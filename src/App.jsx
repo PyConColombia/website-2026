@@ -1,8 +1,11 @@
 import viteLogo from "/vite.svg";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { usePageTracking } from "./hooks/usePageTracking";
 
 function App() {
+  usePageTracking();
+
   return (
     <>
       <div>
