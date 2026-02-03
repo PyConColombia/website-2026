@@ -5,6 +5,7 @@ export function usePageTracking() {
   const location = useLocation();
 
   useEffect(() => {
+    console.log("GA page view:", location.pathname);
     if (!import.meta.env.VITE_GA_ID) return;
 
     window.gtag?.("config", import.meta.env.VITE_GA_ID, {
