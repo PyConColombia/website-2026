@@ -35,7 +35,7 @@ jobs:
       - name: Install node dependencies
         run: |
           cd pycon-website/
-          npm install
+          npm ci
       - name: Show node environment
         run: |
           node --version
@@ -57,7 +57,7 @@ jobs:
         with:
           node-version: '25.2'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build project
         run: npm run build
       - name: Upload dist folder as artifact
