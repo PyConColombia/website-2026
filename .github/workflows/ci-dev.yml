@@ -43,7 +43,7 @@ jobs:
       - name: Run JS lint
         run: |
           cd pycon-website/
-          npm run lint-only
+          npm run format:check
 
   build:
     name: Build
