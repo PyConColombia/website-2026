@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { usePageTracking } from "./hooks/usePageTracking";
 import Home from "./pages/Home";
-import Team from "./pages/Team";
 import Sponsors from "./pages/Sponsors";
+import Team from "./pages/Team";
 
 function App() {
   usePageTracking();
