@@ -1,0 +1,93 @@
+@use "./variables" as *;
+
+.main-with-fixed-navbar {
+  padding-top: 7.5rem;
+}
+
+html,
+body {
+  color: $white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Saira', sans-serif;
+  font-weight: 400;
+}
+
+ul,
+ol {
+  padding-left: 15px;
+}
+
+a {
+  text-decoration: none;
+  transition:
+    color 0.5s ease,
+    transform 0.5s ease;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  &.btn {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &.link-pink {
+    color: $pink;
+  }
+}
+
+.pt-60 {
+  padding-top: 60px;
+}
+
+.pb-60 {
+  padding-bottom: 60px;
+}
+
+.dropdown-menu {
+  background-color: $purple;
+  border: 1px solid $white;
+
+  a {
+    font-size: 15px;
+
+    &:hover,
+    &.active {
+      background-color: $fucsia;
+      text-decoration: none;
+    }
+  }
+}
+
+.dropdown-toggle::after {
+  vertical-align: 0.1em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.shantell-sans {
+  font-family: 'Shantell Sans', cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    'BNCE' 0,
+    'INFM' 0,
+    'SPAC' 0;
+}
