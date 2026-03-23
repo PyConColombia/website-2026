@@ -42,71 +42,32 @@ const LandingPage = ({ dataTranslate }) => {
       <div className="content-wrapper top-section">
         <div className="description">
           <Container>
-            <Row className="justify-content-center">
-              <Col lg={9}>
-                <section
-                  className="landing-hero"
-                  aria-labelledby="landing-hero-title"
-                >
+            <section
+              className="landing-hero"
+              aria-label={h?.conferenceTitle ?? "PyCon conference hero"}
+            >
+              <div className="landing-hero__stage">
+                <img
+                  className="landing-hero__wordmark"
+                  src="/figma-assets/hero-decorative.svg"
+                  alt={h?.wordmarkAlt ?? "PyCon 2026"}
+                />
+                <div className="landing-hero__visual">
+                  <img
+                    className="landing-hero__portrait"
+                    src="/figma-assets/python-hero.svg"
+                    alt={h?.portraitAlt ?? "PyCon speaker portrait"}
+                  />
                   <div className="landing-hero__bottom-glow" aria-hidden />
-                  <div className="landing-hero__stage">
-                    <div
-                      className="landing-hero__deco landing-hero__deco--tl"
-                      aria-hidden
-                    />
-                    <img
-                      className="landing-hero__wordmark"
-                      src="/figma-assets/hero-pycon-wordmark.svg"
-                      alt={h.wordmarkAlt ?? "PYCON"}
-                      width={1155}
-                      height={305}
-                    />
-                    <div className="landing-hero__content-row">
-                      <div className="landing-hero__meta">
-                        <h1
-                          className="landing-hero__title"
-                          id="landing-hero-title"
-                        >
-                          {h.conferenceTitle ?? "pycon COLOMBIA"}
-                        </h1>
-                        <p className="landing-hero__tagline">
-                          {h.tagline ??
-                            "The most and biggest Python conference in Colombia."}
-                        </p>
-                      </div>
-                      <div className="landing-hero__visual">
-                        <div
-                          className="landing-hero__deco landing-hero__deco--blob-sm"
-                          aria-hidden
-                        />
-                        <img
-                          className="landing-hero__portrait"
-                          src="/figma-assets/python-hero.png"
-                          alt=""
-                          width={407}
-                          height={362}
-                        />
-                        <div
-                          className="landing-hero__deco landing-hero__deco--blob-lg"
-                          aria-hidden
-                        />
-                        <img
-                          className="landing-hero__year-mark"
-                          src="/figma-assets/hero-26.svg"
-                          alt=""
-                          width={67}
-                          height={59}
-                        />
-                      </div>
-                    </div>
-                    <div className="landing-hero__date">
-                      <span>{h.dateLine1 ?? "medellin, colombia"}</span>
-                      <span>{h.dateLine2 ?? "24, 25 & 26 JULY - 2026"}</span>
-                    </div>
+                </div>
+                <div className="landing-hero__meta">
+                  <div className="landing-hero__date">
+                    <span>{h?.dateLine1 ?? "medellin, colombia"}</span>
+                    <span>{h?.dateLine2 ?? "24, 25 & 26 JULY - 2026"}</span>
                   </div>
-                </section>
-              </Col>
-            </Row>
+                </div>
+              </div>
+            </section>
           </Container>
         </div>
       </div>

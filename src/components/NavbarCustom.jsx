@@ -63,7 +63,7 @@ const NavbarCustom = ({ dataTranslate }) => {
 
   return (
     <Navbar expand="lg" fixed="top" variant="light" className="navbar-custom">
-      <Container className="d-flex flex-wrap align-items-center gap-2 gap-lg-3">
+      <Container className="d-flex flex-wrap flex-lg-nowrap align-items-center gap-2 gap-lg-3">
         <Navbar.Brand as={NavLink} to="/">
           PYCON COLOMBIA 2026
         </Navbar.Brand>

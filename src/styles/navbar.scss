@@ -5,6 +5,12 @@
   background-color: #fff !important;
   padding: 2.875rem 0 1rem;
 
+  @media (min-width: 992px) {
+    .container {
+      flex-wrap: nowrap !important;
+    }
+  }
+
   .navbar-toggler {
     border-color: var(--navbar-figma-purple);
     color: var(--navbar-figma-purple);
@@ -17,7 +23,7 @@
   .navbar-brand {
     color: var(--navbar-figma-purple) !important;
     font-family: "Oswald", "Bebas Neue", sans-serif;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: 0.06em;
     line-height: 1.083;
@@ -32,6 +38,7 @@
   }
 
   .navbar-custom__collapse {
+    min-width: 0;
     flex-grow: 1;
   }
 
@@ -45,20 +52,18 @@
     @media (min-width: 992px) {
       flex-direction: row;
       gap: 1.5rem;
+      justify-content: space-between;
 
       .navbar-custom__pill-outer {
-        flex: 1 1 auto;
+        flex: 1 1 0;
         justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: max-content;
+        margin: 0;
+        max-width: none;
       }
     }
   }
 
   .navbar-custom__pill-outer {
-    border: 1px solid var(--navbar-figma-purple);
-    border-radius: 9999px;
     display: flex;
     justify-content: center;
     max-width: 100%;
@@ -91,7 +96,7 @@
   .navbar-custom__link {
     color: #000 !important;
     font-family: "Bebas Neue", sans-serif;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: 400;
     letter-spacing: 0.08em;
     line-height: 1;
@@ -117,7 +122,7 @@
       color: #000 !important;
       display: inline-flex;
       font-family: "Bebas Neue", sans-serif;
-      font-size: 1.5rem;
+      font-size: 24px;
       font-weight: 400;
       gap: 0.5rem;
       letter-spacing: 0.08em;
@@ -172,7 +177,7 @@
     display: inline-flex;
     flex-shrink: 0;
     font-family: "Oswald", "Bebas Neue", sans-serif;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: 700;
     gap: 0.5rem;
     height: 52px;

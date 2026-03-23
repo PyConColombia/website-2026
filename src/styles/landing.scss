@@ -6,7 +6,7 @@
   position: relative;
   max-width: 1252px;
   margin: 0 auto;
-  padding: 0 0 2rem;
+  padding: 0 0 8rem;
 }
 
 .landing-hero__bottom-glow {
@@ -74,11 +74,9 @@
 }
 
 .landing-hero__meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  padding-top: 0.25rem;
+  text-align: left;
+  margin-top: -50px;
+  padding-left: 70px;
 }
 
 .landing-hero__title {
@@ -106,16 +104,32 @@
 }
 
 .landing-hero__visual {
-  position: relative;
-  justify-self: center;
-  width: min(100%, 420px);
+  position: absolute;
+  top: clamp(42%, 47vw, 60%);
+  left: 52%;
+  width: min(46vw, 430px);
   min-height: 200px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  animation: landing-hero-float 4.8s ease-in-out infinite;
 }
 
 @media (min-width: 768px) {
   .landing-hero__visual {
-    justify-self: end;
-    margin-top: -1rem;
+    top: clamp(48%, 40vw, 58%);
+    left: 50%;
+    width: min(35vw, 430px);
+  }
+}
+
+@keyframes landing-hero-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(-8px);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(10px);
   }
 }
 
@@ -138,10 +152,12 @@
 .landing-hero__portrait {
   display: block;
   width: 100%;
-  max-width: 407px;
+  max-width: 380px;
   height: auto;
   margin: 0 auto;
+  margin-top: 100px;
   object-fit: contain;
+  padding-top: 0px;
   position: relative;
   z-index: 1;
 }
@@ -180,7 +196,7 @@
   flex-direction: column;
   gap: 0.1em;
   font-family: 'Bebas Neue', 'Saira', sans-serif;
-  font-size: clamp(1.35rem, 2.3vw, 2.02rem);
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0.06em;
@@ -201,6 +217,12 @@
 
   .landing-hero__content-row {
     margin-top: 0;
+  }
+
+  .landing-hero__visual {
+    left: 50%;
+    top: clamp(54%, 84vw, 66%);
+    width: min(72vw, 360px);
   }
 }
 
@@ -284,7 +306,7 @@
   position: relative;
   z-index: 1;
   font-family: 'Geist', system-ui, sans-serif;
-  font-size: clamp(0.85rem, 1.35vw, 0.95rem);
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.01em;
