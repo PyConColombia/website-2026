@@ -8,6 +8,6 @@ export const validateEmail = (email) => {
 export const normalizeTag = (tag) => {
   return tag
     .toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^a-z0-9-]/g, '');
+    .replace(/ /g, "-")
+    .replace(/[^a-z0-9-]/g, "");
 };

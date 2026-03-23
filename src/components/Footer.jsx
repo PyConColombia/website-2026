@@ -1,32 +1,40 @@
-import PropTypes from 'prop-types';
-import { Container, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGithubAlt,
   faInstagram,
   faXTwitter,
-  faYoutube
-} from '@fortawesome/free-brands-svg-icons';
-import { NavLink } from 'react-router-dom';
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
+import { Col, Container, Row } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 const Footer = ({ dataTranslate }) => {
   const f = dataTranslate?.footer ?? {};
 
   const socialLinks = [
-    { icon: faGithubAlt, href: 'https://github.com/PyConColombia', label: 'GitHub' },
+    {
+      icon: faGithubAlt,
+      href: "https://github.com/PyConColombia",
+      label: "GitHub",
+    },
     {
       icon: faInstagram,
-      href: 'https://www.instagram.com/pyconcolombia/',
-      label: 'Instagram'
+      href: "https://www.instagram.com/pyconcolombia/",
+      label: "Instagram",
     },
-    { icon: faXTwitter, href: 'https://twitter.com/pyconcolombia', label: 'X' },
-    { icon: faYoutube, href: 'https://www.youtube.com/@PyConColombia', label: 'YouTube' }
+    { icon: faXTwitter, href: "https://twitter.com/pyconcolombia", label: "X" },
+    {
+      icon: faYoutube,
+      href: "https://www.youtube.com/@PyConColombia",
+      label: "YouTube",
+    },
   ];
 
   const legalLinks = [
-    { to: '/code-of-conduct', label: f.codeOfConduct },
-    { to: '/coc-enforcement', label: f.codeOfConductEnforcementProcedure },
-    { to: '/health-safety', label: f.HealthSafetyPolicy }
+    { to: "/code-of-conduct", label: f.codeOfConduct },
+    { to: "/coc-enforcement", label: f.codeOfConductEnforcementProcedure },
+    { to: "/health-safety", label: f.HealthSafetyPolicy },
   ];
 
   return (
@@ -92,7 +100,7 @@ const Footer = ({ dataTranslate }) => {
 };
 
 Footer.propTypes = {
-  dataTranslate: PropTypes.object
+  dataTranslate: PropTypes.object,
 };
 
 export default Footer;
