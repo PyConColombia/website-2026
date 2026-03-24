@@ -162,6 +162,18 @@
   z-index: 1;
 }
 
+@media (min-width: 769px) and (max-width: 991px) {
+  .landing-hero__portrait {
+    margin-top: 400px;
+  }
+}
+
+@media (max-width: 747px) {
+  .landing-hero__portrait {
+    margin-top: 300px;
+  }
+}
+
 .landing-hero__deco--blob-lg {
   position: absolute;
   right: -2%;

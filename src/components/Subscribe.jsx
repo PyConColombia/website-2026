@@ -126,6 +126,7 @@ const Subscribe = ({ dataTranslate }) => {
             </Form.Group>
             <Button
               type="submit"
+              variant="dark"
               className="subscribe-cta__submit"
               disabled={blockButton || submitting}
             >

@@ -1,65 +1,65 @@
 import PropTypes from "prop-types";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
+// import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+// import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 
-const ArrowUpRightIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden={true}
-  >
-    <path
-      d="M7 17 17 7M17 7H7M17 7v10"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+// const ArrowUpRightIcon = () => (
+//   <svg
+//     width="18"
+//     height="18"
+//     viewBox="0 0 24 24"
+//     fill="none"
+//     xmlns="http://www.w3.org/2000/svg"
+//     aria-hidden={true}
+//   >
+//     <path
+//       d="M7 17 17 7M17 7H7M17 7v10"
+//       stroke="currentColor"
+//       strokeWidth="1.5"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     />
+//   </svg>
+// );
 
-const ChevronDownIcon = () => (
-  <svg
-    className="navbar-custom__chevron"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden={true}
-  >
-    <path
-      d="m6 9 6 6 6-6"
-      stroke="currentColor"
-      strokeWidth="1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+// const ChevronDownIcon = () => (
+//   <svg
+//     className="navbar-custom__chevron"
+//     width="16"
+//     height="16"
+//     viewBox="0 0 24 24"
+//     fill="none"
+//     xmlns="http://www.w3.org/2000/svg"
+//     aria-hidden={true}
+//   >
+//     <path
+//       d="m6 9 6 6 6-6"
+//       stroke="currentColor"
+//       strokeWidth="1"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     />
+//   </svg>
+// );
 
-const NavbarCustom = ({ dataTranslate }) => {
-  const t = dataTranslate?.navbar ?? {};
-  const years = [
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
-  ];
+const NavbarCustom = ({ _dataTranslate }) => {
+  // const t = dataTranslate?.navbar ?? {};
+  // const years = [
+  //   "2016",
+  //   "2017",
+  //   "2018",
+  //   "2019",
+  //   "2020",
+  //   "2021",
+  //   "2022",
+  //   "2023",
+  //   "2024",
+  // ];
 
-  const linkClass = ({ isActive }) =>
-    `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
+  // const linkClass = ({ isActive }) =>
+  //   `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
 
   return (
     <Navbar expand="lg" fixed="top" variant="light" className="navbar-custom">
@@ -68,7 +68,7 @@ const NavbarCustom = ({ dataTranslate }) => {
           PYCON COLOMBIA 2026
         </Navbar.Brand>
 
-        <Navbar.Toggle
+        {/* <Navbar.Toggle
           aria-controls="navbar-custom-collapse"
           className="ms-auto"
         />
@@ -132,7 +132,7 @@ const NavbarCustom = ({ dataTranslate }) => {
               <ArrowUpRightIcon />
             </a>
           </div>
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
       </Container>
     </Navbar>
   );
