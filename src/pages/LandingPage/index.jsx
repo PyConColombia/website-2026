@@ -58,8 +58,8 @@ const LandingPage = ({ dataTranslate }) => {
                     src="/figma-assets/python-hero.svg"
                     alt={h?.portraitAlt ?? "PyCon speaker portrait"}
                   />
-                  <div className="landing-hero__bottom-glow" aria-hidden />
                 </div>
+                <div className="landing-hero__bottom-glow" aria-hidden />
                 <div className="landing-hero__meta">
                   <div className="landing-hero__date">
                     <span>{h?.dateLine1 ?? "medellin, colombia"}</span>

@@ -1,10 +1,15 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 
 import { validateEmail } from "@/utils/fields";
+import {
+  mailchimpSubscribe,
+  stripHtmlMessage,
+} from "@/utils/mailchimpSubscribe";
 
 const Subscribe = ({ dataTranslate }) => {
   const s = dataTranslate?.landing?.subscribe ?? {};
@@ -14,6 +19,7 @@ const Subscribe = ({ dataTranslate }) => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
   const [blockButton, setBlockButton] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const onRequiredChange = (e) => {
     const fieldName = e.target.name;
@@ -25,46 +31,44 @@ const Subscribe = ({ dataTranslate }) => {
     }
   };
 
+  useEffect(() => {
+    if (!showAlert) return;
+    const t = setTimeout(() => setShowAlert(false), 5000);
+    return () => clearTimeout(t);
+  }, [showAlert]);
+
   const onSumitForm = async (e) => {
     e.preventDefault();
+    if (submitting) return;
 
+    setSubmitting(true);
     try {
-      fetch(
-        `https://pycon.us21.list-manage.com/subscribe/post-json?` +
-          new URLSearchParams({
-            u: "b17171278920cd24d0c9c4cfe",
-            id: "785e2a687f",
-            FNAME: "",
-            LNAME: "",
-            EMAIL: email,
-            subscribe: "Subscribe",
-          }),
-        {
-          method: "GET",
-          mode: "no-cors",
-        },
-      ).then((response) => {
-        console.log(response.status);
-        console.log(response);
-      });
+      const data = await mailchimpSubscribe(email);
 
+      if (data?.result === "success") {
+        setAlertType("success");
+        setAlertMessage("Thanks for your interest!");
+        setEmail("");
+        setBlockButton(true);
+      } else {
+        setAlertType("danger");
+        setAlertMessage(
+          stripHtmlMessage(data?.msg) ||
+            "Could not subscribe. Please try again.",
+        );
+      }
       setShowAlert(true);
-      setAlertType("success");
-      setAlertMessage("Thanks for your interest!");
-      setEmail("");
-      setBlockButton(true);
     } catch (error) {
       console.error("Error:", error);
-
-      setShowAlert(true);
       setAlertType("danger");
-      setAlertMessage("Something went wrong, please try again later!");
+      setAlertMessage(
+        error?.message === "Subscription already in progress"
+          ? "Please wait for the current request to finish."
+          : "Something went wrong, please try again later!",
+      );
+      setShowAlert(true);
     } finally {
-      if (showAlert) {
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 5000);
-      }
+      setSubmitting(false);
     }
   };
 
@@ -81,6 +85,7 @@ const Subscribe = ({ dataTranslate }) => {
           <Alert
             className="subscribe-cta__alert"
             variant={alertType}
+            role="alert"
             onClose={() => setShowAlert(false)}
             dismissible
           >
@@ -102,12 +107,6 @@ const Subscribe = ({ dataTranslate }) => {
               alt=""
               aria-hidden
             />
-            <img
-              className="subscribe-cta__art-pycon"
-              src="/figma-assets/subscribe-pycon.svg"
-              alt=""
-              aria-hidden
-            />
           </div>
           <Form onSubmit={onSumitForm} className="subscribe-cta__form-bar">
             <Form.Group
@@ -125,13 +124,13 @@ const Subscribe = ({ dataTranslate }) => {
                 autoComplete="email"
               />
             </Form.Group>
-            <button
+            <Button
               type="submit"
               className="subscribe-cta__submit"
-              disabled={blockButton}
+              disabled={blockButton || submitting}
             >
               {s.submitButton}
-            </button>
+            </Button>
           </Form>
         </div>
       </Container>

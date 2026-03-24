@@ -114,12 +114,6 @@
 }
 
 .footer-column {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  justify-content: center;
-  height: 100%;
-
   &__header {
     font-family: 'Geist', system-ui, sans-serif;
     font-weight: 500;
