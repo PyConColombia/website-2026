@@ -373,8 +373,8 @@ const data = {
       others: "Others",
       legal: "Legal",
       brandName: "PYCON COLOMBIA",
-      description:
-        "PyCon Colombia is the Annual Colombian conference that gathers professionals, enthusiasts and amateur users of the Python programming language. Join us to learn, share, and connect with python professionals from across the globe.",
+      description: `PyCon Colombia is the Annual Colombian conference that gathers professionals, enthusiasts and amateur users of the Python programming language.
+Join us to learn, share, and connect with python professionals from across the globe.`,
       email: "hello@pycon.co",
       codeOfConduct: "Code of Conduct",
       codeOfConductEnforcementProcedure:
