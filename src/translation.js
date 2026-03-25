@@ -73,7 +73,7 @@ const data = {
         headerBold: "know more?",
         description:
           "Join Pycon Colombia newsletter and get a complete overview of our events, speakers and community participation.",
-        emailPlaceholder: "Enter your email id",
+        emailPlaceholder: "Enter your email",
         firstName: "First Name",
         lastName: "Last Name",
         email: "Email",
@@ -374,7 +374,7 @@ const data = {
       legal: "Legal",
       brandName: "PYCON COLOMBIA",
       description:
-        "PyCon Colombia is the national conference for the Python community. Join us to learn, share, and connect with developers from across the country.",
+        "PyCon Colombia is the Annual Colombian conference that gathers professionals, enthusiasts and amateur users of the Python programming language. Join us to learn, share, and connect with python professionals from across the globe.",
       email: "hello@pycon.co",
       codeOfConduct: "Code of Conduct",
       codeOfConductEnforcementProcedure:
