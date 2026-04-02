@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import Container from "react-bootstrap/Container";
-// import Nav from "react-bootstrap/Nav";
+import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 
 // const ArrowUpRightIcon = () => (
@@ -24,42 +24,42 @@ import { NavLink } from "react-router-dom";
 //   </svg>
 // );
 
-// const ChevronDownIcon = () => (
-//   <svg
-//     className="navbar-custom__chevron"
-//     width="16"
-//     height="16"
-//     viewBox="0 0 24 24"
-//     fill="none"
-//     xmlns="http://www.w3.org/2000/svg"
-//     aria-hidden={true}
-//   >
-//     <path
-//       d="m6 9 6 6 6-6"
-//       stroke="currentColor"
-//       strokeWidth="1"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     />
-//   </svg>
-// );
+const ChevronDownIcon = () => (
+  <svg
+    className="navbar-custom__chevron"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
+  >
+    <path
+      d="m6 9 6 6 6-6"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
-const NavbarCustom = ({ _dataTranslate }) => {
-  // const t = dataTranslate?.navbar ?? {};
-  // const years = [
-  //   "2016",
-  //   "2017",
-  //   "2018",
-  //   "2019",
-  //   "2020",
-  //   "2021",
-  //   "2022",
-  //   "2023",
-  //   "2024",
-  // ];
+const NavbarCustom = ({ dataTranslate }) => {
+  const t = dataTranslate?.navbar ?? {};
+  const years = [
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "2021",
+    "2020",
+    "2019",
+    "2018",
+    "2017",
+  ];
 
-  // const linkClass = ({ isActive }) =>
-  //   `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
+  const linkClass = ({ isActive }) =>
+    `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
 
   return (
     <Navbar expand="lg" fixed="top" variant="light" className="navbar-custom">
@@ -68,7 +68,7 @@ const NavbarCustom = ({ _dataTranslate }) => {
           PYCON COLOMBIA 2026
         </Navbar.Brand>
 
-        {/* <Navbar.Toggle
+        <Navbar.Toggle
           aria-controls="navbar-custom-collapse"
           className="ms-auto"
         />
@@ -84,23 +84,23 @@ const NavbarCustom = ({ _dataTranslate }) => {
                   <NavLink to="/" end className={linkClass}>
                     {t.home ?? "Home"}
                   </NavLink>
-                  <NavLink to="/sponsors" className={linkClass}>
+                  {/* <NavLink to="/sponsors" className={linkClass}>
                     {t.sponsors ?? "Sponsors"}
-                  </NavLink>
+                  </NavLink> */}
                   <NavLink to="/keynotes" className={linkClass}>
                     {t.keynotes ?? "Keynotes"}
                   </NavLink>
-                  <NavLink to="/speakers" className={linkClass}>
+                  {/* <NavLink to="/speakers" className={linkClass}>
                     {t.speakers ?? "Speakers"}
                   </NavLink>
                   <NavLink to="/team" className={linkClass}>
                     {t.team ?? "Team"}
-                  </NavLink>
+                  </NavLink> */}
                   <NavDropdown
                     className="navbar-custom__dropdown"
                     title={
                       <span className="d-inline-flex align-items-center gap-2">
-                        {t.schedule ?? "Schedule"}
+                        2026
                         <ChevronDownIcon />
                       </span>
                     }
@@ -114,7 +114,7 @@ const NavbarCustom = ({ _dataTranslate }) => {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        PyCon Colombia {year}
+                        {year}
                       </NavDropdown.Item>
                     ))}
                   </NavDropdown>
@@ -122,7 +122,7 @@ const NavbarCustom = ({ _dataTranslate }) => {
               </div>
             </div>
 
-            <a
+            {/* <a
               className="navbar-custom__cta"
               href={t.ticketsUrl ?? "#"}
               rel="noopener noreferrer"
@@ -130,9 +130,9 @@ const NavbarCustom = ({ _dataTranslate }) => {
             >
               {t.getTickets ?? "GET YOUR TICKETS"}
               <ArrowUpRightIcon />
-            </a>
+            </a> */}
           </div>
-        </Navbar.Collapse> */}
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

@@ -6,20 +6,30 @@
   position: relative;
   max-width: 1252px;
   margin: 0 auto;
-  padding: 0 0 8rem;
+  padding: 0 0 6.5rem;
 }
 
 .landing-hero__bottom-glow {
   position: absolute;
-  bottom: -4.5rem;
+  bottom: -8rem;
   left: 50%;
-  width: min(192px, 40vw);
-  height: 24px;
+  width: min(257px, 66vw);
+  height: auto;
   transform: translateX(-50%);
-  background: #b5b6f2;
-  border-radius: 999px;
-  filter: blur(32px);
   pointer-events: none;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .landing-hero__bottom-glow {
+    bottom: -12rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-hero__bottom-glow {
+    bottom: -5rem;
+  }
 }
 
 .landing-hero__stage {
@@ -216,6 +226,10 @@
 }
 
 @media (max-width: 767px) {
+  .landing-hero {
+    padding-bottom: 12rem;
+  }
+
   .landing-hero__meta {
     align-items: flex-start;
     text-align: left;
@@ -240,7 +254,7 @@
 /* Topic marquee — frame 2056:150 (Soft Badge rows + edge fades) */
 .content-topics {
   position: relative;
-  padding: 1.58rem 0;
+  padding: 0;
   background: #fff;
   color: #0a0a0a;
 }
@@ -260,7 +274,7 @@
 .topics-marquee__stack {
   display: flex;
   flex-direction: column;
-  gap: 0.79rem;
+  gap: 0;
 }
 
 .topics-marquee__row {
