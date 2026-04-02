@@ -1,8 +1,28 @@
+import {
+  faGithubAlt,
+  faInstagram,
+  faXTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+
+const KEYNOTE_SOCIAL_ICONS = {
+  github: faGithubAlt,
+  instagram: faInstagram,
+  twitter: faXTwitter,
+  youtube: faYoutube,
+};
+
+function keynoteFlagAssetPath(code) {
+  if (!code || typeof code !== "string") return "";
+  const iso = code.slice(0, 2).toLowerCase();
+  return `/figma-assets/keynotes/flag-${iso}.svg`;
+}
 
 const DEFAULT_TOPIC_ROWS = [
   [
@@ -36,6 +56,8 @@ const DEFAULT_TOPIC_ROWS = [
 const LandingPage = ({ dataTranslate }) => {
   const h = dataTranslate?.landing?.hero ?? {};
   const topicRows = dataTranslate?.landing?.topics?.rows ?? DEFAULT_TOPIC_ROWS;
+  const keynotes = dataTranslate?.landing?.keynotes;
+  const keynoteColumns = keynotes?.columns ?? keynotes?.rows ?? [];
 
   return (
     <>
@@ -130,6 +152,103 @@ const LandingPage = ({ dataTranslate }) => {
           </Row>
         </Container>
       </section>
+
+      {keynoteColumns.length ? (
+        <section
+          className="landing-keynotes"
+          aria-label={keynotes.sectionAriaLabel ?? "Keynote speakers"}
+        >
+          <div className="landing-keynotes__panel">
+            <Container fluid="xxl" className="landing-keynotes__container">
+              <header className="landing-keynotes__header">
+                <p className="landing-keynotes__eyebrow">{keynotes.eyebrow}</p>
+                <h2 className="landing-keynotes__title">{keynotes.title}</h2>
+              </header>
+
+              <Row className="landing-keynotes__columns g-4">
+                {keynoteColumns.map((column) => {
+                  const photoBlock = (
+                    <div className="landing-keynotes__photo-card">
+                      <img
+                        className="landing-keynotes__photo-img"
+                        src={column.photo.src}
+                        alt={column.photo.alt ?? ""}
+                      />
+                    </div>
+                  );
+
+                  const speakerBlock = (
+                    <article className="landing-keynotes__speaker-card">
+                      <div className="landing-keynotes__speaker-head">
+                        {column.flag?.code ? (
+                          <div
+                            className="landing-keynotes__flag-wrap"
+                            role="img"
+                            aria-label={column.flag.label}
+                          >
+                            <img
+                              className="landing-keynotes__flag-img"
+                              src={keynoteFlagAssetPath(column.flag.code)}
+                              alt=""
+                              width={48}
+                              height={48}
+                              decoding="async"
+                            />
+                          </div>
+                        ) : null}
+                        <div className="landing-keynotes__speaker-meta">
+                          <p className="landing-keynotes__speaker-name">
+                            {column.name}
+                          </p>
+                          <p className="landing-keynotes__speaker-handle">
+                            {column.handle}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="landing-keynotes__bio">{column.bio}</p>
+                      <ul className="landing-keynotes__social">
+                        {(column.social ?? []).map((link) => {
+                          const icon = KEYNOTE_SOCIAL_ICONS[link.key];
+                          if (!icon) return null;
+                          return (
+                            <li key={`${column.name}-${link.key}`}>
+                              <a
+                                className="landing-keynotes__social-link"
+                                href={link.href}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                aria-label={link.label}
+                              >
+                                <FontAwesomeIcon icon={icon} />
+                              </a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </article>
+                  );
+
+                  return (
+                    <Col
+                      key={column.name}
+                      xs={12}
+                      lg={4}
+                      className="landing-keynotes__column"
+                    >
+                      <div
+                        className={`landing-keynotes__stack${column.photoFirst ? "" : " landing-keynotes__stack--text-first-desktop"}`}
+                      >
+                        {photoBlock}
+                        {speakerBlock}
+                      </div>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </Container>
+          </div>
+        </section>
+      ) : null}
     </>
   );
 };

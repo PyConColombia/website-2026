@@ -79,6 +79,112 @@ const data = {
         email: "Email",
         submitButton: "Subscribe to newsletter",
       },
+      keynotes: {
+        sectionAriaLabel: "Keynote speakers",
+        eyebrow: "Chosen by Most Influentials",
+        title: "Keynotes Speakers",
+        columns: [
+          {
+            photoFirst: true,
+            photo: {
+              src: "/figma-assets/keynotes/keynote-photo-1-3dbd42.png",
+              alt: "Keynote speaker portrait",
+            },
+            name: "Mike Droettboom",
+            handle: "@mdboom",
+            flag: { code: "us", label: "United States" },
+            bio: "Principal Software Engineering Manager at Microsoft, leading CPython performance improvements. A veteran open-source contributor, he has worked on matplotlib, astropy, Pyodide, and airspeed velocity.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/mdboom",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/figma-assets/keynotes/keynote-photo-2-2d8cc5.png",
+              alt: "Keynote speaker portrait",
+            },
+            name: "Érico Andrei",
+            handle: "@ericof",
+            flag: { code: "br", label: "Brazil" },
+            bio: "Python Software Foundation Fellow and organizer in the Brazilian Python community, helping grow PyCon and open-source collaboration across Latin America.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/ericof",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/figma-assets/keynotes/keynote-photo-3-1e4643.png",
+              alt: "Keynote speaker portrait",
+            },
+            name: "Shreya Gupta",
+            handle: "@shreyagupta",
+            flag: { code: "in", label: "India" },
+            bio: "Solutions Architect in Gen-AI at Nvidia, AI model development expert. Master’s in Symbolic Systems from Stanford, research in deep learning and cognitive neuroscience. Advocate for diversity in STEM.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+        ],
+      },
     },
     callForProposals: {
       header: "Share Your Voice",
@@ -463,6 +569,112 @@ Join us to learn, share, and connect with python professionals from across the g
         lastName: "Apellidos",
         email: "Correo",
         submitButton: "Suscribirse al boletín",
+      },
+      keynotes: {
+        sectionAriaLabel: "Ponentes principales (keynotes)",
+        eyebrow: "Elegidos por los más influyentes",
+        title: "Keynotes",
+        columns: [
+          {
+            photoFirst: true,
+            photo: {
+              src: "/figma-assets/keynotes/keynote-photo-1-3dbd42.png",
+              alt: "Retrato de ponente principal",
+            },
+            name: "Mike Droettboom",
+            handle: "@mdboom",
+            flag: { code: "us", label: "Estados Unidos" },
+            bio: "Director de ingeniería de software en Microsoft, lidera mejoras de rendimiento en CPython. Contribuidor open source con trayectoria en matplotlib, astropy, Pyodide y airspeed velocity.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/mdboom",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/figma-assets/keynotes/keynote-photo-2-2d8cc5.png",
+              alt: "Retrato de ponente principal",
+            },
+            name: "Érico Andrei",
+            handle: "@ericof",
+            flag: { code: "br", label: "Brasil" },
+            bio: "Fellow de la Python Software Foundation y organizador en la comunidad Python de Brasil, impulsando PyCon y la colaboración open source en Latinoamérica.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/ericof",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/figma-assets/keynotes/keynote-photo-3-1e4643.png",
+              alt: "Retrato de ponente principal",
+            },
+            name: "Shreya Gupta",
+            handle: "@shreyagupta",
+            flag: { code: "in", label: "India" },
+            bio: "Arquitecta de soluciones en Gen-IA en Nvidia, experta en desarrollo de modelos de IA. Máster en Sistemas Simbólicos por Stanford, investigación en aprendizaje profundo y neurociencia cognitiva. Defensora de la diversidad en STEM.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+        ],
       },
     },
     callForProposals: {
