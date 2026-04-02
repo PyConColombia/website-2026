@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -45,7 +46,17 @@ const ChevronDownIcon = () => (
 );
 
 const NavbarCustom = ({ dataTranslate }) => {
+  const [scrolled, setScrolled] = useState(false);
   const t = dataTranslate?.navbar ?? {};
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const years = [
     "2025",
     "2024",
@@ -62,7 +73,12 @@ const NavbarCustom = ({ dataTranslate }) => {
     `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
 
   return (
-    <Navbar expand="lg" fixed="top" variant="light" className="navbar-custom">
+    <Navbar
+      expand="lg"
+      fixed="top"
+      variant="light"
+      className={`navbar-custom${scrolled ? " navbar-custom--scrolled" : ""}`}
+    >
       <Container className="d-flex flex-wrap flex-lg-nowrap align-items-center gap-2 gap-lg-3">
         <Navbar.Brand as={NavLink} to="/">
           PYCON COLOMBIA 2026
@@ -106,6 +122,7 @@ const NavbarCustom = ({ dataTranslate }) => {
                     }
                     id="navbar-schedule-dropdown"
                     align="end"
+                    renderMenuOnMount
                   >
                     {years.map((year) => (
                       <NavDropdown.Item

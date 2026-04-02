@@ -2,8 +2,26 @@
 
 .navbar-custom {
   --navbar-figma-purple: #{$figma-purple};
+  --navbar-transition-duration: 0.45s;
+  --navbar-transition-ease: cubic-bezier(0.33, 1, 0.68, 1);
   background-color: #fff !important;
   padding: 2.875rem 0 1rem;
+  transition:
+    background-color var(--navbar-transition-duration) var(--navbar-transition-ease),
+    padding var(--navbar-transition-duration) var(--navbar-transition-ease);
+
+  &.navbar-custom--scrolled {
+    backdrop-filter: blur(18px);
+    background-color: rgba(97, 85, 245, 0.1) !important;
+    padding: 0 !important;
+
+    .navbar-custom__pill-inner {
+      backdrop-filter: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      background: none !important;
+    }
+  }
 
   @media (min-width: 992px) {
     .container {
@@ -141,11 +159,34 @@
     }
 
     .dropdown-menu {
+      --navbar-dropdown-duration: 0.28s;
+      --navbar-dropdown-ease: cubic-bezier(0.33, 1, 0.68, 1);
+
       background-color: #fff;
       border: 1px solid var(--navbar-figma-purple);
       border-radius: 0.75rem;
+      display: block !important;
       margin-top: 0.5rem;
+      opacity: 0;
       padding: 0.5rem 0;
+      pointer-events: none;
+      transform: translateY(-0.4rem);
+      visibility: hidden;
+      transition:
+        opacity var(--navbar-dropdown-duration) var(--navbar-dropdown-ease),
+        transform var(--navbar-dropdown-duration) var(--navbar-dropdown-ease),
+        visibility 0s linear var(--navbar-dropdown-duration);
+
+      &.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        visibility: visible;
+        transition:
+          opacity var(--navbar-dropdown-duration) var(--navbar-dropdown-ease),
+          transform var(--navbar-dropdown-duration) var(--navbar-dropdown-ease),
+          visibility 0s;
+      }
 
       .dropdown-item {
         color: #000;
@@ -158,6 +199,13 @@
           background-color: rgba(97, 85, 245, 0.1);
           color: var(--navbar-figma-purple);
         }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dropdown-menu,
+      .dropdown-menu.show {
+        transition: none;
       }
     }
   }
