@@ -441,6 +441,24 @@
   min-height: 0;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .landing-keynotes__column {
+    opacity: 0;
+    transform: translateY(1.75rem);
+    transition:
+      opacity 0.65s ease,
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--keynote-reveal-delay, 0s);
+    will-change: opacity, transform;
+  }
+
+  .landing-keynotes__column--visible {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: auto;
+  }
+}
+
 .landing-keynotes__stack {
   display: flex;
   flex-direction: column;

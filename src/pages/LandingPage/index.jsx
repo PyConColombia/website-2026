@@ -8,6 +8,7 @@ import {
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -56,11 +57,135 @@ const DEFAULT_TOPIC_ROWS = [
   ],
 ];
 
+function KeynotesRevealRow({ columns }) {
+  const rootRef = useRef(null);
+  const [visible, setVisible] = useState({});
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const cols = root.querySelectorAll("[data-keynote-reveal]");
+    if (!cols.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const name = entry.target.getAttribute("data-keynote-name");
+          if (!name) continue;
+          setVisible((prev) => (prev[name] ? prev : { ...prev, [name]: true }));
+          observer.unobserve(entry.target);
+        }
+      },
+      { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+
+    for (const el of cols) {
+      observer.observe(el);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Row ref={rootRef} className="landing-keynotes__columns g-4">
+      {columns.map((column, columnIndex) => {
+        const photoBlock = (
+          <div className="landing-keynotes__photo-card">
+            <Image
+              className="landing-keynotes__photo-img"
+              src={column.photo.src}
+              alt={column.photo.alt ?? ""}
+              layout="fullWidth"
+              aspectRatio={3 / 4}
+              objectFit="cover"
+            />
+          </div>
+        );
+
+        const speakerBlock = (
+          <article className="landing-keynotes__speaker-card">
+            <div className="landing-keynotes__speaker-head">
+              {column.flag?.code ? (
+                <div
+                  className="landing-keynotes__flag-wrap"
+                  role="img"
+                  aria-label={column.flag.label}
+                >
+                  <Image
+                    className="landing-keynotes__flag-img"
+                    src={keynoteFlagAssetPath(column.flag.code)}
+                    alt=""
+                    width={48}
+                    height={48}
+                    layout="fixed"
+                  />
+                </div>
+              ) : null}
+              <div className="landing-keynotes__speaker-meta">
+                <p className="landing-keynotes__speaker-name">{column.name}</p>
+                <p className="landing-keynotes__speaker-handle">
+                  {column.handle}
+                </p>
+              </div>
+            </div>
+            <p className="landing-keynotes__bio">{column.bio}</p>
+            <ul className="landing-keynotes__social">
+              {(column.social ?? []).map((link) => {
+                const icon = KEYNOTE_SOCIAL_ICONS[link.key];
+                if (!icon) return null;
+                return (
+                  <li key={`${column.name}-${link.key}`}>
+                    <a
+                      className="landing-keynotes__social-link"
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={link.label}
+                    >
+                      <FontAwesomeIcon icon={icon} />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </article>
+        );
+
+        return (
+          <Col
+            key={column.name}
+            xs={12}
+            lg={4}
+            className={`landing-keynotes__column${visible[column.name] ? " landing-keynotes__column--visible" : ""}`}
+            data-keynote-reveal
+            data-keynote-name={column.name}
+            style={{
+              "--keynote-reveal-delay": `${columnIndex * 0.09}s`,
+            }}
+          >
+            <div
+              className={`landing-keynotes__stack${column.photoFirst ? "" : " landing-keynotes__stack--text-first-desktop"}`}
+            >
+              {photoBlock}
+              {speakerBlock}
+            </div>
+          </Col>
+        );
+      })}
+    </Row>
+  );
+}
+
+KeynotesRevealRow.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 const LandingPage = ({ dataTranslate }) => {
   const h = dataTranslate?.landing?.hero ?? {};
   const topicRows = dataTranslate?.landing?.topics?.rows ?? DEFAULT_TOPIC_ROWS;
   const keynotes = dataTranslate?.landing?.keynotes;
   const keynoteColumns = keynotes?.columns ?? keynotes?.rows ?? [];
+  const keynotesRevealKey = keynoteColumns.map((c) => c.name).join("|");
 
   return (
     <>
@@ -176,89 +301,10 @@ const LandingPage = ({ dataTranslate }) => {
                 <h2 className="landing-keynotes__title">{keynotes.title}</h2>
               </header>
 
-              <Row className="landing-keynotes__columns g-4">
-                {keynoteColumns.map((column) => {
-                  const photoBlock = (
-                    <div className="landing-keynotes__photo-card">
-                      <Image
-                        className="landing-keynotes__photo-img"
-                        src={column.photo.src}
-                        alt={column.photo.alt ?? ""}
-                        layout="fullWidth"
-                        aspectRatio={3 / 4}
-                        objectFit="cover"
-                      />
-                    </div>
-                  );
-
-                  const speakerBlock = (
-                    <article className="landing-keynotes__speaker-card">
-                      <div className="landing-keynotes__speaker-head">
-                        {column.flag?.code ? (
-                          <div
-                            className="landing-keynotes__flag-wrap"
-                            role="img"
-                            aria-label={column.flag.label}
-                          >
-                            <Image
-                              className="landing-keynotes__flag-img"
-                              src={keynoteFlagAssetPath(column.flag.code)}
-                              alt=""
-                              width={48}
-                              height={48}
-                              layout="fixed"
-                            />
-                          </div>
-                        ) : null}
-                        <div className="landing-keynotes__speaker-meta">
-                          <p className="landing-keynotes__speaker-name">
-                            {column.name}
-                          </p>
-                          <p className="landing-keynotes__speaker-handle">
-                            {column.handle}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="landing-keynotes__bio">{column.bio}</p>
-                      <ul className="landing-keynotes__social">
-                        {(column.social ?? []).map((link) => {
-                          const icon = KEYNOTE_SOCIAL_ICONS[link.key];
-                          if (!icon) return null;
-                          return (
-                            <li key={`${column.name}-${link.key}`}>
-                              <a
-                                className="landing-keynotes__social-link"
-                                href={link.href}
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                aria-label={link.label}
-                              >
-                                <FontAwesomeIcon icon={icon} />
-                              </a>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </article>
-                  );
-
-                  return (
-                    <Col
-                      key={column.name}
-                      xs={12}
-                      lg={4}
-                      className="landing-keynotes__column"
-                    >
-                      <div
-                        className={`landing-keynotes__stack${column.photoFirst ? "" : " landing-keynotes__stack--text-first-desktop"}`}
-                      >
-                        {photoBlock}
-                        {speakerBlock}
-                      </div>
-                    </Col>
-                  );
-                })}
-              </Row>
+              <KeynotesRevealRow
+                key={keynotesRevealKey}
+                columns={keynoteColumns}
+              />
             </Container>
           </div>
         </section>
