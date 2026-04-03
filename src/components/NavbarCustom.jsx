@@ -103,9 +103,9 @@ const NavbarCustom = ({ dataTranslate }) => {
                   {/* <NavLink to="/sponsors" className={linkClass}>
                     {t.sponsors ?? "Sponsors"}
                   </NavLink> */}
-                  <NavLink to="/keynotes" className={linkClass}>
+                  {/* <NavLink to="/keynotes" className={linkClass}>
                     {t.keynotes ?? "Keynotes"}
-                  </NavLink>
+                  </NavLink> */}
                   {/* <NavLink to="/speakers" className={linkClass}>
                     {t.speakers ?? "Speakers"}
                   </NavLink>
