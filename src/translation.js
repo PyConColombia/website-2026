@@ -87,98 +87,27 @@ const data = {
           {
             photoFirst: true,
             photo: {
-              src: "/figma-assets/keynotes/keynote-photo-1-3dbd42.png",
+              src: "/images/keynotes/terezaiofciu.jpg",
               alt: "Keynote speaker portrait",
             },
-            name: "Mike Droettboom",
-            handle: "@mdboom",
-            flag: { code: "us", label: "United States" },
-            bio: "Principal Software Engineering Manager at Microsoft, leading CPython performance improvements. A veteran open-source contributor, he has worked on matplotlib, astropy, Pyodide, and airspeed velocity.",
+            name: "Tereza Iofciu",
+            // handle: "@terezaiofciu",
+            flag: { code: "de", label: "Germany" },
+            bio: "Helping data & AI professionals lead with influence, adaptability & purpose | Leadership Coach | Fractional AI Leader | Speaker | PSF Fellow | 20 in Data",
             social: [
               {
-                key: "github",
-                href: "https://github.com/mdboom",
-                label: "GitHub",
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/tereza-iofciu/",
+                label: "LinkedIn",
               },
               {
-                key: "instagram",
-                href: "https://www.instagram.com/",
-                label: "Instagram",
-              },
-              {
-                key: "twitter",
-                href: "https://twitter.com/",
-                label: "X",
+                key: "website",
+                href: "https://www.terezaiofciu.com/",
+                label: "Website",
               },
               {
                 key: "youtube",
-                href: "https://www.youtube.com/",
-                label: "YouTube",
-              },
-            ],
-          },
-          {
-            photoFirst: false,
-            photo: {
-              src: "/figma-assets/keynotes/keynote-photo-2-2d8cc5.png",
-              alt: "Keynote speaker portrait",
-            },
-            name: "Érico Andrei",
-            handle: "@ericof",
-            flag: { code: "br", label: "Brazil" },
-            bio: "Python Software Foundation Fellow and organizer in the Brazilian Python community, helping grow PyCon and open-source collaboration across Latin America.",
-            social: [
-              {
-                key: "github",
-                href: "https://github.com/ericof",
-                label: "GitHub",
-              },
-              {
-                key: "instagram",
-                href: "https://www.instagram.com/",
-                label: "Instagram",
-              },
-              {
-                key: "twitter",
-                href: "https://twitter.com/",
-                label: "X",
-              },
-              {
-                key: "youtube",
-                href: "https://www.youtube.com/",
-                label: "YouTube",
-              },
-            ],
-          },
-          {
-            photoFirst: true,
-            photo: {
-              src: "/figma-assets/keynotes/keynote-photo-3-1e4643.png",
-              alt: "Keynote speaker portrait",
-            },
-            name: "Shreya Gupta",
-            handle: "@shreyagupta",
-            flag: { code: "in", label: "India" },
-            bio: "Solutions Architect in Gen-AI at Nvidia, AI model development expert. Master’s in Symbolic Systems from Stanford, research in deep learning and cognitive neuroscience. Advocate for diversity in STEM.",
-            social: [
-              {
-                key: "github",
-                href: "https://github.com/",
-                label: "GitHub",
-              },
-              {
-                key: "instagram",
-                href: "https://www.instagram.com/",
-                label: "Instagram",
-              },
-              {
-                key: "twitter",
-                href: "https://twitter.com/",
-                label: "X",
-              },
-              {
-                key: "youtube",
-                href: "https://www.youtube.com/",
+                href: "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
                 label: "YouTube",
               },
             ],
@@ -578,7 +507,7 @@ Join us to learn, share, and connect with python professionals from across the g
           {
             photoFirst: true,
             photo: {
-              src: "/figma-assets/keynotes/keynote-photo-1-3dbd42.png",
+              src: "/images/keynotes/keynote-photo-1-3dbd42.png",
               alt: "Retrato de ponente principal",
             },
             name: "Mike Droettboom",
@@ -611,7 +540,7 @@ Join us to learn, share, and connect with python professionals from across the g
           {
             photoFirst: false,
             photo: {
-              src: "/figma-assets/keynotes/keynote-photo-2-2d8cc5.png",
+              src: "/images/keynotes/keynote-photo-2-2d8cc5.png",
               alt: "Retrato de ponente principal",
             },
             name: "Érico Andrei",
@@ -644,7 +573,7 @@ Join us to learn, share, and connect with python professionals from across the g
           {
             photoFirst: true,
             photo: {
-              src: "/figma-assets/keynotes/keynote-photo-3-1e4643.png",
+              src: "/images/keynotes/keynote-photo-3-1e4643.png",
               alt: "Retrato de ponente principal",
             },
             name: "Shreya Gupta",

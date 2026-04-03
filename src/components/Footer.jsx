@@ -47,7 +47,7 @@ const Footer = ({ dataTranslate }) => {
               <div className="footer-brand">
                 <div className="footer-brand__logo">
                   <img
-                    src="/figma-assets/footer-logo-mark.svg"
+                    src="/images/footer-logo-mark.svg"
                     alt=""
                     width={32}
                     height={32}

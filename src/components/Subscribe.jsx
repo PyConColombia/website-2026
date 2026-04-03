@@ -76,7 +76,7 @@ const Subscribe = ({ dataTranslate }) => {
     <div className="subscribe-cta content-wrapper bottom-section">
       <img
         className="subscribe-cta__decor"
-        src="/figma-assets/subscribe-dotted.svg"
+        src="/images/subscribe-dotted.svg"
         alt=""
         aria-hidden
       />
@@ -103,7 +103,7 @@ const Subscribe = ({ dataTranslate }) => {
             <p className="subscribe-cta__description">{s.description}</p>
             <img
               className="subscribe-cta__art-adobe"
-              src="/figma-assets/subscribe-adobe.png"
+              src="/images/subscribe-adobe.png"
               alt=""
               aria-hidden
             />

@@ -1,27 +1,30 @@
 import {
   faGithubAlt,
   faInstagram,
+  faLinkedin,
   faXTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { Image } from "@/components/Image";
 
 const KEYNOTE_SOCIAL_ICONS = {
   github: faGithubAlt,
   instagram: faInstagram,
+  linkedin: faLinkedin,
   twitter: faXTwitter,
+  website: faGlobe,
   youtube: faYoutube,
 };
 
 function keynoteFlagAssetPath(code) {
   if (!code || typeof code !== "string") return "";
-  const iso = code.slice(0, 2).toLowerCase();
-  return `/figma-assets/keynotes/flag-${iso}.svg`;
+  return `/images/keynotes/flag-${code.toLowerCase()}.svg`;
 }
 
 const DEFAULT_TOPIC_ROWS = [
@@ -69,22 +72,30 @@ const LandingPage = ({ dataTranslate }) => {
               aria-label={h?.conferenceTitle ?? "PyCon conference hero"}
             >
               <div className="landing-hero__stage">
-                <img
+                <Image
                   className="landing-hero__wordmark"
-                  src="/figma-assets/hero-decorative.svg"
+                  src="/images/hero-decorative.svg"
                   alt={h?.wordmarkAlt ?? "PyCon 2026"}
+                  width={1252}
+                  height={420}
+                  priority
                 />
                 <div className="landing-hero__visual">
-                  <img
+                  <Image
                     className="landing-hero__portrait"
-                    src="/figma-assets/python-hero.svg"
+                    src="/images/python-hero.svg"
                     alt={h?.portraitAlt ?? "PyCon speaker portrait"}
+                    width={430}
+                    height={400}
+                    priority
                   />
                 </div>
-                <img
+                <Image
                   className="landing-hero__bottom-glow"
-                  src="/figma-assets/hero-bottom-glow.svg"
+                  src="/images/hero-bottom-glow.svg"
                   alt=""
+                  width={257}
+                  height={220}
                   aria-hidden
                 />
                 <div className="landing-hero__meta">
@@ -169,10 +180,13 @@ const LandingPage = ({ dataTranslate }) => {
                 {keynoteColumns.map((column) => {
                   const photoBlock = (
                     <div className="landing-keynotes__photo-card">
-                      <img
+                      <Image
                         className="landing-keynotes__photo-img"
                         src={column.photo.src}
                         alt={column.photo.alt ?? ""}
+                        layout="fullWidth"
+                        aspectRatio={3 / 4}
+                        objectFit="cover"
                       />
                     </div>
                   );
@@ -186,13 +200,13 @@ const LandingPage = ({ dataTranslate }) => {
                             role="img"
                             aria-label={column.flag.label}
                           >
-                            <img
+                            <Image
                               className="landing-keynotes__flag-img"
                               src={keynoteFlagAssetPath(column.flag.code)}
                               alt=""
                               width={48}
                               height={48}
-                              decoding="async"
+                              layout="fixed"
                             />
                           </div>
                         ) : null}
