@@ -114,6 +114,12 @@ const data = {
           },
         ],
       },
+      gallery: {
+        sectionAriaLabel: "Conference photo gallery",
+        modalCloseLabel: "Close image",
+        /** Use `{name}` for the humanized filename (e.g. `my-shot.png` → `My shot`). */
+        imageAltTemplate: "Conference photo: {name}",
+      },
     },
     callForProposals: {
       header: "Share Your Voice",
@@ -604,6 +610,11 @@ Join us to learn, share, and connect with python professionals from across the g
             ],
           },
         ],
+      },
+      gallery: {
+        sectionAriaLabel: "Galería de fotos de la conferencia",
+        modalCloseLabel: "Cerrar imagen",
+        imageAltTemplate: "Foto: {name}",
       },
     },
     callForProposals: {

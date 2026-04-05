@@ -13,6 +13,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Image } from "@/components/Image";
+import LandingPhotoCarousel from "./components/LandingPhotoCarousel";
 
 const KEYNOTE_SOCIAL_ICONS = {
   github: faGithubAlt,
@@ -186,6 +187,7 @@ const LandingPage = ({ dataTranslate }) => {
   const keynotes = dataTranslate?.landing?.keynotes;
   const keynoteColumns = keynotes?.columns ?? keynotes?.rows ?? [];
   const keynotesRevealKey = keynoteColumns.map((c) => c.name).join("|");
+  const gallery = dataTranslate?.landing?.gallery;
 
   return (
     <>
@@ -288,6 +290,13 @@ const LandingPage = ({ dataTranslate }) => {
           </Row>
         </Container>
       </section>
+
+      <LandingPhotoCarousel
+        sectionAriaLabel={gallery?.sectionAriaLabel}
+        modalCloseLabel={gallery?.modalCloseLabel}
+        imageAltTemplate={gallery?.imageAltTemplate}
+        altBySrc={gallery?.altBySrc}
+      />
 
       {keynoteColumns.length ? (
         <section
