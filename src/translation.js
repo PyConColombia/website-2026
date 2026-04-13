@@ -88,12 +88,12 @@ const data = {
             photoFirst: true,
             photo: {
               src: "/images/keynotes/terezaiofciu.jpg",
-              alt: "Keynote speaker portrait",
+              alt: "Portrait of keynote speaker Tereza Iofciu",
             },
             name: "Tereza Iofciu",
             // handle: "@terezaiofciu",
-            flag: { code: "de", label: "Germany" },
-            bio: "Helping data & AI professionals lead with influence, adaptability & purpose | Leadership Coach | Fractional AI Leader | Speaker | PSF Fellow | 20 in Data",
+            flag: { code: "ro", label: "Romania" },
+            bio: "Tereza Iofciu is a data and AI expert, leadership coach, and PSF Fellow with 15+ years of experience. She is an active contributor to the Python community and creator of the Data Diplomat Framework, focused on bridging technical expertise with human-centered leadership.",
             social: [
               {
                 key: "linkedin",

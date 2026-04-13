@@ -399,6 +399,31 @@
   max-width: 1320px;
 }
 
+/* Menos padding en tablet y móvil (panel + márgenes + gutter del container) */
+@media (max-width: 991.98px) {
+  .landing-keynotes {
+    padding: 0 clamp(0.75rem, 2.5vw, 1.25rem) clamp(1.75rem, 5vw, 3rem);
+  }
+
+  .landing-keynotes__panel {
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .landing-keynotes__container {
+    --bs-gutter-x: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-keynotes__panel {
+    padding: 1rem;
+  }
+
+  .landing-keynotes__container {
+    --bs-gutter-x: 0.75rem;
+  }
+}
+
 .landing-keynotes__header {
   display: flex;
   flex-direction: column;

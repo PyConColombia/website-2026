@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import LanguageContext from "@/LanguageContext";
 import Layout from "@/layout";
 import data from "@/translation";
@@ -10,6 +10,16 @@ import Team from "./pages/Team";
 import "./App.scss";
 import CodeOfConduct from "@/pages/CodeOfConduct";
 import LandingPage from "@/pages/LandingPage";
+
+function ScrollToTopOnRouteChange() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    // `pathname` in deps retriggers on navigation; scroll must not depend on reading it.
+    void pathname;
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function App() {
   usePageTracking();
@@ -22,6 +32,7 @@ function App() {
 
   return (
     <Layout dataTranslate={allData}>
+      <ScrollToTopOnRouteChange />
       <Routes>
         <Route path="/" element={<LandingPage dataTranslate={allData} />} />
         <Route path="/team" element={<Team />} />
