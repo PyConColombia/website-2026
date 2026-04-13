@@ -1296,3 +1296,693 @@
     position: static;
   }
 }
+
+/* Call for Proposals — same surface system as Code of Conduct (.coc-page) */
+.cfp-page .coc-page__container {
+  max-width: min(1320px, 100%);
+}
+
+.cfp-hero {
+  position: relative;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: clamp(1rem, 3vw, 2rem);
+  overflow: hidden;
+}
+
+.cfp-hero__glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 66%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.cfp-hero__glow-blob {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(to left, rgba(143, 151, 255, 0.55), transparent);
+  filter: blur(64px);
+  transform: translate(35%, -18%);
+}
+
+.cfp-hero__row {
+  position: relative;
+  z-index: 1;
+}
+
+.cfp-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #595c60;
+  background: #e0e2e9;
+}
+
+.cfp-hero__pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #444dc5;
+  animation: cfp-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cfp-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(0.92);
+  }
+}
+
+.cfp-hero__title {
+  margin: 0 0 1.25rem;
+  font-family: 'Maven Pro', 'Nunito', sans-serif;
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #2c2f33;
+}
+
+.cfp-hero__title-accent {
+  color: #444dc5;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.cfp-hero__lead {
+  margin: 0 0 1.75rem;
+  max-width: 36rem;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.65;
+  color: #595c60;
+}
+
+.cfp-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.cfp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.75rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.cfp-btn--primary {
+  background: #444dc5;
+  color: #f3f1ff !important;
+  border: 2px solid #444dc5;
+}
+
+.cfp-btn--primary:hover {
+  background: #3740b8;
+  border-color: #3740b8;
+  color: #f3f1ff !important;
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(68, 77, 197, 0.28);
+}
+
+.cfp-btn--secondary {
+  background: #ffffff;
+  color: #2c2f33 !important;
+  border: 1px solid rgba(171, 173, 178, 0.35);
+}
+
+.cfp-btn--secondary:hover {
+  border-color: rgba(68, 77, 197, 0.35);
+  color: #444dc5 !important;
+}
+
+.cfp-hero__visual {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #e0e2e9;
+  transform: rotate(3deg);
+  transition: transform 0.65s ease;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.cfp-hero__visual:hover {
+  transform: rotate(0deg);
+}
+
+.cfp-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.15);
+}
+
+.cfp-hero__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(68, 77, 197, 0.12);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.cfp-section {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.cfp-section--alt {
+  margin-left: calc(-1 * clamp(1rem, 3vw, 1.5rem));
+  margin-right: calc(-1 * clamp(1rem, 3vw, 1.5rem));
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 3vw, 1.5rem);
+  background: #ffffff;
+  border-radius: 0;
+}
+
+.cfp-section--inverse {
+  margin-left: calc(-1 * clamp(1rem, 3vw, 1.5rem));
+  margin-right: calc(-1 * clamp(1rem, 3vw, 1.5rem));
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 3vw, 1.5rem);
+  background: #2c2f33;
+  color: #f5f6fb;
+}
+
+.cfp-section--split {
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+  border-bottom: 1px solid rgba(218, 221, 228, 0.65);
+}
+
+.cfp-section--faq {
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.cfp-section__intro {
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.cfp-section__intro--center {
+  text-align: center;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cfp-section__h2 {
+  margin: 0 0 1rem;
+  font-family: 'Maven Pro', 'Nunito', sans-serif;
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #2c2f33;
+}
+
+.cfp-section__h2--center {
+  text-align: center;
+}
+
+.cfp-section__h2--xl {
+  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.cfp-section__h2--inverse-xl {
+  font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+  font-weight: 800;
+  color: #f5f6fb;
+  line-height: 1.1;
+}
+
+.cfp-section__sub {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #595c60;
+}
+
+.cfp-section__lead-inverse {
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #d1d4dc;
+}
+
+.cfp-bento-main {
+  height: 100%;
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  background: #eff1f6;
+}
+
+.cfp-bento-main__p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #595c60;
+}
+
+.cfp-bento-main__p:last-child {
+  margin-bottom: 0;
+}
+
+.cfp-help-block {
+  position: relative;
+  overflow: hidden;
+  padding: 1.75rem 1.85rem;
+  border-radius: 1.25rem;
+  background: #444dc5;
+  color: #f3f1ff;
+  margin-bottom: 1.25rem;
+}
+
+.cfp-help-block__bg-icon {
+  position: absolute;
+  right: -1rem;
+  bottom: -1rem;
+  font-size: 6.5rem;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.cfp-help-block__title {
+  position: relative;
+  margin: 0 0 0.75rem;
+  font-family: 'Maven Pro', 'Nunito', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cfp-help-block__body {
+  position: relative;
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.cfp-help-block__link {
+  position: relative;
+  font-weight: 700;
+  color: #fff !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.cfp-help-block__link:hover {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.cfp-channels {
+  padding: 1.75rem 1.85rem;
+  border-radius: 1.25rem;
+  background: #e0e2e9;
+}
+
+.cfp-channels__title {
+  margin: 0 0 1.15rem;
+  font-family: 'Maven Pro', 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2c2f33;
+}
+
+.cfp-channels__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cfp-channels__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none !important;
+  color: inherit;
+  font-weight: 600;
+  color: #2c2f33;
+}
+
+.cfp-channels__row--static {
+  cursor: default;
+}
+
+.cfp-channels__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444dc5;
+  font-size: 1.15rem;
+}
+
+.cfp-timeline__item {
+  position: relative;
+  padding-top: 2rem;
+  border-top: 2px solid #e6e8ee;
+}
+
+.cfp-timeline__item--border-primary {
+  border-top-color: #444dc5;
+}
+
+.cfp-timeline__dot {
+  position: absolute;
+  top: -0.45rem;
+  left: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: #595c60;
+  box-shadow: 0 0 0 8px #ffffff;
+}
+
+.cfp-timeline__item--dot-primary .cfp-timeline__dot {
+  background: #444dc5;
+}
+
+.cfp-timeline__date {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #595c60;
+}
+
+.cfp-timeline__item--dot-primary .cfp-timeline__date {
+  color: #444dc5;
+}
+
+.cfp-timeline__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c2f33;
+}
+
+.cfp-timeline__body {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #595c60;
+}
+
+.cfp-format-card {
+  height: 100%;
+  padding: clamp(1.75rem, 4vw, 2.25rem);
+  border-radius: 1.25rem;
+  background: #eff1f6;
+  transition: background 0.2s ease;
+}
+
+.cfp-format-card:hover {
+  background: rgba(143, 151, 255, 0.12);
+}
+
+.cfp-format-card__icon {
+  font-size: 2rem;
+  color: #444dc5;
+  margin-bottom: 1.25rem;
+}
+
+.cfp-format-card__title {
+  margin: 0 0 0.65rem;
+  font-family: 'Maven Pro', 'Nunito', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2c2f33;
+}
+
+.cfp-format-card__body {
+  margin: 0 0 1.15rem;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #595c60;
+}
+
+.cfp-format-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cfp-tag {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: #e0e2e9;
+  color: #2c2f33;
+}
+
+.cfp-quote {
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+  border: 1px solid rgba(209, 212, 220, 0.25);
+  border-radius: 1rem;
+}
+
+.cfp-quote p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-style: italic;
+  color: #d1d4dc;
+}
+
+.cfp-quote a {
+  color: #8f97ff !important;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.cfp-topic-tile {
+  height: 100%;
+  min-height: 5.5rem;
+  padding: 1.25rem 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cfp-topic-tile:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.cfp-topic-tile__icon {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-size: 1.5rem;
+  color: #8f97ff;
+}
+
+.cfp-topic-tile__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f5f6fb;
+  line-height: 1.3;
+}
+
+.cfp-steps {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cfp-steps__item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.cfp-steps__num {
+  flex-shrink: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(143, 151, 255, 0.45);
+}
+
+.cfp-steps__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c2f33;
+}
+
+.cfp-steps__body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #595c60;
+}
+
+.cfp-benefits {
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  background: rgba(143, 151, 255, 0.22);
+}
+
+.cfp-benefits__list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.cfp-benefits__row {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.cfp-benefits__check {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: #fff;
+  color: #444dc5;
+  font-size: 0.85rem;
+}
+
+.cfp-benefits__text {
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: #2c2f33;
+}
+
+.cfp-benefits__cta {
+  display: block;
+  margin-top: 2rem;
+  width: 100%;
+  padding: 0.95rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: #2c2f33;
+  color: #f5f6fb !important;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none !important;
+  transition: background 0.15s ease;
+}
+
+.cfp-benefits__cta:hover {
+  background: #595c60;
+  color: #f5f6fb !important;
+}
+
+.cfp-faq__list {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.cfp-faq__item {
+  border-radius: 1rem;
+  background: #eff1f6;
+  overflow: hidden;
+}
+
+.cfp-faq__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.cfp-faq__summary::-webkit-details-marker {
+  display: none;
+}
+
+.cfp-faq__q {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2c2f33;
+  line-height: 1.35;
+}
+
+.cfp-faq__chev {
+  flex-shrink: 0;
+  color: #444dc5;
+  transition: transform 0.25s ease;
+}
+
+.cfp-faq__item[open] .cfp-faq__chev {
+  transform: rotate(180deg);
+}
+
+.cfp-faq__a {
+  padding: 0 1.35rem 1.35rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #595c60;
+}
+
+.cfp-faq__footer {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.cfp-faq__footer-lead {
+  margin: 0 0 0.65rem;
+  color: #595c60;
+}
+
+.cfp-faq__footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+
+@media (min-width: 992px) {
+  .cfp-hero__title {
+    font-size: clamp(2.75rem, 4.5vw, 3.85rem);
+  }
+}

@@ -10,6 +10,7 @@ const data = {
       keynotes: "Keynotes",
       speakers: "Speakers",
       getTickets: "GET YOUR TICKETS",
+      submitProposal: "Submit Proposal",
       ticketsUrl:
         "https://www.eventbrite.co/e/pycon-colombia-2025-tickets-1271703351959",
     },
@@ -505,6 +506,7 @@ Join us to learn, share, and connect with python professionals from across the g
       keynotes: "Keynotes",
       speakers: "Ponentes",
       getTickets: "CONSIGUE TUS ENTRADAS",
+      submitProposal: "Enviar propuesta",
       ticketsUrl:
         "https://www.eventbrite.co/e/pycon-colombia-2025-tickets-1271703351959",
     },
@@ -758,6 +760,183 @@ Join us to learn, share, and connect with python professionals from across the g
           title: "Código de Conducta",
           text: "Para crear un ambiente seguro y cómodo para todos nuestros asistentes y miembros del equipo, y garantizar que todos disfruten de la conferencia, hemos escrito este Código de Conducta. Esperamos que lo leas, lo entiendas y lo sigas tanto en tu propuesta como en tu charla.",
         },
+      },
+    },
+    callForProposalsPage: {
+      metaTitle: "Llamado a propuestas | PyCon Colombia 2026",
+      submitProposalHref:
+        "mailto:speakers@pycon.co?subject=Propuesta%20PyCon%20Colombia%202026",
+      hero: {
+        badge: "Aceptamos envíos",
+        titleBefore: "Llamado a",
+        titleAccent: "propuestas",
+        titleYear: "2026",
+        lead: "Comparte tu conocimiento, inspira a la comunidad y ayuda a dar forma al futuro de Python en Latinoamérica. Te esperamos en los majestuosos Andes en PyCon Colombia 2026.",
+        ctaPrimary: "Envía tu propuesta",
+        ctaSecondary: "Ver guía de envío",
+        imageSrc:
+          "https://lh3.googleusercontent.com/aida-public/AB6AXuDEscQCb1kN9lT8BPqAOHIRVDCMXYjQxsDYjlr-X_06RHeVJPHDKIf6W_vwVsNZvOGIpZbioITlziEw3-r_9wiq3CO_Rk-bOHGqG_FubS9sJ-G4SMkN8RVe8AE2BVindQdOljxgoF3S_kROb-YH2GEag--s8Fxgmpc_KX6X_M2-4A9rT79wjArkANiEA2Ex-pfy-jySUs7VnCaLRwbbc1yTMy6AwJr4S0EXjrrsw6NEgdaa56r8FcGT1mghQcsCoHrDOv_LJTRCN7yX",
+        imageAlt: "Salón de conferencias moderno",
+      },
+      why: {
+        title: "¿Por qué hablar en PyCon Colombia?",
+        paragraphs: [
+          "PyCon Colombia es la reunión más grande de pythonistas en la región. Hablar aquí no se trata solo de compartir código: es tender puentes, acompañar a la siguiente generación y aportar a uno de los ecosistemas tecnológicos más vibrantes del mundo.",
+          "Recibimos con los brazos abiertos a personas de todos los perfiles y niveles de experiencia. Tanto si es tu primera charla como si ya eres una voz reconocida, la comunidad está para apoyarte.",
+        ],
+      },
+      helpCard: {
+        title: "¿Necesitas ayuda?",
+        body: "Lee el FAQ para ponentes o escríbenos para orientarte en tu envío.",
+        faqLinkText: "Ver preguntas frecuentes",
+      },
+      channels: {
+        title: "Canales clave",
+        items: [
+          {
+            icon: "mail",
+            label: "speakers@pycon.co",
+            href: "mailto:speakers@pycon.co",
+          },
+          { icon: "forum", label: "Discord de la comunidad", href: null },
+          { icon: "doc", label: "Plantilla de propuesta", href: null },
+        ],
+      },
+      dates: {
+        title: "Fechas importantes",
+        subtitle:
+          "Anota en tu calendario. No se aceptarán envíos fuera de plazo.",
+        items: [
+          {
+            date: "15 DE OCTUBRE DE 2025",
+            title: "Apertura del CFP",
+            body: "Empieza a bosquejar tus sesiones y tu biografía como ponente.",
+            dotPrimary: true,
+            borderPrimary: false,
+          },
+          {
+            date: "10 DE ENERO DE 2026",
+            title: "Cierre de envíos",
+            body: "Todas las propuestas deben enviarse por el portal antes de medianoche hora Colombia.",
+            dotPrimary: false,
+            borderPrimary: false,
+          },
+          {
+            date: "15 DE FEBRERO DE 2026",
+            title: "Anuncios",
+            body: "Les informaremos el estado de su propuesta.",
+            dotPrimary: false,
+            borderPrimary: false,
+          },
+          {
+            date: "12-14 DE JUNIO DE 2026",
+            title: "PyCon Colombia",
+            body: "El evento principal se realiza en Medellín.",
+            dotPrimary: true,
+            borderPrimary: true,
+          },
+        ],
+      },
+      formats: {
+        title: "Formatos de sesión",
+        items: [
+          {
+            icon: "talk",
+            title: "Charlas",
+            body: "Presentaciones de 30 minutos con espacio para preguntas. Ideales para casos de uso, bibliotecas nuevas o profundizaciones en Python.",
+            tags: ["30 MIN", "PREGUNTAS INCLUIDAS"],
+          },
+          {
+            icon: "workshop",
+            title: "Talleres",
+            body: "Sesiones prácticas intensivas de 3 horas, con guía paso a paso para quienes siguen en su propio equipo.",
+            tags: ["180 MIN", "MANOS A LA OBRA"],
+          },
+          {
+            icon: "poster",
+            title: "Pósters",
+            body: "Representación visual de proyectos o investigación, en el salón principal con tiempo dedicado a conversar y conectar.",
+            tags: ["VISUAL", "NETWORKING"],
+          },
+        ],
+      },
+      topics: {
+        title: "¿Qué buscamos?",
+        lead: "Valoramos la diversidad de miradas. Aceptamos cualquier tema relacionado con Python; estas son algunas líneas que entusiasman especialmente a la comunidad este año.",
+        quoteBefore:
+          "Priorizamos contenido acciónable, bien estructurado y alineado con nuestro ",
+        quoteAfter: ".",
+        codeOfConductLabel: "código de conducta",
+        items: [
+          { key: "ds", title: "Ciencia de datos e IA" },
+          { key: "web", title: "Desarrollo web" },
+          { key: "devops", title: "DevOps e infraestructura" },
+          { key: "sec", title: "Ciberseguridad" },
+          { key: "sci", title: "Python científico" },
+          { key: "edu", title: "Educación y habilidades blandas" },
+          { key: "iot", title: "IoT y hardware" },
+          { key: "core", title: "Python core" },
+          { key: "oss", title: "Cultura de código abierto" },
+        ],
+      },
+      selection: {
+        title: "El proceso de selección",
+        steps: [
+          {
+            title: "Revisión anónima",
+            body: "Para mayor equidad, la primera revisión se hace sin ver nombres ni afiliaciones.",
+          },
+          {
+            title: "Retroalimentación de la comunidad",
+            body: "Un grupo de personas expertas y de la comunidad califica profundidad técnica y relevancia.",
+          },
+          {
+            title: "Curaduría final",
+            body: "El comité de programa arma una mezcla equilibrada de temas y niveles para la agenda final.",
+          },
+        ],
+      },
+      benefits: {
+        title: "Beneficios para ponentes",
+        items: [
+          "Pase completo a la conferencia: acceso a charlas, talleres y espacios sociales.",
+          "Cena exclusiva de ponentes: conoce a keynotes y al equipo central.",
+          "Apoyo económico: ayuda con viaje y alojamiento para quienes la necesiten.",
+          "Swag de ponente: material edición limitada solo para quienes presentan.",
+        ],
+        cta: "¿Lista o listo para postularte?",
+      },
+      faq: {
+        title: "Preguntas frecuentes",
+        subtitle: "Lo esencial para presentar en PyCon Colombia.",
+        items: [
+          {
+            q: "¿En qué idioma envío la propuesta y doy la charla?",
+            a: "PyCon Colombia es bilingüe. Aceptamos propuestas en español e inglés. Puedes elegir el idioma en el que te sientas más cómodo o cómoda al presentar.",
+          },
+          {
+            q: "¿Puedo enviar más de una propuesta?",
+            a: "Sí. Aunque para mantener una agenda diversa, por lo general limitamos a una presentación por persona en el programa final.",
+          },
+          {
+            q: "¿Hay apoyo de viaje para ponentes?",
+            a: "Sí, tenemos programa de ayuda económica. Esperamos que muchas empresas cubran el viaje de sus equipos, pero ofrecemos apoyo a quienes lo necesiten, en especial a grupos subrepresentados en tecnología.",
+          },
+          {
+            q: "¿Qué criterios se usan para evaluar las propuestas?",
+            a: "Relevancia para la comunidad, calidad técnica, claridad del resumen y valor educativo de la charla. Buscamos equilibrio entre niveles principiante y avanzado.",
+          },
+          {
+            q: "Nunca he hablado en una conferencia. ¿Puedo postularme?",
+            a: "¡Por supuesto! Nos encantan las personas que dan su primera charla. Incluso ofrecemos mentorías para pulir tu presentación antes del evento.",
+          },
+          {
+            q: "¿Las sesiones se graban?",
+            a: "Sí, salvo que pidas explícitamente lo contrario, las charlas se graban y publican en nuestro canal de YouTube después del evento, para toda la comunidad global de Python.",
+          },
+        ],
+        footerLead: "¿Sigues con dudas? Estamos para ayudarte.",
+        footerLink: "Escribir al comité de ponentes",
       },
     },
     sponsors: {

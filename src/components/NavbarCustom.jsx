@@ -6,24 +6,24 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 
-// const ArrowUpRightIcon = () => (
-//   <svg
-//     width="18"
-//     height="18"
-//     viewBox="0 0 24 24"
-//     fill="none"
-//     xmlns="http://www.w3.org/2000/svg"
-//     aria-hidden={true}
-//   >
-//     <path
-//       d="M7 17 17 7M17 7H7M17 7v10"
-//       stroke="currentColor"
-//       strokeWidth="1.5"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     />
-//   </svg>
-// );
+const ArrowUpRightIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
+  >
+    <path
+      d="M7 17 17 7M17 7H7M17 7v10"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const ChevronDownIcon = () => (
   <svg
@@ -100,6 +100,9 @@ const NavbarCustom = ({ dataTranslate }) => {
                   <NavLink to="/" end className={linkClass}>
                     {t.home ?? "Home"}
                   </NavLink>
+                  {/* <NavLink to="/call-for-proposals" className={linkClass}>
+                    {t.callForProposals ?? "Call for proposals"}
+                  </NavLink> */}
                   {/* <NavLink to="/sponsors" className={linkClass}>
                     {t.sponsors ?? "Sponsors"}
                   </NavLink> */}
@@ -148,6 +151,10 @@ const NavbarCustom = ({ dataTranslate }) => {
               {t.getTickets ?? "GET YOUR TICKETS"}
               <ArrowUpRightIcon />
             </a> */}
+            <NavLink className="navbar-custom__cta" to="/call-for-proposals">
+              {t.submitProposal ?? "Submit Proposal"}
+              <ArrowUpRightIcon />
+            </NavLink>
           </div>
         </Navbar.Collapse>
       </Container>
