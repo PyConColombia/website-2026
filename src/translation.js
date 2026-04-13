@@ -410,6 +410,75 @@ const data = {
         ],
       },
     },
+    codeOfConductPage: {
+      metaTitle: "Code of Conduct | PyCon Colombia 2026",
+      sectionAriaLabel: "Code of conduct",
+      eyebrow: "PyCon Colombia",
+      titlePart1: "Code of",
+      titlePart2: "Conduct",
+      intro:
+        "PyCon Colombia is a conference organized by the Python Colombia community created for the dissemination of the Python programming language in our country and Latin America, with the objective of sharing knowledge and expanding the spaces for interaction and collaboration of its members. We value the participation of each member of the community and we want each participant in the conference to enjoy and gain valuable experience full of knowledge and innovation. According to this code, all participants including organizers, speakers, volunteers and attendees are expected to show respect and courtesy among themselves in all aspects of the conference, its organization and the events taking place in the context of the conference. To be more explicit than is expected of any person participating in the event and the global and local community of Python and PyCon Colombia are required to comply with the following Code of Conduct. The organizers of this event and any event in the future are subject to enforce following and complying with international and Colombian laws and the spirit of the International Python Society (Python Software Foundation).",
+      nav: {
+        intro: "Introduction",
+        content: "Code of Conduct Content",
+        recommendations: "Our goal",
+        contact: "Contact Information",
+        more: "Want to know more?",
+      },
+      helpCard: {
+        title: "Contact organizers",
+        body: "If you have been harassed or need help, you can reach our organizers directly.",
+        email: "john@pycon.co",
+        emailHref: "mailto:john@pycon.co",
+      },
+      contentSection: {
+        title: "Code of Conduct Content",
+        body: "PyCon Colombia is dedicated to providing a conference free of harassment for all members, regardless of gender, sexual orientation, physical abilities, physical appearance, race or religion. No abuse will be tolerated by any conference participant. All communications should be focused on a professional audience including people with different backgrounds and experiences. Sexual language is not appropriate for any event organized under our rules, including talks.",
+      },
+      recommendations: {
+        title: "Our goal as a community recommends:",
+        inclusiveTitle: "Be Inclusive",
+        inclusiveBody:
+          "Acknowledge different backgrounds and perspectives. Foster a welcoming atmosphere for all participants.",
+        respectfulTitle: "Be Respectful",
+        respectfulBody:
+          "Disagreement is no excuse for poor manners. Be kind in all interactions and communications.",
+        items: [
+          "Be kind to other members.",
+          "Do not insult or demean the other participants.",
+          "Behave professionally.",
+          "Remember that any conduct of harassment, sexism, racism or political division or of any instance, is not appropriate for participation within the conference or community.",
+          "Not attending the conference under the influence of alcoholic beverages.",
+          "Participants of our community of any type (Organizers, Speakers, Volunteers and Assistants) who do not comply with any of these rules will be expelled from the conference without any reimbursement at the discretion of the organizing committee of the conference.",
+        ],
+        thankYou:
+          "Thank you for being subject to these terms and welcome to PyCon Colombia. This is a friendly event for our entire community.",
+      },
+      contact: {
+        title: "Contact Information",
+        lead: "If you have been harassed, or realize that someone else is being harassed or is violating the International Terms of the PyCon Colombia or have any problems, please contact our organizers:",
+        contacts: [
+          {
+            name: "John Jairo Roa Acuña",
+            email: "john@pycon.co",
+            href: "mailto:john@pycon.co",
+          },
+        ],
+        teamNote:
+          "Our team at the conference will also be available to collaborate and contact local security or assist you to ensure your safety. We value your presence in our events.",
+        organizerNote:
+          "In case of any violation of the terms of this code of conduct by the organizers please contact the main organizer of the conference, John Roa or as a last resort to the PSF.",
+        staffLanyardLead: "Staff wear",
+        staffLanyardBold: "Yellow Lanyards",
+        infoDeskLead: "Report at the",
+        infoDeskBold: "Info Desk",
+      },
+      more: {
+        title: "Want to know more?",
+        linkText: "Submit",
+        linkTo: "/",
+      },
+    },
     footer: {
       others: "Others",
       legal: "Legal",
@@ -903,6 +972,75 @@ Join us to learn, share, and connect with python professionals from across the g
           "** Entrevista en formato blog o video **",
           "** Por favor ten en cuenta que en cualquiera de estos formatos puedes elegir permanecer en anonimato.**",
         ],
+      },
+    },
+    codeOfConductPage: {
+      metaTitle: "Código de conducta | PyCon Colombia 2026",
+      sectionAriaLabel: "Código de conducta",
+      eyebrow: "PyCon Colombia",
+      titlePart1: "Código de",
+      titlePart2: "conducta",
+      intro:
+        "PyCon Colombia es una conferencia organizada por la comunidad Python Colombia, creada para la divulgación del lenguaje de programación Python en nuestro país y en América Latina, con el objetivo de compartir conocimiento y ampliar los espacios de interacción y colaboración de sus integrantes. Valoramos la participación de cada miembro de la comunidad y queremos que cada persona participante en la conferencia disfrute y obtenga una experiencia valiosa llena de conocimiento e innovación. De acuerdo con este código, se espera que todas las personas participantes, incluidas organizadoras, ponentes, voluntarias y asistentes, muestren respeto y cortesía entre sí en todos los aspectos de la conferencia, su organización y los eventos que ocurran en el marco de la conferencia. Para ser más explícitos que lo que se espera de cualquier persona que participe en el evento, se requiere que la comunidad global y local de Python y PyCon Colombia cumpla el siguiente Código de Conducta. Las organizadoras de este evento y de cualquier evento en el futuro están obligadas a hacer cumplir y a acatar las leyes internacionales y colombianas y el espíritu de la Python Software Foundation (International Python Society).",
+      nav: {
+        intro: "Introducción",
+        content: "Contenido del código de conducta",
+        recommendations: "Nuestra meta",
+        contact: "Información de contacto",
+        more: "¿Quieres saber más?",
+      },
+      helpCard: {
+        title: "Contacto con organizadoras",
+        body: "Si has sido acosado o necesitas ayuda, puedes contactar directamente a nuestras organizadoras.",
+        email: "john@pycon.co",
+        emailHref: "mailto:john@pycon.co",
+      },
+      contentSection: {
+        title: "Contenido del código de conducta",
+        body: "PyCon Colombia se dedica a ofrecer una conferencia libre de acoso para todos los miembros, sin importar género, orientación sexual, capacidades físicas, apariencia física, raza o religión. No se tolerará ningún abuso por parte de ninguna persona participante en la conferencia. Todas las comunicaciones deben estar dirigidas a una audiencia profesional que incluye personas con distintos orígenes y experiencias. El lenguaje sexual no es apropiado en ningún evento organizado bajo nuestras reglas, incluidas las charlas.",
+      },
+      recommendations: {
+        title: "Nuestra meta como comunidad recomienda:",
+        inclusiveTitle: "Sé inclusivo",
+        inclusiveBody:
+          "Reconoce distintos orígenes y perspectivas. Fomenta un ambiente acogedor para todas las personas participantes.",
+        respectfulTitle: "Sé respetuoso",
+        respectfulBody:
+          "El desacuerdo no es excusa para malos modales. Sé amable en todas tus interacciones y comunicaciones.",
+        items: [
+          "Ser amable con los demás miembros.",
+          "No insultar ni menospreciar a las demás personas participantes.",
+          "Comportarse de manera profesional.",
+          "Recordar que cualquier conducta de acoso, sexismo, racismo o división política, o de cualquier índole, no es apropiada para participar dentro de la conferencia o la comunidad.",
+          "No asistir a la conferencia bajo los efectos de bebidas alcohólicas.",
+          "Las personas participantes de nuestra comunidad de cualquier tipo (Organizadoras, Ponentes, Voluntarias y Asistentes) que no cumplan alguna de estas reglas serán expulsadas de la conferencia sin ningún reembolso, a criterio del comité organizador de la conferencia.",
+        ],
+        thankYou:
+          "Gracias por acoger estos términos y bienvenido o bienvenida a PyCon Colombia. Este es un evento amigable para toda nuestra comunidad.",
+      },
+      contact: {
+        title: "Información de contacto",
+        lead: "Si has sido acosado o acosada, te das cuenta de que alguien más está siendo acosado o se están violando los Términos Internacionales de PyCon Colombia, o tienes algún problema, por favor contacta a nuestras organizadoras:",
+        contacts: [
+          {
+            name: "John Jairo Roa Acuña",
+            email: "john@pycon.co",
+            href: "mailto:john@pycon.co",
+          },
+        ],
+        teamNote:
+          "Nuestro equipo en la conferencia también estará disponible para colaborar, contactar a seguridad local o ayudarte a garantizar tu seguridad. Valoramos tu presencia en nuestros eventos.",
+        organizerNote:
+          "En caso de cualquier violación de los términos de este código de conducta por parte de las organizadoras, por favor contacta al organizador principal de la conferencia, John Roa, o como último recurso a la PSF.",
+        staffLanyardLead: "El staff usa",
+        staffLanyardBold: "lanyards amarillos",
+        infoDeskLead: "Reporta en el",
+        infoDeskBold: "mostrador de información",
+      },
+      more: {
+        title: "¿Quieres saber más?",
+        linkText: "Enviar",
+        linkTo: "/",
       },
     },
     footer: {
