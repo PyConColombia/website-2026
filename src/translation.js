@@ -800,8 +800,7 @@ Join us to learn, share, and connect with python professionals from across the g
         lead: "Comparte tu conocimiento, inspira a la comunidad y ayuda a dar forma al futuro de Python en Latinoamérica. Te esperamos en los majestuosos Andes en PyCon Colombia 2026.",
         ctaPrimary: "Envía tu propuesta",
         ctaSecondary: "Ver guía de envío",
-        imageSrc:
-          "https://lh3.googleusercontent.com/aida-public/AB6AXuDEscQCb1kN9lT8BPqAOHIRVDCMXYjQxsDYjlr-X_06RHeVJPHDKIf6W_vwVsNZvOGIpZbioITlziEw3-r_9wiq3CO_Rk-bOHGqG_FubS9sJ-G4SMkN8RVe8AE2BVindQdOljxgoF3S_kROb-YH2GEag--s8Fxgmpc_KX6X_M2-4A9rT79wjArkANiEA2Ex-pfy-jySUs7VnCaLRwbbc1yTMy6AwJr4S0EXjrrsw6NEgdaa56r8FcGT1mghQcsCoHrDOv_LJTRCN7yX",
+        imageSrc: "/images/cfp.jpg",
         imageAlt: "Salón de conferencias moderno",
       },
       why: {

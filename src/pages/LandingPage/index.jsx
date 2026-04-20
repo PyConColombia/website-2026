@@ -5,7 +5,7 @@ import {
   faXTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
@@ -57,6 +57,20 @@ const DEFAULT_TOPIC_ROWS = [
     "clean architecture",
   ],
 ];
+
+const DEFAULT_CFP_HERO = {
+  submitProposalHref: "/call-for-proposals",
+  guideHref: "/call-for-proposals#cfp-formats",
+  badge: "Now Accepting Submissions",
+  titleBefore: "Call for",
+  titleAccent: "Proposals",
+  titleYear: "2026",
+  lead: "Share your knowledge, inspire the community, and help shape the future of Python in Latin America. Join us in the majestic Andes for PyCon Colombia 2026.",
+  ctaPrimary: "Submit Your Proposal",
+  ctaSecondary: "View Submission Guide",
+  imageSrc: "/images/cfp.jpg",
+  imageAlt: "Modern conference hall",
+};
 
 function KeynotesRevealRow({ columns }) {
   const rootRef = useRef(null);
@@ -184,6 +198,13 @@ KeynotesRevealRow.propTypes = {
 const LandingPage = ({ dataTranslate }) => {
   const h = dataTranslate?.landing?.hero ?? {};
   const topicRows = dataTranslate?.landing?.topics?.rows ?? DEFAULT_TOPIC_ROWS;
+  const cfpPage = dataTranslate?.callForProposalsPage ?? {};
+  const cfpHero = {
+    ...DEFAULT_CFP_HERO,
+    submitProposalHref:
+      cfpPage.submitProposalHref ?? DEFAULT_CFP_HERO.submitProposalHref,
+    ...cfpPage.hero,
+  };
   const keynotes = dataTranslate?.landing?.keynotes;
   const keynoteColumns = keynotes?.columns ?? keynotes?.rows ?? [];
   const keynotesRevealKey = keynoteColumns.map((c) => c.name).join("|");
@@ -288,6 +309,56 @@ const LandingPage = ({ dataTranslate }) => {
               </div>
             </Col>
           </Row>
+        </Container>
+      </section>
+
+      <section aria-label={`${cfpHero.titleBefore} ${cfpHero.titleAccent}`}>
+        <Container fluid="xxl">
+          <header className="cfp-hero coc-page__hero--tracked">
+            <div className="cfp-hero__glow" aria-hidden>
+              <span className="cfp-hero__glow-blob" />
+            </div>
+            <Row className="cfp-hero__row align-items-center g-5 g-lg-0">
+              <Col lg={7}>
+                <div className="cfp-hero__badge">
+                  <span className="cfp-hero__pulse" aria-hidden />
+                  {cfpHero.badge}
+                </div>
+                <h2 className="cfp-hero__title">
+                  {cfpHero.titleBefore}{" "}
+                  <span className="cfp-hero__title-accent">
+                    {cfpHero.titleAccent}
+                  </span>{" "}
+                  {cfpHero.titleYear}
+                </h2>
+                <p className="cfp-hero__lead">{cfpHero.lead}</p>
+                <div className="cfp-hero__actions">
+                  <a
+                    className="cfp-btn cfp-btn--primary"
+                    href={cfpHero.submitProposalHref}
+                  >
+                    {cfpHero.ctaPrimary}{" "}
+                    <FontAwesomeIcon icon={faPaperPlane} aria-hidden />
+                  </a>
+                  {/* <a className="cfp-btn cfp-btn--secondary" href={cfpHero.guideHref}>
+                    {cfpHero.ctaSecondary}
+                  </a> */}
+                </div>
+              </Col>
+              <Col lg={5}>
+                <div className="cfp-hero__visual">
+                  <img
+                    src={cfpHero.imageSrc}
+                    alt={cfpHero.imageAlt}
+                    className="cfp-hero__img"
+                    width={640}
+                    height={640}
+                  />
+                  <div className="cfp-hero__img-overlay" aria-hidden />
+                </div>
+              </Col>
+            </Row>
+          </header>
         </Container>
       </section>
 

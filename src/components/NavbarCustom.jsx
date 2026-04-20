@@ -151,7 +151,10 @@ const NavbarCustom = ({ dataTranslate }) => {
               {t.getTickets ?? "GET YOUR TICKETS"}
               <ArrowUpRightIcon />
             </a> */}
-            <NavLink className="navbar-custom__cta" to="/call-for-proposals">
+            <NavLink
+              className="navbar-custom__cta"
+              to="https://forms.gle/vSGrrWfAf6nZZ5M86"
+            >
               {t.submitProposal ?? "Submit Proposal"}
               <ArrowUpRightIcon />
             </NavLink>

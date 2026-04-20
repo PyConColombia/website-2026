@@ -1631,6 +1631,10 @@
 
 .cfp-help-block__link {
   position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   font-weight: 700;
   color: #fff !important;
   text-decoration: underline !important;

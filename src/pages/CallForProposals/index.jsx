@@ -28,8 +28,7 @@ import { Link } from "react-router-dom";
 
 const DEFAULT_COPY = {
   metaTitle: "Call for Proposals | PyCon Colombia 2026",
-  submitProposalHref:
-    "mailto:speakers@pycon.co?subject=PyCon%20Colombia%202026%20Proposal",
+  submitProposalHref: "https://forms.gle/vSGrrWfAf6nZZ5M86",
   hero: {
     badge: "Now Accepting Submissions",
     titleBefore: "Call for",
@@ -38,8 +37,7 @@ const DEFAULT_COPY = {
     lead: "Share your knowledge, inspire the community, and help shape the future of Python in Latin America. Join us in the majestic Andes for PyCon Colombia 2026.",
     ctaPrimary: "Submit Your Proposal",
     ctaSecondary: "View Submission Guide",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDEscQCb1kN9lT8BPqAOHIRVDCMXYjQxsDYjlr-X_06RHeVJPHDKIf6W_vwVsNZvOGIpZbioITlziEw3-r_9wiq3CO_Rk-bOHGqG_FubS9sJ-G4SMkN8RVe8AE2BVindQdOljxgoF3S_kROb-YH2GEag--s8Fxgmpc_KX6X_M2-4A9rT79wjArkANiEA2Ex-pfy-jySUs7VnCaLRwbbc1yTMy6AwJr4S0EXjrrsw6NEgdaa56r8FcGT1mghQcsCoHrDOv_LJTRCN7yX",
+    imageSrc: "/images/cfp.jpg",
     imageAlt: "Modern conference hall",
   },
   why: {
@@ -62,8 +60,6 @@ const DEFAULT_COPY = {
         label: "speakers@pycon.co",
         href: "mailto:speakers@pycon.co",
       },
-      { icon: "forum", label: "Community Discord", href: null },
-      { icon: "doc", label: "Proposal Template", href: null },
     ],
   },
   dates: {
@@ -71,28 +67,21 @@ const DEFAULT_COPY = {
     subtitle: "Mark your calendars. Late submissions will not be accepted.",
     items: [
       {
-        date: "OCTOBER 15, 2025",
+        date: "MARCH 23, 2026",
         title: "CFP Opens",
         body: "Start drafting your session ideas and speaker bios.",
         dotPrimary: true,
         borderPrimary: false,
       },
       {
-        date: "JANUARY 10, 2026",
+        date: "APRIL 28, 2026",
         title: "Submission Deadline",
         body: "All proposals must be submitted via the portal by midnight COT.",
         dotPrimary: false,
         borderPrimary: false,
       },
       {
-        date: "FEBRUARY 15, 2026",
-        title: "Announcements",
-        body: "Speakers will be notified of their proposal status.",
-        dotPrimary: false,
-        borderPrimary: false,
-      },
-      {
-        date: "JUNE 12-14, 2026",
+        date: "JULY 24-26, 2026",
         title: "PyCon Colombia",
         body: "The main event takes place in Medellín.",
         dotPrimary: true,
@@ -114,12 +103,6 @@ const DEFAULT_COPY = {
         title: "Workshops",
         body: "Intensive 3-hour hands-on sessions. Guided learning experiences where participants follow along on their own laptops.",
         tags: ["180 MINS", "HANDS-ON"],
-      },
-      {
-        icon: "poster",
-        title: "Posters",
-        body: "Visual representations of projects or research. Displayed in the main hall with dedicated time for networking and discussion.",
-        tags: ["VISUAL", "NETWORKING"],
       },
     ],
   },
@@ -164,8 +147,6 @@ const DEFAULT_COPY = {
     items: [
       "Full Conference Pass: Access to all talks, workshops, and social events.",
       "Exclusive Speaker Dinner: Network with keynote speakers and the core team.",
-      "Financial Aid: Travel and accommodation support available for those in need.",
-      "Speaker Swag: Limited edition gear only for conference presenters.",
     ],
     cta: "Ready to Apply?",
   },
@@ -280,6 +261,15 @@ function mergeCopy(raw) {
 
 const CallForProposals = ({ dataTranslate = undefined }) => {
   const c = mergeCopy(dataTranslate?.callForProposalsPage);
+  const handleFaqLinkClick = (event) => {
+    event.preventDefault();
+    const faqSection = document.getElementById("cfp-faq");
+    if (!faqSection) return;
+    faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (window.location.hash !== "#cfp-faq") {
+      window.history.replaceState(null, "", "#cfp-faq");
+    }
+  };
 
   return (
     <>
@@ -314,9 +304,9 @@ const CallForProposals = ({ dataTranslate = undefined }) => {
                     {c.hero.ctaPrimary}{" "}
                     <FontAwesomeIcon icon={faPaperPlane} aria-hidden />
                   </a>
-                  <a className="cfp-btn cfp-btn--secondary" href="#cfp-formats">
+                  {/* <a className="cfp-btn cfp-btn--secondary" href="#cfp-formats">
                     {c.hero.ctaSecondary}
-                  </a>
+                  </a> */}
                 </div>
               </Col>
               <Col lg={5}>
@@ -357,9 +347,13 @@ const CallForProposals = ({ dataTranslate = undefined }) => {
                   />
                   <h3 className="cfp-help-block__title">{c.helpCard.title}</h3>
                   <p className="cfp-help-block__body">{c.helpCard.body}</p>
-                  <a className="cfp-help-block__link" href="#cfp-faq">
+                  <button
+                    className="cfp-help-block__link"
+                    type="button"
+                    onClick={handleFaqLinkClick}
+                  >
                     {c.helpCard.faqLinkText}
-                  </a>
+                  </button>
                 </div>
                 <div className="cfp-channels">
                   <h3 className="cfp-channels__title">{c.channels.title}</h3>
@@ -411,7 +405,7 @@ const CallForProposals = ({ dataTranslate = undefined }) => {
             </div>
             <Row className="cfp-timeline g-4">
               {c.dates.items.map((item) => (
-                <Col md={6} xl={3} key={item.date}>
+                <Col md={6} xl={4} key={item.date}>
                   <article
                     className={`cfp-timeline__item${item.borderPrimary ? " cfp-timeline__item--border-primary" : ""}${item.dotPrimary ? " cfp-timeline__item--dot-primary" : ""}`}
                   >
@@ -440,7 +434,7 @@ const CallForProposals = ({ dataTranslate = undefined }) => {
               {c.formats.items.map((item) => {
                 const Icon = FORMAT_ICONS[item.icon] ?? faBullhorn;
                 return (
-                  <Col md={4} key={item.title}>
+                  <Col md={6} key={item.title}>
                     <article className="cfp-format-card">
                       <div className="cfp-format-card__icon" aria-hidden>
                         <FontAwesomeIcon icon={Icon} />
