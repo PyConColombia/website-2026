@@ -82,7 +82,6 @@ const data = {
       },
       keynotes: {
         sectionAriaLabel: "Keynote speakers",
-        eyebrow: "Chosen by Most Influentials",
         title: "Keynotes Speakers",
         columns: [
           {
@@ -578,7 +577,6 @@ Join us to learn, share, and connect with python professionals from across the g
       },
       keynotes: {
         sectionAriaLabel: "Ponentes principales (keynotes)",
-        eyebrow: "Elegidos por los más influyentes",
         title: "Keynotes",
         columns: [
           {

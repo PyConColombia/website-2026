@@ -306,7 +306,6 @@ const LandingPage = ({ dataTranslate }) => {
           <div className="landing-keynotes__panel">
             <Container fluid="xxl" className="landing-keynotes__container">
               <header className="landing-keynotes__header">
-                <p className="landing-keynotes__eyebrow">{keynotes.eyebrow}</p>
                 <h2 className="landing-keynotes__title">{keynotes.title}</h2>
               </header>
 
