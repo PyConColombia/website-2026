@@ -298,6 +298,21 @@ const LandingPage = ({ dataTranslate }) => {
         altBySrc={gallery?.altBySrc}
       />
 
+      <div className="landing-gallery__album-link-wrap">
+        <p className="landing-gallery__album-link-text">
+          Relive the best moments of PyCon Colombia by exploring our official
+          photo album{" "}
+          <a
+            href="https://rebrand.ly/pycon-colombia-2025-photos"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            here
+          </a>
+          .
+        </p>
+      </div>
+
       {keynoteColumns.length ? (
         <section
           className="landing-keynotes"
