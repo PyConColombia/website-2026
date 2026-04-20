@@ -112,6 +112,34 @@ const data = {
               },
             ],
           },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/images/keynotes/anna-pristoupilova.jpeg",
+              alt: "Portrait of keynote speaker Anna Pristoupilova",
+            },
+            name: "Anna Pristoupilova",
+            handle: "@pristanna",
+            flag: { code: "cz", label: "Czech Republic" },
+            bio: "Bioinformatician with a demonstrated history of working in the research. Skilled in Bioinformatics, NGS Sequencing, Rare Diseases, Molecular Biology and Genetics. Strong research professional with PhD and Master’s Degree focused on Molecular biology and genetics and second Master's Degree focused on Medical devices and informatics, both from Charles University, Czech Republic.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/pristanna/",
+                label: "LinkedIn",
+              },
+              // {
+              //   key: "website",
+              //   href: "https://www.terezaiofciu.com/",
+              //   label: "Website",
+              // },
+              // {
+              //   key: "youtube",
+              //   href: "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
+              //   label: "YouTube",
+              // },
+            ],
+          },
         ],
       },
       gallery: {
