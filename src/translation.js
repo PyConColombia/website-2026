@@ -149,7 +149,7 @@ const data = {
             name: "Malvika Sharan",
             handle: "@malvikasharan",
             flag: { code: "in", label: "India" },
-            bio: "A Computational Biologist, advancing open, community-based, and ethical approaches to make data science and AI more inclusive and collaborative.",
+            bio: "Malvika Sharan is Senior Director of Data Science at St. Jude Children's Research Hospital and a globally recognized leader in open science and community-driven research. She is a co-founder of Open Life Science and a key contributor to The Turing Way, advancing reproducible, ethical, and collaborative data science practices worldwide. With a background in bioinformatics and leadership roles at institutions like the Alan Turing Institute and EMBL, Malvika focuses on building inclusive research communities and empowering practitioners through open, transparent, and responsible approaches to AI and data science.",
             social: [
               {
                 key: "linkedin",
