@@ -143,7 +143,7 @@ const data = {
           {
             photoFirst: true,
             photo: {
-              src: "/images/keynotes/malvika-sharan.jpg",
+              src: "/images/keynotes/malvika-sharan.png",
               alt: "Portrait of keynote speaker Malvika Sharan",
             },
             name: "Malvika Sharan",
