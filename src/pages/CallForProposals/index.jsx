@@ -163,10 +163,6 @@ const DEFAULT_COPY = {
         a: "Yes! You can submit multiple proposals. However, to ensure a diverse schedule, we usually limit speakers to one presentation in the final program.",
       },
       {
-        q: "Does PyCon Colombia offer travel support for speakers?",
-        a: "Yes, we have a financial aid program. While we hope speakers' companies can cover their travel, we offer support for travel and accommodation for those who need it, especially for underrepresented groups in tech.",
-      },
-      {
         q: "What criteria are used to evaluate the proposals?",
         a: "Proposals are evaluated based on their relevance to the community, technical quality, clarity of the abstract, and the educational value of the talk. We look for a balance of topics ranging from beginner to advanced.",
       },

@@ -140,6 +140,39 @@ const data = {
               // },
             ],
           },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/malvika-sharan.jpg",
+              alt: "Portrait of keynote speaker Malvika Sharan",
+            },
+            name: "Malvika Sharan",
+            handle: "@malvikasharan",
+            flag: { code: "in", label: "India" },
+            bio: "A Computational Biologist, advancing open, community-based, and ethical approaches to make data science and AI more inclusive and collaborative.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/malvikasharan/",
+                label: "LinkedIn",
+              },
+              {
+                key: "website",
+                href: "https://malvikasharan.github.io/",
+                label: "Website",
+              },
+              // {
+              //   key: "youtube",
+              //   href: "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
+              //   label: "YouTube",
+              // },
+              {
+                key: "github",
+                href: "https://github.com/malvikasharan",
+                label: "GitHub",
+              },
+            ],
+          },
         ],
       },
       gallery: {
