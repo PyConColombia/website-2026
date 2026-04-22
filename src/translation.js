@@ -10,6 +10,7 @@ const data = {
       keynotes: "Keynotes",
       speakers: "Speakers",
       getTickets: "GET YOUR TICKETS",
+      submitProposal: "Submit Proposal",
       ticketsUrl:
         "https://www.eventbrite.co/e/pycon-colombia-2025-tickets-1271703351959",
     },
@@ -78,6 +79,107 @@ const data = {
         lastName: "Last Name",
         email: "Email",
         submitButton: "Subscribe to newsletter",
+      },
+      keynotes: {
+        sectionAriaLabel: "Keynote speakers",
+        title: "Keynotes Speakers",
+        columns: [
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/terezaiofciu.jpg",
+              alt: "Portrait of keynote speaker Tereza Iofciu",
+            },
+            name: "Tereza Iofciu",
+            // handle: "@terezaiofciu",
+            flag: { code: "ro", label: "Romania" },
+            bio: "Tereza Iofciu is a data and AI expert, leadership coach, and PSF Fellow with 15+ years of experience. She is an active contributor to the Python community and creator of the Data Diplomat Framework, focused on bridging technical expertise with human-centered leadership.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/tereza-iofciu/",
+                label: "LinkedIn",
+              },
+              {
+                key: "website",
+                href: "https://www.terezaiofciu.com/",
+                label: "Website",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/images/keynotes/anna-pristoupilova.jpeg",
+              alt: "Portrait of keynote speaker Anna Pristoupilova",
+            },
+            name: "Anna Pristoupilova",
+            handle: "@pristanna",
+            flag: { code: "cz", label: "Czech Republic" },
+            bio: "Bioinformatician with a demonstrated history of working in the research. Skilled in Bioinformatics, NGS Sequencing, Rare Diseases, Molecular Biology and Genetics. Strong research professional with PhD and Master’s Degree focused on Molecular biology and genetics and second Master's Degree focused on Medical devices and informatics, both from Charles University, Czech Republic.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/pristanna/",
+                label: "LinkedIn",
+              },
+              // {
+              //   key: "website",
+              //   href: "https://www.terezaiofciu.com/",
+              //   label: "Website",
+              // },
+              // {
+              //   key: "youtube",
+              //   href: "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
+              //   label: "YouTube",
+              // },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/malvika-sharan.png",
+              alt: "Portrait of keynote speaker Malvika Sharan",
+            },
+            name: "Malvika Sharan",
+            handle: "@malvikasharan",
+            flag: { code: "in", label: "India" },
+            bio: "Malvika Sharan is Senior Director of Data Science at St. Jude Children's Research Hospital and a globally recognized leader in open science and community-driven research. She is a co-founder of Open Life Science and a key contributor to The Turing Way, advancing reproducible, ethical, and collaborative data science practices worldwide. With a background in bioinformatics and leadership roles at institutions like the Alan Turing Institute and EMBL, Malvika focuses on building inclusive research communities and empowering practitioners through open, transparent, and responsible approaches to AI and data science.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/malvikasharan/",
+                label: "LinkedIn",
+              },
+              {
+                key: "website",
+                href: "https://malvikasharan.github.io/",
+                label: "Website",
+              },
+              // {
+              //   key: "youtube",
+              //   href: "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
+              //   label: "YouTube",
+              // },
+              {
+                key: "github",
+                href: "https://github.com/malvikasharan",
+                label: "GitHub",
+              },
+            ],
+          },
+        ],
+      },
+      gallery: {
+        sectionAriaLabel: "Conference photo gallery",
+        modalCloseLabel: "Close image",
+        /** Use `{name}` for the humanized filename (e.g. `my-shot.png` → `My shot`). */
+        imageAltTemplate: "Conference photo: {name}",
       },
     },
     callForProposals: {
@@ -369,6 +471,77 @@ const data = {
         ],
       },
     },
+    codeOfConductPage: {
+      metaTitle: "Code of Conduct | PyCon Colombia 2026",
+      sectionAriaLabel: "Code of conduct",
+      eyebrow: "PyCon Colombia",
+      titlePart1: "Code of",
+      titlePart2: "Conduct",
+      intro:
+        "PyCon Colombia is a conference organized by the Python Colombia community created for the dissemination of the Python programming language in our country and Latin America, with the objective of sharing knowledge and expanding the spaces for interaction and collaboration of its members. We value the participation of each member of the community and we want each participant in the conference to enjoy and gain valuable experience full of knowledge and innovation. According to this code, all participants including organizers, speakers, volunteers and attendees are expected to show respect and courtesy among themselves in all aspects of the conference, its organization and the events taking place in the context of the conference. To be more explicit than is expected of any person participating in the event and the global and local community of Python and PyCon Colombia are required to comply with the following Code of Conduct. The organizers of this event and any event in the future are subject to enforce following and complying with international and Colombian laws and the spirit of the International Python Society (Python Software Foundation).",
+      nav: {
+        intro: "Introduction",
+        content: "Code of Conduct Content",
+        recommendations: "Our goal",
+        contact: "Contact Information",
+        more: "Want to know more?",
+      },
+      helpCard: {
+        title: "Contact organizers",
+        body: "If you have been harassed or need help, you can reach our organizers directly.",
+        buttonText: "Open report form",
+        buttonHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
+      },
+      contentSection: {
+        title: "Code of Conduct Content",
+        body: "PyCon Colombia is dedicated to providing a conference free of harassment for all members, regardless of gender, sexual orientation, physical abilities, physical appearance, race or religion. No abuse will be tolerated by any conference participant. All communications should be focused on a professional audience including people with different backgrounds and experiences. Sexual language is not appropriate for any event organized under our rules, including talks.",
+      },
+      recommendations: {
+        title: "Our goal as a community recommends:",
+        inclusiveTitle: "Be Inclusive",
+        inclusiveBody:
+          "Acknowledge different backgrounds and perspectives. Foster a welcoming atmosphere for all participants.",
+        respectfulTitle: "Be Respectful",
+        respectfulBody:
+          "Disagreement is no excuse for poor manners. Be kind in all interactions and communications.",
+        items: [
+          "Be kind to other members.",
+          "Do not insult or demean the other participants.",
+          "Behave professionally.",
+          "Remember that any conduct of harassment, sexism, racism or political division or of any instance, is not appropriate for participation within the conference or community.",
+          "Not attending the conference under the influence of alcoholic beverages.",
+          "Participants of our community of any type (Organizers, Speakers, Volunteers and Assistants) who do not comply with any of these rules will be expelled from the conference without any reimbursement at the discretion of the organizing committee of the conference.",
+        ],
+        thankYou:
+          "Thank you for being subject to these terms and welcome to PyCon Colombia. This is a friendly event for our entire community.",
+      },
+      contact: {
+        title: "Contact Information",
+        lead: "If you have been harassed, or realize that someone else is being harassed or is violating the International Terms of the PyCon Colombia or have any problems, please contact our organizers:",
+        formLinkText: "Open report form",
+        formLinkHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
+        contacts: [
+          {
+            name: "John Jairo Roa Acuña",
+            email: "john@pycon.co",
+            href: "mailto:john@pycon.co",
+          },
+        ],
+        teamNote:
+          "Our team at the conference will also be available to collaborate and contact local security or assist you to ensure your safety. We value your presence in our events.",
+        organizerNote:
+          "In case of any violation of the terms of this code of conduct by the organizers please contact the main organizer of the conference, John Roa or as a last resort to the PSF.",
+        staffLanyardLead: "Staff wear",
+        staffLanyardBold: "Yellow Lanyards",
+        infoDeskLead: "Report at the",
+        infoDeskBold: "Info Desk",
+      },
+      more: {
+        title: "Want to know more?",
+        linkText: "Submit",
+        linkTo: "/",
+      },
+    },
     footer: {
       others: "Others",
       legal: "Legal",
@@ -395,6 +568,7 @@ Join us to learn, share, and connect with python professionals from across the g
       keynotes: "Keynotes",
       speakers: "Ponentes",
       getTickets: "CONSIGUE TUS ENTRADAS",
+      submitProposal: "Enviar propuesta",
       ticketsUrl:
         "https://www.eventbrite.co/e/pycon-colombia-2025-tickets-1271703351959",
     },
@@ -463,6 +637,116 @@ Join us to learn, share, and connect with python professionals from across the g
         lastName: "Apellidos",
         email: "Correo",
         submitButton: "Suscribirse al boletín",
+      },
+      keynotes: {
+        sectionAriaLabel: "Ponentes principales (keynotes)",
+        title: "Keynotes",
+        columns: [
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/keynote-photo-1-3dbd42.png",
+              alt: "Retrato de ponente principal",
+            },
+            name: "Mike Droettboom",
+            handle: "@mdboom",
+            flag: { code: "us", label: "Estados Unidos" },
+            bio: "Director de ingeniería de software en Microsoft, lidera mejoras de rendimiento en CPython. Contribuidor open source con trayectoria en matplotlib, astropy, Pyodide y airspeed velocity.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/mdboom",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/images/keynotes/keynote-photo-2-2d8cc5.png",
+              alt: "Retrato de ponente principal",
+            },
+            name: "Érico Andrei",
+            handle: "@ericof",
+            flag: { code: "br", label: "Brasil" },
+            bio: "Fellow de la Python Software Foundation y organizador en la comunidad Python de Brasil, impulsando PyCon y la colaboración open source en Latinoamérica.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/ericof",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/keynote-photo-3-1e4643.png",
+              alt: "Retrato de ponente principal",
+            },
+            name: "Shreya Gupta",
+            handle: "@shreyagupta",
+            flag: { code: "in", label: "India" },
+            bio: "Arquitecta de soluciones en Gen-IA en Nvidia, experta en desarrollo de modelos de IA. Máster en Sistemas Simbólicos por Stanford, investigación en aprendizaje profundo y neurociencia cognitiva. Defensora de la diversidad en STEM.",
+            social: [
+              {
+                key: "github",
+                href: "https://github.com/",
+                label: "GitHub",
+              },
+              {
+                key: "instagram",
+                href: "https://www.instagram.com/",
+                label: "Instagram",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/",
+                label: "X",
+              },
+              {
+                key: "youtube",
+                href: "https://www.youtube.com/",
+                label: "YouTube",
+              },
+            ],
+          },
+        ],
+      },
+      gallery: {
+        sectionAriaLabel: "Galería de fotos de la conferencia",
+        modalCloseLabel: "Cerrar imagen",
+        imageAltTemplate: "Foto: {name}",
       },
     },
     callForProposals: {
@@ -537,6 +821,182 @@ Join us to learn, share, and connect with python professionals from across the g
           title: "Código de Conducta",
           text: "Para crear un ambiente seguro y cómodo para todos nuestros asistentes y miembros del equipo, y garantizar que todos disfruten de la conferencia, hemos escrito este Código de Conducta. Esperamos que lo leas, lo entiendas y lo sigas tanto en tu propuesta como en tu charla.",
         },
+      },
+    },
+    callForProposalsPage: {
+      metaTitle: "Llamado a propuestas | PyCon Colombia 2026",
+      submitProposalHref:
+        "mailto:speakers@pycon.co?subject=Propuesta%20PyCon%20Colombia%202026",
+      hero: {
+        badge: "Aceptamos envíos",
+        titleBefore: "Llamado a",
+        titleAccent: "propuestas",
+        titleYear: "2026",
+        lead: "Comparte tu conocimiento, inspira a la comunidad y ayuda a dar forma al futuro de Python en Latinoamérica. Te esperamos en los majestuosos Andes en PyCon Colombia 2026.",
+        ctaPrimary: "Envía tu propuesta",
+        ctaSecondary: "Ver guía de envío",
+        imageSrc: "/images/cfp.jpg",
+        imageAlt: "Salón de conferencias moderno",
+      },
+      why: {
+        title: "¿Por qué hablar en PyCon Colombia?",
+        paragraphs: [
+          "PyCon Colombia es la reunión más grande de pythonistas en la región. Hablar aquí no se trata solo de compartir código: es tender puentes, acompañar a la siguiente generación y aportar a uno de los ecosistemas tecnológicos más vibrantes del mundo.",
+          "Recibimos con los brazos abiertos a personas de todos los perfiles y niveles de experiencia. Tanto si es tu primera charla como si ya eres una voz reconocida, la comunidad está para apoyarte.",
+        ],
+      },
+      helpCard: {
+        title: "¿Necesitas ayuda?",
+        body: "Lee el FAQ para ponentes o escríbenos para orientarte en tu envío.",
+        faqLinkText: "Ver preguntas frecuentes",
+      },
+      channels: {
+        title: "Canales clave",
+        items: [
+          {
+            icon: "mail",
+            label: "speakers@pycon.co",
+            href: "mailto:speakers@pycon.co",
+          },
+          { icon: "forum", label: "Discord de la comunidad", href: null },
+          { icon: "doc", label: "Plantilla de propuesta", href: null },
+        ],
+      },
+      dates: {
+        title: "Fechas importantes",
+        subtitle:
+          "Anota en tu calendario. No se aceptarán envíos fuera de plazo.",
+        items: [
+          {
+            date: "15 DE OCTUBRE DE 2025",
+            title: "Apertura del CFP",
+            body: "Empieza a bosquejar tus sesiones y tu biografía como ponente.",
+            dotPrimary: true,
+            borderPrimary: false,
+          },
+          {
+            date: "10 DE ENERO DE 2026",
+            title: "Cierre de envíos",
+            body: "Todas las propuestas deben enviarse por el portal antes de medianoche hora Colombia.",
+            dotPrimary: false,
+            borderPrimary: false,
+          },
+          {
+            date: "15 DE FEBRERO DE 2026",
+            title: "Anuncios",
+            body: "Les informaremos el estado de su propuesta.",
+            dotPrimary: false,
+            borderPrimary: false,
+          },
+          {
+            date: "12-14 DE JUNIO DE 2026",
+            title: "PyCon Colombia",
+            body: "El evento principal se realiza en Medellín.",
+            dotPrimary: true,
+            borderPrimary: true,
+          },
+        ],
+      },
+      formats: {
+        title: "Formatos de sesión",
+        items: [
+          {
+            icon: "talk",
+            title: "Charlas",
+            body: "Presentaciones de 30 minutos con espacio para preguntas. Ideales para casos de uso, bibliotecas nuevas o profundizaciones en Python.",
+            tags: ["30 MIN", "PREGUNTAS INCLUIDAS"],
+          },
+          {
+            icon: "workshop",
+            title: "Talleres",
+            body: "Sesiones prácticas intensivas de 3 horas, con guía paso a paso para quienes siguen en su propio equipo.",
+            tags: ["180 MIN", "MANOS A LA OBRA"],
+          },
+          {
+            icon: "poster",
+            title: "Pósters",
+            body: "Representación visual de proyectos o investigación, en el salón principal con tiempo dedicado a conversar y conectar.",
+            tags: ["VISUAL", "NETWORKING"],
+          },
+        ],
+      },
+      topics: {
+        title: "¿Qué buscamos?",
+        lead: "Valoramos la diversidad de miradas. Aceptamos cualquier tema relacionado con Python; estas son algunas líneas que entusiasman especialmente a la comunidad este año.",
+        quoteBefore:
+          "Priorizamos contenido acciónable, bien estructurado y alineado con nuestro ",
+        quoteAfter: ".",
+        codeOfConductLabel: "código de conducta",
+        items: [
+          { key: "ds", title: "Ciencia de datos e IA" },
+          { key: "web", title: "Desarrollo web" },
+          { key: "devops", title: "DevOps e infraestructura" },
+          { key: "sec", title: "Ciberseguridad" },
+          { key: "sci", title: "Python científico" },
+          { key: "edu", title: "Educación y habilidades blandas" },
+          { key: "iot", title: "IoT y hardware" },
+          { key: "core", title: "Python core" },
+          { key: "oss", title: "Cultura de código abierto" },
+        ],
+      },
+      selection: {
+        title: "El proceso de selección",
+        steps: [
+          {
+            title: "Revisión anónima",
+            body: "Para mayor equidad, la primera revisión se hace sin ver nombres ni afiliaciones.",
+          },
+          {
+            title: "Retroalimentación de la comunidad",
+            body: "Un grupo de personas expertas y de la comunidad califica profundidad técnica y relevancia.",
+          },
+          {
+            title: "Curaduría final",
+            body: "El comité de programa arma una mezcla equilibrada de temas y niveles para la agenda final.",
+          },
+        ],
+      },
+      benefits: {
+        title: "Beneficios para ponentes",
+        items: [
+          "Pase completo a la conferencia: acceso a charlas, talleres y espacios sociales.",
+          "Cena exclusiva de ponentes: conoce a keynotes y al equipo central.",
+          "Apoyo económico: ayuda con viaje y alojamiento para quienes la necesiten.",
+          "Swag de ponente: material edición limitada solo para quienes presentan.",
+        ],
+        cta: "¿Lista o listo para postularte?",
+      },
+      faq: {
+        title: "Preguntas frecuentes",
+        subtitle: "Lo esencial para presentar en PyCon Colombia.",
+        items: [
+          {
+            q: "¿En qué idioma envío la propuesta y doy la charla?",
+            a: "PyCon Colombia es bilingüe. Aceptamos propuestas en español e inglés. Puedes elegir el idioma en el que te sientas más cómodo o cómoda al presentar.",
+          },
+          {
+            q: "¿Puedo enviar más de una propuesta?",
+            a: "Sí. Aunque para mantener una agenda diversa, por lo general limitamos a una presentación por persona en el programa final.",
+          },
+          {
+            q: "¿Hay apoyo de viaje para ponentes?",
+            a: "Sí, tenemos programa de ayuda económica. Esperamos que muchas empresas cubran el viaje de sus equipos, pero ofrecemos apoyo a quienes lo necesiten, en especial a grupos subrepresentados en tecnología.",
+          },
+          {
+            q: "¿Qué criterios se usan para evaluar las propuestas?",
+            a: "Relevancia para la comunidad, calidad técnica, claridad del resumen y valor educativo de la charla. Buscamos equilibrio entre niveles principiante y avanzado.",
+          },
+          {
+            q: "Nunca he hablado en una conferencia. ¿Puedo postularme?",
+            a: "¡Por supuesto! Nos encantan las personas que dan su primera charla. Incluso ofrecemos mentorías para pulir tu presentación antes del evento.",
+          },
+          {
+            q: "¿Las sesiones se graban?",
+            a: "Sí, salvo que pidas explícitamente lo contrario, las charlas se graban y publican en nuestro canal de YouTube después del evento, para toda la comunidad global de Python.",
+          },
+        ],
+        footerLead: "¿Sigues con dudas? Estamos para ayudarte.",
+        footerLink: "Escribir al comité de ponentes",
       },
     },
     sponsors: {
@@ -751,6 +1211,77 @@ Join us to learn, share, and connect with python professionals from across the g
           "** Entrevista en formato blog o video **",
           "** Por favor ten en cuenta que en cualquiera de estos formatos puedes elegir permanecer en anonimato.**",
         ],
+      },
+    },
+    codeOfConductPage: {
+      metaTitle: "Código de conducta | PyCon Colombia 2026",
+      sectionAriaLabel: "Código de conducta",
+      eyebrow: "PyCon Colombia",
+      titlePart1: "Código de",
+      titlePart2: "conducta",
+      intro:
+        "PyCon Colombia es una conferencia organizada por la comunidad Python Colombia, creada para la divulgación del lenguaje de programación Python en nuestro país y en América Latina, con el objetivo de compartir conocimiento y ampliar los espacios de interacción y colaboración de sus integrantes. Valoramos la participación de cada miembro de la comunidad y queremos que cada persona participante en la conferencia disfrute y obtenga una experiencia valiosa llena de conocimiento e innovación. De acuerdo con este código, se espera que todas las personas participantes, incluidas organizadoras, ponentes, voluntarias y asistentes, muestren respeto y cortesía entre sí en todos los aspectos de la conferencia, su organización y los eventos que ocurran en el marco de la conferencia. Para ser más explícitos que lo que se espera de cualquier persona que participe en el evento, se requiere que la comunidad global y local de Python y PyCon Colombia cumpla el siguiente Código de Conducta. Las organizadoras de este evento y de cualquier evento en el futuro están obligadas a hacer cumplir y a acatar las leyes internacionales y colombianas y el espíritu de la Python Software Foundation (International Python Society).",
+      nav: {
+        intro: "Introducción",
+        content: "Contenido del código de conducta",
+        recommendations: "Nuestra meta",
+        contact: "Información de contacto",
+        more: "¿Quieres saber más?",
+      },
+      helpCard: {
+        title: "Contacto con organizadoras",
+        body: "Si has sido acosado o necesitas ayuda, puedes contactar directamente a nuestras organizadoras.",
+        buttonText: "Abrir formulario de reporte",
+        buttonHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
+      },
+      contentSection: {
+        title: "Contenido del código de conducta",
+        body: "PyCon Colombia se dedica a ofrecer una conferencia libre de acoso para todos los miembros, sin importar género, orientación sexual, capacidades físicas, apariencia física, raza o religión. No se tolerará ningún abuso por parte de ninguna persona participante en la conferencia. Todas las comunicaciones deben estar dirigidas a una audiencia profesional que incluye personas con distintos orígenes y experiencias. El lenguaje sexual no es apropiado en ningún evento organizado bajo nuestras reglas, incluidas las charlas.",
+      },
+      recommendations: {
+        title: "Nuestra meta como comunidad recomienda:",
+        inclusiveTitle: "Sé inclusivo",
+        inclusiveBody:
+          "Reconoce distintos orígenes y perspectivas. Fomenta un ambiente acogedor para todas las personas participantes.",
+        respectfulTitle: "Sé respetuoso",
+        respectfulBody:
+          "El desacuerdo no es excusa para malos modales. Sé amable en todas tus interacciones y comunicaciones.",
+        items: [
+          "Ser amable con los demás miembros.",
+          "No insultar ni menospreciar a las demás personas participantes.",
+          "Comportarse de manera profesional.",
+          "Recordar que cualquier conducta de acoso, sexismo, racismo o división política, o de cualquier índole, no es apropiada para participar dentro de la conferencia o la comunidad.",
+          "No asistir a la conferencia bajo los efectos de bebidas alcohólicas.",
+          "Las personas participantes de nuestra comunidad de cualquier tipo (Organizadoras, Ponentes, Voluntarias y Asistentes) que no cumplan alguna de estas reglas serán expulsadas de la conferencia sin ningún reembolso, a criterio del comité organizador de la conferencia.",
+        ],
+        thankYou:
+          "Gracias por acoger estos términos y bienvenido o bienvenida a PyCon Colombia. Este es un evento amigable para toda nuestra comunidad.",
+      },
+      contact: {
+        title: "Información de contacto",
+        lead: "Si has sido acosado o acosada, te das cuenta de que alguien más está siendo acosado o se están violando los Términos Internacionales de PyCon Colombia, o tienes algún problema, por favor contacta a nuestras organizadoras:",
+        formLinkText: "Abrir formulario de reporte",
+        formLinkHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
+        contacts: [
+          {
+            name: "John Jairo Roa Acuña",
+            email: "john@pycon.co",
+            href: "mailto:john@pycon.co",
+          },
+        ],
+        teamNote:
+          "Nuestro equipo en la conferencia también estará disponible para colaborar, contactar a seguridad local o ayudarte a garantizar tu seguridad. Valoramos tu presencia en nuestros eventos.",
+        organizerNote:
+          "En caso de cualquier violación de los términos de este código de conducta por parte de las organizadoras, por favor contacta al organizador principal de la conferencia, John Roa, o como último recurso a la PSF.",
+        staffLanyardLead: "El staff usa",
+        staffLanyardBold: "lanyards amarillos",
+        infoDeskLead: "Reporta en el",
+        infoDeskBold: "mostrador de información",
+      },
+      more: {
+        title: "¿Quieres saber más?",
+        linkText: "Enviar",
+        linkTo: "/",
       },
     },
     footer: {

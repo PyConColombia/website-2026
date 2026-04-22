@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import { Col, Container, Row } from "react-bootstrap";
 
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Footer = ({ dataTranslate }) => {
   const f = dataTranslate?.footer ?? {};
@@ -32,11 +32,11 @@ const Footer = ({ dataTranslate }) => {
     },
   ];
 
-  // const legalLinks = [
-  //   { to: "/code-of-conduct", label: f.codeOfConduct },
-  //   { to: "/coc-enforcement", label: f.codeOfConductEnforcementProcedure },
-  //   { to: "/health-safety", label: f.HealthSafetyPolicy },
-  // ];
+  const legalLinks = [
+    { to: "/code-of-conduct", label: f.codeOfConduct },
+    // { to: "/coc-enforcement", label: f.codeOfConductEnforcementProcedure },
+    // { to: "/health-safety", label: f.HealthSafetyPolicy },
+  ];
 
   return (
     <footer className="footer-container">
@@ -47,7 +47,7 @@ const Footer = ({ dataTranslate }) => {
               <div className="footer-brand">
                 <div className="footer-brand__logo">
                   <img
-                    src="/figma-assets/footer-logo-mark.svg"
+                    src="/images/footer-logo-mark.svg"
                     alt=""
                     width={32}
                     height={32}
@@ -73,7 +73,7 @@ const Footer = ({ dataTranslate }) => {
                 </ul>
               </div>
             </Col>
-            {/* <Col xs={12} sm={6} lg={3}>
+            <Col xs={12} sm={6} lg={3}>
               <div className="footer-column">
                 <div className="footer-column__header">{f.legal}</div>
                 <nav className="footer-column__links" aria-label={f.legal}>
@@ -84,7 +84,7 @@ const Footer = ({ dataTranslate }) => {
                   ))}
                 </nav>
               </div>
-            </Col> */}
+            </Col>
             <Col xs={12} sm={6} lg={4}>
               <div className="footer-column">
                 <div className="footer-column__header">{f.contact}</div>
