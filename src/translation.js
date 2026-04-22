@@ -489,8 +489,8 @@ const data = {
       helpCard: {
         title: "Contact organizers",
         body: "If you have been harassed or need help, you can reach our organizers directly.",
-        email: "john@pycon.co",
-        emailHref: "mailto:john@pycon.co",
+        buttonText: "Open report form",
+        buttonHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
       },
       contentSection: {
         title: "Code of Conduct Content",
@@ -518,6 +518,8 @@ const data = {
       contact: {
         title: "Contact Information",
         lead: "If you have been harassed, or realize that someone else is being harassed or is violating the International Terms of the PyCon Colombia or have any problems, please contact our organizers:",
+        formLinkText: "Open report form",
+        formLinkHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
         contacts: [
           {
             name: "John Jairo Roa Acuña",
@@ -1229,8 +1231,8 @@ Join us to learn, share, and connect with python professionals from across the g
       helpCard: {
         title: "Contacto con organizadoras",
         body: "Si has sido acosado o necesitas ayuda, puedes contactar directamente a nuestras organizadoras.",
-        email: "john@pycon.co",
-        emailHref: "mailto:john@pycon.co",
+        buttonText: "Abrir formulario de reporte",
+        buttonHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
       },
       contentSection: {
         title: "Contenido del código de conducta",
@@ -1258,6 +1260,8 @@ Join us to learn, share, and connect with python professionals from across the g
       contact: {
         title: "Información de contacto",
         lead: "Si has sido acosado o acosada, te das cuenta de que alguien más está siendo acosado o se están violando los Términos Internacionales de PyCon Colombia, o tienes algún problema, por favor contacta a nuestras organizadoras:",
+        formLinkText: "Abrir formulario de reporte",
+        formLinkHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
         contacts: [
           {
             name: "John Jairo Roa Acuña",

@@ -39,8 +39,8 @@ const DEFAULT_COPY = {
   helpCard: {
     title: "Contact organizers",
     body: "If you have been harassed or need help, you can reach our organizers directly.",
-    email: "john@pycon.co",
-    emailHref: "mailto:john@pycon.co",
+    buttonText: "Open report form",
+    buttonHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
   },
   contentSection: {
     title: "Code of Conduct Content",
@@ -68,6 +68,8 @@ const DEFAULT_COPY = {
   contact: {
     title: "Contact Information",
     lead: "If you have been harassed, or realize that someone else is being harassed or is violating the International Terms of the PyCon Colombia or have any problems, please contact our organizers:",
+    formLinkText: "Open report form",
+    formLinkHref: "https://forms.gle/Q92DS8RvrzW8sUN67",
     contacts: [
       {
         name: "John Jairo Roa Acuña",
@@ -228,10 +230,12 @@ const CodeOfConduct = ({ dataTranslate = undefined }) => {
                   <p className="coc-help-card__title">{c.helpCard.title}</p>
                   <p className="coc-help-card__body">{c.helpCard.body}</p>
                   <a
-                    className="coc-help-card__email"
-                    href={c.helpCard.emailHref}
+                    className="coc-help-card__button"
+                    href={c.helpCard.buttonHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {c.helpCard.email}
+                    {c.helpCard.buttonText}
                   </a>
                 </div>
               </aside>
@@ -294,17 +298,14 @@ const CodeOfConduct = ({ dataTranslate = undefined }) => {
                   <div className="coc-contact-cta">
                     <p className="coc-contact-cta__lead">{c.contact.lead}</p>
 
-                    <ul className="coc-contact-cta__contacts">
-                      {c.contact.contacts.map((row) => (
-                        <li key={row.email}>
-                          <span className="coc-contact-cta__contact-name">
-                            {row.name}
-                          </span>
-                          {": "}
-                          <a href={row.href}>{row.email}</a>
-                        </li>
-                      ))}
-                    </ul>
+                    <a
+                      className="coc-contact-cta__form-link"
+                      href={c.contact.formLinkHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {c.contact.formLinkText}
+                    </a>
                     <p className="coc-contact-cta__note">
                       {c.contact.teamNote}
                     </p>

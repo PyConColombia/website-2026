@@ -1027,9 +1027,25 @@
   color: #595c60;
 }
 
-.coc-help-card__email {
-  font-size: 0.95rem;
-  word-break: break-word;
+.coc-help-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.25rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(68, 77, 197, 0.28);
+  background: #444dc5;
+  color: #f3f1ff !important;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.coc-help-card__button:hover {
+  background: #3740b8;
+  border-color: #3740b8;
+  color: #f3f1ff !important;
 }
 
 .coc-page__main {
@@ -1197,19 +1213,39 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
+.coc-contact-cta__form-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: #f3f1ff;
+  color: #2f36a9 !important;
+  text-decoration: none !important;
+  font-weight: 700;
+}
+
+.coc-contact-cta__form-link:hover {
+  color: #232886 !important;
+  border-color: rgba(255, 255, 255, 0.75);
+  background: #fff;
+}
+
 .coc-contact-cta__contact-name {
   font-weight: 600;
   color: #fff;
 }
 
-.coc-contact-cta a {
+.coc-contact-cta a:not(.coc-contact-cta__form-link) {
   color: #fff !important;
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 600;
 }
 
-.coc-contact-cta a:hover {
+.coc-contact-cta a:not(.coc-contact-cta__form-link):hover {
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
