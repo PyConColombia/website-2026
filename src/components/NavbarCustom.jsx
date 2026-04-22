@@ -142,7 +142,7 @@ const NavbarCustom = ({ dataTranslate }) => {
               </div>
             </div>
 
-            {/* <a
+            <a
               className="navbar-custom__cta"
               href={t.ticketsUrl ?? "#"}
               rel="noopener noreferrer"
@@ -150,14 +150,7 @@ const NavbarCustom = ({ dataTranslate }) => {
             >
               {t.getTickets ?? "GET YOUR TICKETS"}
               <ArrowUpRightIcon />
-            </a> */}
-            <NavLink
-              className="navbar-custom__cta"
-              to="https://forms.gle/vSGrrWfAf6nZZ5M86"
-            >
-              {t.submitProposal ?? "Submit Proposal"}
-              <ArrowUpRightIcon />
-            </NavLink>
+            </a>
           </div>
         </Navbar.Collapse>
       </Container>

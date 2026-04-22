@@ -12,7 +12,7 @@ const data = {
       getTickets: "GET YOUR TICKETS",
       submitProposal: "Submit Proposal",
       ticketsUrl:
-        "https://www.eventbrite.co/e/pycon-colombia-2025-tickets-1271703351959",
+        "https://www.eventbrite.co/e/pycon-colombia-2026-tickets-1986172567616?aff=ebdssbdestsearch",
     },
     landing: {
       date: "Medellín, July 4th, 5th and 6th, 2025",
@@ -570,7 +570,7 @@ Join us to learn, share, and connect with python professionals from across the g
       getTickets: "CONSIGUE TUS ENTRADAS",
       submitProposal: "Enviar propuesta",
       ticketsUrl:
-        "https://www.eventbrite.co/e/pycon-colombia-2025-tickets-1271703351959",
+        "https://www.eventbrite.co/e/pycon-colombia-2026-tickets-1986172567616?aff=ebdssbdestsearch",
     },
     landing: {
       date: "Medellín, Julio 4, 5 y 6, 2025",
