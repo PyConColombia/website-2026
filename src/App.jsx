@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import LanguageContext from "@/LanguageContext";
 import Layout from "@/layout";
-import data from "@/translation";
+import { stripLanguagePrefix } from "@/languageRouting";
+import { getTranslation } from "@/translation";
 import { usePageTracking } from "./hooks/usePageTracking";
 import Sponsors from "./pages/Sponsors";
 import Team from "./pages/Team";
@@ -24,17 +25,19 @@ function ScrollToTopOnRouteChange() {
 
 function App() {
   usePageTracking();
+  const location = useLocation();
+  const normalizedPathname = stripLanguagePrefix(location.pathname);
   const { language } = useContext(LanguageContext);
-  const [allData, setAllData] = useState({});
-
-  useEffect(() => {
-    setAllData(data[language]);
-  }, [language]);
+  const allData = getTranslation(language);
+  const routedLocation =
+    normalizedPathname === location.pathname
+      ? location
+      : { ...location, pathname: normalizedPathname };
 
   return (
     <Layout dataTranslate={allData}>
       <ScrollToTopOnRouteChange />
-      <Routes>
+      <Routes location={routedLocation}>
         <Route path="/" element={<LandingPage dataTranslate={allData} />} />
         <Route path="/team" element={<Team />} />
         <Route path="/sponsors" element={<Sponsors />} />

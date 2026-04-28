@@ -20,11 +20,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import LanguageContext from "@/LanguageContext";
+import { localizePath } from "@/languageRouting";
 
 const DEFAULT_COPY = {
   metaTitle: "Call for Proposals | PyCon Colombia 2026",
@@ -256,6 +259,7 @@ function mergeCopy(raw) {
 }
 
 const CallForProposals = ({ dataTranslate = undefined }) => {
+  const { language } = useContext(LanguageContext);
   const c = mergeCopy(dataTranslate?.callForProposalsPage);
   const handleFaqLinkClick = (event) => {
     event.preventDefault();
@@ -467,7 +471,7 @@ const CallForProposals = ({ dataTranslate = undefined }) => {
                 <blockquote className="cfp-quote">
                   <p>
                     {c.topics.quoteBefore}
-                    <Link to="/code-of-conduct">
+                    <Link to={localizePath("/code-of-conduct", language)}>
                       {c.topics.codeOfConductLabel}
                     </Link>
                     {c.topics.quoteAfter}
