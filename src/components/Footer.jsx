@@ -6,10 +6,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-import { Col, Container, Row } from "react-bootstrap";
-
-import { NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import LanguageContext from "@/LanguageContext";
 import { localizePath } from "@/languageRouting";
 

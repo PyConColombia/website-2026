@@ -1,8 +1,8 @@
 import { PropTypes } from "prop-types";
 import { createContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "./translation";
 import { getLanguageFromPathname, localizePath } from "./languageRouting";
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "./translation";
 
 const LanguageContext = createContext();
 
@@ -31,9 +31,7 @@ export const LanguageProvider = ({ children }) => {
   };
 
   return (
-    <LanguageContext.Provider
-      value={{ language, setLanguage: changeLanguage }}
-    >
+    <LanguageContext.Provider value={{ language, setLanguage: changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

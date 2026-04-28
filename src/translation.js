@@ -925,7 +925,8 @@ Join us to learn, share, and connect with python professionals from across the g
       },
       faq: {
         title: "Preguntas frecuentes",
-        subtitle: "Todo lo que necesitas saber para presentar en PyCon Colombia.",
+        subtitle:
+          "Todo lo que necesitas saber para presentar en PyCon Colombia.",
         items: [
           {
             q: "¿En qué idioma envío la propuesta y doy la charla?",
@@ -1112,8 +1113,7 @@ Join us to learn, share, and connect with python professionals from across the g
         "Queremos que PyCon Colombia sea inclusiva para toda la comunidad Python de nuestro país. Para ayudar a aliviar las barreras económicas para asistir a la conferencia, el comité organizador de PyCon está ofreciendo becas a personas que enfrentan obstáculos financieros, incluyendo estudiantes y miembros de grupos subrepresentados dentro de la comunidad Python. Estas becas cubren el costo de la entrada a la conferencia.",
       paragraph3:
         "Es importante tener en cuenta que las personas beneficiarias de las becas serán responsables de cubrir todos los demás gastos, como viaje, alojamiento, costos de visa y transporte.",
-      paragraph4Text:
-        "Si deseas postularte, por favor ve a este formulario:",
+      paragraph4Text: "Si deseas postularte, por favor ve a este formulario:",
       formLink: "https://forms.gle/EnSffxKcuzu4yugdA",
       formLinkText: "Enlace al formulario",
     },
@@ -1287,7 +1287,10 @@ export function getTranslation(language = DEFAULT_LANGUAGE) {
     return data[DEFAULT_LANGUAGE];
   }
 
-  return mergeTranslations(data[DEFAULT_LANGUAGE], data[selectedLanguage] ?? {});
+  return mergeTranslations(
+    data[DEFAULT_LANGUAGE],
+    data[selectedLanguage] ?? {},
+  );
 }
 
 export { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES };

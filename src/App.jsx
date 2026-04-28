@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import LanguageContext from "@/LanguageContext";
-import Layout from "@/layout";
 import { stripLanguagePrefix } from "@/languageRouting";
+import Layout from "@/layout";
 import { getTranslation } from "@/translation";
 import { usePageTracking } from "./hooks/usePageTracking";
 import Sponsors from "./pages/Sponsors";
