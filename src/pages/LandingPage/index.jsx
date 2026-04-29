@@ -25,11 +25,6 @@ const KEYNOTE_SOCIAL_ICONS = {
   youtube: faYoutube,
 };
 
-function keynoteFlagAssetPath(code) {
-  if (!code || typeof code !== "string") return "";
-  return `/images/keynotes/flag-${code.toLowerCase()}.svg`;
-}
-
 const DEFAULT_TOPIC_ROWS = [
   [
     "Data Science",
@@ -105,6 +100,8 @@ function KeynotesRevealRow({ columns }) {
   return (
     <Row ref={rootRef} className="landing-keynotes__columns g-4">
       {columns.map((column, columnIndex) => {
+        // Alternate layout: 1st, 3rd, 5th... keynote shows photo first on desktop.
+        const photoFirst = columnIndex % 2 === 0;
         const photoBlock = (
           <div className="landing-keynotes__photo-card">
             <Image
@@ -121,26 +118,10 @@ function KeynotesRevealRow({ columns }) {
         const speakerBlock = (
           <article className="landing-keynotes__speaker-card">
             <div className="landing-keynotes__speaker-head">
-              {column.flag?.code ? (
-                <div
-                  className="landing-keynotes__flag-wrap"
-                  role="img"
-                  aria-label={column.flag.label}
-                >
-                  <Image
-                    className="landing-keynotes__flag-img"
-                    src={keynoteFlagAssetPath(column.flag.code)}
-                    alt=""
-                    width={48}
-                    height={48}
-                    layout="fixed"
-                  />
-                </div>
-              ) : null}
               <div className="landing-keynotes__speaker-meta">
                 <p className="landing-keynotes__speaker-name">{column.name}</p>
                 <p className="landing-keynotes__speaker-handle">
-                  {column.handle}
+                  {column.profession ?? column.handle}
                 </p>
               </div>
             </div>
@@ -180,7 +161,7 @@ function KeynotesRevealRow({ columns }) {
             }}
           >
             <div
-              className={`landing-keynotes__stack${column.photoFirst ? "" : " landing-keynotes__stack--text-first-desktop"}`}
+              className={`landing-keynotes__stack${photoFirst ? "" : " landing-keynotes__stack--text-first-desktop"}`}
             >
               {photoBlock}
               {speakerBlock}
@@ -207,7 +188,12 @@ const LandingPage = ({ dataTranslate }) => {
     ...cfpPage.hero,
   };
   const keynotes = dataTranslate?.landing?.keynotes;
-  const keynoteColumns = keynotes?.columns ?? keynotes?.rows ?? [];
+  const keynoteColumnsRaw = keynotes?.columns ?? keynotes?.rows ?? [];
+  const keynoteColumns = [...keynoteColumnsRaw].sort((a, b) =>
+    String(a?.name ?? "").localeCompare(String(b?.name ?? ""), undefined, {
+      sensitivity: "base",
+    }),
+  );
   const keynotesRevealKey = keynoteColumns.map((c) => c.name).join("|");
   const gallery = dataTranslate?.landing?.gallery;
 

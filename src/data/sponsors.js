@@ -48,4 +48,3 @@ export const SILVER_SPONSORS = [
     href: "https://provectus.com/",
   },
 ];
-

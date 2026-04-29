@@ -156,4 +156,3 @@ SponsorsSection.propTypes = {
     silverPartners: PropTypes.string,
   }),
 };
-

@@ -91,7 +91,8 @@ const data = {
               alt: "Portrait of keynote speaker Tereza Iofciu",
             },
             name: "Tereza Iofciu",
-            // handle: "@terezaiofciu",
+            profession:
+              "Data & AI expert, leadership coach, and Python Software Foundation Fellow",
             flag: { code: "ro", label: "Romania" },
             bio: "Tereza Iofciu is a data and AI expert, leadership coach, and PSF Fellow with 15+ years of experience. She is an active contributor to the Python community and creator of the Data Diplomat Framework, focused on bridging technical expertise with human-centered leadership.",
             social: [
@@ -119,7 +120,7 @@ const data = {
               alt: "Portrait of keynote speaker Anna Pristoupilova",
             },
             name: "Anna Pristoupilova",
-            handle: "@pristanna",
+            profession: "Bioinformatician and researcher",
             flag: { code: "cz", label: "Czech Republic" },
             bio: "Bioinformatician with a demonstrated history of working in the research. Skilled in Bioinformatics, NGS Sequencing, Rare Diseases, Molecular Biology and Genetics. Strong research professional with PhD and Master’s Degree focused on Molecular biology and genetics and second Master's Degree focused on Medical devices and informatics, both from Charles University, Czech Republic.",
             social: [
@@ -147,7 +148,8 @@ const data = {
               alt: "Portrait of keynote speaker Malvika Sharan",
             },
             name: "Malvika Sharan",
-            handle: "@malvikasharan",
+            profession:
+              "Senior Director of Data Science at St. Jude Children's Research Hospital",
             flag: { code: "in", label: "India" },
             bio: "Malvika Sharan is Senior Director of Data Science at St. Jude Children's Research Hospital and a globally recognized leader in open science and community-driven research. She is a co-founder of Open Life Science and a key contributor to The Turing Way, advancing reproducible, ethical, and collaborative data science practices worldwide. With a background in bioinformatics and leadership roles at institutions like the Alan Turing Institute and EMBL, Malvika focuses on building inclusive research communities and empowering practitioners through open, transparent, and responsible approaches to AI and data science.",
             social: [
@@ -180,7 +182,7 @@ const data = {
               alt: "Portrait of keynote speaker Dr. Kari L. Jordan",
             },
             name: "Dr. Kari L. Jordan",
-            // handle: "@kariljordan",
+            profession: "Executive Director of The Carpentries",
             flag: { code: "us", label: "United States" },
             bio: "Dr. Kari L. Jordan is Executive Director of The Carpentries and a leader in data science education. With a PhD in Engineering Education, she focuses on inclusive learning, data literacy, and expanding access to technical skills worldwide.",
             social: [
@@ -194,6 +196,25 @@ const data = {
               //   href: "https://twitter.com/kariljordan",
               //   label: "X (Twitter)",
               // },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/irit-katriel.jpg",
+              alt: "Portrait of keynote speaker Irit Katriel",
+            },
+            name: "Irit Katriel",
+            profession:
+              "Deep Learning Compilers @ Nvidia, CPython Core Developer",
+            flag: { code: "il", label: "Israel" },
+            bio: "Irit Katriel works on deep learning compilers at Nvidia and is a CPython core developer focused on programming language design and compiler architecture. Major contributions to Python include PEP 654, Exception Groups, except*, and significant improvements to CPython’s compiler and exception systems. She previously worked at Microsoft on Python Performance Engineering and has authored several academic publications.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/irit-katriel/",
+                label: "LinkedIn",
+              },
             ],
           },
         ],
@@ -684,6 +705,8 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Tereza Iofciu",
             },
             name: "Tereza Iofciu",
+            profession:
+              "Experta en datos e IA, coach de liderazgo y PSF Fellow",
             flag: { code: "ro", label: "Rumania" },
             bio: "Tereza Iofciu es experta en datos e IA, coach de liderazgo y PSF Fellow, con más de 15 años de experiencia. Es una colaboradora activa de la comunidad Python y creadora del Data Diplomat Framework, enfocado en conectar la experiencia técnica con un liderazgo centrado en las personas.",
             social: [
@@ -711,7 +734,7 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Anna Pristoupilova",
             },
             name: "Anna Pristoupilova",
-            handle: "@pristanna",
+            profession: "Bioinformática e investigadora",
             flag: { code: "cz", label: "República Checa" },
             bio: "Bioinformática con amplia trayectoria en investigación. Tiene experiencia en bioinformática, secuenciación NGS, enfermedades raras, biología molecular y genética. Es una profesional con sólida formación investigativa, con un doctorado y una maestría en biología molecular y genética, además de una segunda maestría en dispositivos médicos e informática, ambas de la Universidad Carolina, en la República Checa.",
             social: [
@@ -729,7 +752,8 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Malvika Sharan",
             },
             name: "Malvika Sharan",
-            handle: "@malvikasharan",
+            profession:
+              "Directora sénior de ciencia de datos en St. Jude Children's Research Hospital",
             flag: { code: "in", label: "India" },
             bio: "Malvika Sharan es directora sénior de ciencia de datos en St. Jude Children's Research Hospital y una líder reconocida globalmente en ciencia abierta e investigación impulsada por comunidades. Es cofundadora de Open Life Science y una colaboradora clave de The Turing Way, donde impulsa prácticas de ciencia de datos reproducibles, éticas y colaborativas en todo el mundo. Con formación en bioinformática y roles de liderazgo en instituciones como el Alan Turing Institute y EMBL, Malvika se enfoca en construir comunidades de investigación inclusivas y en empoderar a profesionales mediante enfoques abiertos, transparentes y responsables en IA y ciencia de datos.",
             social: [
@@ -757,7 +781,7 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Dra. Kari L. Jordan",
             },
             name: "Dra. Kari L. Jordan",
-            handle: "@kariljordan",
+            profession: "Directora ejecutiva de The Carpentries",
             flag: { code: "us", label: "Estados Unidos" },
             bio: "La Dra. Kari L. Jordan es directora ejecutiva de The Carpentries y una referente en educación en ciencia de datos. Con doctorado en educación en ingeniería, trabaja el aprendizaje inclusivo, la alfabetización en datos y ampliar el acceso a habilidades técnicas en todo el mundo.",
             social: [
@@ -770,6 +794,25 @@ Join us to learn, share, and connect with python professionals from across the g
                 key: "twitter",
                 href: "https://twitter.com/kariljordan",
                 label: "X (Twitter)",
+              },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/irit-katriel.jpg",
+              alt: "Retrato de la ponente magistral Irit Katriel",
+            },
+            name: "Irit Katriel",
+            profession:
+              "Compiladores de deep learning en Nvidia, desarrolladora core de CPython",
+            flag: { code: "il", label: "Israel" },
+            bio: "Irit Katriel trabaja en compiladores de deep learning en Nvidia y es desarrolladora core de CPython, enfocada en el diseño de lenguajes de programación y la arquitectura de compiladores. Entre sus principales contribuciones a Python se encuentran PEP 654, los Exception Groups, el constructo except* y mejoras significativas en el compilador y el sistema de excepciones de CPython. Anteriormente trabajó en Microsoft en Python Performance Engineering y ha publicado artículos académicos.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/irit-katriel/",
+                label: "LinkedIn",
               },
             ],
           },
