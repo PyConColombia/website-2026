@@ -6,11 +6,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
 import { NavLink } from "react-router-dom";
+import LanguageContext from "@/LanguageContext";
+import { localizePath } from "@/languageRouting";
 
 const Footer = ({ dataTranslate }) => {
+  const { language } = useContext(LanguageContext);
   const f = dataTranslate?.footer ?? {};
 
   const socialLinks = [
@@ -78,7 +81,11 @@ const Footer = ({ dataTranslate }) => {
                 <div className="footer-column__header">{f.legal}</div>
                 <nav className="footer-column__links" aria-label={f.legal}>
                   {legalLinks.map(({ to, label }) => (
-                    <NavLink key={to} className="footer-column__link" to={to}>
+                    <NavLink
+                      key={to}
+                      className="footer-column__link"
+                      to={localizePath(to, language)}
+                    >
                       {label}
                     </NavLink>
                   ))}

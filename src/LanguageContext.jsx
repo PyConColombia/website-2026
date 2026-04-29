@@ -1,18 +1,37 @@
 import { PropTypes } from "prop-types";
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getLanguageFromPathname, localizePath } from "./languageRouting";
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "./translation";
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const storedLang = localStorage.getItem("language") || "en";
-  const [language, setLanguage] = useState(storedLang);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const language = getLanguageFromPathname(location.pathname);
 
-  useEffect(() => {
-    localStorage.setItem("language", language);
-  }, [language]);
+  const changeLanguage = (nextLanguage) => {
+    const targetLanguage = SUPPORTED_LANGUAGES.includes(nextLanguage)
+      ? nextLanguage
+      : DEFAULT_LANGUAGE;
+
+    const targetPath = localizePath(location.pathname, targetLanguage);
+
+    if (location.pathname !== targetPath) {
+      navigate(
+        {
+          pathname: targetPath,
+          search: location.search,
+          hash: location.hash,
+        },
+        { replace: false },
+      );
+    }
+  };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage: changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

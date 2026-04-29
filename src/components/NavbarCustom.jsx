@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
+import LanguageContext from "@/LanguageContext";
+import { localizePath } from "@/languageRouting";
 
 const ArrowUpRightIcon = () => (
   <svg
@@ -46,8 +48,13 @@ const ChevronDownIcon = () => (
 );
 
 const NavbarCustom = ({ dataTranslate }) => {
+  const { language, setLanguage } = useContext(LanguageContext);
   const [scrolled, setScrolled] = useState(false);
   const t = dataTranslate?.navbar ?? {};
+  const languageOptions = [
+    { code: "en", label: "EN" },
+    { code: "es", label: "ES" },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -71,6 +78,7 @@ const NavbarCustom = ({ dataTranslate }) => {
 
   const linkClass = ({ isActive }) =>
     `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
+  const homePath = localizePath("/", language);
 
   return (
     <Navbar
@@ -80,7 +88,7 @@ const NavbarCustom = ({ dataTranslate }) => {
       className={`navbar-custom${scrolled ? " navbar-custom--scrolled" : ""}`}
     >
       <Container className="d-flex flex-wrap flex-lg-nowrap align-items-center gap-2 gap-lg-3">
-        <Navbar.Brand as={NavLink} to="/">
+        <Navbar.Brand as={NavLink} to={homePath}>
           PYCON COLOMBIA 2026
         </Navbar.Brand>
 
@@ -97,7 +105,7 @@ const NavbarCustom = ({ dataTranslate }) => {
             <div className="navbar-custom__pill-outer">
               <div className="navbar-custom__pill-inner">
                 <Nav as="div" className="navbar-custom__nav-links">
-                  <NavLink to="/" end className={linkClass}>
+                  <NavLink to={homePath} end className={linkClass}>
                     {t.home ?? "Home"}
                   </NavLink>
                   {/* <NavLink to="/call-for-proposals" className={linkClass}>
@@ -112,7 +120,7 @@ const NavbarCustom = ({ dataTranslate }) => {
                   {/* <NavLink to="/speakers" className={linkClass}>
                     {t.speakers ?? "Speakers"}
                   </NavLink>
-                  <NavLink to="/team" className={linkClass}>
+                  <NavLink to={teamPath} className={linkClass}>
                     {t.team ?? "Team"}
                   </NavLink> */}
                   <NavDropdown
@@ -135,6 +143,30 @@ const NavbarCustom = ({ dataTranslate }) => {
                         target="_blank"
                       >
                         {year}
+                      </NavDropdown.Item>
+                    ))}
+                  </NavDropdown>
+                  <NavDropdown
+                    className="navbar-custom__dropdown"
+                    title={
+                      <span className="d-inline-flex align-items-center gap-2">
+                        {language.toUpperCase()}
+                        <ChevronDownIcon />
+                      </span>
+                    }
+                    id="navbar-language-dropdown"
+                    align="end"
+                    renderMenuOnMount
+                  >
+                    {languageOptions.map(({ code, label }) => (
+                      <NavDropdown.Item
+                        as="button"
+                        key={code}
+                        active={language === code}
+                        onClick={() => setLanguage(code)}
+                        type="button"
+                      >
+                        {label}
                       </NavDropdown.Item>
                     ))}
                   </NavDropdown>
