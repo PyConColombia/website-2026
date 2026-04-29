@@ -303,7 +303,7 @@ const data = {
     },
     sponsors: {
       metaTitle: "PyCon Colombia 2026 - Sponsors",
-      title: "Meet Our Sponsors",
+      title: "Sponsors",
       description:
         "From cutting-edge tech companies to dedicated community advocates, these sponsors are leading the way in Python and software development.",
       thankYouMessage:
@@ -1056,7 +1056,7 @@ Join us to learn, share, and connect with python professionals from across the g
     },
     sponsors: {
       metaTitle: "PyCon Colombia 2026 - Patrocinadores",
-      title: "Conoce a nuestros patrocinadores",
+      title: "Patrocinadores",
       description:
         "Desde empresas tecnológicas de vanguardia hasta personas y organizaciones comprometidas con la comunidad, estos patrocinadores están liderando el camino en Python y desarrollo de software.",
       thankYouMessage:

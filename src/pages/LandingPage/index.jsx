@@ -25,6 +25,20 @@ const KEYNOTE_SOCIAL_ICONS = {
   youtube: faYoutube,
 };
 
+const KEYNOTE_FLAGS_BY_NAME = {
+  "Tereza Iofciu": { code: "ro", label: "Romania" },
+  "Anna Pristoupilova": { code: "cz", label: "Czech Republic" },
+  "Malvika Sharan": { code: "in", label: "India" },
+  "Dr. Kari L. Jordan": { code: "us", label: "United States" },
+  "Dra. Kari L. Jordan": { code: "us", label: "Estados Unidos" },
+  "Irit Katriel": { code: "il", label: "Israel" },
+};
+
+function keynoteFlagAssetPath(code) {
+  if (!code || typeof code !== "string") return "";
+  return `/images/keynotes/flag-${code.toLowerCase()}.svg`;
+}
+
 const DEFAULT_TOPIC_ROWS = [
   [
     "Data Science",
@@ -118,6 +132,24 @@ function KeynotesRevealRow({ columns }) {
         const speakerBlock = (
           <article className="landing-keynotes__speaker-card">
             <div className="landing-keynotes__speaker-head">
+              {KEYNOTE_FLAGS_BY_NAME[column.name]?.code ? (
+                <div
+                  className="landing-keynotes__flag-wrap"
+                  role="img"
+                  aria-label={KEYNOTE_FLAGS_BY_NAME[column.name].label}
+                >
+                  <Image
+                    className="landing-keynotes__flag-img"
+                    src={keynoteFlagAssetPath(
+                      KEYNOTE_FLAGS_BY_NAME[column.name].code,
+                    )}
+                    alt=""
+                    width={48}
+                    height={48}
+                    layout="fixed"
+                  />
+                </div>
+              ) : null}
               <div className="landing-keynotes__speaker-meta">
                 <p className="landing-keynotes__speaker-name">{column.name}</p>
                 <p className="landing-keynotes__speaker-handle">
@@ -393,8 +425,8 @@ const LandingPage = ({ dataTranslate }) => {
 
       <div className="sponsors-page">
         <div className="sponsors-page__inner">
-          <header className="landing-sponsors__header">
-            <h2 className="landing-sponsors__title">
+          <header className="landing-keynotes__header">
+            <h2 className="landing-keynotes__title">
               {dataTranslate?.sponsors?.title ?? "Sponsors"}
             </h2>
           </header>
