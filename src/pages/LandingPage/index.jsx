@@ -13,6 +13,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Image } from "@/components/Image";
+import SponsorsSection from "@/components/SponsorsSection";
 import LandingPhotoCarousel from "./components/LandingPhotoCarousel";
 
 const KEYNOTE_SOCIAL_ICONS = {
@@ -403,6 +404,17 @@ const LandingPage = ({ dataTranslate }) => {
           </div>
         </section>
       ) : null}
+
+      <div className="sponsors-page">
+        <div className="sponsors-page__inner">
+          <header className="landing-sponsors__header">
+            <h2 className="landing-sponsors__title">
+              {dataTranslate?.sponsors?.title ?? "Sponsors"}
+            </h2>
+          </header>
+          <SponsorsSection copy={dataTranslate?.sponsors} />
+        </div>
+      </div>
     </>
   );
 };

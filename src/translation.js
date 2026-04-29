@@ -176,11 +176,11 @@ const data = {
           {
             photoFirst: false,
             photo: {
-              src: "https://drive.google.com/uc?export=view&id=1smuciV64zQzXkP2_RkuOKkfkONNL9qo2",
+              src: "/images/keynotes/kari-jordan.jpg",
               alt: "Portrait of keynote speaker Dr. Kari L. Jordan",
             },
             name: "Dr. Kari L. Jordan",
-            handle: "@kariljordan",
+            // handle: "@kariljordan",
             flag: { code: "us", label: "United States" },
             bio: "Dr. Kari L. Jordan is Executive Director of The Carpentries and a leader in data science education. With a PhD in Engineering Education, she focuses on inclusive learning, data literacy, and expanding access to technical skills worldwide.",
             social: [
@@ -189,11 +189,11 @@ const data = {
                 href: "https://www.linkedin.com/in/kariljordan/",
                 label: "LinkedIn",
               },
-              {
-                key: "twitter",
-                href: "https://twitter.com/kariljordan",
-                label: "X (Twitter)",
-              },
+              // {
+              //   key: "twitter",
+              //   href: "https://twitter.com/kariljordan",
+              //   label: "X (Twitter)",
+              // },
             ],
           },
         ],
@@ -753,7 +753,7 @@ Join us to learn, share, and connect with python professionals from across the g
           {
             photoFirst: false,
             photo: {
-              src: "https://drive.google.com/uc?export=view&id=1smuciV64zQzXkP2_RkuOKkfkONNL9qo2",
+              src: "/images/keynotes/kari-jordan.jpg",
               alt: "Retrato de la ponente magistral Dra. Kari L. Jordan",
             },
             name: "Dra. Kari L. Jordan",
