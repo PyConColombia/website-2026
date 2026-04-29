@@ -173,6 +173,29 @@ const data = {
               },
             ],
           },
+          {
+            photoFirst: false,
+            photo: {
+              src: "https://drive.google.com/uc?export=view&id=1smuciV64zQzXkP2_RkuOKkfkONNL9qo2",
+              alt: "Portrait of keynote speaker Dr. Kari L. Jordan",
+            },
+            name: "Dr. Kari L. Jordan",
+            handle: "@kariljordan",
+            flag: { code: "us", label: "United States" },
+            bio: "Dr. Kari L. Jordan is Executive Director of The Carpentries and a leader in data science education. With a PhD in Engineering Education, she focuses on inclusive learning, data literacy, and expanding access to technical skills worldwide.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/kariljordan/",
+                label: "LinkedIn",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/kariljordan",
+                label: "X (Twitter)",
+              },
+            ],
+          },
         ],
       },
       gallery: {
@@ -258,11 +281,22 @@ const data = {
       },
     },
     sponsors: {
+      metaTitle: "PyCon Colombia 2026 - Sponsors",
       title: "Meet Our Sponsors",
       description:
         "From cutting-edge tech companies to dedicated community advocates, these sponsors are leading the way in Python and software development.",
       thankYouMessage:
         "We couldn’t do it without them—thank you for your commitment to advancing the future of Python!",
+      heroTitleTrustedBy: "Trusted by",
+      heroTitleIndustry: "industry",
+      heroTitleLeaders: "leaders.",
+      heroLead:
+        "PyCon Colombia is made possible through the generous support of organizations dedicated to advancing the Python ecosystem and fostering technological innovation in Latin America.",
+      becomeSponsorCta: "Become a Sponsor",
+      venueLevel: "Venue",
+      platinoLevel: "Platinum",
+      goldPartners: "Gold",
+      silverPartners: "Silver",
     },
     codeOfConduct: {
       title: "Code of Conduct",
@@ -715,6 +749,29 @@ Join us to learn, share, and connect with python professionals from across the g
               },
             ],
           },
+          {
+            photoFirst: false,
+            photo: {
+              src: "https://drive.google.com/uc?export=view&id=1smuciV64zQzXkP2_RkuOKkfkONNL9qo2",
+              alt: "Retrato de la ponente magistral Dra. Kari L. Jordan",
+            },
+            name: "Dra. Kari L. Jordan",
+            handle: "@kariljordan",
+            flag: { code: "us", label: "Estados Unidos" },
+            bio: "La Dra. Kari L. Jordan es directora ejecutiva de The Carpentries y una referente en educación en ciencia de datos. Con doctorado en educación en ingeniería, trabaja el aprendizaje inclusivo, la alfabetización en datos y ampliar el acceso a habilidades técnicas en todo el mundo.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/kariljordan/",
+                label: "LinkedIn",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/kariljordan",
+                label: "X (Twitter)",
+              },
+            ],
+          },
         ],
       },
       gallery: {
@@ -954,11 +1011,22 @@ Join us to learn, share, and connect with python professionals from across the g
       },
     },
     sponsors: {
+      metaTitle: "PyCon Colombia 2026 - Patrocinadores",
       title: "Conoce a nuestros patrocinadores",
       description:
         "Desde empresas tecnológicas de vanguardia hasta personas y organizaciones comprometidas con la comunidad, estos patrocinadores están liderando el camino en Python y desarrollo de software.",
       thankYouMessage:
         "No podríamos lograrlo sin ellos. Gracias por su compromiso con el futuro de Python.",
+      heroTitleTrustedBy: "Respaldados por líderes de la",
+      heroTitleIndustry: "industria",
+      heroTitleLeaders: ".",
+      heroLead:
+        "PyCon Colombia es posible gracias al apoyo generoso de organizaciones comprometidas con el ecosistema Python y la innovación tecnológica en América Latina.",
+      becomeSponsorCta: "Ser patrocinador",
+      venueLevel: "Sede",
+      platinoLevel: "Platino",
+      goldPartners: "Oro",
+      silverPartners: "Plata",
     },
     codeOfConduct: {
       title: "Código de Conducta",

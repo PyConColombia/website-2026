@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="6128"
+   height="2115"
+   viewBox="0 0 6128 2115"
+   fill="none"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="loka.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.074086162"
+     inkscape:cx="3070.7489"
+     inkscape:cy="1059.5771"
+     inkscape:window-width="1440"
+     inkscape:window-height="900"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4" />
+  <path
+     d="M0 369.574H288.092V1488.11H883.705V1777.34H0V369.574Z"
+     fill="#000000"
+     id="path1"
+     style="fill:#000000" />
+  <path
+     d="M3419.3 369.574H3726.61V1102.4L4478.91 369.574H4859.97L4184.34 1043.04L4166.79 1058.14L4667.77 1561.73L5855.65 369.574H6127.66V1758.04H5839.57V774.579L4875.85 1758.04H4475.78L3998.62 1274.38L3977.1 1252.78L3726.61 1499.43V1777.34H3419.3V369.574Z"
+     fill="#000000"
+     id="path2"
+     style="fill:#000000" />
+  <path
+     d="M2122.58 0C1540.97 0 1069.45 473.379 1069.45 1057.5C1069.45 1641.41 1540.97 2115 2122.79 2115C2704.61 2115 3176.13 1641.62 3176.13 1057.5C3175.92 473.379 2704.41 0 2122.58 0ZM2114.64 1822.42C1693.05 1822.42 1351.06 1479.28 1351.06 1055.82C1351.06 632.57 1692.85 289.229 2114.64 289.229C2536.44 289.229 2878.22 632.361 2878.22 1055.82C2878.22 1479.28 2536.23 1822.42 2114.64 1822.42Z"
+     fill="#000000"
+     id="path3"
+     style="fill:#000000" />
+  <path
+     d="M2353.22 1057.48C2353.22 1183.54 2251.47 1285.68 2125.92 1285.68C2000.36 1285.68 1898.62 1183.54 1898.62 1057.48C1898.62 931.431 2000.36 829.288 2125.92 829.288C2251.47 829.288 2353.22 931.431 2353.22 1057.48Z"
+     fill="#000000"
+     id="path4"
+     style="fill:#000000" />
+</svg>

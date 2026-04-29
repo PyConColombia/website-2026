@@ -40,7 +40,10 @@ function App() {
       <Routes location={routedLocation}>
         <Route path="/" element={<LandingPage dataTranslate={allData} />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/sponsors" element={<Sponsors />} />
+        <Route
+          path="/sponsors"
+          element={<Sponsors dataTranslate={allData} />}
+        />
         <Route
           path="/call-for-proposals"
           element={<CallForProposals dataTranslate={allData} />}

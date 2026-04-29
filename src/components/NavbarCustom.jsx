@@ -79,6 +79,7 @@ const NavbarCustom = ({ dataTranslate }) => {
   const linkClass = ({ isActive }) =>
     `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
   const homePath = localizePath("/", language);
+  const sponsorsPath = localizePath("/sponsors", language);
 
   return (
     <Navbar
@@ -111,9 +112,9 @@ const NavbarCustom = ({ dataTranslate }) => {
                   {/* <NavLink to="/call-for-proposals" className={linkClass}>
                     {t.callForProposals ?? "Call for proposals"}
                   </NavLink> */}
-                  {/* <NavLink to="/sponsors" className={linkClass}>
+                  <NavLink to={sponsorsPath} className={linkClass}>
                     {t.sponsors ?? "Sponsors"}
-                  </NavLink> */}
+                  </NavLink>
                   {/* <NavLink to="/keynotes" className={linkClass}>
                     {t.keynotes ?? "Keynotes"}
                   </NavLink> */}
