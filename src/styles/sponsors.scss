@@ -57,6 +57,16 @@ $sponsors-diamond-shell: #e6e8f4;
   }
 }
 
+.sponsors-page__sponsor-link {
+  display: block;
+  border-radius: 1rem;
+
+  &:focus-visible {
+    outline: 3px solid rgb(68 77 197 / 0.55);
+    outline-offset: 4px;
+  }
+}
+
 .sponsors-page__inner {
   max-width: 72rem;
   margin-inline: auto;
@@ -255,6 +265,7 @@ $sponsors-diamond-shell: #e6e8f4;
   min-height: 6.5rem;
   box-shadow: 0 10px 40px rgb(44 47 51 / 0.06);
   transition: box-shadow 0.35s ease;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 14px 44px rgb(68 77 197 / 0.12);
@@ -294,9 +305,15 @@ $sponsors-diamond-shell: #e6e8f4;
   max-height: 2.5rem;
 }
 
+.sponsors-page__sponsor-card--silverPlus .sponsors-page__sponsor-card-logo {
+  width: 10.5rem;
+  max-height: 2.6rem;
+}
+
 // Tier rows: vertical rhythm comes from `.sponsors-page__sections` gap only
 .sponsors-page__platino,
 .sponsors-page__gold,
+.sponsors-page__silver-plus,
 .sponsors-page__silver {
   padding-top: 0;
 }

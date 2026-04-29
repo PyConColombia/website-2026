@@ -296,6 +296,7 @@ const data = {
       venueLevel: "Venue",
       platinoLevel: "Platinum",
       goldPartners: "Gold",
+      silverPlusPartners: "Silver +",
       silverPartners: "Silver",
     },
     codeOfConduct: {
@@ -1026,6 +1027,7 @@ Join us to learn, share, and connect with python professionals from across the g
       venueLevel: "Sede",
       platinoLevel: "Platino",
       goldPartners: "Oro",
+      silverPlusPartners: "Plata +",
       silverPartners: "Plata",
     },
     codeOfConduct: {
