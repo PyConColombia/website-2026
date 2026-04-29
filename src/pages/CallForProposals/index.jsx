@@ -77,7 +77,7 @@ const DEFAULT_COPY = {
         borderPrimary: false,
       },
       {
-        date: "APRIL 28, 2026",
+        date: "MAY 12, 2026",
         title: "Submission Deadline",
         body: "All proposals must be submitted via the portal by midnight COT.",
         dotPrimary: false,

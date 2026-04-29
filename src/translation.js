@@ -67,7 +67,7 @@ const data = {
         finalText:
           "We’re looking for passionate speakers to lead talks on development, security, Python, and beyond.",
       },
-      speakerDeadline: "Closes on May 5th 2025",
+      speakerDeadline: "Closes on May 12, 2026",
       applyToSpeakButton: "Apply to Speak",
       subscribe: {
         header: "Want to ",
@@ -681,7 +681,7 @@ Join us to learn, share, and connect with python professionals from across the g
         finalText:
           "Buscamos ponentes apasionados para liderar charlas sobre desarrollo, seguridad, Python y mucho más.",
       },
-      speakerDeadline: "Cierra el 5 de mayo de 2025",
+      speakerDeadline: "Cierra el 12 de mayo de 2026",
       applyToSpeakButton: "Postúlate para hablar",
       subscribe: {
         header: "¿Quieres ",
@@ -901,7 +901,7 @@ Join us to learn, share, and connect with python professionals from across the g
     },
     callForProposalsPage: {
       metaTitle: "Llamado a propuestas | PyCon Colombia 2026",
-      submitProposalHref: "https://forms.gle/vSGrrWfAf6nZZ5M86",
+      submitProposalHref: "/call-for-proposals",
       hero: {
         badge: "Recibiendo propuestas",
         titleBefore: "Llamado a",

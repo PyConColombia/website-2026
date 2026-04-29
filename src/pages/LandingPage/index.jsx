@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { Link } from "react-router-dom";
 import { Image } from "@/components/Image";
 import SponsorsSection from "@/components/SponsorsSection";
 import LandingPhotoCarousel from "./components/LandingPhotoCarousel";
@@ -81,6 +82,10 @@ const DEFAULT_CFP_HERO = {
   imageSrc: "/images/cfp.jpg",
   imageAlt: "Modern conference hall",
 };
+
+function isExternalHref(href) {
+  return /^https?:\/\//i.test(String(href ?? ""));
+}
 
 function KeynotesRevealRow({ columns }) {
   const rootRef = useRef(null);
@@ -228,6 +233,7 @@ const LandingPage = ({ dataTranslate }) => {
   );
   const keynotesRevealKey = keynoteColumns.map((c) => c.name).join("|");
   const gallery = dataTranslate?.landing?.gallery;
+  const cfpSubmitIsExternal = isExternalHref(cfpHero.submitProposalHref);
 
   return (
     <>
@@ -352,13 +358,23 @@ const LandingPage = ({ dataTranslate }) => {
                 </h2>
                 <p className="cfp-hero__lead">{cfpHero.lead}</p>
                 <div className="cfp-hero__actions">
-                  <a
-                    className="cfp-btn cfp-btn--primary"
-                    href={cfpHero.submitProposalHref}
-                  >
-                    {cfpHero.ctaPrimary}{" "}
-                    <FontAwesomeIcon icon={faPaperPlane} aria-hidden />
-                  </a>
+                  {cfpSubmitIsExternal ? (
+                    <a
+                      className="cfp-btn cfp-btn--primary"
+                      href={cfpHero.submitProposalHref}
+                    >
+                      {cfpHero.ctaPrimary}{" "}
+                      <FontAwesomeIcon icon={faPaperPlane} aria-hidden />
+                    </a>
+                  ) : (
+                    <Link
+                      className="cfp-btn cfp-btn--primary"
+                      to={cfpHero.submitProposalHref}
+                    >
+                      {cfpHero.ctaPrimary}{" "}
+                      <FontAwesomeIcon icon={faPaperPlane} aria-hidden />
+                    </Link>
+                  )}
                   {/* <a className="cfp-btn cfp-btn--secondary" href={cfpHero.guideHref}>
                     {cfpHero.ctaSecondary}
                   </a> */}
