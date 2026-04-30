@@ -206,9 +206,9 @@ const data = {
             },
             name: "Irit Katriel",
             profession:
-              "Deep Learning Compilers @ Nvidia, CPython Core Developer",
+              "Principal Software Engineer @ Microsoft, CPython Core Developer",
             flag: { code: "il", label: "Israel" },
-            bio: "Irit Katriel works on deep learning compilers at Nvidia and is a CPython core developer focused on programming language design and compiler architecture. Major contributions to Python include PEP 654, Exception Groups, except*, and significant improvements to CPython’s compiler and exception systems. She previously worked at Microsoft on Python Performance Engineering and has authored several academic publications.",
+            bio: "Irit Katriel is a Principal Software Engineer at Microsoft and a CPython core developer focused on programming language design and compiler architecture. Major contributions to Python include PEP 654, Exception Groups, except*, and significant improvements to CPython’s compiler and exception systems. Irit also works on Python Performance Engineering at Microsoft and has authored several academic publications.",
             social: [
               {
                 key: "linkedin",
@@ -805,9 +805,9 @@ Join us to learn, share, and connect with python professionals from across the g
             },
             name: "Irit Katriel",
             profession:
-              "Compiladores de deep learning en Nvidia, desarrolladora core de CPython",
+              "Principal Software Engineer en Microsoft, desarrolladora core de CPython",
             flag: { code: "il", label: "Israel" },
-            bio: "Irit Katriel trabaja en compiladores de deep learning en Nvidia y es desarrolladora core de CPython, enfocada en el diseño de lenguajes de programación y la arquitectura de compiladores. Entre sus principales contribuciones a Python se encuentran PEP 654, los Exception Groups, el constructo except* y mejoras significativas en el compilador y el sistema de excepciones de CPython. Anteriormente trabajó en Microsoft en Python Performance Engineering y ha publicado artículos académicos.",
+            bio: "Irit Katriel es Principal Software Engineer en Microsoft y desarrolladora core de CPython, enfocada en el diseño de lenguajes de programación y la arquitectura de compiladores. Entre sus principales contribuciones a Python se encuentran la PEP 654, los Exception Groups, el constructo except* y mejoras significativas en el compilador y el sistema de excepciones de CPython. Irit también trabaja en Python Performance Engineering en Microsoft y ha publicado artículos académicos.",
             social: [
               {
                 key: "linkedin",
