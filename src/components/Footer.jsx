@@ -1,6 +1,7 @@
 import {
   faGithubAlt,
   faInstagram,
+  faWhatsapp,
   faXTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
@@ -32,6 +33,11 @@ const Footer = ({ dataTranslate }) => {
       icon: faYoutube,
       href: "https://www.youtube.com/@PyConColombia",
       label: "YouTube",
+    },
+    {
+      icon: faWhatsapp,
+      href: "https://whatsapp.com/channel/0029VbD4Fju90x2nq0jHYL03",
+      label: "WhatsApp Channel",
     },
   ];
 
