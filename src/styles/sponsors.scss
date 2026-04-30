@@ -55,6 +55,7 @@ $sponsors-diamond-shell: #e6e8f4;
       text-decoration: none;
     }
   }
+
 }
 
 .sponsors-page__sponsor-link {
@@ -236,19 +237,22 @@ $sponsors-diamond-shell: #e6e8f4;
 .sponsors-page__diamond-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
+  max-width: 50rem;
+  margin-inline: auto;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem 2rem;
   }
 
-  &--single {
-    grid-template-columns: 1fr;
-    max-width: 26rem;
-    margin-inline: auto;
-
+  // One venue sponsor: span full row so the second column is not empty
+  > .sponsors-page__sponsor-link:only-child {
     @media (min-width: 768px) {
-      grid-template-columns: 1fr;
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: 100%;
+      max-width: min(50rem, 100%);
     }
   }
 }
@@ -276,70 +280,66 @@ $sponsors-diamond-shell: #e6e8f4;
 // Card sizing per tier (Venue > Platinum > Gold > Silver+ > Silver)
 .sponsors-page__sponsor-card--venue {
   min-height: 10rem;
-  max-width: 34rem;
-  margin-inline: auto;
+  max-width: none;
+  width: 100%;
 }
 
 .sponsors-page__sponsor-card--platino {
   min-height: 9rem;
-  max-width: 30rem;
+  max-width: 100%;
   margin-inline: auto;
 }
 
 .sponsors-page__sponsor-card--gold {
   min-height: 8.25rem;
-  max-width: 26rem;
+  max-width: 24rem;
   margin-inline: auto;
 }
 
 .sponsors-page__sponsor-card--silverPlus {
   min-height: 7.5rem;
-  max-width: 24rem;
+  max-width: 20rem;
   margin-inline: auto;
 }
 
 .sponsors-page__sponsor-card--silver {
-  min-height: 7rem;
-  max-width: 22rem;
+  min-height: 6rem;
+  max-width: 18rem;
   margin-inline: auto;
 }
 
-// Fixed logo slot per tier (width); max-width keeps small viewports inside the card
+// Logos fill the card width; max-height ladder: Venue > Platinum > Gold > …
 .sponsors-page__sponsor-card-logo {
   display: block;
   flex-shrink: 0;
-  width: 10rem;
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 100%;
   max-width: 100%;
   height: auto;
-  max-height: 2.75rem;
+  max-height: 7.05rem;
   object-fit: contain;
   object-position: center;
-  margin-inline: auto;
 }
 
 .sponsors-page__sponsor-card--venue .sponsors-page__sponsor-card-logo {
-  width: 100%;
-  max-height: 4rem;
+  max-height: 22rem;
 }
 
 .sponsors-page__sponsor-card--platino .sponsors-page__sponsor-card-logo {
-  width: 90%;
-  max-height: 3.5rem;
+  max-height: 11rem;
 }
 
 .sponsors-page__sponsor-card--gold .sponsors-page__sponsor-card-logo {
-  width: 80%;
-  max-height: 3.1rem;
-}
-
-.sponsors-page__sponsor-card--silver .sponsors-page__sponsor-card-logo {
-  width: 60%;
-  max-height: 2.6rem;
+  max-height: 10rem;
 }
 
 .sponsors-page__sponsor-card--silverPlus .sponsors-page__sponsor-card-logo {
-  width: 70%;
-  max-height: 2.85rem;
+  max-height: 8.55rem;
+}
+
+.sponsors-page__sponsor-card--silver .sponsors-page__sponsor-card-logo {
+  max-height: 7.05rem;
 }
 
 // Tier rows: vertical rhythm comes from `.sponsors-page__sections` gap only
@@ -360,8 +360,13 @@ $sponsors-diamond-shell: #e6e8f4;
   }
 
   &--single {
-    max-width: 24rem;
+    max-width: 40rem;
     margin-inline: auto;
+
+    // Platinum: same track as gold — venue must stay the widest / tallest tier
+    &.sponsors-page__gold-grid--platino {
+      max-width: 40rem;
+    }
   }
 
   &--silver {

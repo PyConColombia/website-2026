@@ -56,7 +56,7 @@ export default function SponsorsSection({ copy }) {
           <span className="sponsors-page__tier-label">{s.venueLevel}</span>
         </h2>
         <div className="sponsors-page__diamond-panel">
-          <div className="sponsors-page__diamond-grid sponsors-page__diamond-grid--single">
+          <div className="sponsors-page__diamond-grid">
             {VENUE_SPONSORS.map((item) => (
               <SponsorCard
                 key={item.key}
@@ -75,7 +75,7 @@ export default function SponsorsSection({ copy }) {
           <span className="sponsors-page__tier-rule-grey" aria-hidden={true} />
           <span className="sponsors-page__tier-label">{s.platinoLevel}</span>
         </h2>
-        <div className="sponsors-page__gold-grid sponsors-page__gold-grid--single">
+        <div className="sponsors-page__gold-grid sponsors-page__gold-grid--single sponsors-page__gold-grid--platino">
           {PLATINO_SPONSORS.map((item) => (
             <SponsorCard
               key={item.key}
