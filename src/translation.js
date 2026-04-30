@@ -67,7 +67,7 @@ const data = {
         finalText:
           "We’re looking for passionate speakers to lead talks on development, security, Python, and beyond.",
       },
-      speakerDeadline: "Closes on May 5th 2025",
+      speakerDeadline: "Closes on May 12, 2026",
       applyToSpeakButton: "Apply to Speak",
       subscribe: {
         header: "Want to ",
@@ -91,7 +91,8 @@ const data = {
               alt: "Portrait of keynote speaker Tereza Iofciu",
             },
             name: "Tereza Iofciu",
-            // handle: "@terezaiofciu",
+            profession:
+              "Data & AI expert, leadership coach, and Python Software Foundation Fellow",
             flag: { code: "ro", label: "Romania" },
             bio: "Tereza Iofciu is a data and AI expert, leadership coach, and PSF Fellow with 15+ years of experience. She is an active contributor to the Python community and creator of the Data Diplomat Framework, focused on bridging technical expertise with human-centered leadership.",
             social: [
@@ -119,7 +120,7 @@ const data = {
               alt: "Portrait of keynote speaker Anna Pristoupilova",
             },
             name: "Anna Pristoupilova",
-            handle: "@pristanna",
+            profession: "Bioinformatician and researcher",
             flag: { code: "cz", label: "Czech Republic" },
             bio: "Bioinformatician with a demonstrated history of working in the research. Skilled in Bioinformatics, NGS Sequencing, Rare Diseases, Molecular Biology and Genetics. Strong research professional with PhD and Master’s Degree focused on Molecular biology and genetics and second Master's Degree focused on Medical devices and informatics, both from Charles University, Czech Republic.",
             social: [
@@ -147,7 +148,8 @@ const data = {
               alt: "Portrait of keynote speaker Malvika Sharan",
             },
             name: "Malvika Sharan",
-            handle: "@malvikasharan",
+            profession:
+              "Senior Director of Data Science at St. Jude Children's Research Hospital",
             flag: { code: "in", label: "India" },
             bio: "Malvika Sharan is Senior Director of Data Science at St. Jude Children's Research Hospital and a globally recognized leader in open science and community-driven research. She is a co-founder of Open Life Science and a key contributor to The Turing Way, advancing reproducible, ethical, and collaborative data science practices worldwide. With a background in bioinformatics and leadership roles at institutions like the Alan Turing Institute and EMBL, Malvika focuses on building inclusive research communities and empowering practitioners through open, transparent, and responsible approaches to AI and data science.",
             social: [
@@ -170,6 +172,48 @@ const data = {
                 key: "github",
                 href: "https://github.com/malvikasharan",
                 label: "GitHub",
+              },
+            ],
+          },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/images/keynotes/kari-jordan.jpg",
+              alt: "Portrait of keynote speaker Dr. Kari L. Jordan",
+            },
+            name: "Dr. Kari L. Jordan",
+            profession: "Executive Director of The Carpentries",
+            flag: { code: "us", label: "United States" },
+            bio: "Dr. Kari L. Jordan is Executive Director of The Carpentries and a leader in data science education. With a PhD in Engineering Education, she focuses on inclusive learning, data literacy, and expanding access to technical skills worldwide.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/kariljordan/",
+                label: "LinkedIn",
+              },
+              // {
+              //   key: "twitter",
+              //   href: "https://twitter.com/kariljordan",
+              //   label: "X (Twitter)",
+              // },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/irit-katriel.jpg",
+              alt: "Portrait of keynote speaker Irit Katriel",
+            },
+            name: "Irit Katriel",
+            profession:
+              "Principal Software Engineer @ Microsoft, CPython Core Developer",
+            flag: { code: "il", label: "Israel" },
+            bio: "Irit Katriel is a Principal Software Engineer at Microsoft and a CPython core developer focused on programming language design and compiler architecture. Major contributions to Python include PEP 654, Exception Groups, except*, and significant improvements to CPython’s compiler and exception systems. Irit also works on Python Performance Engineering at Microsoft and has authored several academic publications.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/irit-katriel/",
+                label: "LinkedIn",
               },
             ],
           },
@@ -258,11 +302,23 @@ const data = {
       },
     },
     sponsors: {
-      title: "Meet Our Sponsors",
+      metaTitle: "PyCon Colombia 2026 - Sponsors",
+      title: "Sponsors",
       description:
         "From cutting-edge tech companies to dedicated community advocates, these sponsors are leading the way in Python and software development.",
       thankYouMessage:
         "We couldn’t do it without them—thank you for your commitment to advancing the future of Python!",
+      heroTitleTrustedBy: "Trusted by",
+      heroTitleIndustry: "industry",
+      heroTitleLeaders: "leaders.",
+      heroLead:
+        "PyCon Colombia is made possible through the generous support of organizations dedicated to advancing the Python ecosystem and fostering technological innovation in Latin America.",
+      becomeSponsorCta: "Become a Sponsor",
+      venueLevel: "Venue",
+      platinoLevel: "Platinum",
+      goldPartners: "Gold",
+      silverPlusPartners: "Silver +",
+      silverPartners: "Silver",
     },
     codeOfConduct: {
       title: "Code of Conduct",
@@ -625,7 +681,7 @@ Join us to learn, share, and connect with python professionals from across the g
         finalText:
           "Buscamos ponentes apasionados para liderar charlas sobre desarrollo, seguridad, Python y mucho más.",
       },
-      speakerDeadline: "Cierra el 5 de mayo de 2025",
+      speakerDeadline: "Cierra el 12 de mayo de 2026",
       applyToSpeakButton: "Postúlate para hablar",
       subscribe: {
         header: "¿Quieres ",
@@ -649,6 +705,8 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Tereza Iofciu",
             },
             name: "Tereza Iofciu",
+            profession:
+              "Experta en datos e IA, coach de liderazgo y PSF Fellow",
             flag: { code: "ro", label: "Rumania" },
             bio: "Tereza Iofciu es experta en datos e IA, coach de liderazgo y PSF Fellow, con más de 15 años de experiencia. Es una colaboradora activa de la comunidad Python y creadora del Data Diplomat Framework, enfocado en conectar la experiencia técnica con un liderazgo centrado en las personas.",
             social: [
@@ -676,7 +734,7 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Anna Pristoupilova",
             },
             name: "Anna Pristoupilova",
-            handle: "@pristanna",
+            profession: "Bioinformática e investigadora",
             flag: { code: "cz", label: "República Checa" },
             bio: "Bioinformática con amplia trayectoria en investigación. Tiene experiencia en bioinformática, secuenciación NGS, enfermedades raras, biología molecular y genética. Es una profesional con sólida formación investigativa, con un doctorado y una maestría en biología molecular y genética, además de una segunda maestría en dispositivos médicos e informática, ambas de la Universidad Carolina, en la República Checa.",
             social: [
@@ -694,7 +752,8 @@ Join us to learn, share, and connect with python professionals from across the g
               alt: "Retrato de la ponente magistral Malvika Sharan",
             },
             name: "Malvika Sharan",
-            handle: "@malvikasharan",
+            profession:
+              "Directora sénior de ciencia de datos en St. Jude Children's Research Hospital",
             flag: { code: "in", label: "India" },
             bio: "Malvika Sharan es directora sénior de ciencia de datos en St. Jude Children's Research Hospital y una líder reconocida globalmente en ciencia abierta e investigación impulsada por comunidades. Es cofundadora de Open Life Science y una colaboradora clave de The Turing Way, donde impulsa prácticas de ciencia de datos reproducibles, éticas y colaborativas en todo el mundo. Con formación en bioinformática y roles de liderazgo en instituciones como el Alan Turing Institute y EMBL, Malvika se enfoca en construir comunidades de investigación inclusivas y en empoderar a profesionales mediante enfoques abiertos, transparentes y responsables en IA y ciencia de datos.",
             social: [
@@ -712,6 +771,48 @@ Join us to learn, share, and connect with python professionals from across the g
                 key: "github",
                 href: "https://github.com/malvikasharan",
                 label: "GitHub",
+              },
+            ],
+          },
+          {
+            photoFirst: false,
+            photo: {
+              src: "/images/keynotes/kari-jordan.jpg",
+              alt: "Retrato de la ponente magistral Dra. Kari L. Jordan",
+            },
+            name: "Dra. Kari L. Jordan",
+            profession: "Directora ejecutiva de The Carpentries",
+            flag: { code: "us", label: "Estados Unidos" },
+            bio: "La Dra. Kari L. Jordan es directora ejecutiva de The Carpentries y una referente en educación en ciencia de datos. Con doctorado en educación en ingeniería, trabaja el aprendizaje inclusivo, la alfabetización en datos y ampliar el acceso a habilidades técnicas en todo el mundo.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/kariljordan/",
+                label: "LinkedIn",
+              },
+              {
+                key: "twitter",
+                href: "https://twitter.com/kariljordan",
+                label: "X (Twitter)",
+              },
+            ],
+          },
+          {
+            photoFirst: true,
+            photo: {
+              src: "/images/keynotes/irit-katriel.jpg",
+              alt: "Retrato de la ponente magistral Irit Katriel",
+            },
+            name: "Irit Katriel",
+            profession:
+              "Principal Software Engineer en Microsoft, desarrolladora core de CPython",
+            flag: { code: "il", label: "Israel" },
+            bio: "Irit Katriel es Principal Software Engineer en Microsoft y desarrolladora core de CPython, enfocada en el diseño de lenguajes de programación y la arquitectura de compiladores. Entre sus principales contribuciones a Python se encuentran la PEP 654, los Exception Groups, el constructo except* y mejoras significativas en el compilador y el sistema de excepciones de CPython. Irit también trabaja en Python Performance Engineering en Microsoft y ha publicado artículos académicos.",
+            social: [
+              {
+                key: "linkedin",
+                href: "https://www.linkedin.com/in/irit-katriel/",
+                label: "LinkedIn",
               },
             ],
           },
@@ -800,7 +901,7 @@ Join us to learn, share, and connect with python professionals from across the g
     },
     callForProposalsPage: {
       metaTitle: "Llamado a propuestas | PyCon Colombia 2026",
-      submitProposalHref: "https://forms.gle/vSGrrWfAf6nZZ5M86",
+      submitProposalHref: "/call-for-proposals",
       hero: {
         badge: "Recibiendo propuestas",
         titleBefore: "Llamado a",
@@ -954,11 +1055,23 @@ Join us to learn, share, and connect with python professionals from across the g
       },
     },
     sponsors: {
-      title: "Conoce a nuestros patrocinadores",
+      metaTitle: "PyCon Colombia 2026 - Patrocinadores",
+      title: "Patrocinadores",
       description:
         "Desde empresas tecnológicas de vanguardia hasta personas y organizaciones comprometidas con la comunidad, estos patrocinadores están liderando el camino en Python y desarrollo de software.",
       thankYouMessage:
         "No podríamos lograrlo sin ellos. Gracias por su compromiso con el futuro de Python.",
+      heroTitleTrustedBy: "Respaldados por líderes de la",
+      heroTitleIndustry: "industria",
+      heroTitleLeaders: ".",
+      heroLead:
+        "PyCon Colombia es posible gracias al apoyo generoso de organizaciones comprometidas con el ecosistema Python y la innovación tecnológica en América Latina.",
+      becomeSponsorCta: "Ser patrocinador",
+      venueLevel: "Sede",
+      platinoLevel: "Platino",
+      goldPartners: "Oro",
+      silverPlusPartners: "Plata +",
+      silverPartners: "Plata",
     },
     codeOfConduct: {
       title: "Código de Conducta",

@@ -79,6 +79,7 @@ const NavbarCustom = ({ dataTranslate }) => {
   const linkClass = ({ isActive }) =>
     `navbar-custom__link${isActive ? " navbar-custom__link--active" : ""}`;
   const homePath = localizePath("/", language);
+  const sponsorsPath = localizePath("/sponsors", language);
 
   return (
     <Navbar
@@ -111,9 +112,9 @@ const NavbarCustom = ({ dataTranslate }) => {
                   {/* <NavLink to="/call-for-proposals" className={linkClass}>
                     {t.callForProposals ?? "Call for proposals"}
                   </NavLink> */}
-                  {/* <NavLink to="/sponsors" className={linkClass}>
+                  <NavLink to={sponsorsPath} className={linkClass}>
                     {t.sponsors ?? "Sponsors"}
-                  </NavLink> */}
+                  </NavLink>
                   {/* <NavLink to="/keynotes" className={linkClass}>
                     {t.keynotes ?? "Keynotes"}
                   </NavLink> */}
@@ -123,66 +124,61 @@ const NavbarCustom = ({ dataTranslate }) => {
                   <NavLink to={teamPath} className={linkClass}>
                     {t.team ?? "Team"}
                   </NavLink> */}
-                  <NavDropdown
-                    className="navbar-custom__dropdown"
-                    title={
-                      <span className="d-inline-flex align-items-center gap-2">
-                        2026
-                        <ChevronDownIcon />
-                      </span>
-                    }
-                    id="navbar-schedule-dropdown"
-                    align="end"
-                    renderMenuOnMount
-                  >
-                    {years.map((year) => (
-                      <NavDropdown.Item
-                        key={year}
-                        href={`https://${year}.pycon.co`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {year}
-                      </NavDropdown.Item>
-                    ))}
-                  </NavDropdown>
-                  <NavDropdown
-                    className="navbar-custom__dropdown"
-                    title={
-                      <span className="d-inline-flex align-items-center gap-2">
-                        {language.toUpperCase()}
-                        <ChevronDownIcon />
-                      </span>
-                    }
-                    id="navbar-language-dropdown"
-                    align="end"
-                    renderMenuOnMount
-                  >
-                    {languageOptions.map(({ code, label }) => (
-                      <NavDropdown.Item
-                        as="button"
-                        key={code}
-                        active={language === code}
-                        onClick={() => setLanguage(code)}
-                        type="button"
-                      >
-                        {label}
-                      </NavDropdown.Item>
-                    ))}
-                  </NavDropdown>
                 </Nav>
               </div>
             </div>
 
-            <a
-              className="navbar-custom__cta"
-              href={t.ticketsUrl ?? "#"}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {t.getTickets ?? "GET YOUR TICKETS"}
-              <ArrowUpRightIcon />
-            </a>
+            <div className="navbar-custom__actions">
+              <a
+                className="navbar-custom__cta"
+                href={t.ticketsUrl ?? "#"}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {t.getTickets ?? "GET YOUR TICKETS"}
+                <ArrowUpRightIcon />
+              </a>
+              <NavDropdown
+                className="navbar-custom__dropdown"
+                title={
+                  <span className="d-inline-flex align-items-center gap-2">
+                    2026
+                    <ChevronDownIcon />
+                  </span>
+                }
+                id="navbar-schedule-dropdown"
+                align="end"
+                renderMenuOnMount
+              >
+                {years.map((year) => (
+                  <NavDropdown.Item
+                    key={year}
+                    href={`https://${year}.pycon.co`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {year}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+              <fieldset className="navbar-custom__lang-toggle">
+                <legend className="visually-hidden">Language</legend>
+                {(() => {
+                  const nextLanguage =
+                    language === "en" ? languageOptions[1] : languageOptions[0];
+                  return (
+                    <button
+                      type="button"
+                      className="navbar-custom__lang-btn"
+                      aria-label={`Switch language to ${nextLanguage.label}`}
+                      onClick={() => setLanguage(nextLanguage.code)}
+                    >
+                      {nextLanguage.label}
+                    </button>
+                  );
+                })()}
+              </fieldset>
+            </div>
           </div>
         </Navbar.Collapse>
       </Container>
