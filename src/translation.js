@@ -80,6 +80,14 @@ const data = {
         email: "Email",
         submitButton: "Subscribe to newsletter",
       },
+      afterMovie: {
+        sectionAriaLabel: "2025 conference after movie",
+        title: "2025 After Movie",
+        subtitle:
+          "Relive the magic of our previous gathering. See what makes PyCon Colombia a unique experience.",
+        playLabel: "Play after movie video",
+        youtubeVideoId: "6JUYr7QBtBI",
+      },
       keynotes: {
         sectionAriaLabel: "Keynote speakers",
         title: "Keynotes Speakers",
@@ -693,6 +701,14 @@ Join us to learn, share, and connect with python professionals from across the g
         lastName: "Apellidos",
         email: "Correo",
         submitButton: "Suscribirse al boletín",
+      },
+      afterMovie: {
+        sectionAriaLabel: "Video after movie de la conferencia 2025",
+        title: "After movie 2025",
+        subtitle:
+          "Revive la magia de nuestro encuentro anterior. Descubre qué hace única la experiencia de PyCon Colombia.",
+        playLabel: "Reproducir video del after movie",
+        youtubeVideoId: "6JUYr7QBtBI",
       },
       keynotes: {
         sectionAriaLabel: "Ponentes magistrales",
