@@ -431,7 +431,7 @@ const LandingPage = ({ dataTranslate }) => {
             <div className="cfp-hero__glow" aria-hidden>
               <span className="cfp-hero__glow-blob" />
             </div>
-            <Row className="cfp-hero__row align-items-center g-5 g-lg-0">
+            <Row className="cfp-hero__row align-items-center gx-0 gy-5 g-lg-0">
               <Col lg={7}>
                 <div className="cfp-hero__badge">
                   <span className="cfp-hero__pulse" aria-hidden />
