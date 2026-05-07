@@ -186,14 +186,14 @@ const HeaderNavigation = ({
             return (
               <NavigationMenuItem key={navItem.title}>
                 <NavigationMenuLink
-                  href={navItem.href}
                   data-active={isActive}
                   className={cn(
                     navigationMenuTriggerStyle(),
                     'text-muted-foreground! hover:text-foreground! data-[active=true]:text-foreground! bg-transparent! p-0! text-base'
                   )}
+                  asChild
                 >
-                  {navItem.title}
+                  <Link href={navItem.href}>{navItem.title}</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             )
