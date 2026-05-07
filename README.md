@@ -39,10 +39,10 @@ npm run preview
 
 ## Other scripts
 
-| Script          | Description                    |
-|-----------------|--------------------------------|
-| `npm run format`      | Format and fix with Biome      |
-| `npm run format:check`| Check formatting (no write)    |
+| Script                 | Description                 |
+| ---------------------- | --------------------------- |
+| `npm run format`       | Format and fix with Biome   |
+| `npm run format:check` | Check formatting (no write) |
 
 ## Tech stack
 

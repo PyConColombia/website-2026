@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Tereza Iofciu",
+    "description": "Tereza Iofciu is a data and AI expert, leadership coach, and PSF Fellow with 15+ years of experience leading data and product teams at neuefische, FREE NOW, and New Work (XING). She helps professionals lead and adapt in the age of AI through her Data Diplomat Framework™, bridging technical depth with human leadership. Along side that she’s been volunteering in the Python Community and wore many hats over the years: PyLadies Hamburg organizer, Python Software Verband board member, NumFocus DISC Steering Committee member, Python Software Foundation Code of Conduct team member, Diversity & Inclusion working group member, PyConDE & PyData Berlin organizer, Python Pizza Hamburg organizer, and PyPodcats co-leader. In 2021 Tereza was awarded the Python Software Foundation community service award and in 2025 was named a PSF Fellow.",
+    "image": "/images/keynotes/keynote-01.webp",
+    "flag": "/images/flags/romania.webp",
+    "linkedin": "https://www.linkedin.com/in/tereza-iofciu/",
+    "github": "https://github.com/terezaif",
+    "website": "https://www.terezaiofciu.com/",
+    "youtube": "https://www.youtube.com/@terezaif0",
+    "x": ""
+  },
+  {
+    "name": "Anna Pristoupilova",
+    "description": "Anna is a bioinformatics scientist focused on genome analysis techniques and their applications in understanding rare genetic diseases. She received the Bolzano Award for her doctoral thesis. She holds a PhD in Molecular and Cell Biology, Genetics, and Virology and two MSc degrees: one in Medical Technology and Informatics, and the other in Molecular Biology and Genetics, all from Charles University. Anna has co-authored over 25 publications in peer-reviewed journals and has presented her work at various scientific conferences. Currently, she works as a Senior Bioinformatics Scientist at DNAnexus company, where she assists customers with their bioinformatics analysis. She also conducts research at the Research Unit for Rare Diseases at the First Faculty of Medicine, Charles University.",
+    "image": "/images/keynotes/keynote-02.webp",
+    "flag": "/images/flags/czech-republic.webp",
+    "linkedin": "https://www.linkedin.com/in/pristanna/",
+    "github": "https://github.com/pristanna",
+    "website": "",
+    "youtube": "",
+    "x": "https://x.com/pristanna"
+  },
+  {
+    "name": "Malvika Sharan",
+    "description": "Malvika Sharan is Senior Director of Data Science at St. Jude Children’s Research Hospital and a globally recognized leader in open science and community-driven research. She is a co-founder of Open Life Science and a key contributor to The Turing Way, advancing reproducible, ethical, and collaborative data science practices worldwide. With a background in bioinformatics and leadership roles at institutions like the Alan Turing Institute and EMBL, Malvika focuses on building inclusive research communities and empowering practitioners through open, transparent, and responsible approaches to AI and data science.",
+    "image": "/images/keynotes/keynote-03.webp",
+    "flag": "/images/flags/india.webp",
+    "linkedin": "",
+    "github": "https://github.com/malvikasharan",
+    "website": "https://malvikasharan.github.io/",
+    "youtube": "",
+    "x": "https://twitter.com/malvikasharan"
+  },
+  {
+    "name": "Kari L. Jordan",
+    "description": "Dr. Kari L. Jordan, is a leading figure in data science education, serving as the Executive Director for The Carpentries, a globally recognized nonprofit organization. Upon completing Bachelor's and Master’s degrees in Mechanical Engineering from Michigan Technological University, she pursued a Ph.D. in Engineering Education at The Ohio State University, specializing in interventions to enhance belonging for people of color in STEM. Dr. Jordan's visionary leadership has propelled The Carpentries' mission worldwide, fostering exponential growth and impact across academia, industry, and government sectors. A sought-after speaker and advocate for diversity and inclusion, she champions accessible data literacy and bridges the digital skills gap through strategic initiatives and international collaboration. Dr. Jordan's dedication to empowering individuals and fostering inclusive learning environments has earned her widespread recognition and respect, shaping the future of data literacy for societal betterment.",
+    "image": "/images/keynotes/keynote-04.webp",
+    "flag": "/images/flags/eeuu.webp",
+    "linkedin": "https://www.linkedin.com/in/kariljordan/",
+    "github": "",
+    "website": "",
+    "youtube": "",
+    "x": "https://twitter.com/kariljordan"
+  },
+  {
+    "name": "Irit Katriel",
+    "description": "Irit Katriel is a Principal Software Engineer at Microsoft, a CPython core developer, and a contributor with a strong focus on programming language design and compiler architecture. Recent contributions to Python include the implementation of exception groups (PEP 654), the except* construct, key simplifications to Python’s exception mechanisms, and a major refactor of the CPython bytecode compiler to improve structure, maintainability, and testability. Work on Microsoft’s Python Performance Engineering team further reflects deep involvement in the evolution of Python. Irit has also authored several academic publications.",
+    "image": "/images/keynotes/keynote-05.webp",
+    "flag": "/images/flags/israel.webp",
+    "linkedin": "https://www.linkedin.com/in/irit-katriel/",
+    "github": "https://github.com/iritkatriel",
+    "website": "",
+    "youtube": "",
+    "x": "https://x.com/IritKatriel"
+  },
+  {
+    "name": "Luciano Ramalho",
+    "description": "Luciano Ramalho is a renowned Python educator, author, and software developer best known for Fluent Python, one of the most influential books on mastering Pythonic programming and software craftsmanship. A Python Software Foundation Fellow and long-time advocate for open source and developer education, Luciano has helped programmers worldwide deepen their understanding of Python’s design, best practices, and expressive power. Through decades of teaching, speaking, and writing, he has played a major role in shaping how developers write more effective, idiomatic, and thoughtful Python.",
+    "image": "/images/keynotes/keynote-06.webp",
+    "flag": "/images/flags/brazil.webp",
+    "linkedin": "https://www.linkedin.com/in/lucianoramalho/",
+    "github": "https://github.com/ramalho",
+    "website": "",
+    "youtube": "",
+    "x": "https://x.com/ramalhoorg"
+  }
+]
