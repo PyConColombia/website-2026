@@ -14,6 +14,7 @@ import type { PostMetadata } from '@/lib/posts'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { SecondaryFlowButton } from '@/components/ui/flow-button'
 import { MotionPreset } from '@/components/ui/motion-preset'
+import { assetPath } from '@/lib/utils'
 
 const BlogGrid = ({
   posts,
@@ -29,7 +30,7 @@ const BlogGrid = ({
           <CardContent className='flex h-full flex-col gap-3.5'>
             <Link href={`/blog/${post.slug}`} className='mb-2.5 overflow-hidden rounded-lg'>
               <img
-                src={post.image}
+                src={assetPath(post.image)}
                 alt={post.title}
                 className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
               />

@@ -6,6 +6,7 @@ import { galleryImages } from '@/assets/data/gallery'
 import { PrimaryFlowButton } from '@/components/ui/flow-button'
 import { Marquee } from '@/components/ui/marquee'
 import { MotionPreset } from '@/components/ui/motion-preset'
+import { assetPath } from '@/lib/utils'
 
 const Gallery = () => {
   const midpoint = Math.ceil(galleryImages.length / 2)
@@ -44,7 +45,7 @@ const Gallery = () => {
               {galleryRows[0].map(image => (
                 <img
                   key={image.src}
-                  src={image.src}
+                  src={assetPath(image.src)}
                   alt={image.alt}
                   className='h-68.5 w-67 shrink-0 rounded-lg border object-cover shadow-sm'
                 />
@@ -57,7 +58,7 @@ const Gallery = () => {
               {galleryRows[1].map(image => (
                 <img
                   key={image.src}
-                  src={image.src}
+                  src={assetPath(image.src)}
                   alt={image.alt}
                   className='h-68.5 w-67 shrink-0 rounded-lg border object-cover shadow-sm'
                 />

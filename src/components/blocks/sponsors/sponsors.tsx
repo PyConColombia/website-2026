@@ -6,7 +6,7 @@ import { sponsorTiers, type SponsorTier } from '@/assets/data/sponsors'
 import { Badge } from '@/components/ui/badge'
 import { PrimaryFlowButton } from '@/components/ui/flow-button'
 import { MotionPreset } from '@/components/ui/motion-preset'
-import { cn } from '@/lib/utils'
+import { assetPath, cn } from '@/lib/utils'
 
 const sponsorDeckUrl = 'mailto:Hello@pycon.co?subject=PyCon%20Colombia%202026%20Sponsorship'
 
@@ -59,7 +59,7 @@ const SponsorLogo = ({ tier }: { tier: SponsorTier }) => {
             )}
           >
             {sponsor.logo ? (
-              <img src={sponsor.logo} alt={sponsor.name} className={cn('object-contain', styles.logo)} />
+              <img src={assetPath(sponsor.logo)} alt={sponsor.name} className={cn('object-contain', styles.logo)} />
             ) : (
               <div className='space-y-2'>
                 <p className={cn('font-semibold text-foreground', styles.logo)}>{sponsor.name}</p>

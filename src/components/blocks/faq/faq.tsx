@@ -7,7 +7,7 @@ import { motion } from 'motion/react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { MotionPreset } from '@/components/ui/motion-preset'
 
-import { cn } from '@/lib/utils'
+import { assetPath, cn } from '@/lib/utils'
 
 export type FAQs = {
   question: string
@@ -56,13 +56,13 @@ const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
           {/* Right content */}
           <div className='group bg-muted relative mx-auto flex h-full max-h-116 w-full max-w-148 items-end justify-center overflow-hidden rounded-xl border lg:max-xl:max-h-95'>
             <img
-              src='/images/dashboard.webp'
+              src={assetPath('/images/dashboard.webp')}
               alt='Dashboard'
               loading='lazy'
               className='h-full w-full origin-bottom scale-90 rounded-t-md shadow-md transition-transform duration-500 group-hover:scale-100 dark:hidden'
             />
             <img
-              src='/images/dashboard-dark.webp'
+              src={assetPath('/images/dashboard-dark.webp')}
               alt='Dashboard'
               loading='lazy'
               className='hidden h-full w-full origin-bottom scale-90 rounded-t-md shadow-md transition-transform duration-400 group-hover:scale-100 dark:inline-block'

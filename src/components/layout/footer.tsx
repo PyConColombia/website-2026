@@ -5,6 +5,8 @@ import { FacebookIcon, GithubIcon, InstagramIcon, XIcon, YoutubeIcon } from 'luc
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { assetPath } from '@/lib/utils'
+
 const socialLinks = [
   {
     label: 'X',
@@ -75,7 +77,7 @@ const Footer = () => {
           <Link href='/#pycon-hero' className='inline-flex items-center gap-3'>
             <span className='ring-white/25 size-10 overflow-hidden rounded-full bg-white ring-2'>
               <Image
-                src='/favicon/apple-touch-icon.png'
+                src={assetPath('/favicon/apple-touch-icon.png')}
                 alt='PyCon Colombia'
                 width={40}
                 height={40}

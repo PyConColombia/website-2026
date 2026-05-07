@@ -3,14 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: 'AgencyGothicCT';
-  src: url('/fonts/agency-gothic-ct-bold.otf') format('opentype');
-  font-display: swap;
-  font-style: normal;
-  font-weight: 700;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -128,7 +120,7 @@
   --font-serif: Playfair Display, serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-button: var(--font-bebas-neue), var(--font-sans);
-  --font-display: "AgencyGothicCT", var(--font-button);
+  --font-display: var(--font-agency-gothic), var(--font-button);
 
   --radius: 1.975rem;
 

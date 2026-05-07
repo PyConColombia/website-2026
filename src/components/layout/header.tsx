@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 import { HeaderNavigation, HeaderNavigationSmallScreen, type Navigation } from '@/components/layout/header-navigation'
 
-import { cn } from '@/lib/utils'
+import { assetPath, cn } from '@/lib/utils'
 
 type HeaderProps = {
   navigationData: Navigation[]
@@ -63,7 +63,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
           <div className='flex items-center gap-3'>
             <div className='bg-primary ring-primary/30 size-8 overflow-hidden rounded-full ring-2'>
               <Image
-                src='/favicon/apple-touch-icon.png'
+                src={assetPath('/favicon/apple-touch-icon.png')}
                 alt='PyCon Colombia'
                 width={32}
                 height={32}

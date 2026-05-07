@@ -9,6 +9,7 @@ import { PrimaryFlowButton } from '@/components/ui/flow-button'
 import { MotionPreset } from '@/components/ui/motion-preset'
 
 import DottedSheet from '@/assets/svg/dotted-sheet'
+import { assetPath } from '@/lib/utils'
 
 const CTASection = () => {
   return (
@@ -40,7 +41,7 @@ const CTASection = () => {
               transition={{ duration: 0.5 }}
             >
               <img
-                src='/images/cta/blur-logo.png'
+                src={assetPath('/images/cta/blur-logo.png')}
                 alt=''
                 aria-hidden='true'
                 className='hidden size-72 -translate-x-12 translate-y-14 object-contain opacity-80 lg:block'
@@ -54,7 +55,7 @@ const CTASection = () => {
               transition={{ duration: 0.5 }}
             >
               <img
-                src='/images/cta/soft-cylinder.png'
+                src={assetPath('/images/cta/soft-cylinder.png')}
                 alt=''
                 aria-hidden='true'
                 className='hidden size-72 translate-x-12 translate-y-16 object-contain opacity-80 lg:block'

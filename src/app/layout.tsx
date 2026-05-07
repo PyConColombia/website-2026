@@ -1,12 +1,13 @@
 import type { ReactNode } from 'react'
 
 import { Bebas_Neue, Geist, Geist_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
-import { cn } from '@/lib/utils'
+import { assetPath, cn } from '@/lib/utils'
 
 import './globals.css'
 
@@ -24,6 +25,13 @@ const bebasNeue = Bebas_Neue({
   variable: '--font-bebas-neue',
   subsets: ['latin'],
   weight: '400'
+})
+
+const agencyGothic = localFont({
+  src: '../../public/fonts/agency-gothic-ct-bold.otf',
+  variable: '--font-agency-gothic',
+  display: 'swap',
+  weight: '700'
 })
 
 export const metadata: Metadata = {
@@ -45,37 +53,37 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon/favicon-16x16.png',
+        url: assetPath('/favicon/favicon-16x16.png'),
         sizes: '16x16',
         type: 'image/png'
       },
       {
-        url: '/favicon/favicon-32x32.png',
+        url: assetPath('/favicon/favicon-32x32.png'),
         sizes: '32x32',
         type: 'image/png'
       },
       {
-        url: '/favicon/favicon.ico',
+        url: assetPath('/favicon/favicon.ico'),
         sizes: '48x48',
         type: 'image/x-icon'
       }
     ],
     apple: [
       {
-        url: '/favicon/apple-touch-icon.png',
+        url: assetPath('/favicon/apple-touch-icon.png'),
         sizes: '180x180',
         type: 'image/png'
       }
     ],
     other: [
       {
-        url: '/favicon/android-chrome-192x192.png',
+        url: assetPath('/favicon/android-chrome-192x192.png'),
         rel: 'icon',
         sizes: '192x192',
         type: 'image/png'
       },
       {
-        url: '/favicon/android-chrome-512x512.png',
+        url: assetPath('/favicon/android-chrome-512x512.png'),
         rel: 'icon',
         sizes: '512x512',
         type: 'image/png'
@@ -122,6 +130,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
         geistSans.variable,
         geistMono.variable,
         bebasNeue.variable,
+        agencyGothic.variable,
         'flex min-h-full w-full scroll-smooth antialiased'
       )}
       suppressHydrationWarning

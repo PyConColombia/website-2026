@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { MotionPreset } from '@/components/ui/motion-preset'
 
-import { cn } from '@/lib/utils'
+import { assetPath, cn } from '@/lib/utils'
 
 const FloatingLogo = ({ className }: { className?: string }) => {
   return (
@@ -18,7 +18,7 @@ const FloatingLogo = ({ className }: { className?: string }) => {
       >
         <div className='animate-pycon-float relative z-10 size-44 sm:size-55 lg:size-65'>
           <Image
-            src='/images/pycon/logo-flotante.png'
+            src={assetPath('/images/pycon/logo-flotante.png')}
             alt='PyCon Colombia logo'
             fill
             sizes='(max-width: 640px) 176px, (max-width: 1024px) 220px, 260px'

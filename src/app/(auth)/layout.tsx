@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 
 import AuthBackgroundShape from '@/assets/svg/auth-background-shape'
 import { BorderBeam } from '@/components/ui/border-beam'
+import { assetPath } from '@/lib/utils'
 
 const AuthLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
@@ -11,12 +12,12 @@ const AuthLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
         <div className='bg-muted relative z-1 flex h-full items-center justify-center px-6'>
           <div className='outline-border relative shrink rounded-[20px] p-2.5 outline-2 -outline-offset-2'>
             <img
-              src='/images/dashboard.webp'
+              src={assetPath('/images/dashboard.webp')}
               className='max-h-111 w-full rounded-lg object-contain dark:hidden'
               alt='Dashboards'
             />
             <img
-              src='/images/dashboard-dark.webp'
+              src={assetPath('/images/dashboard-dark.webp')}
               className='hidden max-h-111 w-full rounded-lg object-contain dark:inline-block'
               alt='Dashboards'
             />

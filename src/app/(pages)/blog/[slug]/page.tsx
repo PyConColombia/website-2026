@@ -24,6 +24,7 @@ import RelatedBlogSection from '@/components/blog/related-blog-section/related-b
 import SectionSeparator from '@/components/section-separator'
 import CTASection from '@/components/blocks/cta/cta'
 import { SecondaryFlowButton } from '@/components/ui/flow-button'
+import { assetPath } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const posts = await getPosts()
@@ -202,7 +203,11 @@ const BlogDetailsPage = async ({ params }: { params: Promise<{ slug: string }> }
               </div>
             </div>
 
-            <img src={metadata.image} alt={metadata.title} className='mb-16 max-h-110 w-full rounded-xl object-cover' />
+            <img
+              src={assetPath(metadata.image)}
+              alt={metadata.title}
+              className='mb-16 max-h-110 w-full rounded-xl object-cover'
+            />
 
             <MDXContent source={content} />
 

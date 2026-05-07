@@ -6,7 +6,7 @@ import { motion, useScroll, useSpring, useTransform } from 'motion/react'
 import { GithubIcon, GlobeIcon, LinkedinIcon, XIcon, YoutubeIcon } from 'lucide-react'
 
 import { MotionPreset } from '@/components/ui/motion-preset'
-import { cn } from '@/lib/utils'
+import { assetPath, cn } from '@/lib/utils'
 
 export type Features = {
   icon?: ReactNode
@@ -32,7 +32,7 @@ const SpeakerTitle = ({ feature, className }: { feature: Features[number]; class
       <div className={cn('font-medium', className)}>{feature.title}</div>
       {feature.flag && (
         <span className='border-primary/20 bg-background flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-sm'>
-          <img src={feature.flag} alt={`${feature.title} flag`} className='size-full object-cover' />
+          <img src={assetPath(feature.flag)} alt={`${feature.title} flag`} className='size-full object-cover' />
         </span>
       )}
     </div>
@@ -181,7 +181,7 @@ const ImageItem = ({
       className='absolute inset-0 flex items-center justify-center px-3'
       transition={{ duration: 0.3 }}
     >
-      <img src={feature.image} alt={feature.title} className='h-full w-full max-w-110 object-contain md:max-h-95' />
+      <img src={assetPath(feature.image)} alt={feature.title} className='h-full w-full max-w-110 object-contain md:max-h-95' />
     </motion.div>
   )
 }
@@ -280,7 +280,7 @@ const Benefits = ({ featuresList }: { featuresList: Features }) => {
                   <div className='bg-card sticky top-20 flex h-87.5 items-center justify-center overflow-hidden rounded-xl border'>
                     <div className='absolute inset-0 flex items-center justify-center'>
                       <img
-                        src={feature.image}
+                        src={assetPath(feature.image)}
                         alt={feature.title}
                         className='size-full max-h-70 max-w-96 object-contain max-sm:max-w-70'
                       />

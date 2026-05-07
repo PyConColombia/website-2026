@@ -7,6 +7,7 @@ import { SecondaryFlowButton } from '@/components/ui/flow-button'
 import { Card, CardContent } from '@/components/ui/card'
 
 import type { PostMetadata } from '@/lib/posts'
+import { assetPath } from '@/lib/utils'
 
 const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
   return (
@@ -29,7 +30,7 @@ const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                 <CardContent className='flex h-full flex-col gap-3.5'>
                   <div className='mb-2.5 overflow-hidden rounded-lg'>
                     <img
-                      src={post.image}
+                      src={assetPath(post.image)}
                       alt={post.title}
                       className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
                     />

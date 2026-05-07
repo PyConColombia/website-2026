@@ -13,6 +13,7 @@ import { NumberTicker } from '@/components/ui/number-ticker'
 import RegularUpdatesRippleBg from '@/components/blocks/features/regular-updates-ripple-bg'
 
 import Logo from '@/assets/svg/flow-logo'
+import { assetPath } from '@/lib/utils'
 
 export type NotificationCard = {
   id: string
@@ -146,7 +147,7 @@ const RegularUpdatesCard = () => {
               </Badge>
             </div>
 
-            <img src={notification.productImage} alt={notification.productAlt} className='size-13' />
+            <img src={assetPath(notification.productImage)} alt={notification.productAlt} className='size-13' />
           </motion.div>
         ))}
       </MotionPreset>

@@ -4,6 +4,7 @@ import { teamMembers } from '@/assets/data/team'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { MotionPreset } from '@/components/ui/motion-preset'
+import { assetPath } from '@/lib/utils'
 
 const socialButtonClassName =
   'bg-primary/10 text-primary hover:bg-primary/20 focus-visible:ring-primary/20 dark:focus-visible:ring-primary/40 size-8'
@@ -44,7 +45,7 @@ const Team = () => {
             <Card className='h-full gap-0 overflow-hidden py-0 shadow-sm transition-shadow duration-300 hover:shadow-md lg:flex-row'>
               <CardContent className='h-64 px-0 lg:h-auto lg:w-58 lg:shrink-0 xl:w-66'>
                 <img
-                  src={member.image}
+                  src={assetPath(member.image)}
                   alt={member.name}
                   className='size-full object-cover lg:rounded-l-xl'
                 />
