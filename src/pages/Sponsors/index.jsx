@@ -75,7 +75,7 @@ const Sponsors = ({ dataTranslate }) => {
               <p className="sponsors-page__lead">{s.heroLead}</p>
             </div>
             <div className="sponsors-page__hero-cta-wrap">
-              <a className="sponsors-page__cta" href={sponsorMailto}>
+              <a className="cfp-btn cfp-btn--primary" href={sponsorMailto}>
                 {s.becomeSponsorCta}
                 <ArrowOutwardIcon />
               </a>

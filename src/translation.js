@@ -80,6 +80,14 @@ const data = {
         email: "Email",
         submitButton: "Subscribe to newsletter",
       },
+      afterMovie: {
+        sectionAriaLabel: "2025 conference after movie",
+        title: "2025 After Movie",
+        subtitle:
+          "Relive the magic of our previous gathering. See what makes PyCon Colombia a unique experience.",
+        playLabel: "Play after movie video",
+        youtubeVideoId: "6JUYr7QBtBI",
+      },
       keynotes: {
         sectionAriaLabel: "Keynote speakers",
         title: "Keynotes Speakers",
@@ -207,7 +215,7 @@ const data = {
             name: "Irit Katriel",
             profession:
               "Principal Software Engineer @ Microsoft, CPython Core Developer",
-            flag: { code: "il", label: "Israel" },
+            flag: { code: "gb", label: "United Kingdom" },
             bio: "Irit Katriel is a Principal Software Engineer at Microsoft and a CPython core developer focused on programming language design and compiler architecture. Major contributions to Python include PEP 654, Exception Groups, except*, and significant improvements to CPython’s compiler and exception systems. Irit also works on Python Performance Engineering at Microsoft and has authored several academic publications.",
             social: [
               {
@@ -694,6 +702,14 @@ Join us to learn, share, and connect with python professionals from across the g
         email: "Correo",
         submitButton: "Suscribirse al boletín",
       },
+      afterMovie: {
+        sectionAriaLabel: "Video after movie de la conferencia 2025",
+        title: "After movie 2025",
+        subtitle:
+          "Revive la magia de nuestro encuentro anterior. Descubre qué hace única la experiencia de PyCon Colombia.",
+        playLabel: "Reproducir video del after movie",
+        youtubeVideoId: "6JUYr7QBtBI",
+      },
       keynotes: {
         sectionAriaLabel: "Ponentes magistrales",
         title: "Ponentes magistrales",
@@ -806,7 +822,7 @@ Join us to learn, share, and connect with python professionals from across the g
             name: "Irit Katriel",
             profession:
               "Principal Software Engineer en Microsoft, desarrolladora core de CPython",
-            flag: { code: "il", label: "Israel" },
+            flag: { code: "gb", label: "Reino Unido" },
             bio: "Irit Katriel es Principal Software Engineer en Microsoft y desarrolladora core de CPython, enfocada en el diseño de lenguajes de programación y la arquitectura de compiladores. Entre sus principales contribuciones a Python se encuentran la PEP 654, los Exception Groups, el constructo except* y mejoras significativas en el compilador y el sistema de excepciones de CPython. Irit también trabaja en Python Performance Engineering en Microsoft y ha publicado artículos académicos.",
             social: [
               {

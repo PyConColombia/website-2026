@@ -32,7 +32,7 @@ const KEYNOTE_FLAGS_BY_NAME = {
   "Malvika Sharan": { code: "in", label: "India" },
   "Dr. Kari L. Jordan": { code: "us", label: "United States" },
   "Dra. Kari L. Jordan": { code: "us", label: "Estados Unidos" },
-  "Irit Katriel": { code: "il", label: "Israel" },
+  "Irit Katriel": { code: "gb", label: "United Kingdom" },
 };
 
 function keynoteFlagAssetPath(code) {
@@ -214,6 +214,91 @@ KeynotesRevealRow.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+function LandingAfterMovieSection({ copy }) {
+  const videoId = copy?.youtubeVideoId;
+  const [playing, setPlaying] = useState(false);
+
+  if (!videoId) return null;
+
+  const embedSrc = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&modestbranding=1`;
+  const thumbMax = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const thumbHq = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+  return (
+    <section
+      className="landing-after-movie"
+      aria-label={copy.sectionAriaLabel ?? copy.title}
+    >
+      <Container fluid="xxl" className="landing-after-movie__container">
+        <header className="landing-after-movie__header">
+          <h2 className="landing-after-movie__title">{copy.title}</h2>
+          <p className="landing-after-movie__subtitle">{copy.subtitle}</p>
+        </header>
+        <div className="landing-after-movie__frame-wrap">
+          <div className="landing-after-movie__frame">
+            {playing ? (
+              <iframe
+                className="landing-after-movie__iframe"
+                src={embedSrc}
+                title={copy.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : (
+              <button
+                type="button"
+                className="landing-after-movie__poster"
+                onClick={() => setPlaying(true)}
+                aria-label={copy.playLabel ?? copy.title}
+              >
+                <span className="landing-after-movie__poster-bg" aria-hidden>
+                  <img
+                    src={thumbMax}
+                    alt=""
+                    className="landing-after-movie__poster-img"
+                    onError={(e) => {
+                      if (e.currentTarget.src !== thumbHq) {
+                        e.currentTarget.src = thumbHq;
+                      }
+                    }}
+                  />
+                </span>
+                <span
+                  className="landing-after-movie__poster-scrim"
+                  aria-hidden
+                />
+                <span className="landing-after-movie__play" aria-hidden>
+                  <svg
+                    className="landing-after-movie__play-icon"
+                    viewBox="0 0 24 24"
+                    width="28"
+                    height="28"
+                    fill="currentColor"
+                    aria-hidden
+                  >
+                    <title>{copy.playLabel ?? copy.title}</title>
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </button>
+            )}
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+LandingAfterMovieSection.propTypes = {
+  copy: PropTypes.shape({
+    sectionAriaLabel: PropTypes.string,
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    playLabel: PropTypes.string,
+    youtubeVideoId: PropTypes.string,
+  }),
+};
+
 const LandingPage = ({ dataTranslate }) => {
   const h = dataTranslate?.landing?.hero ?? {};
   const topicRows = dataTranslate?.landing?.topics?.rows ?? DEFAULT_TOPIC_ROWS;
@@ -224,6 +309,7 @@ const LandingPage = ({ dataTranslate }) => {
       cfpPage.submitProposalHref ?? DEFAULT_CFP_HERO.submitProposalHref,
     ...cfpPage.hero,
   };
+  const afterMovie = dataTranslate?.landing?.afterMovie;
   const keynotes = dataTranslate?.landing?.keynotes;
   const keynoteColumnsRaw = keynotes?.columns ?? keynotes?.rows ?? [];
   const keynoteColumns = [...keynoteColumnsRaw].sort((a, b) =>
@@ -337,13 +423,15 @@ const LandingPage = ({ dataTranslate }) => {
         </Container>
       </section>
 
+      {afterMovie ? <LandingAfterMovieSection copy={afterMovie} /> : null}
+
       <section aria-label={`${cfpHero.titleBefore} ${cfpHero.titleAccent}`}>
         <Container fluid="xxl">
           <header className="cfp-hero coc-page__hero--tracked">
             <div className="cfp-hero__glow" aria-hidden>
               <span className="cfp-hero__glow-blob" />
             </div>
-            <Row className="cfp-hero__row align-items-center g-5 g-lg-0">
+            <Row className="cfp-hero__row align-items-center gx-0 gy-5 g-lg-0">
               <Col lg={7}>
                 <div className="cfp-hero__badge">
                   <span className="cfp-hero__pulse" aria-hidden />

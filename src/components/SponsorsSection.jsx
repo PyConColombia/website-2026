@@ -50,26 +50,30 @@ export default function SponsorsSection({ copy }) {
 
   return (
     <section className="sponsors-page__sections" aria-label="Sponsors">
-      <div className="sponsors-page__diamond-block">
-        <h2 className="sponsors-page__tier-heading sponsors-page__tier-heading--diamond">
-          <span className="sponsors-page__tier-rule-grey" aria-hidden={true} />
-          <span className="sponsors-page__tier-label">{s.venueLevel}</span>
-        </h2>
-        <div className="sponsors-page__diamond-panel">
-          <div className="sponsors-page__diamond-grid">
-            {VENUE_SPONSORS.map((item) => (
-              <SponsorCard
-                key={item.key}
-                name={item.name}
-                logoSrc={item.logoSrc}
-                href={item.href}
-                variant="venue"
-              />
-            ))}
+      {VENUE_SPONSORS.length > 0 && (
+        <div className="sponsors-page__diamond-block">
+          <h2 className="sponsors-page__tier-heading sponsors-page__tier-heading--diamond">
+            <span
+              className="sponsors-page__tier-rule-grey"
+              aria-hidden={true}
+            />
+            <span className="sponsors-page__tier-label">{s.venueLevel}</span>
+          </h2>
+          <div className="sponsors-page__diamond-panel">
+            <div className="sponsors-page__diamond-grid">
+              {VENUE_SPONSORS.map((item) => (
+                <SponsorCard
+                  key={item.key}
+                  name={item.name}
+                  logoSrc={item.logoSrc}
+                  href={item.href}
+                  variant="venue"
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-
+      )}
       <div className="sponsors-page__platino">
         <h2 className="sponsors-page__tier-heading sponsors-page__tier-heading--gold">
           <span className="sponsors-page__tier-rule-grey" aria-hidden={true} />

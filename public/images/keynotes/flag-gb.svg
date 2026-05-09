@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 10" aria-hidden="true">
+  <rect width="19" height="10" fill="#012169" />
+  <path
+    d="M0 0 19 10M19 0 0 10"
+    stroke="#fff"
+    stroke-width="2.8"
+    stroke-linecap="square"
+  />
+  <path
+    d="M0 0 19 10M19 0 0 10"
+    stroke="#c8102e"
+    stroke-width="1.35"
+    stroke-linecap="square"
+  />
+  <path d="M0 4.6h19v0.8H0z" fill="#fff" />
+  <path d="M8.6 0h1.8v10H8.6z" fill="#fff" />
+  <path d="M0 4.85h19v0.3H0z" fill="#c8102e" />
+  <path d="M8.85 0h1.3v10H8.85z" fill="#c8102e" />
+</svg>
