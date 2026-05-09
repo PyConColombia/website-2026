@@ -1,10 +1,10 @@
 export const VENUE_SPONSORS = [
-  // {
-  //   key: "eafit",
-  //   name: "Universidad EAFIT",
-  //   logoSrc: "/images/sponsors/eafit.svg",
-  //   href: "https://www.eafit.edu.co/",
-  // },
+  {
+    key: "eafit",
+    name: "Universidad EAFIT",
+    logoSrc: "/images/sponsors/eafit.svg",
+    href: "https://www.eafit.edu.co/",
+  },
 ];
 
 export const PLATINO_SPONSORS = [
