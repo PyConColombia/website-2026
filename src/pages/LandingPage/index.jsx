@@ -32,7 +32,7 @@ const KEYNOTE_FLAGS_BY_NAME = {
   "Malvika Sharan": { code: "in", label: "India" },
   "Dr. Kari L. Jordan": { code: "us", label: "United States" },
   "Dra. Kari L. Jordan": { code: "us", label: "Estados Unidos" },
-  "Irit Katriel": { code: "il", label: "Israel" },
+  "Irit Katriel": { code: "gb", label: "United Kingdom" },
 };
 
 function keynoteFlagAssetPath(code) {
