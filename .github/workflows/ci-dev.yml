@@ -58,6 +58,22 @@ jobs:
           node-version: '22'
       - name: Install dependencies
         run: npm ci
+      - name: Set Pages environment
+        shell: bash
+        run: |
+          if [ -n "${{ vars.NEXT_PUBLIC_APP_URL }}" ]; then
+            echo "BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_APP_URL=${{ vars.NEXT_PUBLIC_APP_URL }}" >> "$GITHUB_ENV"
+          elif [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
+            echo "BASEPATH=" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASEPATH=" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_APP_URL=https://${{ github.repository_owner }}.github.io" >> "$GITHUB_ENV"
+          else
+            echo "BASEPATH=/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASEPATH=/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_APP_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+          fi
       - name: Build project
         run: npm run build
       - name: Upload dist folder as artifact
@@ -94,7 +110,8 @@ jobs:
       - name: Prepare deployment
         run: |
           find website-develop/ -mindepth 1 ! -name 'CNAME' ! -path "website-develop/.git*" -delete
-          mv out/* website-develop/
+          # `mv out/*` skips dotfiles; `.nojekyll` must be present or GitHub Pages ignores `_next/`.
+          cp -a out/. website-develop/
       - name: Commit and push changes
         run: |
           cd website-develop
