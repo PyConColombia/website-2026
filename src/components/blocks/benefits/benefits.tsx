@@ -11,6 +11,8 @@ import { assetPath, cn } from '@/lib/utils'
 export type Features = {
   icon?: ReactNode
   title: string
+  role?: string
+  country?: string
   description: string
   image: string
   flag?: string
@@ -31,8 +33,15 @@ const SpeakerTitle = ({ feature, className }: { feature: Features[number]; class
     <div className='flex items-center gap-3'>
       <div className={cn('font-medium', className)}>{feature.title}</div>
       {feature.flag && (
-        <span className='border-primary/20 bg-background flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-sm'>
-          <img src={assetPath(feature.flag)} alt={`${feature.title} flag`} className='size-full object-cover' />
+        <span
+          className='border-primary/20 bg-background flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-sm'
+          title={feature.country}
+        >
+          <img
+            src={assetPath(feature.flag)}
+            alt={feature.country ? `Flag of ${feature.country}` : `${feature.title} flag`}
+            className='size-full object-cover'
+          />
         </span>
       )}
     </div>
@@ -81,8 +90,9 @@ const FeatureItem = ({
             {feature.icon}
             <SpeakerTitle feature={feature} className='md:text-2xl xl:text-3xl' />
           </div>
+          {feature.role && <p className='text-foreground/80 text-sm md:text-base'>{feature.role}</p>}
         </div>
-        <div className='text-muted-foreground'>{feature.description}</div>
+        <div className='text-muted-foreground line-clamp-7 md:line-clamp-8'>{feature.description}</div>
         {(feature.linkedin || feature.github || feature.website || feature.youtube || feature.x) && (
           <div className='flex items-center gap-2'>
             {feature.linkedin && (
@@ -309,6 +319,7 @@ const Benefits = ({ featuresList }: { featuresList: Features }) => {
                       {feature.icon}
                       <SpeakerTitle feature={feature} className='text-xl' />
                     </div>
+                    {feature.role && <p className='text-foreground/80 text-sm'>{feature.role}</p>}
                   </div>
                   <div className='text-muted-foreground'>{feature.description}</div>
                   {(feature.linkedin || feature.github || feature.website || feature.youtube || feature.x) && (

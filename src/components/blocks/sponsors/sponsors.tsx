@@ -94,13 +94,14 @@ const Sponsors = () => {
 
           <MotionPreset fade blur slide={{ direction: 'up', offset: 50 }} delay={0.2} transition={{ duration: 0.5 }}>
             <h2 className='mx-auto max-w-3xl text-2xl font-semibold md:text-3xl lg:text-4xl'>
-              Support the Python community in Colombia
+              Trusted by industry leaders
             </h2>
           </MotionPreset>
 
           <MotionPreset fade blur slide={{ direction: 'up', offset: 50 }} delay={0.4} transition={{ duration: 0.5 }}>
             <p className='text-muted-foreground mx-auto max-w-3xl text-xl'>
-              Sponsorship tiers are organized by visual hierarchy so each category reflects its level of support.
+              PyCon Colombia is made possible through the generous support of organizations dedicated to advancing
+              the Python ecosystem and fostering technological innovation in Latin America.
             </p>
           </MotionPreset>
 

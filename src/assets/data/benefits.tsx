@@ -4,6 +4,8 @@ import keynotes from '@/assets/data/keynotes.json'
 
 export const benefits: Features = keynotes.map(keynote => ({
   title: keynote.name,
+  role: keynote.role,
+  country: keynote.country,
   description: keynote.description,
   image: keynote.image,
   flag: keynote.flag,

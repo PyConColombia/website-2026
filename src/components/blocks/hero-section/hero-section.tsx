@@ -27,7 +27,7 @@ const HeroSection = () => {
           className='z-10'
         >
           <Badge variant='outline' className='bg-background text-sm font-normal'>
-            Over 3,000 attendees across 9 years
+            Medellin, Colombia · 24, 25 &amp; 26 July, 2026
           </Badge>
         </MotionPreset>
 
@@ -40,19 +40,19 @@ const HeroSection = () => {
           component='h1'
           className='z-10 flex flex-col items-center gap-3 text-center text-3xl font-semibold md:text-4xl lg:text-5xl lg:leading-[1.29167]'
         >
-          <span>Explore Python&rsquo;s Diverse Talks</span>
+          <span>Ready to dive into the world of</span>
           <TextFlip
             words={[
+              'Python',
               'Data Science',
               'Machine Learning',
-              'AI',
+              'Artificial Intelligence',
               'DevOps',
               'Core Python',
               'Scientific Computing',
               'Computer Vision',
-              'Data Viz',
-              'IoT',
-              'Game Dev'
+              'Community',
+              'Open Source'
             ]}
           />
         </MotionPreset>
@@ -66,7 +66,8 @@ const HeroSection = () => {
           component='p'
           className='text-muted-foreground z-10 max-w-156 text-center text-xl'
         >
-          A space where people, ideas, and experiences come together to explore the possibilities of Python.
+          The biggest Python conference in Colombia. Come explore, learn, and connect with others just as passionate
+          as you are.
         </MotionPreset>
 
         <MotionPreset
@@ -79,7 +80,7 @@ const HeroSection = () => {
         >
           <PrimaryFlowButton size='lg' asChild>
             <Link href={ticketsUrl} target='_blank' rel='noopener noreferrer'>
-              VIEW SCHEDULE
+              GET YOUR TICKETS
               <ArrowUpRightIcon />
             </Link>
           </PrimaryFlowButton>

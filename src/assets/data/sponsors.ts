@@ -19,36 +19,65 @@ export const sponsorTiers: SponsorTier[] = [
     size: 'XL',
     description: 'Our main host and venue partner for the conference experience.',
     sponsors: [
-    {
-    name: 'EAFIT - Nodo',
-    logo: '/images/sponsors/eafit.svg',
-    href: 'https://sponsor.com'
-    }
-  ]
+      {
+        name: 'Universidad EAFIT',
+        logo: '/images/sponsors/eafit.svg',
+        href: 'https://www.eafit.edu.co/'
+      }
+    ]
   },
   {
     title: 'Platinum Sponsor',
     size: 'L',
     description: 'Top-tier support for PyCon Colombia and the Python community.',
-    sponsors: []
+    sponsors: [
+      {
+        name: 'Aimpoint Digital',
+        logo: '/images/sponsors/aimpoint.svg',
+        href: 'https://aimpointdigital.com/'
+      }
+    ]
   },
   {
     title: 'Gold Sponsor',
     size: 'M',
     description: 'High-impact partners supporting talks, community, and learning.',
-    sponsors: []
+    sponsors: [
+      {
+        name: 'Loka',
+        logo: '/images/sponsors/loka.svg',
+        href: 'https://loka.com/'
+      }
+    ]
   },
   {
     title: 'Silver + Sponsor',
     size: 'M',
     description: 'Partners helping us strengthen the attendee experience.',
-    sponsors: []
+    sponsors: [
+      {
+        name: 'Lovelytics',
+        logo: '/images/sponsors/lovelytics.svg',
+        href: 'https://lovelytics.com/'
+      }
+    ]
   },
   {
     title: 'Silver Sponsor',
     size: 'M',
     description: 'Community sponsors supporting the conference program.',
-    sponsors: []
+    sponsors: [
+      {
+        name: 'Genlogs',
+        logo: '/images/sponsors/genlogs.svg',
+        href: 'https://genlogs.io/'
+      },
+      {
+        name: 'Provectus',
+        logo: '/images/sponsors/provectus.svg',
+        href: 'https://provectus.com/'
+      }
+    ]
   },
   {
     title: 'Bronze Sponsor',

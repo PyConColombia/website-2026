@@ -85,15 +85,15 @@ const Footer = () => {
               />
             </span>
             <span className='text-2xl tracking-wide text-white' style={{ fontFamily: 'var(--font-button)' }}>
-              PYCON COLOMBIA 2025
+              PYCON COLOMBIA 2026
             </span>
           </Link>
 
           <p className='max-w-xl text-base leading-7 text-white/75'>
-            PyCon Colombia is the Annual Colombian conference that gathers professionals, enthusiasts and amateur users
+            PyCon Colombia is the annual Colombian conference that gathers professionals, enthusiasts and amateur users
             of the Python programming language.
             <br />
-            Join us to learn, share, and connect with python professionals from across the globe.
+            Join us to learn, share, and connect with Python professionals from across the globe.
           </p>
 
           <div className='flex flex-wrap items-center gap-3'>

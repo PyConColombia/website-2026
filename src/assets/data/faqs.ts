@@ -2,33 +2,43 @@ import type { FAQs } from '@/components/blocks/faq/faq'
 
 export const faqItems: FAQs = [
   {
-    question: 'What is Flow?',
+    question: 'What language should I submit my proposal and give my talk in?',
     answer:
-      'Flow is a SaaS platform that helps you monitor and manage your product performance - including users, purchases, and engagement - from a single dashboard.'
+      'PyCon Colombia is a bilingual conference. We accept proposals in both Spanish and English. You can choose the language you feel most comfortable with for your presentation.'
   },
   {
-    question: 'How does Flow help my business?',
+    question: 'Can I submit more than one proposal?',
     answer:
-      'Flow helps your business by providing clear insights into user behavior, sales performance, and engagement metrics, enabling you to make data-driven decisions and optimize growth.'
+      'Yes. You can submit several proposals. However, to ensure a diverse program, we usually limit each speaker to a single presentation in the final lineup.'
   },
   {
-    question: 'Can I track multiple products at once?',
+    question: 'What criteria are used to evaluate proposals?',
     answer:
-      'Yes, Flow allows you to track multiple products simultaneously, giving you a unified view of performance across all your products.'
+      'Proposals are evaluated based on relevance to the community, technical quality, clarity of the abstract, and educational value. We aim to balance topics for both beginner and advanced audiences.'
   },
   {
-    question: 'Do I need technical knowledge to use it?',
+    question: 'I have never spoken at a conference. Can I still apply?',
     answer:
-      'No, Flow is designed to be user-friendly and intuitive, so you can easily use it without any technical expertise.'
+      'Of course! We love first-time speakers. We even offer mentorship programs to help you sharpen your presentation before the big day.'
   },
   {
-    question: 'Is my data safe with Flow?',
+    question: 'Are sessions recorded?',
     answer:
-      'Yes, your data is secure with Flow. We use industry-standard security practices to ensure your information is protected and handled safely.'
+      'Yes. Unless explicitly opted out, all talks are recorded and published on our YouTube channel after the conference for the benefit of the global Python community.'
   },
   {
-    question: 'Does Flow offer a free trial?',
+    question: 'Are there scholarships available to attend PyCon Colombia?',
     answer:
-      'Yes, Flow offers a free trial so you can explore all core features and see how it fits your business before committing to a paid plan.'
+      'Yes. We offer Diversity Scholarships every year to help reduce financial barriers. They cover the cost of conference admission for students and members of underrepresented groups within the Python community.'
+  },
+  {
+    question: 'When and where is PyCon Colombia 2026 happening?',
+    answer:
+      'PyCon Colombia 2026 will take place on July 24, 25 and 26, 2026 in Medellín, Colombia, at our venue partner Universidad EAFIT.'
+  },
+  {
+    question: 'How can my company become a sponsor?',
+    answer:
+      'PyCon Colombia is made possible thanks to our sponsors. If your organization is interested in supporting the Python ecosystem and Latin American innovation, please contact us at hello@pycon.co.'
   }
 ]

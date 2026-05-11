@@ -22,10 +22,10 @@ const Testimonials = ({ testimonials }: { testimonials: TestimonialItem[] }) => 
       >
         <p className='text-primary text-sm font-medium uppercase'>Testimonials</p>
 
-        <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>Trusted by People Who Sell Smarter</h2>
+        <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>What our community says</h2>
 
         <p className='text-muted-foreground text-xl'>
-          Real stories from users who simplified their sales process and grew their revenue with Flow.
+          Real stories from speakers, attendees, and volunteers who make PyCon Colombia unforgettable every year.
         </p>
       </MotionPreset>
 

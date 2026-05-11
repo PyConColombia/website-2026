@@ -64,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-artifact
-          path: dist/
+          path: out/
 
   deploy:
     if: github.event_name == 'push'
@@ -90,11 +90,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-artifact
-          path: dist
+          path: out
       - name: Prepare deployment
         run: |
           find website-develop/ -mindepth 1 ! -name 'CNAME' ! -path "website-develop/.git*" -delete
-          mv dist/* website-develop/
+          mv out/* website-develop/
       - name: Commit and push changes
         run: |
           cd website-develop

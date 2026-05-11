@@ -40,15 +40,17 @@ export const metadata: Metadata = {
     default: 'PyCon Colombia 2026'
   },
   description:
-    'Grow your product faster with an all-in-one sales and analytics platform. Track performance, automate follow-ups, and make smarter decisions easily.',
+    'PyCon Colombia is the biggest Python conference in Colombia. Join us in Medellín on July 24, 25 & 26, 2026 for three days of talks, workshops, and Python community.',
   robots: 'index,follow',
   keywords: [
-    'sales analytics',
-    'product growth',
-    'sales dashboard',
-    'business analytics',
-    'growth tracking',
-    'sales performance'
+    'PyCon Colombia',
+    'Python Colombia',
+    'Python conference',
+    'Medellín',
+    'Latin America',
+    'Data Science',
+    'Machine Learning',
+    'Open Source'
   ],
   icons: {
     icon: [
@@ -97,7 +99,7 @@ export const metadata: Metadata = {
       default: 'PyCon Colombia 2026'
     },
     description:
-      'Grow your product faster with an all-in-one sales and analytics platform. Track performance, automate follow-ups, and make smarter decisions easily.',
+      'PyCon Colombia is the biggest Python conference in Colombia. Join us in Medellín on July 24, 25 & 26, 2026 for three days of talks, workshops, and Python community.',
     type: 'website',
     siteName: 'PyCon Colombia 2026',
     url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
@@ -118,7 +120,7 @@ export const metadata: Metadata = {
       default: 'PyCon Colombia 2026'
     },
     description:
-      'Grow your product faster with an all-in-one sales and analytics platform. Track performance, automate follow-ups, and make smarter decisions easily.'
+      'PyCon Colombia is the biggest Python conference in Colombia. Join us in Medellín on July 24, 25 & 26, 2026 for three days of talks, workshops, and Python community.'
   }
 }
 
