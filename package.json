@@ -50,6 +50,7 @@
     "remark-mdx-remove-esm": "1.2.3"
   },
   "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "4.1.18",
     "lightningcss-linux-x64-gnu": "1.30.2"
   }
 }
