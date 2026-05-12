@@ -81,6 +81,9 @@ jobs:
         with:
           name: dist-artifact
           path: out/
+          # Required so `public/.nojekyll` → `out/.nojekyll` is included. Without it, GitHub Pages
+          # Jekyll ignores `_next/` and every chunk returns 404.
+          include-hidden-files: true
 
   deploy:
     if: github.event_name == 'push'
@@ -112,6 +115,9 @@ jobs:
           find website-develop/ -mindepth 1 ! -name 'CNAME' ! -path "website-develop/.git*" -delete
           # `mv out/*` skips dotfiles; `.nojekyll` must be present or GitHub Pages ignores `_next/`.
           cp -a out/. website-develop/
+          # Belt-and-suspenders: artifact uploads omit dotfiles unless include-hidden-files is set;
+          # an empty file is enough to disable Jekyll for the whole site.
+          touch website-develop/.nojekyll
       - name: Commit and push changes
         run: |
           cd website-develop
