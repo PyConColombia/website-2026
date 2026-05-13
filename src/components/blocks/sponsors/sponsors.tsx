@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { type SponsorTier, sponsorTiers } from "@/assets/data/sponsors";
@@ -17,34 +18,51 @@ const sizeStyles = {
     card: "min-h-48 sm:min-h-56",
     logo: "max-h-24 max-w-72 text-3xl",
     badge: "XL",
+    imageWidth: 288,
+    imageHeight: 96,
   },
   L: {
     section: "lg:col-span-6",
     card: "min-h-44 sm:min-h-52",
     logo: "max-h-20 max-w-64 text-2xl",
     badge: "L",
+    imageWidth: 256,
+    imageHeight: 80,
   },
   M: {
     section: "lg:col-span-4",
     card: "min-h-38 sm:min-h-44",
     logo: "max-h-16 max-w-52 text-xl",
     badge: "M",
+    imageWidth: 208,
+    imageHeight: 64,
   },
   S: {
     section: "lg:col-span-3",
     card: "min-h-32 sm:min-h-36",
     logo: "max-h-12 max-w-44 text-lg",
     badge: "S",
+    imageWidth: 176,
+    imageHeight: 48,
   },
   XS: {
     section: "lg:col-span-2",
     card: "min-h-28 sm:min-h-32",
     logo: "max-h-10 max-w-36 text-base",
     badge: "XS",
+    imageWidth: 144,
+    imageHeight: 40,
   },
 } satisfies Record<
   SponsorTier["size"],
-  { section: string; card: string; logo: string; badge: string }
+  {
+    section: string;
+    card: string;
+    logo: string;
+    badge: string;
+    imageWidth: number;
+    imageHeight: number;
+  }
 >;
 
 const SponsorLogo = ({ tier }: { tier: SponsorTier }) => {
@@ -65,10 +83,12 @@ const SponsorLogo = ({ tier }: { tier: SponsorTier }) => {
             )}
           >
             {sponsor.logo ? (
-              <img
+              <Image
                 src={assetPath(sponsor.logo)}
                 alt={sponsor.name}
-                className={cn("object-contain", styles.logo)}
+                width={styles.imageWidth}
+                height={styles.imageHeight}
+                className={cn("h-auto w-auto object-contain", styles.logo)}
               />
             ) : (
               <div className="space-y-2">
