@@ -4,13 +4,9 @@ import TrustedBrands from '@/components/blocks/trusted-brands/trusted-brands'
 import Benefits from '@/components/blocks/benefits/benefits'
 import Sponsors from '@/components/blocks/sponsors/sponsors'
 import Gallery from '@/components/blocks/gallery/gallery'
-import Testimonials from '@/components/blocks/testimonials/testimonials'
-import FAQ from '@/components/blocks/faq/faq'
 import CTA from '@/components/blocks/cta/cta'
 
 import { topics } from '@/assets/data/trusted-brands'
-import { testimonials } from '@/assets/data/testimonials'
-import { faqItems } from '@/assets/data/faqs'
 import { benefits } from '@/assets/data/benefits'
 
 import SectionSeparator from '@/components/section-separator'
@@ -88,12 +84,6 @@ const Home = () => {
       <Gallery />
 
       <SectionSeparator />
-
-      <Testimonials testimonials={testimonials} />
-
-      <SectionSeparator />
-
-      <FAQ faqItems={faqItems} />
 
       <CTA />
 

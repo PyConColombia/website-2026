@@ -39,6 +39,6 @@ export const faqItems: FAQs = [
   {
     question: 'How can my company become a sponsor?',
     answer:
-      'PyCon Colombia is made possible thanks to our sponsors. If your organization is interested in supporting the Python ecosystem and Latin American innovation, please contact us at hello@pycon.co.'
+      'PyCon Colombia is made possible thanks to our sponsors. If your organization is interested in supporting the Python ecosystem and Latin American innovation, please contact us at sponsors@pycon.co.'
   }
 ]

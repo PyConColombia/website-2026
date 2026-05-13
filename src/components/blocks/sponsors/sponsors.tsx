@@ -8,7 +8,7 @@ import { PrimaryFlowButton } from '@/components/ui/flow-button'
 import { MotionPreset } from '@/components/ui/motion-preset'
 import { assetPath, cn } from '@/lib/utils'
 
-const sponsorDeckUrl = 'mailto:Hello@pycon.co?subject=PyCon%20Colombia%202026%20Sponsorship'
+const sponsorDeckUrl = 'mailto:sponsors@pycon.co?subject=PyCon%20Colombia%202026%20Sponsorship'
 
 const sizeStyles = {
   XL: {
@@ -62,8 +62,7 @@ const SponsorLogo = ({ tier }: { tier: SponsorTier }) => {
               <img src={assetPath(sponsor.logo)} alt={sponsor.name} className={cn('object-contain', styles.logo)} />
             ) : (
               <div className='space-y-2'>
-                <p className={cn('font-semibold text-foreground', styles.logo)}>{sponsor.name}</p>
-                <p className='text-muted-foreground text-sm'>Add sponsor logo in sponsors.ts</p>
+                <p className={cn('text-foreground font-semibold', styles.logo)}>{sponsor.name}</p>
               </div>
             )}
           </div>
@@ -100,8 +99,8 @@ const Sponsors = () => {
 
           <MotionPreset fade blur slide={{ direction: 'up', offset: 50 }} delay={0.4} transition={{ duration: 0.5 }}>
             <p className='text-muted-foreground mx-auto max-w-3xl text-xl'>
-              PyCon Colombia is made possible through the generous support of organizations dedicated to advancing
-              the Python ecosystem and fostering technological innovation in Latin America.
+              PyCon Colombia is made possible through the generous support of organizations dedicated to advancing the
+              Python ecosystem and fostering technological innovation in Latin America.
             </p>
           </MotionPreset>
 
