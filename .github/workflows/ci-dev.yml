@@ -1,5 +1,11 @@
 name: Deploy static content to website-develop
 
+# GitHub Actions is non-TTY; these make Node/Next (chalk) and similar tools emit ANSI colors
+# that render in the Actions log viewer.
+env:
+  FORCE_COLOR: "1"
+  TERM: xterm-256color
+
 on:
   push:
     branches:
