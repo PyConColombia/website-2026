@@ -1,17 +1,17 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-import ResetPassword from '@/components/auth/reset-password/reset-password'
+import ResetPassword from "@/components/auth/reset-password/reset-password";
 
 export const metadata: Metadata = {
-  title: 'Reset Password',
-  robots: 'noindex,nofollow',
+  title: "Reset Password",
+  robots: "noindex,nofollow",
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`
-  }
-}
+    canonical: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`,
+  },
+};
 
 const ResetPasswordPage = () => {
-  return <ResetPassword />
-}
+  return <ResetPassword />;
+};
 
-export default ResetPasswordPage
+export default ResetPasswordPage;

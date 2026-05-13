@@ -1,8 +1,7 @@
-import { type Features } from '@/components/blocks/benefits/benefits'
+import keynotes from "@/assets/data/keynotes.json";
+import type { Features } from "@/components/blocks/benefits/benefits";
 
-import keynotes from '@/assets/data/keynotes.json'
-
-export const benefits: Features = keynotes.map(keynote => ({
+export const benefits: Features = keynotes.map((keynote) => ({
   title: keynote.name,
   role: keynote.role,
   country: keynote.country,
@@ -13,5 +12,5 @@ export const benefits: Features = keynotes.map(keynote => ({
   github: keynote.github,
   website: keynote.website,
   youtube: keynote.youtube,
-  x: keynote.x
-}))
+  x: keynote.x,
+}));

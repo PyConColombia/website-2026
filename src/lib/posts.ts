@@ -1,31 +1,30 @@
-import fs from 'fs' // Comment this line if using remote fetching
-import path from 'path' // Comment this line if using remote fetching
-
-import matter from 'gray-matter'
+import fs from "node:fs"; // Comment this line if using remote fetching
+import path from "node:path"; // Comment this line if using remote fetching
+import matter from "gray-matter";
 
 export type Post = {
-  metadata: PostMetadata
-  content: string
-}
+  metadata: PostMetadata;
+  content: string;
+};
 
 export type PostMetadata = {
-  slug: string
-  title?: string
-  description?: string
-  category?: string
-  publishedAt?: string
+  slug: string;
+  title?: string;
+  description?: string;
+  category?: string;
+  publishedAt?: string;
   author?: {
-    name: string
-    picture: string
-  }
-  image?: string
-  featured?: boolean
-  readTime?: string
-  keywords?: string[]
-}
+    name: string;
+    picture: string;
+  };
+  image?: string;
+  featured?: boolean;
+  readTime?: string;
+  keywords?: string[];
+};
 
 // local content directory (comment below line if using remote fetching)
-const rootDirectory = path.join(process.cwd(), 'src', 'content', 'blog')
+const rootDirectory = path.join(process.cwd(), "src", "content", "blog");
 
 // Remote repository details
 // const GITHUB_USERNAME = 'yourusername'
@@ -36,8 +35,8 @@ const rootDirectory = path.join(process.cwd(), 'src', 'content', 'blog')
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   try {
     // LOCAL LOGIC:
-    const filePath = path.join(rootDirectory, `${slug}.mdx`)
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
+    const filePath = path.join(rootDirectory, `${slug}.mdx`);
+    const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
 
     // REMOTE LOGIC (commented for reference):
     // const res = await fetch(
@@ -45,19 +44,21 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     // )
     // const fileContent = await res.text()
 
-    const { data, content } = matter(fileContent)
+    const { data, content } = matter(fileContent);
 
-    return { metadata: { ...data, slug }, content }
+    return { metadata: { ...data, slug }, content };
   } catch {
-    return null
+    return null;
   }
 }
 
 export async function getPosts(limit?: number): Promise<PostMetadata[]> {
   try {
     // LOCAL LOGIC:
-    const files = fs.readdirSync(rootDirectory)
-    const posts = await Promise.all(files.map(async (file: any) => await getPostMetadata(file)))
+    const files = fs.readdirSync(rootDirectory);
+    const posts = await Promise.all(
+      files.map(async (file: string) => await getPostMetadata(file)),
+    );
 
     // REMOTE LOGIC (commented for reference):
     // const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${CONTENT_PATH}`)
@@ -69,32 +70,32 @@ export async function getPosts(limit?: number): Promise<PostMetadata[]> {
 
     // Sort posts by published date
     const sortedPosts = posts.sort((a, b) => {
-      if (new Date(a.publishedAt ?? '') < new Date(b.publishedAt ?? '')) {
-        return 1
+      if (new Date(a.publishedAt ?? "") < new Date(b.publishedAt ?? "")) {
+        return 1;
       } else {
-        return -1
+        return -1;
       }
-    })
+    });
 
     if (limit) {
-      return sortedPosts.slice(0, limit)
+      return sortedPosts.slice(0, limit);
     }
 
-    return sortedPosts
+    return sortedPosts;
   } catch (error) {
-    console.error('Error fetching posts:', error)
+    console.error("Error fetching posts:", error);
 
-    return []
+    return [];
   }
 }
 
 export async function getPostMetadata(filepath: string): Promise<PostMetadata> {
   try {
-    const slug = filepath.replace(/\.mdx$/, '')
+    const slug = filepath.replace(/\.mdx$/, "");
 
     // LOCAL LOGIC:
-    const filePath = path.join(rootDirectory, filepath)
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
+    const filePath = path.join(rootDirectory, filepath);
+    const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
 
     // REMOTE LOGIC (commented for reference):
     // const res = await fetch(
@@ -102,12 +103,12 @@ export async function getPostMetadata(filepath: string): Promise<PostMetadata> {
     // )
     // const fileContent = await res.text()
 
-    const { data } = matter(fileContent)
+    const { data } = matter(fileContent);
 
-    return { ...data, slug }
+    return { ...data, slug };
   } catch (error) {
-    console.error(`Error fetching metadata for ${filepath}:`, error)
+    console.error(`Error fetching metadata for ${filepath}:`, error);
 
-    return { slug: filepath.replace(/\.mdx$/, '') }
+    return { slug: filepath.replace(/\.mdx$/, "") };
   }
 }

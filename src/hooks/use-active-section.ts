@@ -1,78 +1,77 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const useActiveSection = (sectionIds: string[]) => {
-  const [activeSection, setActiveSection] = useState<string>('')
+  const [activeSection, setActiveSection] = useState<string>("");
 
-  const pathname = usePathname()
+  const _pathname = usePathname();
 
   // Reset active section when pathname changes (route navigation)
   useEffect(() => {
-    setActiveSection('')
-  }, [pathname])
+    setActiveSection("");
+  }, []);
 
   // Scroll to hash on mount if present
   useEffect(() => {
-    const hash = window.location.hash.slice(1) // Remove the '#'
+    const hash = window.location.hash.slice(1); // Remove the '#'
 
     if (hash && sectionIds.includes(hash)) {
-      const element = document.getElementById(hash)
+      const element = document.getElementById(hash);
 
       if (element) {
         // Small delay to ensure page is fully loaded
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }, 100)
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // Run only once on mount
+  }, [sectionIds.includes]); // Run only once on mount
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         // Find all visible sections
         const visibleSections = entries
-          .filter(entry => entry.isIntersecting)
+          .filter((entry) => entry.isIntersecting)
           .sort((a, b) => {
             // Sort by how much of the section is visible (intersection ratio)
             // and by position on screen (top edge)
-            const ratioComparison = b.intersectionRatio - a.intersectionRatio
+            const ratioComparison = b.intersectionRatio - a.intersectionRatio;
 
-            if (ratioComparison !== 0) return ratioComparison
+            if (ratioComparison !== 0) return ratioComparison;
 
-            return a.boundingClientRect.top - b.boundingClientRect.top
-          })
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
 
         // Set the most visible section as active, or clear if none are visible
         if (visibleSections.length > 0) {
-          setActiveSection(visibleSections[0].target.id)
+          setActiveSection(visibleSections[0].target.id);
         } else {
-          setActiveSection('')
+          setActiveSection("");
         }
       },
       {
-        rootMargin: '-20% 0px -35% 0px', // Adjust when sections become "active"
-        threshold: [0, 0.25, 0.5, 0.75, 1] // Multiple thresholds for better detection
-      }
-    )
+        rootMargin: "-20% 0px -35% 0px", // Adjust when sections become "active"
+        threshold: [0, 0.25, 0.5, 0.75, 1], // Multiple thresholds for better detection
+      },
+    );
 
     // Observe all sections
-    sectionIds.forEach(id => {
-      const element = document.getElementById(id)
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
 
       if (element) {
-        observer.observe(element)
+        observer.observe(element);
       }
-    })
+    });
 
     return () => {
-      observer.disconnect()
-    }
-  }, [sectionIds, pathname])
+      observer.disconnect();
+    };
+  }, [sectionIds]);
 
-  return activeSection
-}
+  return activeSection;
+};
