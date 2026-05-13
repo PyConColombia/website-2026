@@ -9,7 +9,6 @@
     "mikestead.dotenv",
     "EditorConfig.EditorConfig",
     "usernamehw.errorlens",
-    "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "xabikos.JavaScriptSnippets",
     "christian-kohler.npm-intellisense",

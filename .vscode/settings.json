@@ -12,7 +12,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never",
     "source.fixAll.stylelint": "explicit"
   },
@@ -22,19 +21,6 @@
   "git.enableSmartCommit": true,
   // Extension: Prettier
   "prettier.requireConfig": true,
-  // Extension: ESLint
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "javascriptreact",
-    "typescriptreact"
-  ],
-  "eslint.format.enable": true,
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
   "markdown.extension.toc.updateOnSave": false,
   "files.insertFinalNewline": true,
   "editor.linkedEditing": true,

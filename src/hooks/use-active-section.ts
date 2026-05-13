@@ -27,7 +27,6 @@ export const useActiveSection = (sectionIds: string[]) => {
         }, 100);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sectionIds.includes]); // Run only once on mount
 
   useEffect(() => {

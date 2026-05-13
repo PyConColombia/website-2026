@@ -25,7 +25,6 @@
     "target": "esnext"
   },
   "include": [
-    "eslint.config.mjs",
     "next.config.ts",
     "postcss.config.mjs",
     "next-env.d.ts",
