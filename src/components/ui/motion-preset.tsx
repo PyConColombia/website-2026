@@ -37,13 +37,11 @@ interface MotionPresetProps {
       }
     | boolean;
   motionProps?: Omit<
-    HTMLMotionProps<any>,
+    HTMLMotionProps<"div">,
     "children" | "className" | "ref" | "transition"
   >;
-  ref?: React.Ref<any>;
+  ref?: React.Ref<HTMLElement | null>;
 }
-
-const motionComponents = motion as any;
 
 function MotionPreset({
   ref,
@@ -61,9 +59,12 @@ function MotionPreset({
   zoom = false,
   motionProps = {},
 }: MotionPresetProps) {
-  const localRef = React.useRef<any>(null);
+  const localRef = React.useRef<HTMLElement | null>(null);
 
-  React.useImperativeHandle(ref, () => localRef.current);
+  React.useImperativeHandle<HTMLElement | null, HTMLElement | null>(
+    ref,
+    () => localRef.current,
+  );
 
   const inViewResult = useInView(localRef, {
     once: inViewOnce,
@@ -100,12 +101,12 @@ function MotionPreset({
     visibleVariant.scale = zoom === true ? 1 : (zoom.scale ?? 1);
   }
 
-  const MotionComponent = motionComponents[component] || motion.div;
+  const Motion = (motion[component] ?? motion.div) as typeof motion.div;
 
   return (
     <AnimatePresence>
-      <MotionComponent
-        ref={localRef}
+      <Motion
+        ref={localRef as React.Ref<HTMLDivElement>}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         exit="hidden"
@@ -121,7 +122,7 @@ function MotionPreset({
         {...motionProps}
       >
         {children}
-      </MotionComponent>
+      </Motion>
     </AnimatePresence>
   );
 }

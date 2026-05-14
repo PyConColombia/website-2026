@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
 import ResetPassword from "@/components/auth/reset-password/reset-password";
+import { getSiteUrl } from "@/lib/site-seo";
 
 export const metadata: Metadata = {
   title: "Reset Password",
   robots: "noindex,nofollow",
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`,
+    canonical: `${getSiteUrl()}/reset-password`,
   },
 };
 

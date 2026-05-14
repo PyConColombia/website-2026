@@ -7,6 +7,14 @@ import type { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
+import {
+  absoluteAssetUrl,
+  getSiteUrl,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_ORGANIZER,
+} from "@/lib/site-seo";
 import { assetPath, cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -35,23 +43,15 @@ const agencyGothic = localFont({
 });
 
 export const metadata: Metadata = {
+  applicationName: SITE_NAME,
   title: {
-    template: "%s | PyCon Colombia 2026",
-    default: "PyCon Colombia 2026",
+    template: `%s | ${SITE_NAME}`,
+    default: SITE_NAME,
   },
-  description:
-    "PyCon Colombia is the biggest Python conference in Colombia. Join us in Medellín on July 24, 25 & 26, 2026 for three days of talks, workshops, and Python community.",
+  description: SITE_DESCRIPTION,
   robots: "index,follow",
-  keywords: [
-    "PyCon Colombia",
-    "Python Colombia",
-    "Python conference",
-    "Medellín",
-    "Latin America",
-    "Data Science",
-    "Machine Learning",
-    "Open Source",
-  ],
+  authors: [{ name: SITE_ORGANIZER.name, url: SITE_ORGANIZER.url }],
+  keywords: SITE_KEYWORDS,
   icons: {
     icon: [
       {
@@ -92,37 +92,34 @@ export const metadata: Metadata = {
       },
     ],
   },
-  metadataBase: new URL(
-    `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}`,
-  ),
+  metadataBase: new URL(getSiteUrl()),
   openGraph: {
     title: {
-      template: "%s | PyCon Colombia 2026",
-      default: "PyCon Colombia 2026",
+      template: `%s | ${SITE_NAME}`,
+      default: SITE_NAME,
     },
-    description:
-      "PyCon Colombia is the biggest Python conference in Colombia. Join us in Medellín on July 24, 25 & 26, 2026 for three days of talks, workshops, and Python community.",
+    description: SITE_DESCRIPTION,
     type: "website",
-    siteName: "PyCon Colombia 2026",
-    url: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}`,
+    locale: "en_US",
+    siteName: SITE_NAME,
+    url: `${getSiteUrl()}/`,
     images: [
       {
-        url: "/images/og-image.png",
+        url: absoluteAssetUrl("/images/og-image.png"),
         type: "image/png",
         width: 1200,
         height: 630,
-        alt: "PyCon Colombia 2026",
+        alt: `${SITE_NAME} — Medellín, July 24–26, 2026`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: {
-      template: "%s | PyCon Colombia 2026",
-      default: "PyCon Colombia 2026",
+      template: `%s | ${SITE_NAME}`,
+      default: SITE_NAME,
     },
-    description:
-      "PyCon Colombia is the biggest Python conference in Colombia. Join us in Medellín on July 24, 25 & 26, 2026 for three days of talks, workshops, and Python community.",
+    description: SITE_DESCRIPTION,
   },
 };
 

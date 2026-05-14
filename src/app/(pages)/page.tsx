@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { benefits } from "@/assets/data/benefits";
 import { topics } from "@/assets/data/trusted-brands";
 import Benefits from "@/components/blocks/benefits/benefits";
@@ -9,26 +11,49 @@ import Sponsors from "@/components/blocks/sponsors/sponsors";
 import TrustedBrands from "@/components/blocks/trusted-brands/trusted-brands";
 
 import SectionSeparator from "@/components/section-separator";
+import {
+  absoluteAssetUrl,
+  getSiteUrl,
+  SITE_DESCRIPTION,
+  SITE_DESCRIPTION_LONG,
+  SITE_NAME,
+  SITE_ORGANIZER,
+  websiteJsonLd,
+} from "@/lib/site-seo";
+
+export const metadata: Metadata = {
+  title: { absolute: SITE_NAME },
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: `${getSiteUrl()}/`,
+  },
+  keywords: [
+    "PyCon Colombia 2026",
+    "Python conference Medellín",
+    "Universidad EAFIT",
+    "July 24 2026",
+    "July 25 2026",
+    "July 26 2026",
+  ],
+  openGraph: {
+    title: { absolute: SITE_NAME },
+    description: SITE_DESCRIPTION,
+    url: `${getSiteUrl()}/`,
+    type: "website",
+  },
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: "PyCon Colombia 2026",
-      description:
-        "PyCon Colombia is the biggest Python conference in Colombia. A space where people, ideas, and experiences come together to explore the possibilities of Python.",
-      url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: "en",
-    },
+    websiteJsonLd(),
     {
       "@context": "https://schema.org",
       "@type": "Event",
-      name: "PyCon Colombia 2026",
-      description:
-        "The biggest Python conference in Colombia. Three days of talks, workshops, and community gatherings around the Python programming language.",
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION_LONG,
+      url: `${getSiteUrl()}/`,
+      image: [absoluteAssetUrl("/images/og-image.png")],
       startDate: "2026-07-24",
       endDate: "2026-07-26",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -45,8 +70,8 @@ const jsonLd = {
       },
       organizer: {
         "@type": "Organization",
-        name: "Python Colombia",
-        url: "https://pycon.co",
+        name: SITE_ORGANIZER.name,
+        url: SITE_ORGANIZER.url,
       },
       offers: {
         "@type": "Offer",

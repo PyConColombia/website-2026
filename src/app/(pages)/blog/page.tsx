@@ -5,46 +5,39 @@ import BlogSection from "@/components/blog/blog-section/blog-section";
 import HeroSection from "@/components/blog/hero-section/hero-section";
 import SectionSeparator from "@/components/section-separator";
 import { getPosts } from "@/lib/posts";
+import {
+  getSiteUrl,
+  SITE_KEYWORDS,
+  webPageJsonLd,
+  websiteJsonLd,
+} from "@/lib/site-seo";
+
+const blogDescription =
+  "News, speaker stories, and updates from PyCon Colombia 2026—July 24–26 in Medellín at Universidad EAFIT.";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "Welcome to our blog. Stay updated with the latest news and articles.",
-  keywords: ["blog", "articles", "news", "updates", "insights"],
+  description: blogDescription,
+  keywords: [
+    ...SITE_KEYWORDS,
+    "PyCon blog",
+    "conference news",
+    "Python community",
+  ],
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_APP_URL}/blog`,
+    canonical: `${getSiteUrl()}/blog`,
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: "Flow",
-      description:
-        "Grow your product faster with an all-in-one sales and analytics platform. Track performance, automate follow-ups, and make smarter decisions easily.",
-      url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: "en-US",
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "@id": `${process.env.NEXT_PUBLIC_APP_URL}#webpage`,
-      name: "Blog",
-      description:
-        "Welcome to our blog. Stay updated with the latest news and articles.",
-      url: `${process.env.NEXT_PUBLIC_APP_URL}/blog`,
-      isPartOf: {
-        "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      },
-      potentialAction: {
-        "@type": "ReadAction",
-        target: [`${process.env.NEXT_PUBLIC_APP_URL}/blog`],
-      },
-    },
+    websiteJsonLd(),
+    webPageJsonLd({
+      name: "Blog — PyCon Colombia 2026",
+      description: blogDescription,
+      url: `${getSiteUrl()}/blog`,
+    }),
   ],
 };
 

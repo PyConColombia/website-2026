@@ -1,47 +1,41 @@
 import type { Metadata } from "next";
+
 import { plans, pricingFeatures } from "@/assets/data/pricing-details";
 import CTASection from "@/components/blocks/cta/cta";
 import PricingDetail from "@/components/pricing/pricing-detail";
+import {
+  getSiteUrl,
+  SITE_KEYWORDS,
+  webPageJsonLd,
+  websiteJsonLd,
+} from "@/lib/site-seo";
+
+const pricingDescription =
+  "Ticket and add-on options for PyCon Colombia 2026—three days of Python in Medellín, July 24–26 at Universidad EAFIT.";
 
 export const metadata: Metadata = {
-  title: "Pricing",
-  description:
-    "Explore our pricing plans and find the perfect fit for your needs.",
-  keywords: ["pricing", "plans", "subscription", "cost", "features"],
+  title: "Tickets",
+  description: pricingDescription,
+  keywords: [
+    ...SITE_KEYWORDS,
+    "PyCon tickets",
+    "conference registration",
+    "Eventbrite",
+  ],
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
+    canonical: `${getSiteUrl()}/pricing`,
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: "Flow",
-      description:
-        "Grow your product faster with an all-in-one sales and analytics platform. Track performance, automate follow-ups, and make smarter decisions easily.",
-      url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: "en-US",
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "@id": `${process.env.NEXT_PUBLIC_APP_URL}#webpage`,
-      name: "Pricing",
-      description:
-        "Explore our pricing plans and find the perfect fit for your needs.",
-      url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
-      isPartOf: {
-        "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      },
-      potentialAction: {
-        "@type": "ReadAction",
-        target: [`${process.env.NEXT_PUBLIC_APP_URL}/pricing`],
-      },
-    },
+    websiteJsonLd(),
+    webPageJsonLd({
+      name: "Tickets — PyCon Colombia 2026",
+      description: pricingDescription,
+      url: `${getSiteUrl()}/pricing`,
+    }),
   ],
 };
 

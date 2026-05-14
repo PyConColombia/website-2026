@@ -21,6 +21,7 @@ import { SecondaryFlowButton } from "@/components/ui/flow-button";
 import { Separator } from "@/components/ui/separator";
 import { extractHeadings } from "@/lib/extract-headings";
 import { getPostBySlug, getPosts } from "@/lib/posts";
+import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
 import { assetPath } from "@/lib/utils";
 
 const defaultPostImage = "/images/og-image.png";
@@ -47,11 +48,11 @@ export async function generateMetadata({
   const { metadata } = post;
 
   return {
-    title: `Blog: ${metadata.title}`,
+    title: metadata.title ?? "Article",
     description: metadata.description,
     keywords: metadata.keywords,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${metadata.slug}`,
+      canonical: `${getSiteUrl()}/blog/${metadata.slug}`,
     },
   };
 }
@@ -104,34 +105,17 @@ const BlogDetailsPage = async ({
   // Extract headings for TOC
   const headings = extractHeadings(content);
 
+  const postUrl = `${getSiteUrl()}/blog/${metadata.slug}`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-        name: "Flow",
-        description:
-          "Grow your product faster with an all-in-one sales and analytics platform. Track performance, automate follow-ups, and make smarter decisions easily.",
-        url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-        inLanguage: "en-US",
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "@id": `${process.env.NEXT_PUBLIC_APP_URL}#webpage`,
-        name: `Blog: ${metadata.title}`,
+      websiteJsonLd(),
+      webPageJsonLd({
+        name: metadata.title ?? "Article",
         description: metadata.description,
-        url: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${metadata.slug}`,
-        isPartOf: {
-          "@id": `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-        },
-        potentialAction: {
-          "@type": "ReadAction",
-          target: [`${process.env.NEXT_PUBLIC_APP_URL}/blog/${metadata.slug}`],
-        },
-      },
+        url: postUrl,
+      }),
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -140,19 +124,19 @@ const BlogDetailsPage = async ({
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: `${process.env.NEXT_PUBLIC_APP_URL}`,
+            item: `${getSiteUrl()}/`,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Blog",
-            item: `${process.env.NEXT_PUBLIC_APP_URL}/blog`,
+            item: `${getSiteUrl()}/blog`,
           },
           {
             "@type": "ListItem",
             position: 3,
-            name: metadata.title,
-            item: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${metadata.slug}`,
+            name: metadata.title ?? "Article",
+            item: postUrl,
           },
         ],
       },

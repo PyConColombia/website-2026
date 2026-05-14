@@ -7,7 +7,13 @@ import {
   XIcon,
   YoutubeIcon,
 } from "lucide-react";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import {
+  type MotionValue,
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import Image from "next/image";
 import { type ReactNode, useRef } from "react";
 
@@ -75,7 +81,7 @@ const FeatureItem = ({
   feature: Features[number];
   index: number;
   totalFeatures: number;
-  scrollYProgress: any;
+  scrollYProgress: MotionValue<number>;
 }) => {
   const start = index / totalFeatures;
   const middle = (index + 0.5) / totalFeatures;
@@ -204,7 +210,7 @@ const ImageItem = ({
   feature: Features[number];
   index: number;
   totalFeatures: number;
-  scrollYProgress: any;
+  scrollYProgress: MotionValue<number>;
 }) => {
   const start = index / totalFeatures;
   const middle = (index + 0.5) / totalFeatures;
