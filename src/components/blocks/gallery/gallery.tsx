@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { galleryImages } from "@/assets/data/gallery";
@@ -56,10 +57,13 @@ const Gallery = () => {
           <div className="w-full overflow-hidden">
             <Marquee pauseOnHover duration={22} gap={1.5}>
               {galleryRows[0].map((image) => (
-                <img
+                <Image
                   key={image.src}
                   src={assetPath(image.src)}
                   alt={image.alt}
+                  width={268}
+                  height={274}
+                  sizes="268px"
                   className="h-68.5 w-67 shrink-0 rounded-lg border object-cover shadow-sm"
                 />
               ))}
@@ -69,10 +73,13 @@ const Gallery = () => {
           <div className="w-full overflow-hidden">
             <Marquee pauseOnHover duration={22} gap={1.5} reverse>
               {galleryRows[1].map((image) => (
-                <img
+                <Image
                   key={image.src}
                   src={assetPath(image.src)}
                   alt={image.alt}
+                  width={268}
+                  height={274}
+                  sizes="268px"
                   className="h-68.5 w-67 shrink-0 rounded-lg border object-cover shadow-sm"
                 />
               ))}

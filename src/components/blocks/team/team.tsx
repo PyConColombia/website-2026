@@ -1,5 +1,7 @@
 import { GithubIcon, LinkedinIcon, XIcon } from "lucide-react";
 
+import Image from "next/image";
+
 import { teamMembers } from "@/assets/data/team";
 import { Button } from "@/components/ui/button";
 import {
@@ -54,9 +56,12 @@ const Team = () => {
           >
             <Card className="h-full gap-0 overflow-hidden py-0 shadow-sm transition-shadow duration-300 hover:shadow-md lg:flex-row">
               <CardContent className="h-64 px-0 lg:h-auto lg:w-58 lg:shrink-0 xl:w-66">
-                <img
+                <Image
                   src={assetPath(member.image)}
                   alt={member.name}
+                  width={264}
+                  height={256}
+                  sizes="(max-width: 1024px) 100vw, 264px"
                   className="size-full object-cover lg:rounded-l-xl"
                 />
               </CardContent>

@@ -1,4 +1,5 @@
 import { CalendarDaysIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +15,8 @@ import { MotionPreset } from "@/components/ui/motion-preset";
 
 import type { PostMetadata } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
+
+const defaultPostImage = "/images/og-image.png";
 
 const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
   return (
@@ -99,9 +102,12 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
               <Card className="group h-full shadow-none">
                 <CardContent className="flex h-full flex-col gap-6">
                   <div className="overflow-hidden rounded-md">
-                    <img
-                      src={assetPath(post.image)}
-                      alt={post.title}
+                    <Image
+                      src={assetPath(post.image ?? defaultPostImage)}
+                      alt={post.title ?? "Blog post"}
+                      width={1200}
+                      height={650}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="h-65 w-full object-cover transition-transform duration-300 group-hover:scale-105 max-lg:h-full max-sm:h-50 sm:max-lg:max-h-65"
                     />
                   </div>
@@ -170,9 +176,12 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
                       </div>
                     </div>
                     <div className="overflow-hidden rounded-md">
-                      <img
-                        src={assetPath(post.image)}
-                        alt={post.title}
+                      <Image
+                        src={assetPath(post.image ?? defaultPostImage)}
+                        alt={post.title ?? "Blog post"}
+                        width={480}
+                        height={320}
+                        sizes="(max-width: 640px) 100vw, 120px"
                         className="h-50 w-full rounded-md object-cover transition-transform duration-300 group-hover:scale-105 sm:size-30"
                       />
                     </div>

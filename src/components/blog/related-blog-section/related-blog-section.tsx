@@ -1,5 +1,6 @@
 import { ArrowRightIcon, CalendarDaysIcon } from "lucide-react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,8 @@ import { SecondaryFlowButton } from "@/components/ui/flow-button";
 
 import type { PostMetadata } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
+
+const defaultPostImage = "/images/og-image.png";
 
 const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
   return (
@@ -33,9 +36,12 @@ const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
               <Card className="group h-full overflow-hidden shadow-none">
                 <CardContent className="flex h-full flex-col gap-3.5">
                   <div className="mb-2.5 overflow-hidden rounded-lg">
-                    <img
-                      src={assetPath(post.image)}
-                      alt={post.title}
+                    <Image
+                      src={assetPath(post.image ?? defaultPostImage)}
+                      alt={post.title ?? "Blog post"}
+                      width={1200}
+                      height={675}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>

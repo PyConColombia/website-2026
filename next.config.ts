@@ -6,6 +6,13 @@ const nextConfig: NextConfig = {
   assetPrefix: process.env.BASEPATH ?? "",
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.shadcnstudio.com",
+        pathname: "/ss-assets/**",
+      },
+    ],
   },
   trailingSlash: true,
   reactStrictMode: true,

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRightIcon, CalendarDaysIcon, SearchIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -13,6 +14,8 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { PostMetadata } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
+
+const defaultPostImage = "/images/og-image.png";
 
 const BlogGrid = ({
   posts,
@@ -33,9 +36,12 @@ const BlogGrid = ({
               href={`/blog/${post.slug}`}
               className="mb-2.5 overflow-hidden rounded-lg"
             >
-              <img
-                src={assetPath(post.image)}
-                alt={post.title}
+              <Image
+                src={assetPath(post.image ?? defaultPostImage)}
+                alt={post.title ?? "Blog post"}
+                width={1200}
+                height={675}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </Link>

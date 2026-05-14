@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 import AuthBackgroundShape from "@/assets/svg/auth-background-shape";
@@ -11,15 +12,21 @@ const AuthLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       <div className="max-lg:hidden lg:col-span-3 xl:col-span-4">
         <div className="bg-muted relative z-1 flex h-full items-center justify-center px-6">
           <div className="outline-border relative shrink rounded-[20px] p-2.5 outline-2 -outline-offset-2">
-            <img
+            <Image
               src={assetPath("/images/dashboard.webp")}
               className="max-h-111 w-full rounded-lg object-contain dark:hidden"
               alt="Dashboards"
+              width={1200}
+              height={900}
+              sizes="(max-width: 1024px) 0vw, 50vw"
             />
-            <img
+            <Image
               src={assetPath("/images/dashboard-dark.webp")}
               className="hidden max-h-111 w-full rounded-lg object-contain dark:inline-block"
               alt="Dashboards"
+              width={1200}
+              height={900}
+              sizes="(max-width: 1024px) 0vw, 50vw"
             />
 
             <BorderBeam duration={8} borderWidth={2} size={100} />

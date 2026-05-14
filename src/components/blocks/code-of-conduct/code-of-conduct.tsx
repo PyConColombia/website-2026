@@ -1,4 +1,5 @@
 import { ArrowRightIcon, MailIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { SVGAttributes } from "react";
 
@@ -109,9 +110,12 @@ const CodeOfConduct = () => {
               transition={{ duration: 0.5 }}
               className="peer z-10 order-2 -mx-4 basis-3/5 rounded-full sm:-mx-6 sm:basis-3/5 md:-mx-8 lg:-mx-10"
             >
-              <img
+              <Image
                 src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/about-us/image-32.png"
                 alt="PyCon Colombia community"
+                width={640}
+                height={640}
+                sizes="(max-width: 768px) 80vw, 40vw"
                 className="size-full rounded-full object-cover transition-transform duration-500 hover:scale-105"
               />
             </MotionPreset>

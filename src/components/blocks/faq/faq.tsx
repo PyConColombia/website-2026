@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 
 import {
@@ -72,16 +73,20 @@ const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
 
           {/* Right content */}
           <div className="group bg-muted relative mx-auto flex h-full max-h-116 w-full max-w-148 items-end justify-center overflow-hidden rounded-xl border lg:max-xl:max-h-95">
-            <img
+            <Image
               src={assetPath("/images/dashboard.webp")}
               alt="Dashboard"
-              loading="lazy"
+              width={592}
+              height={464}
+              sizes="(max-width: 1024px) 100vw, 592px"
               className="h-full w-full origin-bottom scale-90 rounded-t-md shadow-md transition-transform duration-500 group-hover:scale-100 dark:hidden"
             />
-            <img
+            <Image
               src={assetPath("/images/dashboard-dark.webp")}
               alt="Dashboard"
-              loading="lazy"
+              width={592}
+              height={464}
+              sizes="(max-width: 1024px) 100vw, 592px"
               className="hidden h-full w-full origin-bottom scale-90 rounded-t-md shadow-md transition-transform duration-400 group-hover:scale-100 dark:inline-block"
             />
 

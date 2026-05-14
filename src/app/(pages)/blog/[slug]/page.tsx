@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CTASection from "@/components/blocks/cta/cta";
@@ -21,6 +22,8 @@ import { Separator } from "@/components/ui/separator";
 import { extractHeadings } from "@/lib/extract-headings";
 import { getPostBySlug, getPosts } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
+
+const defaultPostImage = "/images/og-image.png";
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -230,9 +233,12 @@ const BlogDetailsPage = async ({
               </div>
             </div>
 
-            <img
-              src={assetPath(metadata.image)}
-              alt={metadata.title}
+            <Image
+              src={assetPath(metadata.image ?? defaultPostImage)}
+              alt={metadata.title ?? "Blog post"}
+              width={1280}
+              height={720}
+              sizes="(max-width: 1280px) 100vw, 1280px"
               className="mb-16 max-h-110 w-full rounded-xl object-cover"
             />
 

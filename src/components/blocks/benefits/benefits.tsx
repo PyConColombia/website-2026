@@ -7,8 +7,8 @@ import {
   XIcon,
   YoutubeIcon,
 } from "lucide-react";
-
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import Image from "next/image";
 import { type ReactNode, useRef } from "react";
 
 import { MotionPreset } from "@/components/ui/motion-preset";
@@ -49,13 +49,15 @@ const SpeakerTitle = ({
           className="border-primary/20 bg-background flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-sm"
           title={feature.country}
         >
-          <img
+          <Image
             src={assetPath(feature.flag)}
             alt={
               feature.country
                 ? `Flag of ${feature.country}`
                 : `${feature.title} flag`
             }
+            width={32}
+            height={32}
             className="size-full object-cover"
           />
         </span>
@@ -227,9 +229,12 @@ const ImageItem = ({
       className="absolute inset-0 flex items-center justify-center px-3"
       transition={{ duration: 0.3 }}
     >
-      <img
+      <Image
         src={assetPath(feature.image)}
         alt={feature.title}
+        width={440}
+        height={380}
+        sizes="(max-width: 768px) 100vw, 50vw"
         className="h-full w-full max-w-110 object-contain md:max-h-95"
       />
     </motion.div>
@@ -343,9 +348,12 @@ const Benefits = ({ featuresList }: { featuresList: Features }) => {
                 <div className="bg-primary relative px-6 py-20">
                   <div className="bg-card sticky top-20 flex h-87.5 items-center justify-center overflow-hidden rounded-xl border">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <img
+                      <Image
                         src={assetPath(feature.image)}
                         alt={feature.title}
+                        width={384}
+                        height={280}
+                        sizes="100vw"
                         className="size-full max-h-70 max-w-96 object-contain max-sm:max-w-70"
                       />
                     </div>

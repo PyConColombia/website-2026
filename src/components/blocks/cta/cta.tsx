@@ -1,6 +1,7 @@
 "use client";
 
 import { SendIcon } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import DottedSheet from "@/assets/svg/dotted-sheet";
 import { Card, CardContent } from "@/components/ui/card";
@@ -83,10 +84,12 @@ const CTASection = () => {
               slide
               transition={{ duration: 0.5 }}
             >
-              <img
+              <Image
                 src={assetPath("/images/cta/blur-logo.png")}
                 alt=""
                 aria-hidden="true"
+                width={288}
+                height={288}
                 className="hidden size-72 -translate-x-12 translate-y-14 object-contain opacity-80 lg:block"
               />
             </MotionPreset>
@@ -97,10 +100,12 @@ const CTASection = () => {
               slide={{ direction: "right" }}
               transition={{ duration: 0.5 }}
             >
-              <img
+              <Image
                 src={assetPath("/images/cta/soft-cylinder.png")}
                 alt=""
                 aria-hidden="true"
+                width={288}
+                height={288}
                 className="hidden size-72 translate-x-12 translate-y-16 object-contain opacity-80 lg:block"
               />
             </MotionPreset>
