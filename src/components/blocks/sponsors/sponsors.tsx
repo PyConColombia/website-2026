@@ -14,106 +14,161 @@ const sponsorDeckUrl =
 
 const sizeStyles = {
   XL: {
-    section: "lg:col-span-6",
-    card: "min-h-48 sm:min-h-56",
-    logo: "max-h-24 max-w-72 text-3xl",
-    badge: "XL",
+    container: "w-full max-w-4xl",
+    card: "min-h-48 px-8 py-10 sm:min-h-56 sm:px-10 sm:py-12",
+    logo: "max-h-28 max-w-[min(100%,20rem)] sm:max-h-32 sm:max-w-[22rem]",
+    imageWidth: 320,
+    imageHeight: 112,
+  },
+  L: {
+    container: "w-full max-w-3xl",
+    card: "min-h-44 px-7 py-9 sm:min-h-52 sm:px-9 sm:py-10",
+    logo: "max-h-24 max-w-[min(100%,18rem)] sm:max-h-28 sm:max-w-[20rem]",
     imageWidth: 288,
     imageHeight: 96,
   },
-  L: {
-    section: "lg:col-span-6",
-    card: "min-h-44 sm:min-h-52",
-    logo: "max-h-20 max-w-64 text-2xl",
-    badge: "L",
-    imageWidth: 256,
-    imageHeight: 80,
-  },
   M: {
-    section: "lg:col-span-4",
-    card: "min-h-38 sm:min-h-44",
-    logo: "max-h-16 max-w-52 text-xl",
-    badge: "M",
-    imageWidth: 208,
-    imageHeight: 64,
+    container: "w-full max-w-xl",
+    card: "min-h-36 px-6 py-8 sm:min-h-44 sm:px-8 sm:py-9",
+    logo: "max-h-16 max-w-52 sm:max-h-20 sm:max-w-56",
+    imageWidth: 224,
+    imageHeight: 72,
   },
   S: {
-    section: "lg:col-span-3",
-    card: "min-h-32 sm:min-h-36",
-    logo: "max-h-12 max-w-44 text-lg",
-    badge: "S",
+    container: "w-full max-w-xs sm:max-w-sm",
+    card: "min-h-28 px-5 py-6 sm:min-h-32 sm:px-6 sm:py-7",
+    logo: "max-h-11 max-w-40 sm:max-h-12 sm:max-w-44",
     imageWidth: 176,
     imageHeight: 48,
   },
   XS: {
-    section: "lg:col-span-2",
-    card: "min-h-28 sm:min-h-32",
-    logo: "max-h-10 max-w-36 text-base",
-    badge: "XS",
+    container: "w-full max-w-[10.5rem] sm:max-w-44",
+    card: "min-h-24 px-4 py-5 sm:min-h-28",
+    logo: "max-h-9 max-w-32 sm:max-h-10 sm:max-w-36",
     imageWidth: 144,
     imageHeight: 40,
   },
 } satisfies Record<
   SponsorTier["size"],
   {
-    section: string;
+    container: string;
     card: string;
     logo: string;
-    badge: string;
     imageWidth: number;
     imageHeight: number;
   }
 >;
 
-const SponsorLogo = ({ tier }: { tier: SponsorTier }) => {
+type SponsorCardProps = {
+  sponsor: SponsorTier["sponsors"][number];
+  tier: SponsorTier;
+};
+
+const SponsorCard = ({ sponsor, tier }: SponsorCardProps) => {
+  const styles = sizeStyles[tier.size];
+  const isPlaceholder = !sponsor.logo;
+
+  const inner = (
+    <div
+      className={cn(
+        "bg-card flex items-center justify-center rounded-lg text-center shadow-sm transition-colors",
+        isPlaceholder
+          ? "border-border border border-dashed hover:border-primary/40 hover:bg-primary/5"
+          : "border-border border",
+        styles.card,
+      )}
+    >
+      {sponsor.logo ? (
+        <Image
+          src={assetPath(sponsor.logo)}
+          alt={sponsor.name}
+          width={styles.imageWidth}
+          height={styles.imageHeight}
+          className={cn("h-auto w-auto object-contain", styles.logo)}
+        />
+      ) : (
+        <p className={cn("text-foreground font-semibold", styles.logo)}>
+          {sponsor.name}
+        </p>
+      )}
+    </div>
+  );
+
+  if (sponsor.href) {
+    return (
+      <Link
+        href={sponsor.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full"
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return inner;
+};
+
+const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
   const styles = sizeStyles[tier.size];
   const sponsors =
     tier.sponsors.length > 0 ? tier.sponsors : [{ name: "Open slot" }];
+  const isMulti = sponsors.length > 1;
 
   return (
-    <div className="grid gap-3">
-      {sponsors.map((sponsor) => {
-        const content = (
-          <div
-            key={`${tier.title}-${sponsor.name}-${sponsor.href ?? ""}`}
-            className={cn(
-              "bg-background flex items-center justify-center rounded-lg border border-dashed p-5 text-center shadow-sm transition-colors",
-              "hover:border-primary/40 hover:bg-primary/5",
-              styles.card,
-            )}
-          >
-            {sponsor.logo ? (
-              <Image
-                src={assetPath(sponsor.logo)}
-                alt={sponsor.name}
-                width={styles.imageWidth}
-                height={styles.imageHeight}
-                className={cn("h-auto w-auto object-contain", styles.logo)}
-              />
-            ) : (
-              <div className="space-y-2">
-                <p className={cn("text-foreground font-semibold", styles.logo)}>
-                  {sponsor.name}
-                </p>
-              </div>
-            )}
-          </div>
-        );
+    <MotionPreset
+      key={tier.title}
+      fade
+      blur
+      slide={{ direction: "up", offset: 30 }}
+      delay={index * 0.06}
+      transition={{ duration: 0.55 }}
+      className="flex flex-col"
+    >
+      <div className="mb-4 flex items-center gap-3">
+        <span
+          className={cn(
+            "h-px w-8 shrink-0",
+            tier.accent === "venue" ? "bg-primary" : "bg-border",
+          )}
+          aria-hidden
+        />
+        <h3
+          className={cn(
+            "text-xs font-semibold tracking-[0.2em] uppercase",
+            tier.accent === "venue" ? "text-primary" : "text-muted-foreground",
+          )}
+        >
+          {tier.title}
+        </h3>
+      </div>
 
-        return sponsor.href ? (
-          <Link
-            key={sponsor.name}
-            href={sponsor.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {content}
-          </Link>
-        ) : (
-          <div key={sponsor.name}>{content}</div>
-        );
-      })}
-    </div>
+      <div
+        className={cn(
+          "flex w-full justify-center",
+          tier.accent === "venue" &&
+            "bg-primary/10 rounded-3xl p-5 sm:p-8 lg:p-10",
+        )}
+      >
+        <div
+          className={cn(
+            isMulti
+              ? "grid w-full max-w-2xl grid-cols-2 gap-4 sm:gap-5"
+              : "flex justify-center",
+          )}
+        >
+          {sponsors.map((sponsor) => (
+            <div
+              key={`${tier.title}-${sponsor.name}-${sponsor.href ?? ""}`}
+              className={cn(!isMulti && styles.container)}
+            >
+              <SponsorCard sponsor={sponsor} tier={tier} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </MotionPreset>
   );
 };
 
@@ -180,37 +235,10 @@ const Sponsors = () => {
           </MotionPreset>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-          {sponsorTiers.map((tier, index) => {
-            const styles = sizeStyles[tier.size];
-
-            return (
-              <MotionPreset
-                key={tier.title}
-                fade
-                blur
-                slide={{ direction: "up", offset: 30 }}
-                delay={index * 0.06}
-                transition={{ duration: 0.55 }}
-                className={styles.section}
-              >
-                <article className="bg-card h-full rounded-lg border p-4 shadow-sm sm:p-5">
-                  <div className="mb-4 flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-lg font-semibold">{tier.title}</h3>
-                      <p className="text-muted-foreground mt-1 text-sm">
-                        {tier.description}
-                      </p>
-                    </div>
-                    <span className="bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium">
-                      {styles.badge}
-                    </span>
-                  </div>
-                  <SponsorLogo tier={tier} />
-                </article>
-              </MotionPreset>
-            );
-          })}
+        <div className="mx-auto flex max-w-4xl flex-col gap-10 sm:gap-12 lg:gap-14">
+          {sponsorTiers.map((tier, index) => (
+            <TierRow key={tier.title} tier={tier} index={index} />
+          ))}
         </div>
       </div>
     </section>

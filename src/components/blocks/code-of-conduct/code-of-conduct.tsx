@@ -202,7 +202,13 @@ const CodeOfConduct = () => {
                 On this page
               </p>
               <nav className="space-y-2">
-                {codeOfConduct.sections.map((section) => (
+                {[
+                  ...codeOfConduct.sections,
+                  {
+                    id: codeOfConduct.contactInformation.id,
+                    title: codeOfConduct.contactInformation.title,
+                  },
+                ].map((section) => (
                   <Link
                     key={section.id}
                     href={`#${section.id}`}
@@ -250,6 +256,40 @@ const CodeOfConduct = () => {
                 </section>
               ))}
             </div>
+
+            <section
+              id={codeOfConduct.contactInformation.id}
+              className="scroll-mt-24 border-t pt-8"
+            >
+              <h3 className="text-xl font-semibold md:text-2xl">
+                {codeOfConduct.contactInformation.title}
+              </h3>
+              <div className="bg-primary text-primary-foreground mt-6 space-y-4 rounded-3xl p-6 text-base leading-7 shadow-lg sm:p-8">
+                <p>{codeOfConduct.contactInformation.intro}</p>
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  asChild
+                  className="h-11 rounded-full px-6 text-base shadow-sm"
+                >
+                  <Link
+                    href={codeOfConduct.contactInformation.reportForm.href}
+                    {...(codeOfConduct.contactInformation.reportForm.href.startsWith(
+                      "http",
+                    )
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {codeOfConduct.contactInformation.reportForm.label}
+                  </Link>
+                </Button>
+                {codeOfConduct.contactInformation.paragraphsAfterButton.map(
+                  (paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ),
+                )}
+              </div>
+            </section>
           </article>
         </div>
       </section>

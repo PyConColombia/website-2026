@@ -7,15 +7,19 @@ export type Sponsor = {
 };
 
 export type SponsorTier = {
+  /** Short label shown next to the rule (e.g. Venue → VENUE via CSS) */
   title: string;
   size: SponsorSize;
   description: string;
   sponsors: Sponsor[];
+  /** Venue row: primary-colored label and tinted panel behind logos */
+  accent?: "venue";
 };
 
 export const sponsorTiers: SponsorTier[] = [
   {
-    title: "Venue Sponsor",
+    title: "Venue",
+    accent: "venue",
     size: "XL",
     description:
       "Our main host and venue partner for the conference experience.",
@@ -28,7 +32,7 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
-    title: "Platinum Sponsor",
+    title: "Platinum",
     size: "L",
     description:
       "Top-tier support for PyCon Colombia and the Python community.",
@@ -41,7 +45,7 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
-    title: "Gold Sponsor",
+    title: "Gold",
     size: "M",
     description:
       "High-impact partners supporting talks, community, and learning.",
@@ -54,8 +58,8 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
-    title: "Silver + Sponsor",
-    size: "M",
+    title: "Silver +",
+    size: "S",
     description: "Partners helping us strengthen the attendee experience.",
     sponsors: [
       {
@@ -66,8 +70,8 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
-    title: "Silver Sponsor",
-    size: "M",
+    title: "Silver",
+    size: "S",
     description: "Community sponsors supporting the conference program.",
     sponsors: [
       {
@@ -81,24 +85,5 @@ export const sponsorTiers: SponsorTier[] = [
         href: "https://provectus.com/",
       },
     ],
-  },
-  {
-    title: "Bronze Sponsor",
-    size: "S",
-    description: "Supporters helping make PyCon Colombia more accessible.",
-    sponsors: [],
-  },
-  {
-    title: "Start up Sponsor",
-    size: "S",
-    description: "Emerging companies joining the Python ecosystem.",
-    sponsors: [],
-  },
-  {
-    title: "Partner",
-    size: "XS",
-    description:
-      "Community allies, media partners, and supporting organizations.",
-    sponsors: [],
   },
 ];
