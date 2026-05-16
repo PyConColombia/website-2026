@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRightIcon } from "lucide-react";
 
 import Image from "next/image";
@@ -7,9 +9,11 @@ import { galleryImages } from "@/assets/data/gallery";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Marquee } from "@/components/ui/marquee";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 import { assetPath } from "@/lib/utils";
 
 const Gallery = () => {
+  const { t } = useTranslations();
   const midpoint = Math.ceil(galleryImages.length / 2);
   const galleryRows = [
     galleryImages.slice(0, midpoint),
@@ -29,17 +33,18 @@ const Gallery = () => {
         transition={{ duration: 0.5 }}
         className="mx-auto max-w-7xl space-y-4 px-4 text-center sm:px-6 lg:px-8"
       >
-        <p className="text-primary text-sm font-medium uppercase">Gallery</p>
+        <p className="text-primary text-sm font-medium uppercase">
+          {t("blocks.gallery.eyebrow")}
+        </p>
         <h2 className="text-2xl font-semibold sm:text-3xl lg:text-4xl">
-          PyCon Colombia in Frames
+          {t("blocks.gallery.title")}
         </h2>
         <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-          A glimpse of the talks, hallway conversations, and community moments
-          that make PyCon Colombia special.
+          {t("blocks.gallery.subtitle")}
         </p>
         <PrimaryFlowButton size="lg" className="mx-auto" asChild>
           <Link href={galleryUrl} target="_blank" rel="noopener noreferrer">
-            SEE ALL
+            {t("blocks.gallery.seeAll")}
             <ArrowRightIcon />
           </Link>
         </PrimaryFlowButton>

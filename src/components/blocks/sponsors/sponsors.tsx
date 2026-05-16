@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRightIcon } from "lucide-react";
 
 import Image from "next/image";
@@ -7,10 +9,13 @@ import { type SponsorTier, sponsorTiers } from "@/assets/data/sponsors";
 import { Badge } from "@/components/ui/badge";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 import { assetPath, cn } from "@/lib/utils";
 
 const sponsorDeckUrl =
   "mailto:sponsors@pycon.co?subject=PyCon%20Colombia%202026%20Sponsorship";
+
+const OPEN_SLOT_NAME = "Open slot";
 
 const sizeStyles = {
   XL: {
@@ -64,7 +69,11 @@ type SponsorCardProps = {
   tier: SponsorTier;
 };
 
-const SponsorCard = ({ sponsor, tier }: SponsorCardProps) => {
+const SponsorCard = ({
+  sponsor,
+  tier,
+  sponsorDisplayName,
+}: SponsorCardProps & { sponsorDisplayName: string }) => {
   const styles = sizeStyles[tier.size];
   const isPlaceholder = !sponsor.logo;
 
@@ -81,14 +90,14 @@ const SponsorCard = ({ sponsor, tier }: SponsorCardProps) => {
       {sponsor.logo ? (
         <Image
           src={assetPath(sponsor.logo)}
-          alt={sponsor.name}
+          alt={sponsorDisplayName}
           width={styles.imageWidth}
           height={styles.imageHeight}
           className={cn("h-auto w-auto object-contain", styles.logo)}
         />
       ) : (
         <p className={cn("text-foreground font-semibold", styles.logo)}>
-          {sponsor.name}
+          {sponsorDisplayName}
         </p>
       )}
     </div>
@@ -111,14 +120,16 @@ const SponsorCard = ({ sponsor, tier }: SponsorCardProps) => {
 };
 
 const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
+  const { t } = useTranslations();
   const styles = sizeStyles[tier.size];
   const sponsors =
-    tier.sponsors.length > 0 ? tier.sponsors : [{ name: "Open slot" }];
+    tier.sponsors.length > 0 ? tier.sponsors : [{ name: OPEN_SLOT_NAME }];
   const isMulti = sponsors.length > 1;
+  const tierTitle = t(`blocks.sponsors.tiers.${tier.tierKey}.title`);
 
   return (
     <MotionPreset
-      key={tier.title}
+      key={tier.tierKey}
       fade
       blur
       slide={{ direction: "up", offset: 30 }}
@@ -140,7 +151,7 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
             tier.accent === "venue" ? "text-primary" : "text-muted-foreground",
           )}
         >
-          {tier.title}
+          {tierTitle}
         </h3>
       </div>
 
@@ -158,14 +169,25 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
               : "flex justify-center",
           )}
         >
-          {sponsors.map((sponsor) => (
-            <div
-              key={`${tier.title}-${sponsor.name}-${sponsor.href ?? ""}`}
-              className={cn(!isMulti && styles.container)}
-            >
-              <SponsorCard sponsor={sponsor} tier={tier} />
-            </div>
-          ))}
+          {sponsors.map((sponsor) => {
+            const sponsorDisplayName =
+              sponsor.name === OPEN_SLOT_NAME
+                ? t("blocks.sponsors.openSlot")
+                : sponsor.name;
+
+            return (
+              <div
+                key={`${tier.tierKey}-${sponsor.name}-${sponsor.href ?? ""}`}
+                className={cn(!isMulti && styles.container)}
+              >
+                <SponsorCard
+                  sponsor={sponsor}
+                  tier={tier}
+                  sponsorDisplayName={sponsorDisplayName}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </MotionPreset>
@@ -173,6 +195,8 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
 };
 
 const Sponsors = () => {
+  const { t } = useTranslations();
+
   return (
     <section id="sponsors" className="overflow-hidden py-8 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 md:space-y-16 lg:px-8">
@@ -187,7 +211,7 @@ const Sponsors = () => {
               variant="outline"
               className="bg-background text-sm font-normal"
             >
-              Sponsors
+              {t("blocks.sponsors.badge")}
             </Badge>
           </MotionPreset>
 
@@ -199,7 +223,7 @@ const Sponsors = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="mx-auto max-w-3xl text-2xl font-semibold md:text-3xl lg:text-4xl">
-              Trusted by industry leaders
+              {t("blocks.sponsors.title")}
             </h2>
           </MotionPreset>
 
@@ -211,9 +235,7 @@ const Sponsors = () => {
             transition={{ duration: 0.5 }}
           >
             <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-              PyCon Colombia is made possible through the generous support of
-              organizations dedicated to advancing the Python ecosystem and
-              fostering technological innovation in Latin America.
+              {t("blocks.sponsors.subtitle")}
             </p>
           </MotionPreset>
 
@@ -227,7 +249,7 @@ const Sponsors = () => {
             <div className="flex justify-center">
               <PrimaryFlowButton size="lg" asChild>
                 <Link href={sponsorDeckUrl}>
-                  Become a sponsor
+                  {t("blocks.sponsors.cta")}
                   <ArrowRightIcon />
                 </Link>
               </PrimaryFlowButton>
@@ -237,7 +259,7 @@ const Sponsors = () => {
 
         <div className="mx-auto flex max-w-4xl flex-col gap-10 sm:gap-12 lg:gap-14">
           {sponsorTiers.map((tier, index) => (
-            <TierRow key={tier.title} tier={tier} index={index} />
+            <TierRow key={tier.tierKey} tier={tier} index={index} />
           ))}
         </div>
       </div>

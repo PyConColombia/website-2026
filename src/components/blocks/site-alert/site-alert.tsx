@@ -4,6 +4,7 @@ import { MegaphoneIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
+import { useTranslations } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
 
 const callForSpeakersUrl =
@@ -11,6 +12,7 @@ const callForSpeakersUrl =
 
 const SiteAlert = ({ className }: { className?: string }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const { t } = useTranslations();
 
   if (!isVisible) {
     return null;
@@ -27,20 +29,20 @@ const SiteAlert = ({ className }: { className?: string }) => {
       <div className="flex max-w-7xl flex-1 items-center justify-center gap-3 pr-9 text-center">
         <MegaphoneIcon className="hidden size-4 shrink-0 sm:block" />
         <p className="text-balance">
-          PyCon Colombia 2026 Call for Speakers.{" "}
+          {t("alert.line")}{" "}
           <Link
             href={callForSpeakersUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold underline"
           >
-            Apply now
+            {t("alert.applyNow")}
           </Link>
         </p>
       </div>
       <button
         type="button"
-        aria-label="Dismiss alert"
+        aria-label={t("alert.dismissAria")}
         className="absolute right-3 top-1/2 flex size-7 -translate-y-1/2 items-center justify-center rounded-md transition-colors hover:bg-primary-foreground/15"
         onClick={() => setIsVisible(false)}
       >

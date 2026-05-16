@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 import { assetPath } from "@/lib/utils";
 import {
   mailchimpSubscribe,
@@ -16,6 +17,7 @@ import {
 } from "@/utils/mailchimpSubscribe";
 
 const CTASection = () => {
+  const { t } = useTranslations();
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -37,19 +39,19 @@ const CTASection = () => {
       if (data?.result === "success") {
         setStatus("success");
         const msg = stripHtmlMessage(String(data.msg ?? ""));
-        setFeedback(msg || "You're subscribed. Check your inbox.");
+        setFeedback(msg || t("blocks.cta.successDefault"));
         form.reset();
       } else {
         setStatus("error");
         setFeedback(
-          stripHtmlMessage(
-            String(data?.msg ?? "Could not subscribe. Please try again."),
-          ),
+          stripHtmlMessage(String(data?.msg ?? t("blocks.cta.errorTryAgain"))),
         );
       }
     } catch (err) {
       setStatus("error");
-      setFeedback(err instanceof Error ? err.message : "Something went wrong.");
+      setFeedback(
+        err instanceof Error ? err.message : t("blocks.cta.somethingWrong"),
+      );
     }
   }
 
@@ -70,12 +72,11 @@ const CTASection = () => {
               className="flex flex-col items-center justify-center gap-4"
             >
               <h2 className="dark:text-foreground text-2xl font-semibold text-white md:text-3xl lg:text-4xl">
-                Want to know more?
+                {t("blocks.cta.title")}
               </h2>
 
               <p className="dark:text-muted-foreground w-full text-xl text-white/80 lg:max-w-2xl">
-                Join Pycon Colombia newsletter and get a complete overview of
-                our events, speakers and community participation.
+                {t("blocks.cta.subtitle")}
               </p>
             </MotionPreset>
             <MotionPreset
@@ -128,7 +129,7 @@ const CTASection = () => {
               <Input
                 type="email"
                 name="cta-email"
-                placeholder="Your email address"
+                placeholder={t("blocks.cta.placeholder")}
                 autoComplete="email"
                 disabled={status === "loading"}
                 className="h-10 border-none shadow-none focus-visible:ring-transparent dark:bg-transparent disabled:opacity-60"
@@ -141,15 +142,15 @@ const CTASection = () => {
                 disabled={status === "loading"}
               >
                 {status === "loading"
-                  ? "Subscribing…"
-                  : "Subscribe to newsletter"}
+                  ? t("blocks.cta.subscribing")
+                  : t("blocks.cta.submit")}
               </PrimaryFlowButton>
               <PrimaryFlowButton
                 size="icon-lg"
                 className="hidden shrink-0 max-sm:inline-flex"
                 type="submit"
                 disabled={status === "loading"}
-                aria-label="Subscribe to newsletter"
+                aria-label={t("blocks.cta.subscribeAria")}
               >
                 <SendIcon />
               </PrimaryFlowButton>

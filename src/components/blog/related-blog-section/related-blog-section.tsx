@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRightIcon, CalendarDaysIcon } from "lucide-react";
 
 import Image from "next/image";
@@ -7,25 +9,31 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SecondaryFlowButton } from "@/components/ui/flow-button";
 
+import { useTranslations } from "@/contexts/language-context";
 import type { PostMetadata } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
 
 const defaultPostImage = "/images/og-image.png";
 
 const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
+  const { t, locale } = useTranslations();
+  const dateLocaleTag = locale === "es" ? "es-CO" : "en-US";
+
   return (
     <section className="pt-8 sm:pt-16 lg:pt-24">
       <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:space-y-16 lg:px-8">
         {/* Header */}
         <div className="space-y-4 text-center">
-          <p className="text-sm font-medium uppercase">Related blogs</p>
+          <p className="text-sm font-medium uppercase">
+            {t("blocks.relatedBlogSection.eyebrow")}
+          </p>
 
           <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-            Related Post
+            {t("blocks.relatedBlogSection.title")}
           </h2>
 
           <p className="text-muted-foreground text-xl">
-            Expand your knowledge with these hand-picked posts.
+            {t("blocks.relatedBlogSection.subtitle")}
           </p>
         </div>
 
@@ -38,7 +46,7 @@ const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                   <div className="mb-2.5 overflow-hidden rounded-lg">
                     <Image
                       src={assetPath(post.image ?? defaultPostImage)}
-                      alt={post.title ?? "Blog post"}
+                      alt={post.title ?? t("blocks.blogHero.postFallbackAlt")}
                       width={1200}
                       height={675}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -51,7 +59,7 @@ const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                       <CalendarDaysIcon className="size-4.5" />
                       <span className="text-muted-foreground">
                         {new Date(post.publishedAt ?? "").toLocaleDateString(
-                          "en-US",
+                          dateLocaleTag,
                           {
                             year: "numeric",
                             month: "long",
@@ -75,7 +83,12 @@ const RelatedBlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                     <p className="text-sm font-medium">{post.author?.name}</p>
                     <SecondaryFlowButton size="icon">
                       <ArrowRightIcon className="size-4 -rotate-45" />
-                      <span className="sr-only">Read more: {post.title}</span>
+                      <span className="sr-only">
+                        {t("blocks.relatedBlogSection.readMoreSrOnly").replace(
+                          "{title}",
+                          post.title ?? "",
+                        )}
+                      </span>
                     </SecondaryFlowButton>
                   </div>
                 </CardContent>

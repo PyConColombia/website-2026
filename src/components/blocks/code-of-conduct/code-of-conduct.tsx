@@ -1,13 +1,16 @@
+"use client";
+
 import { ArrowRightIcon, MailIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { SVGAttributes } from "react";
 
-import { codeOfConduct } from "@/assets/data/code-of-conduct";
+import { codeOfConductByLocale } from "@/assets/data/code-of-conduct";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 
 const SemiCircleSVG = (props: SVGAttributes<SVGElement>) => {
   return (
@@ -29,6 +32,10 @@ const SemiCircleSVG = (props: SVGAttributes<SVGElement>) => {
 };
 
 const CodeOfConduct = () => {
+  const { locale } = useLanguage();
+  const { t } = useTranslations();
+  const codeOfConduct = codeOfConductByLocale[locale];
+
   return (
     <>
       <section className="py-8 sm:py-16 lg:py-24">
@@ -82,7 +89,7 @@ const CodeOfConduct = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <PrimaryFlowButton size="lg" asChild>
                   <Link href="#policy">
-                    Read policy
+                    {t("blocks.codeOfConductUi.readPolicy")}
                     <ArrowRightIcon />
                   </Link>
                 </PrimaryFlowButton>
@@ -93,7 +100,7 @@ const CodeOfConduct = () => {
                   asChild
                 >
                   <Link href={`mailto:${codeOfConduct.contactEmail}`}>
-                    Contact us
+                    {t("blocks.codeOfConductUi.contactUs")}
                     <MailIcon />
                   </Link>
                 </Button>
@@ -112,7 +119,7 @@ const CodeOfConduct = () => {
             >
               <Image
                 src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/about-us/image-32.png"
-                alt="PyCon Colombia community"
+                alt={t("blocks.codeOfConductUi.communityImageAlt")}
                 width={640}
                 height={640}
                 sizes="(max-width: 768px) 80vw, 40vw"
@@ -199,7 +206,7 @@ const CodeOfConduct = () => {
           <aside className="hidden lg:block">
             <div className="sticky top-24 rounded-lg border bg-card p-5">
               <p className="mb-4 text-sm font-medium uppercase text-primary">
-                On this page
+                {t("blocks.codeOfConductUi.onThisPage")}
               </p>
               <nav className="space-y-2">
                 {[
@@ -227,7 +234,7 @@ const CodeOfConduct = () => {
                 {codeOfConduct.updatedAt}
               </p>
               <h2 className="mt-3 text-2xl font-semibold md:text-3xl">
-                Policy details
+                {t("blocks.codeOfConductUi.policyDetails")}
               </h2>
             </div>
 

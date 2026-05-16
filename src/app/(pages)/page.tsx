@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { benefits } from "@/assets/data/benefits";
-import { topics } from "@/assets/data/trusted-brands";
+import { topicsByLocale } from "@/assets/data/trusted-brands";
 import Benefits from "@/components/blocks/benefits/benefits";
 import CTA from "@/components/blocks/cta/cta";
 import Gallery from "@/components/blocks/gallery/gallery";
@@ -93,11 +92,11 @@ const Home = () => {
 
       <SectionSeparator />
 
-      <TrustedBrands topics={topics} />
+      <TrustedBrands topicsByLocale={topicsByLocale} />
 
       <SectionSeparator />
 
-      <Benefits featuresList={benefits} />
+      <Benefits />
 
       <SectionSeparator />
 

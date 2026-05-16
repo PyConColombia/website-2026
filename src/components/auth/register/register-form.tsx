@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "@/contexts/language-context";
 
 const RegisterForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -16,6 +17,8 @@ const RegisterForm = () => {
     useState(false);
 
   const router = useRouter();
+  const { t } = useTranslations();
+  const f = (key: string) => t(`blocks.auth.registerForm.${key}`);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,30 +27,31 @@ const RegisterForm = () => {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
-      {/* Username */}
       <div className="space-y-1">
         <Label className="leading-5" htmlFor="username">
-          Username*
+          {f("usernameLabel")}
         </Label>
-        <Input type="text" id="username" placeholder="Enter your username" />
+        <Input
+          type="text"
+          id="username"
+          placeholder={f("usernamePlaceholder")}
+        />
       </div>
 
-      {/* Email */}
       <div className="space-y-1">
         <Label className="leading-5" htmlFor="userEmail">
-          Email address*
+          {f("emailLabel")}
         </Label>
         <Input
           type="email"
           id="userEmail"
-          placeholder="Enter your email address"
+          placeholder={f("emailPlaceholder")}
         />
       </div>
 
-      {/* Password */}
       <div className="w-full space-y-1">
         <Label className="leading-5" htmlFor="password">
-          Password*
+          {f("passwordLabel")}
         </Label>
         <div className="relative">
           <Input
@@ -64,16 +68,15 @@ const RegisterForm = () => {
           >
             {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
             <span className="sr-only">
-              {isPasswordVisible ? "Hide password" : "Show password"}
+              {isPasswordVisible ? f("hidePassword") : f("showPassword")}
             </span>
           </Button>
         </div>
       </div>
 
-      {/* Confirm Password */}
       <div className="w-full space-y-1">
         <Label className="leading-5" htmlFor="confirmPassword">
-          Confirm password*
+          {f("confirmPasswordLabel")}
         </Label>
         <div className="relative">
           <Input
@@ -92,23 +95,22 @@ const RegisterForm = () => {
           >
             {isConfirmPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
             <span className="sr-only">
-              {isConfirmPasswordVisible ? "Hide password" : "Show password"}
+              {isConfirmPasswordVisible ? f("hidePassword") : f("showPassword")}
             </span>
           </Button>
         </div>
       </div>
 
-      {/* Privacy policy */}
       <div className="flex items-center gap-3">
         <Checkbox id="rememberMe" className="size-6" />
-        <Label htmlFor="rememberMe">I agree to privacy policy & terms</Label>
+        <Label htmlFor="rememberMe">{f("privacyLabel")}</Label>
       </div>
 
       <PrimaryFlowButton
         className="w-full *:w-full [&>button]:after:-inset-55"
         type="submit"
       >
-        Sign up to flow
+        {f("submit")}
       </PrimaryFlowButton>
     </form>
   );

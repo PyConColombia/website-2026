@@ -1,3 +1,5 @@
+"use client";
+
 import { ExternalLinkIcon, StarIcon } from "lucide-react";
 
 import Link from "next/link";
@@ -6,18 +8,20 @@ import TestimonialCard from "@/components/blocks/testimonials/testimonial-card";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Marquee } from "@/components/ui/marquee";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 
 const Testimonials = ({
   testimonials,
 }: {
   testimonials: TestimonialItem[];
 }) => {
+  const { t } = useTranslations();
+
   return (
     <section
       id="testimonials"
       className="space-y-12 py-8 sm:space-y-16 sm:py-16 lg:space-y-24 lg:py-24"
     >
-      {/* Testimonial Header */}
       <MotionPreset
         className="mx-auto max-w-7xl space-y-4 px-4 text-center sm:px-6 lg:px-8"
         fade
@@ -26,20 +30,18 @@ const Testimonials = ({
         transition={{ duration: 0.5 }}
       >
         <p className="text-primary text-sm font-medium uppercase">
-          Testimonials
+          {t("blocks.testimonials.eyebrow")}
         </p>
 
         <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-          What our community says
+          {t("blocks.testimonials.title")}
         </h2>
 
         <p className="text-muted-foreground text-xl">
-          Real stories from speakers, attendees, and volunteers who make PyCon
-          Colombia unforgettable every year.
+          {t("blocks.testimonials.subtitle")}
         </p>
       </MotionPreset>
 
-      {/* Testimonials Marquee */}
       <div className="w-full">
         <Marquee
           pauseOnHover
@@ -58,15 +60,15 @@ const Testimonials = ({
           <div>
             <div className="flex items-center gap-1.5">
               <p className="text-2xl font-semibold">4.5</p>
-              <StarIcon className="fill-amber-600 stroke-amber-600 dark:fill-amber-400 dark:stroke-amber-400"></StarIcon>
+              <StarIcon className="fill-amber-600 stroke-amber-600 dark:fill-amber-400 dark:stroke-amber-400" />
             </div>
             <p className="text-muted-foreground text-sm font-medium">
-              Stars out of 5
+              {t("blocks.testimonials.starsLabel")}
             </p>
           </div>
           <PrimaryFlowButton size="lg" asChild>
             <Link href="#">
-              View all testimonials
+              {t("blocks.testimonials.viewAll")}
               <ExternalLinkIcon />
             </Link>
           </PrimaryFlowButton>

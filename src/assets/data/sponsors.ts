@@ -1,5 +1,12 @@
 export type SponsorSize = "XL" | "L" | "M" | "S" | "XS";
 
+export type SponsorTierKey =
+  | "venue"
+  | "platinum"
+  | "gold"
+  | "silverPlus"
+  | "silver";
+
 export type Sponsor = {
   name: string;
   logo?: string;
@@ -7,6 +14,7 @@ export type Sponsor = {
 };
 
 export type SponsorTier = {
+  tierKey: SponsorTierKey;
   /** Short label shown next to the rule (e.g. Venue → VENUE via CSS) */
   title: string;
   size: SponsorSize;
@@ -18,6 +26,7 @@ export type SponsorTier = {
 
 export const sponsorTiers: SponsorTier[] = [
   {
+    tierKey: "venue",
     title: "Venue",
     accent: "venue",
     size: "XL",
@@ -32,6 +41,7 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    tierKey: "platinum",
     title: "Platinum",
     size: "L",
     description:
@@ -45,6 +55,7 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    tierKey: "gold",
     title: "Gold",
     size: "M",
     description:
@@ -58,6 +69,7 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    tierKey: "silverPlus",
     title: "Silver +",
     size: "S",
     description: "Partners helping us strengthen the attendee experience.",
@@ -70,6 +82,7 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    tierKey: "silver",
     title: "Silver",
     size: "S",
     description: "Community sponsors supporting the conference program.",

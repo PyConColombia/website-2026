@@ -30,8 +30,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useTranslations } from "@/contexts/language-context";
 import { useActiveSection } from "@/hooks/use-active-section";
-
+import type { NavTitleKey } from "@/lib/site-messages";
 import { cn } from "@/lib/utils";
 
 type NavigationSection = {
@@ -49,7 +50,7 @@ type NavigationItem = {
 };
 
 type Navigation = {
-  title: string;
+  titleKey: NavTitleKey;
   contentClassName?: string;
 } & (
   | {
@@ -152,6 +153,9 @@ const HeaderNavigation = ({
   navigationClassName?: string;
 }) => {
   const pathname = usePathname();
+  const { t } = useTranslations();
+
+  const navLabel = (key: NavTitleKey) => t(`nav.${key}`);
 
   // Extract all section IDs from navigation data
   const sectionIds = navigationData.flatMap((navItem) => {
@@ -220,7 +224,7 @@ const HeaderNavigation = ({
               : pathname?.startsWith(navItem.href);
 
             return (
-              <NavigationMenuItem key={navItem.title}>
+              <NavigationMenuItem key={navItem.titleKey}>
                 <NavigationMenuLink
                   data-active={isActive}
                   className={cn(
@@ -229,7 +233,7 @@ const HeaderNavigation = ({
                   )}
                   asChild
                 >
-                  <Link href={navItem.href}>{navItem.title}</Link>
+                  <Link href={navItem.href}>{navLabel(navItem.titleKey)}</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             );
@@ -266,12 +270,12 @@ const HeaderNavigation = ({
           }
 
           return (
-            <NavigationMenuItem key={navItem.title}>
+            <NavigationMenuItem key={navItem.titleKey}>
               <NavigationMenuTrigger
                 data-active={hasActiveChild}
                 className="text-muted-foreground! data-[active=true]:text-foreground! bg-transparent! p-0! text-base [&_svg]:size-4"
               >
-                {navItem.title}
+                {navLabel(navItem.titleKey)}
               </NavigationMenuTrigger>
               <NavigationMenuContent className="absolute left-1/2 w-auto -translate-x-1/2 shadow-lg!">
                 {navItem.splitItems ? (
@@ -360,6 +364,9 @@ const HeaderNavigationSmallScreen = ({
   const isMobile = useMedia(`(max-width: ${screenSize}px)`, false);
 
   const pathname = usePathname();
+  const { t } = useTranslations();
+
+  const navLabel = (key: NavTitleKey) => t(`nav.${key}`);
 
   // Extract all section IDs from navigation data
   const sectionIds = navigationData.flatMap((navItem) => {
@@ -426,7 +433,7 @@ const HeaderNavigationSmallScreen = ({
           className={cn("inline-flex lg:hidden", triggerClassName)}
         >
           <MenuIcon />
-          <span className="sr-only">Menu</span>
+          <span className="sr-only">{t("blocks.headerUi.menuSrOnly")}</span>
         </SecondaryFlowButton>
       </SheetTrigger>
       <SheetContent side="left" className="w-75 gap-0 p-0">
@@ -438,7 +445,7 @@ const HeaderNavigationSmallScreen = ({
           </Link>
         </SheetHeader>
         <div className="space-y-0.5 overflow-y-auto p-2">
-          {navigationData.map((navItem, index) => {
+          {navigationData.map((navItem) => {
             if (navItem.href) {
               const sectionId = navItem.href.startsWith("/#")
                 ? navItem.href.slice(2)
@@ -452,13 +459,13 @@ const HeaderNavigationSmallScreen = ({
 
               return (
                 <Link
-                  key={navItem.title}
+                  key={navItem.titleKey}
                   href={navItem.href}
                   data-active={isActive}
                   className="hover:bg-accent data-[active=true]:bg-accent flex items-center gap-2 rounded-sm px-3 py-2 text-sm data-[active=true]:font-medium"
                   onClick={handleLinkClick}
                 >
-                  {navItem.title}
+                  {navLabel(navItem.titleKey)}
                 </Link>
               );
             }
@@ -493,12 +500,14 @@ const HeaderNavigationSmallScreen = ({
             }
 
             return (
-              <Collapsible key={index} className="w-full">
+              <Collapsible key={navItem.titleKey} className="w-full">
                 <CollapsibleTrigger
                   data-active={hasActiveChild}
                   className="hover:bg-accent group data-[active=true]:bg-accent flex w-full items-center justify-between rounded-sm px-3 py-2 text-sm data-[active=true]:font-medium"
                 >
-                  <div className="flex items-center gap-2">{navItem.title}</div>
+                  <div className="flex items-center gap-2">
+                    {navLabel(navItem.titleKey)}
+                  </div>
                   <ChevronRightIcon className="size-4 shrink-0 transition-transform duration-300 group-data-[state=open]:rotate-90" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden transition-all duration-300">

@@ -4,9 +4,12 @@ import { useRouter } from "next/navigation";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "@/contexts/language-context";
 
 const ForgotPasswordForm = () => {
   const router = useRouter();
+  const { t } = useTranslations();
+  const f = (key: string) => t(`blocks.auth.forgotForm.${key}`);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,15 +18,14 @@ const ForgotPasswordForm = () => {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
-      {/* Email */}
       <div className="space-y-1">
         <Label className="leading-5" htmlFor="userEmail">
-          Email address*
+          {f("emailLabel")}
         </Label>
         <Input
           type="email"
           id="userEmail"
-          placeholder="Enter your email address"
+          placeholder={f("emailPlaceholder")}
         />
       </div>
 
@@ -31,7 +33,7 @@ const ForgotPasswordForm = () => {
         className="w-full *:w-full [&>button]:after:-inset-55"
         type="submit"
       >
-        Reset password
+        {f("submit")}
       </PrimaryFlowButton>
     </form>
   );

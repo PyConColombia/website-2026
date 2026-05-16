@@ -9,6 +9,7 @@ import {
   HeaderNavigationSmallScreen,
   type Navigation,
 } from "@/components/layout/header-navigation";
+import { LanguageSwitch } from "@/components/layout/language-switch";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import {
   Select,
@@ -22,6 +23,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTranslations } from "@/contexts/language-context";
 
 import { assetPath, cn } from "@/lib/utils";
 
@@ -31,6 +33,7 @@ type HeaderProps = {
 };
 
 const Header = ({ navigationData, className }: HeaderProps) => {
+  const { t } = useTranslations();
   const [isScrolled, setIsScrolled] = useState(false);
   const ticketsUrl =
     "https://www.eventbrite.co/e/pycon-colombia-2026-tickets-1986172567616?aff=ebdssbdestsearch";
@@ -86,7 +89,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
             <div className="bg-primary ring-primary/30 size-8 overflow-hidden rounded-full ring-2">
               <Image
                 src={assetPath("/favicon/apple-touch-icon.png")}
-                alt="PyCon Colombia"
+                alt={t("blocks.headerUi.brandAlt")}
                 width={32}
                 height={32}
                 className="size-full object-contain"
@@ -107,7 +110,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
 
         {/* Actions */}
         <div className="flex gap-4 sm:gap-6">
-          <div className="max-sm:hidden">
+          <div className="max-sm:hidden flex items-center gap-2">
             <div className="ring-secondary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2">
               <Select defaultValue="2026" onValueChange={openYearSite}>
                 <SelectTrigger
@@ -116,7 +119,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
                     "h-10 px-6 text-base",
                   )}
                 >
-                  <SelectValue placeholder="Year" />
+                  <SelectValue placeholder={t("header.yearPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
                   {years.map((y) => (
@@ -127,42 +130,46 @@ const Header = ({ navigationData, className }: HeaderProps) => {
                 </SelectContent>
               </Select>
             </div>
+            <LanguageSwitch />
           </div>
 
           <PrimaryFlowButton size="lg" className="max-sm:hidden" asChild>
             <Link href={ticketsUrl} target="_blank" rel="noopener noreferrer">
-              GET YOUR TICKETS
+              {t("header.getTickets")}
             </Link>
           </PrimaryFlowButton>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="sm:hidden">
-                <div className="ring-secondary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2">
-                  <Select defaultValue="2026" onValueChange={openYearSite}>
-                    <SelectTrigger
-                      aria-label="Select year"
-                      className={cn(
-                        "hover:bg-secondary ring-0 shadow-none relative rounded-lg border border-transparent bg-secondary bg-clip-padding duration-500 text-shadow-xs",
-                        "size-10 justify-center px-0 [&_[data-slot=select-value]]:hidden",
-                      )}
-                    >
-                      <SelectValue />
-                      <CalendarDaysIcon className="size-4" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {years.map((y) => (
-                        <SelectItem key={y} value={y}>
-                          {y}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+          <div className="sm:hidden flex items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div>
+                  <div className="ring-secondary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2">
+                    <Select defaultValue="2026" onValueChange={openYearSite}>
+                      <SelectTrigger
+                        aria-label={t("header.selectYearAria")}
+                        className={cn(
+                          "hover:bg-secondary ring-0 shadow-none relative rounded-lg border border-transparent bg-secondary bg-clip-padding duration-500 text-shadow-xs",
+                          "size-10 justify-center px-0 [&_[data-slot=select-value]]:hidden",
+                        )}
+                      >
+                        <SelectValue />
+                        <CalendarDaysIcon className="size-4" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {years.map((y) => (
+                          <SelectItem key={y} value={y}>
+                            {y}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>PyCon by year</TooltipContent>
-          </Tooltip>
+              </TooltipTrigger>
+              <TooltipContent>{t("header.pyconByYear")}</TooltipContent>
+            </Tooltip>
+            <LanguageSwitch />
+          </div>
 
           <Tooltip>
             <TooltipTrigger asChild>
@@ -173,11 +180,13 @@ const Header = ({ navigationData, className }: HeaderProps) => {
                   rel="noopener noreferrer"
                 >
                   <ExternalLinkIcon />
-                  <span className="sr-only">Get your tickets</span>
+                  <span className="sr-only">
+                    {t("header.getTicketsSrOnly")}
+                  </span>
                 </Link>
               </PrimaryFlowButton>
             </TooltipTrigger>
-            <TooltipContent>Get your tickets</TooltipContent>
+            <TooltipContent>{t("header.getTicketsTooltip")}</TooltipContent>
           </Tooltip>
 
           <HeaderNavigationSmallScreen navigationData={navigationData} />

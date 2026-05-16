@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { useTranslations } from "@/contexts/language-context";
 import { assetPath } from "@/lib/utils";
 
 const socialLinks = [
@@ -41,33 +42,36 @@ const socialLinks = [
   },
 ];
 
-const legalLinks = [
-  {
-    label: "Code of Conduct",
-    href: "/code-of-conduct",
-  },
-];
-
-const footerLinks = [
-  {
-    label: "Home",
-    href: "/#pycon-hero",
-  },
-  {
-    label: "Keynote Speakers",
-    href: "/#benefits",
-  },
-  {
-    label: "Gallery",
-    href: "/#gallery",
-  },
-  {
-    label: "Team",
-    href: "/team",
-  },
-];
-
 const Footer = () => {
+  const { t } = useTranslations();
+  const year = new Date().getFullYear();
+
+  const legalLinks = [
+    {
+      label: t("footer.codeOfConduct"),
+      href: "/code-of-conduct",
+    },
+  ];
+
+  const footerLinks = [
+    {
+      label: t("footer.home"),
+      href: "/#pycon-hero",
+    },
+    {
+      label: t("footer.keynoteSpeakers"),
+      href: "/#benefits",
+    },
+    {
+      label: t("footer.gallery"),
+      href: "/#gallery",
+    },
+    {
+      label: t("footer.team"),
+      href: "/team",
+    },
+  ];
+
   return (
     <footer className="bg-[#0F172B] text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-16 lg:grid-cols-[1.3fr_1fr] lg:px-8 lg:py-20">
@@ -76,7 +80,7 @@ const Footer = () => {
             <span className="size-10 overflow-hidden rounded-full bg-white ring-2 ring-white/25">
               <Image
                 src={assetPath("/favicon/apple-touch-icon.png")}
-                alt="PyCon Colombia"
+                alt={t("blocks.headerUi.brandAlt")}
                 width={40}
                 height={40}
                 className="size-full object-contain"
@@ -91,12 +95,9 @@ const Footer = () => {
           </Link>
 
           <p className="max-w-xl text-base leading-7 text-white/75">
-            PyCon Colombia is the annual Colombian conference that gathers
-            professionals, enthusiasts and amateur users of the Python
-            programming language.
+            {t("footer.descriptionLead")}
             <br />
-            Join us to learn, share, and connect with Python professionals from
-            across the globe.
+            {t("footer.descriptionJoin")}
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -117,10 +118,12 @@ const Footer = () => {
 
         <div className="grid gap-8 sm:grid-cols-3">
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-white">Legal</h2>
+            <h2 className="text-lg font-semibold text-white">
+              {t("footer.legal")}
+            </h2>
             <ul className="space-y-3 text-white/70">
               {legalLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="transition-colors hover:text-white"
@@ -133,7 +136,9 @@ const Footer = () => {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-white">Contact</h2>
+            <h2 className="text-lg font-semibold text-white">
+              {t("footer.contact")}
+            </h2>
             <Link
               href="mailto:Hello@pycon.co"
               className="block text-white/70 transition-colors hover:text-white"
@@ -143,10 +148,12 @@ const Footer = () => {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-white">Links</h2>
+            <h2 className="text-lg font-semibold text-white">
+              {t("footer.links")}
+            </h2>
             <ul className="space-y-3 text-white/70">
               {footerLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="transition-colors hover:text-white"
@@ -163,7 +170,7 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl justify-center px-4 py-6 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-white/60">
-            ©{new Date().getFullYear()} PyCon Colombia. All rights reserved.
+            {t("footer.copyright").replace("{year}", String(year))}
           </p>
         </div>
       </div>

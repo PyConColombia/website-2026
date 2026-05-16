@@ -1,3 +1,5 @@
+"use client";
+
 import { GithubIcon, LinkedinIcon, XIcon } from "lucide-react";
 
 import Image from "next/image";
@@ -13,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 import { assetPath } from "@/lib/utils";
 
 const socialButtonClassName =
@@ -25,6 +28,8 @@ const formatRole = (role: string) => {
 };
 
 const Team = () => {
+  const { t } = useTranslations();
+
   return (
     <section id="team" className="py-8 sm:py-16 lg:py-24">
       <MotionPreset
@@ -34,13 +39,14 @@ const Team = () => {
         transition={{ duration: 0.5 }}
         className="mb-12 space-y-4 text-center max-md:px-4 sm:mb-16"
       >
-        <p className="text-primary text-sm font-medium uppercase">Team</p>
+        <p className="text-primary text-sm font-medium uppercase">
+          {t("blocks.team.eyebrow")}
+        </p>
         <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-          Meet the people behind PyCon Colombia
+          {t("blocks.team.title")}
         </h2>
         <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-          A community-driven team working to bring speakers, sponsors,
-          volunteers, and attendees together.
+          {t("blocks.team.subtitle")}
         </p>
       </MotionPreset>
 
@@ -77,8 +83,7 @@ const Team = () => {
                     </span>
                   </div>
                   <CardDescription className="text-base">
-                    Part of the team bringing speakers, sponsors, volunteers,
-                    and attendees together for PyCon Colombia 2026.
+                    {t("blocks.team.cardDescription")}
                   </CardDescription>
                 </CardHeader>
 

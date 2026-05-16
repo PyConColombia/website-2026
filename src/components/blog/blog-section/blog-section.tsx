@@ -12,10 +12,13 @@ import { Input } from "@/components/ui/input";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 import type { PostMetadata } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
 
 const defaultPostImage = "/images/og-image.png";
+
+const ALL_POSTS_TAB = "All";
 
 const BlogGrid = ({
   posts,
@@ -24,6 +27,10 @@ const BlogGrid = ({
   posts: PostMetadata[];
   onCategoryClick: (category: string) => void;
 }) => {
+  const { locale } = useLanguage();
+  const { t } = useTranslations();
+  const dateLocale = locale === "es" ? "es-CO" : "en-US";
+
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts.map((post, index) => (
@@ -38,7 +45,7 @@ const BlogGrid = ({
             >
               <Image
                 src={assetPath(post.image ?? defaultPostImage)}
-                alt={post.title ?? "Blog post"}
+                alt={post.title ?? t("blocks.blogHero.postFallbackAlt")}
                 width={1200}
                 height={675}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -50,7 +57,7 @@ const BlogGrid = ({
                 <CalendarDaysIcon className="size-4.5" />
                 <span className="text-muted-foreground">
                   {new Date(post.publishedAt ?? "").toLocaleDateString(
-                    "en-US",
+                    dateLocale,
                     {
                       year: "numeric",
                       month: "long",
@@ -83,7 +90,9 @@ const BlogGrid = ({
               <SecondaryFlowButton size="icon" asChild>
                 <Link href={`/blog/${post.slug}`}>
                   <ArrowRightIcon className="size-4 -rotate-45" />
-                  <span className="sr-only">Read more: {post.title}</span>
+                  <span className="sr-only">
+                    {t("blocks.blogSection.readMoreSrOnly")}: {post.title}
+                  </span>
                 </Link>
               </SecondaryFlowButton>
             </div>
@@ -95,13 +104,17 @@ const BlogGrid = ({
 };
 
 const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
-  const [selectedTab, setSelectedTab] = useState("All");
+  const { t } = useTranslations();
+  const [selectedTab, setSelectedTab] = useState(ALL_POSTS_TAB);
   const [searchQuery, setSearchQuery] = useState("");
 
   const filterCategories = Array.from(
     new Set(posts.map((post) => post.category)),
   ).filter(Boolean) as string[];
-  const categories = ["All", ...filterCategories];
+  const categories = [ALL_POSTS_TAB, ...filterCategories];
+
+  const tabLabel = (tab: string) =>
+    tab === ALL_POSTS_TAB ? t("blocks.blogSection.allCategory") : tab;
 
   const handleTabChange = (tab: string) => {
     setSelectedTab(tab);
@@ -110,7 +123,7 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
   const filteredPosts = posts.filter((post) => {
     // Category filter
     const matchesCategory =
-      selectedTab === "All" || post.category === selectedTab;
+      selectedTab === ALL_POSTS_TAB || post.category === selectedTab;
 
     // Search filter
     if (!searchQuery) return matchesCategory;
@@ -137,16 +150,16 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
           transition={{ duration: 0.5 }}
           className="space-y-4 text-center"
         >
-          <p className="text-sm font-medium uppercase">Blogs</p>
+          <p className="text-sm font-medium uppercase">
+            {t("blocks.blogSection.eyebrow")}
+          </p>
 
           <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-            Learn How High-Performing Products Grow
+            {t("blocks.blogSection.title")}
           </h2>
 
           <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-            Actionable insights, real-world strategies, and product analytics
-            lessons to help you track what matters, move faster, and scale with
-            confidence.
+            {t("blocks.blogSection.subtitle")}
           </p>
         </MotionPreset>
 
@@ -172,7 +185,7 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                       value={category}
                       className="hover:bg-primary/10 dark:data-[state=active]:bg-background dark:data-[state=active]:border-background min-w-30 cursor-pointer px-4 text-base"
                     >
-                      {category}
+                      {tabLabel(category)}
                     </TabsTrigger>
                   ))}
                 </TabsList>
@@ -182,11 +195,13 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
               <div className="relative w-full max-w-82 max-md:w-full max-md:max-w-89">
                 <div className="text-muted-foreground pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">
                   <SearchIcon className="size-4" />
-                  <span className="sr-only">Search</span>
+                  <span className="sr-only">
+                    {t("blocks.blogSection.searchSrOnly")}
+                  </span>
                 </div>
                 <Input
                   type="search"
-                  placeholder="Search insights"
+                  placeholder={t("blocks.blogSection.searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="peer h-10 ps-9 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none"
@@ -215,12 +230,17 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                     <SearchIcon className="size-12 opacity-50" />
                     <div className="space-y-2">
                       <h3 className="text-foreground text-lg font-medium">
-                        No posts found
+                        {t("blocks.blogSection.noPostsTitle")}
                       </h3>
                       <p className="text-sm">
                         {searchQuery
-                          ? `No results in "${category}" for "${searchQuery}".`
-                          : `No posts in "${category}" category yet.`}
+                          ? t("blocks.blogSection.noPostsSearch")
+                              .replace("{category}", tabLabel(selectedTab))
+                              .replace("{query}", searchQuery)
+                          : t("blocks.blogSection.noPostsCategory").replace(
+                              "{category}",
+                              tabLabel(selectedTab),
+                            )}
                       </p>
                     </div>
                     {searchQuery && (
@@ -228,7 +248,7 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
                         size="sm"
                         onClick={() => setSearchQuery("")}
                       >
-                        Clear search
+                        {t("blocks.blogSection.clearSearch")}
                       </SecondaryFlowButton>
                     )}
                   </div>

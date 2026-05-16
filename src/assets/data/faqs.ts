@@ -1,6 +1,7 @@
 import type { FAQs } from "@/components/blocks/faq/faq";
+import type { SiteLocale } from "@/lib/site-messages";
 
-export const faqItems: FAQs = [
+export const faqItemsEn: FAQs = [
   {
     question: "What language should I submit my proposal and give my talk in?",
     answer:
@@ -42,3 +43,54 @@ export const faqItems: FAQs = [
       "PyCon Colombia is made possible thanks to our sponsors. If your organization is interested in supporting the Python ecosystem and Latin American innovation, please contact us at sponsors@pycon.co.",
   },
 ];
+
+const faqItemsEs: FAQs = [
+  {
+    question: "¿En qué idioma debo enviar mi propuesta y dar mi charla?",
+    answer:
+      "PyCon Colombia es una conferencia bilingüe. Aceptamos propuestas en español y en inglés. Puedes elegir el idioma con el que te sientas más cómodo/a para tu presentación.",
+  },
+  {
+    question: "¿Puedo enviar más de una propuesta?",
+    answer:
+      "Sí. Puedes enviar varias propuestas. Sin embargo, para mantener un programa diverso, normalmente limitamos a una sola presentación por ponente en la selección final.",
+  },
+  {
+    question: "¿Qué criterios se usan para evaluar las propuestas?",
+    answer:
+      "Las propuestas se evalúan por relevancia para la comunidad, calidad técnica, claridad del resumen y valor educativo. Buscamos equilibrio entre públicos principiante y avanzado.",
+  },
+  {
+    question: "Nunca he hablado en una conferencia. ¿Puedo postular?",
+    answer:
+      "¡Por supuesto! Nos encantan las personas que debutan como ponentes. Incluso ofrecemos mentorías para ayudarte a pulir tu presentación antes del evento.",
+  },
+  {
+    question: "¿Las sesiones se graban?",
+    answer:
+      "Sí. Salvo que se indique explícitamente lo contrario, las charlas se graban y publican en nuestro canal de YouTube después del evento para beneficio de la comunidad Python global.",
+  },
+  {
+    question: "¿Hay becas para asistir a PyCon Colombia?",
+    answer:
+      "Sí. Cada año ofrecemos becas de diversidad para reducir barreras económicas; cubren el costo de la entrada para estudiantes y personas de grupos subrepresentados en la comunidad Python.",
+  },
+  {
+    question: "¿Cuándo y dónde será PyCon Colombia 2026?",
+    answer:
+      "PyCon Colombia 2026 será del 24 al 26 de julio de 2026 en Medellín, Colombia, en nuestra sede aliada Universidad EAFIT.",
+  },
+  {
+    question: "¿Cómo puede mi empresa ser patrocinadora?",
+    answer:
+      "PyCon Colombia es posible gracias a los patrocinadores. Si tu organización quiere apoyar el ecosistema Python y la innovación en Latinoamérica, escríbenos a sponsors@pycon.co.",
+  },
+];
+
+export const faqItemsByLocale: Record<SiteLocale, FAQs> = {
+  en: faqItemsEn,
+  es: faqItemsEs,
+};
+
+/** @deprecated use faqItemsByLocale */
+export const faqItems = faqItemsEn;

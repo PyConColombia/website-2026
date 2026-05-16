@@ -1,11 +1,16 @@
+"use client";
+
 import FloatingLogo from "@/components/blocks/pycon-visual-hero/floating-logo";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 
 const PyconVisualHero = () => {
+  const { t } = useTranslations();
+
   return (
     <section
       id="pycon-hero"
-      aria-label="PyCon Colombia 2026"
+      aria-label={t("heroVisual.ariaLabel")}
       className="relative isolate min-h-[650px] overflow-hidden bg-background px-4 py-12 sm:px-6 lg:px-8"
     >
       <div className="absolute left-[calc(12%-50px)] top-8 size-11 rounded-full bg-[radial-gradient(88.84%_88.84%_at_63.5%_12.5%,#FFF_0%,#C2CCFF_100%)] blur-[3.1469154357910156px] sm:size-15" />
@@ -36,8 +41,8 @@ const PyconVisualHero = () => {
             delay={0.55}
             className="[font-family:var(--font-button)] absolute bottom-[-52px] left-[140px] z-30 w-max max-w-72 text-left text-[25px] leading-[1.05] text-foreground sm:bottom-[4px] sm:max-w-none sm:text-[29px]"
           >
-            <p>MEDELLIN, COLOMBIA</p>
-            <p>24, 25 &amp; 26 JULY - 2026</p>
+            <p>{t("heroVisual.locationLine1")}</p>
+            <p>{t("heroVisual.locationLine2")}</p>
           </MotionPreset>
         </div>
 

@@ -1,30 +1,16 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import CTASection from "@/components/blocks/cta/cta";
+import BlogPostLayout from "@/components/blog/blog-post-layout";
 import RelatedBlogSection from "@/components/blog/related-blog-section/related-blog-section";
-import TableOfContents from "@/components/blog/table-of-contents";
 import MDXContent from "@/components/mdx-content";
 import SectionSeparator from "@/components/section-separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { SecondaryFlowButton } from "@/components/ui/flow-button";
-import { Separator } from "@/components/ui/separator";
 import { extractHeadings } from "@/lib/extract-headings";
 import { getPostBySlug, getPosts } from "@/lib/posts";
+import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
+import { siteMessages } from "@/lib/site-messages";
 import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
-import { assetPath } from "@/lib/utils";
-
-const defaultPostImage = "/images/og-image.png";
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -45,10 +31,13 @@ export async function generateMetadata({
     return {};
   }
 
+  const fallbackTitle =
+    siteMessages[STATIC_PRERENDER_LOCALE].blocks.blogPostPage.fallbackTitle;
+
   const { metadata } = post;
 
   return {
-    title: metadata.title ?? "Article",
+    title: metadata.title ?? fallbackTitle,
     description: metadata.description,
     keywords: metadata.keywords,
     alternates: {
@@ -73,16 +62,16 @@ const BlogDetailsPage = async ({
     notFound();
   }
 
+  const messages = siteMessages[STATIC_PRERENDER_LOCALE];
+
   const { metadata, content } = post;
 
-  // Sort posts by published date
   const allPosts = posts.sort(
     (a, b) =>
       new Date(a.publishedAt ?? "").getTime() -
       new Date(b.publishedAt ?? "").getTime(),
   );
 
-  // Find the current post index
   const currentPostIndex = allPosts.findIndex((p) => p.slug === slug);
   const previousPost =
     currentPostIndex > 0 ? allPosts[currentPostIndex - 1] : null;
@@ -102,17 +91,17 @@ const BlogDetailsPage = async ({
     3,
   );
 
-  // Extract headings for TOC
   const headings = extractHeadings(content);
 
   const postUrl = `${getSiteUrl()}/blog/${metadata.slug}`;
+  const fallbackArticleTitle = messages.blocks.blogPostPage.fallbackTitle;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       websiteJsonLd(),
       webPageJsonLd({
-        name: metadata.title ?? "Article",
+        name: metadata.title ?? fallbackArticleTitle,
         description: metadata.description,
         url: postUrl,
       }),
@@ -123,19 +112,19 @@ const BlogDetailsPage = async ({
           {
             "@type": "ListItem",
             position: 1,
-            name: "Home",
+            name: messages.nav.home,
             item: `${getSiteUrl()}/`,
           },
           {
             "@type": "ListItem",
             position: 2,
-            name: "Blog",
+            name: messages.blocks.blogPostPage.breadcrumbBlog,
             item: `${getSiteUrl()}/blog`,
           },
           {
             "@type": "ListItem",
             position: 3,
-            name: metadata.title ?? "Article",
+            name: metadata.title ?? fallbackArticleTitle,
             item: postUrl,
           },
         ],
@@ -145,126 +134,20 @@ const BlogDetailsPage = async ({
 
   return (
     <>
-      <section className="py-8 sm:py-16">
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 px-4 sm:px-6 lg:grid-cols-[250px_1fr] lg:gap-12 lg:px-8 xl:gap-16">
-          <aside className="hidden lg:block">
-            <TableOfContents headings={headings} />
-          </aside>
-
-          <div>
-            <Breadcrumb className="mb-6">
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/">Home</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/blog">Blog</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{metadata.category}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-
-            <h1 className="mb-6 text-2xl font-semibold md:text-3xl lg:text-4xl">
-              {metadata.title}
-            </h1>
-
-            <p className="text-muted-foreground">{metadata.description}</p>
-
-            <Separator className="my-6" />
-
-            <div className="mb-16 flex flex-wrap items-center justify-between gap-6">
-              <div className="flex items-center gap-2">
-                <Avatar className="size-11.5">
-                  <AvatarImage
-                    src={metadata.author?.picture}
-                    alt={metadata.author?.name}
-                  />
-                  <AvatarFallback>
-                    {metadata.author?.name.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col text-sm">
-                  <span className="text-muted-foreground mb-1">Written by</span>
-                  <span className="font-medium">{metadata.author?.name}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col text-sm">
-                <span className="text-muted-foreground mb-1.5">Read Time</span>
-                <span className="font-medium">{metadata.readTime}</span>
-              </div>
-
-              <div className="flex flex-col text-sm">
-                <span className="text-muted-foreground mb-1.5">Posted on</span>
-                <span className="font-medium">
-                  {new Date(metadata.publishedAt ?? "").toLocaleDateString(
-                    "en-US",
-                    {
-                      year: "numeric",
-                      month: "long",
-                      day: "2-digit",
-                    },
-                  )}
-                </span>
-              </div>
-            </div>
-
-            <Image
-              src={assetPath(metadata.image ?? defaultPostImage)}
-              alt={metadata.title ?? "Blog post"}
-              width={1280}
-              height={720}
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              className="mb-16 max-h-110 w-full rounded-xl object-cover"
-            />
-
-            <MDXContent source={content} />
-
-            <div className="flex items-center justify-between gap-4 pt-8 sm:pt-16">
-              {previousPost ? (
-                <SecondaryFlowButton asChild size="lg">
-                  <Link href={`/blog/${previousPost.slug}`}>
-                    <ChevronLeftIcon className="max-sm:hidden" />
-                    Previous Post
-                  </Link>
-                </SecondaryFlowButton>
-              ) : (
-                <SecondaryFlowButton
-                  size="lg"
-                  className="pointer-events-none opacity-50"
-                >
-                  <ChevronLeftIcon className="max-sm:hidden" />
-                  Previous Post
-                </SecondaryFlowButton>
-              )}
-              {nextPost ? (
-                <SecondaryFlowButton asChild size="lg">
-                  <Link href={`/blog/${nextPost.slug}`}>
-                    Next Post
-                    <ChevronRightIcon className="max-sm:hidden" />
-                  </Link>
-                </SecondaryFlowButton>
-              ) : (
-                <SecondaryFlowButton
-                  size="lg"
-                  className="pointer-events-none opacity-50"
-                >
-                  Next Post
-                  <ChevronRightIcon className="max-sm:hidden" />
-                </SecondaryFlowButton>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      <BlogPostLayout
+        headings={headings}
+        metadata={metadata}
+        previousPost={
+          previousPost
+            ? { slug: previousPost.slug, title: previousPost.title }
+            : null
+        }
+        nextPost={
+          nextPost ? { slug: nextPost.slug, title: nextPost.title } : null
+        }
+      >
+        <MDXContent source={content} />
+      </BlogPostLayout>
 
       <SectionSeparator />
 

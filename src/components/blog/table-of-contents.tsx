@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTranslations } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
 
 export interface TocItem {
@@ -53,6 +54,7 @@ function buildTocTree(
 }
 
 const TableOfContents = ({ headings }: TableOfContentsProps) => {
+  const { t } = useTranslations();
   const [activeId, setActiveId] = useState<string>("");
   const groupedHeadings = buildTocTree(headings);
 
@@ -154,7 +156,9 @@ const TableOfContents = ({ headings }: TableOfContentsProps) => {
 
   return (
     <div className="sticky top-20 hidden max-h-[calc(100vh-5rem)] md:block">
-      <div className="mb-4 text-sm font-semibold">On This Page</div>
+      <div className="mb-4 text-sm font-semibold">
+        {t("blocks.codeOfConductUi.onThisPage")}
+      </div>
       <ScrollArea className="h-[calc(100vh-8rem)]">
         <nav>
           <ul className="flex list-none flex-col gap-y-3">

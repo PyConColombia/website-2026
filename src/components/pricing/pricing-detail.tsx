@@ -10,6 +10,7 @@ import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useTranslations } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
 
 export type FeatureValue = boolean | string;
@@ -45,6 +46,7 @@ const PricingDetail = ({
   features: PricingFeature[];
 }) => {
   const [billingPeriod, setBillingPeriod] = useState("monthly");
+  const { t } = useTranslations();
 
   const renderFeatureValue = (value: FeatureValue) => {
     if (typeof value === "boolean") {
@@ -67,15 +69,16 @@ const PricingDetail = ({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 space-y-4 text-center sm:mb-16 lg:mb-24">
-          <p className="text-primary text-sm font-medium uppercase">Pricing</p>
+          <p className="text-primary text-sm font-medium uppercase">
+            {t("blocks.pricing.eyebrow")}
+          </p>
 
           <h1 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-            Pricing Details
+            {t("blocks.pricing.title")}
           </h1>
 
           <p className="text-muted-foreground mb-9 text-xl">
-            A Comprehensive Breakdown Of Our Pricing Plans to Help You Make The
-            Best Choice!
+            {t("blocks.pricing.subtitle")}
           </p>
 
           {/* Billing Toggle */}
@@ -91,14 +94,18 @@ const PricingDetail = ({
                   className="data-[state=active]:bg-background data-[state=active]:text-muted dark:data-[state=active]:text-muted dark:data-[state=active]:bg-background px-3 py-1 data-[state=active]:shadow-sm dark:data-[state=active]:border-transparent"
                   aria-hidden
                 >
-                  <span className="text-foreground text-base">Monthly</span>
+                  <span className="text-foreground text-base">
+                    {t("blocks.pricing.monthly")}
+                  </span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="yearly"
                   className="data-[state=active]:bg-background data-[state=active]:text-muted dark:data-[state=active]:text-muted dark:data-[state=active]:bg-background px-3 py-1 data-[state=active]:shadow-sm dark:data-[state=active]:border-transparent"
                   aria-hidden
                 >
-                  <span className="text-foreground text-base">Yearly</span>
+                  <span className="text-foreground text-base">
+                    {t("blocks.pricing.yearly")}
+                  </span>
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -112,17 +119,21 @@ const PricingDetail = ({
             <div className="mb-13 grid grid-cols-4 gap-6">
               {/* Discount Card */}
               <div className="flex h-full w-full flex-col justify-center gap-6 rounded-lg border border-dashed p-6">
-                <p className="text-2xl font-semibold uppercase">Flat</p>
+                <p className="text-2xl font-semibold uppercase">
+                  {t("blocks.pricing.flat")}
+                </p>
                 <div>
                   <span className="text-destructive text-6xl font-bold">
                     20%{" "}
                   </span>
-                  <span className="text-xl font-medium">OFF</span>
+                  <span className="text-xl font-medium">
+                    {t("blocks.pricing.offSuffix")}
+                  </span>
                 </div>
                 <p className="text-muted-foreground text-lg">
-                  For first 250 users,
+                  {t("blocks.pricing.discountLine1")}
                   <br />
-                  hurry up and get in now
+                  {t("blocks.pricing.discountLine2")}
                 </p>
               </div>
 
@@ -152,7 +163,9 @@ const PricingDetail = ({
                         </AvatarFallback>
                       </Avatar>
                       {plan.isPopular && (
-                        <Badge variant="destructive">Trending</Badge>
+                        <Badge variant="destructive">
+                          {t("blocks.pricing.trending")}
+                        </Badge>
                       )}
                     </div>
 

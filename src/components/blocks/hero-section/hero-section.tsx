@@ -8,8 +8,10 @@ import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect
 import { Badge } from "@/components/ui/badge";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useTranslations } from "@/contexts/language-context";
 
 const HeroSection = () => {
+  const { t, ta } = useTranslations();
   const ticketsUrl =
     "https://www.eventbrite.co/e/pycon-colombia-2026-tickets-1986172567616?aff=ebdssbdestsearch";
 
@@ -32,7 +34,7 @@ const HeroSection = () => {
             variant="outline"
             className="bg-background text-sm font-normal"
           >
-            Medellin, Colombia · 24, 25 &amp; 26 July, 2026
+            {t("hero.badge")}
           </Badge>
         </MotionPreset>
 
@@ -45,21 +47,8 @@ const HeroSection = () => {
           component="h1"
           className="z-10 flex flex-col items-center gap-3 text-center text-3xl font-semibold md:text-4xl lg:text-5xl lg:leading-[1.29167]"
         >
-          <span>Ready to dive into the world of</span>
-          <TextFlip
-            words={[
-              "Python",
-              "Data Science",
-              "Machine Learning",
-              "Artificial Intelligence",
-              "DevOps",
-              "Core Python",
-              "Scientific Computing",
-              "Computer Vision",
-              "Community",
-              "Open Source",
-            ]}
-          />
+          <span>{t("hero.titlePrefix")}</span>
+          <TextFlip words={ta("hero.flipWords")} />
         </MotionPreset>
 
         <MotionPreset
@@ -71,8 +60,7 @@ const HeroSection = () => {
           component="p"
           className="text-muted-foreground z-10 max-w-156 text-center text-xl"
         >
-          The biggest Python conference in Colombia. Come explore, learn, and
-          connect with others just as passionate as you are.
+          {t("hero.subtitle")}
         </MotionPreset>
 
         <MotionPreset
@@ -85,7 +73,7 @@ const HeroSection = () => {
         >
           <PrimaryFlowButton size="lg" asChild>
             <Link href={ticketsUrl} target="_blank" rel="noopener noreferrer">
-              GET YOUR TICKETS
+              {t("hero.getTickets")}
               <ArrowUpRightIcon />
             </Link>
           </PrimaryFlowButton>

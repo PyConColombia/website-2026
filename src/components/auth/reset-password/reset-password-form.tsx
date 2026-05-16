@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "@/contexts/language-context";
 
 const ResetPasswordForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -15,6 +16,8 @@ const ResetPasswordForm = () => {
     useState(false);
 
   const router = useRouter();
+  const { t } = useTranslations();
+  const f = (key: string) => t(`blocks.auth.resetForm.${key}`);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,10 +26,9 @@ const ResetPasswordForm = () => {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
-      {/* Password */}
       <div className="w-full space-y-1">
         <Label className="leading-5" htmlFor="password">
-          New password*
+          {f("newPasswordLabel")}
         </Label>
         <div className="relative">
           <Input
@@ -43,16 +45,15 @@ const ResetPasswordForm = () => {
           >
             {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
             <span className="sr-only">
-              {isPasswordVisible ? "Hide password" : "Show password"}
+              {isPasswordVisible ? f("hidePassword") : f("showPassword")}
             </span>
           </Button>
         </div>
       </div>
 
-      {/* Confirm Password */}
       <div className="w-full space-y-1">
         <Label className="leading-5" htmlFor="confirmPassword">
-          Confirm password*
+          {f("confirmPasswordLabel")}
         </Label>
         <div className="relative">
           <Input
@@ -71,7 +72,7 @@ const ResetPasswordForm = () => {
           >
             {isConfirmPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
             <span className="sr-only">
-              {isConfirmPasswordVisible ? "Hide password" : "Show password"}
+              {isConfirmPasswordVisible ? f("hidePassword") : f("showPassword")}
             </span>
           </Button>
         </div>
@@ -81,7 +82,7 @@ const ResetPasswordForm = () => {
         className="w-full *:w-full [&>button]:after:-inset-55"
         type="submit"
       >
-        Set new password
+        {f("submit")}
       </PrimaryFlowButton>
     </form>
   );

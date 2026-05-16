@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
-
+import { faqItemsByLocale } from "@/assets/data/faqs";
 import {
   Accordion,
   AccordionContent,
@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MotionPreset } from "@/components/ui/motion-preset";
-
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { assetPath, cn } from "@/lib/utils";
 
 export type FAQs = {
@@ -19,7 +19,11 @@ export type FAQs = {
   answer: string;
 }[];
 
-const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
+const FAQ = () => {
+  const { locale } = useLanguage();
+  const { t } = useTranslations();
+  const faqItems = faqItemsByLocale[locale];
+
   const [activeItem, setActiveItem] = useState<string>("item-1");
   const [rotationKey, setRotationKey] = useState(0);
 
@@ -39,15 +43,16 @@ const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
           transition={{ duration: 0.5 }}
           className="mb-12 space-y-4 text-center sm:mb-16 lg:mb-24"
         >
-          <p className="text-primary text-sm font-medium uppercase">FAQ</p>
+          <p className="text-primary text-sm font-medium uppercase">
+            {t("blocks.faq.eyebrow")}
+          </p>
 
           <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-            Frequently asked questions
+            {t("blocks.faq.title")}
           </h2>
 
           <p className="text-muted-foreground mx-auto max-w-2xl text-xl">
-            Here are some quick answers to help you understand how Flow powers
-            your product success.
+            {t("blocks.faq.subtitle")}
           </p>
         </MotionPreset>
 
@@ -75,7 +80,7 @@ const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
           <div className="group bg-muted relative mx-auto flex h-full max-h-116 w-full max-w-148 items-end justify-center overflow-hidden rounded-xl border lg:max-xl:max-h-95">
             <Image
               src={assetPath("/images/dashboard.webp")}
-              alt="Dashboard"
+              alt={t("blocks.faq.dashboardAlt")}
               width={592}
               height={464}
               sizes="(max-width: 1024px) 100vw, 592px"
@@ -83,7 +88,7 @@ const FAQ = ({ faqItems }: { faqItems: FAQs }) => {
             />
             <Image
               src={assetPath("/images/dashboard-dark.webp")}
-              alt="Dashboard"
+              alt={t("blocks.faq.dashboardAlt")}
               width={592}
               height={464}
               sizes="(max-width: 1024px) 100vw, 592px"

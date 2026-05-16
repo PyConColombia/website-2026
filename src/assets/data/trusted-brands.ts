@@ -1,4 +1,6 @@
-export const topics = [
+import type { SiteLocale } from "@/lib/site-messages";
+
+export const topicsEn = [
   "Data Science",
   "Scientific Computing",
   "Artificial Intelligence",
@@ -32,4 +34,48 @@ export const topics = [
   "Bioinformatics",
   "Robotics",
   "Education",
-];
+] as const;
+
+const topicsEs = [
+  "Ciencia de datos",
+  "Computación científica",
+  "Inteligencia artificial",
+  "Visión por computador",
+  "Python core",
+  "Machine Learning",
+  "Videojuegos",
+  "Comunidad",
+  "DevOps",
+  "MCP",
+  "Arquitectura limpia",
+  "Deep Learning",
+  "Internet de las cosas (IoT)",
+  "Desarrollo web",
+  "Micro-Python",
+  "Frameworks Python",
+  "Inclusión y diversidad",
+  "Industria y academia",
+  "Educación y habilidades blandas",
+  "Calidad de vida en STEM",
+  "Ciberseguridad",
+  "Cultura de código abierto",
+  "IA generativa",
+  "LLMs",
+  "Agentes de IA",
+  "MLOps",
+  "Computación en la nube",
+  "Contenedores",
+  "Testing",
+  "Rendimiento",
+  "Bioinformática",
+  "Robótica",
+  "Educación",
+] as const;
+
+export const topicsByLocale: Record<SiteLocale, readonly string[]> = {
+  en: topicsEn,
+  es: topicsEs,
+};
+
+/** @deprecated use topicsByLocale */
+export const topics = [...topicsEn];

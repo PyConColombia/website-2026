@@ -1,9 +1,18 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Marquee } from "@/components/ui/marquee";
+import { useLanguage } from "@/contexts/language-context";
+import type { SiteLocale } from "@/lib/site-messages";
 
-export type Topics = string[];
+type TrustedBrandsProps = {
+  topicsByLocale: Record<SiteLocale, readonly string[]>;
+};
 
-const TrustedBrands = ({ topics }: { topics: Topics }) => {
+const TrustedBrands = ({ topicsByLocale }: TrustedBrandsProps) => {
+  const { locale } = useLanguage();
+  const topics = topicsByLocale[locale];
+
   const midpoint = Math.ceil(topics.length / 2);
   const topicRows = [topics.slice(0, midpoint), topics.slice(midpoint)];
 
@@ -24,7 +33,7 @@ const TrustedBrands = ({ topics }: { topics: Topics }) => {
               >
                 {row.map((topic) => (
                   <Badge
-                    key={topic}
+                    key={`${locale}-${topic}`}
                     variant="outline"
                     className="border-primary/20 shrink-0 bg-[#F1F2FC] px-4 py-2 text-sm font-medium text-foreground sm:text-base"
                   >

@@ -1,3 +1,5 @@
+"use client";
+
 import { CalendarDaysIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +14,7 @@ import {
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 
 import type { PostMetadata } from "@/lib/posts";
 import { assetPath } from "@/lib/utils";
@@ -19,6 +22,10 @@ import { assetPath } from "@/lib/utils";
 const defaultPostImage = "/images/og-image.png";
 
 const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
+  const { locale } = useLanguage();
+  const { t } = useTranslations();
+  const dateLocale = locale === "es" ? "es-CO" : "en-US";
+
   return (
     <section
       id="home"
@@ -39,7 +46,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
               variant="outline"
               className="bg-background text-sm font-normal"
             >
-              Trusted by 5,000+ growing businesses
+              {t("blocks.blogHero.badge")}
             </Badge>
           </MotionPreset>
 
@@ -52,7 +59,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
             component="h1"
             className="z-10 max-w-2xl text-center text-3xl font-semibold md:text-4xl lg:text-5xl lg:leading-[1.29167]"
           >
-            Insights That Power Smarter Product Growth
+            {t("blocks.blogHero.title")}
           </MotionPreset>
 
           <MotionPreset
@@ -64,9 +71,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
             component="p"
             className="text-muted-foreground z-10 max-w-4xl text-center text-xl"
           >
-            From product discovery to revenue metrics, explore actionable
-            insights, proven strategies, and real-world frameworks to help you
-            build, measure, and scale successful products with confidence.
+            {t("blocks.blogHero.subtitle")}
           </MotionPreset>
 
           <MotionPreset
@@ -79,12 +84,12 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
           >
             <Input
               type="email"
-              placeholder="Your email"
+              placeholder={t("blocks.blogHero.emailPlaceholder")}
               className="bg-background dark:bg-background h-10 sm:w-72"
               required
             />
             <PrimaryFlowButton size="lg" className="shrink-0">
-              Subscribe
+              {t("blocks.blogHero.subscribe")}
             </PrimaryFlowButton>
           </MotionPreset>
         </div>
@@ -104,7 +109,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
                   <div className="overflow-hidden rounded-md">
                     <Image
                       src={assetPath(post.image ?? defaultPostImage)}
-                      alt={post.title ?? "Blog post"}
+                      alt={post.title ?? t("blocks.blogHero.postFallbackAlt")}
                       width={1200}
                       height={650}
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -115,7 +120,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
                     <div className="text-muted-foreground flex items-center gap-1.5">
                       <CalendarDaysIcon className="size-4.5" />
                       {new Date(post.publishedAt ?? "").toLocaleDateString(
-                        "en-US",
+                        dateLocale,
                         {
                           year: "numeric",
                           month: "long",
@@ -153,7 +158,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
                         <span className="text-muted-foreground flex items-center gap-1.5">
                           <CalendarDaysIcon className="size-4.5" />
                           {new Date(post.publishedAt ?? "").toLocaleDateString(
-                            "en-US",
+                            dateLocale,
                             {
                               year: "numeric",
                               month: "long",
@@ -178,7 +183,7 @@ const HeroSection = ({ posts }: { posts: PostMetadata[] }) => {
                     <div className="overflow-hidden rounded-md">
                       <Image
                         src={assetPath(post.image ?? defaultPostImage)}
-                        alt={post.title ?? "Blog post"}
+                        alt={post.title ?? t("blocks.blogHero.postFallbackAlt")}
                         width={480}
                         height={320}
                         sizes="(max-width: 640px) 100vw, 120px"

@@ -10,10 +10,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "@/contexts/language-context";
 
 const LoginForm = () => {
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
+  const { t } = useTranslations();
+  const f = (key: string) => t(`blocks.auth.loginForm.${key}`);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,22 +25,20 @@ const LoginForm = () => {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
-      {/* Email */}
       <div className="space-y-1">
         <Label className="leading-5" htmlFor="userEmail">
-          Email address*
+          {f("emailLabel")}
         </Label>
         <Input
           type="email"
           id="userEmail"
-          placeholder="Enter your email address"
+          placeholder={f("emailPlaceholder")}
         />
       </div>
 
-      {/* Password */}
       <div className="w-full space-y-1">
         <Label className="leading-5" htmlFor="password">
-          Password*
+          {f("passwordLabel")}
         </Label>
         <div className="relative">
           <Input
@@ -54,21 +55,20 @@ const LoginForm = () => {
           >
             {isVisible ? <EyeOffIcon /> : <EyeIcon />}
             <span className="sr-only">
-              {isVisible ? "Hide password" : "Show password"}
+              {isVisible ? f("hidePassword") : f("showPassword")}
             </span>
           </Button>
         </div>
       </div>
 
-      {/* Remember Me and Forgot Password */}
       <div className="flex items-center justify-between gap-y-2">
         <div className="flex items-center gap-3">
           <Checkbox id="rememberMe" className="size-6" />
-          <Label htmlFor="rememberMe"> Remember Me</Label>
+          <Label htmlFor="rememberMe">{f("rememberMe")}</Label>
         </div>
 
         <Link href="/forgot-password" className="hover:underline">
-          Forgot Password?
+          {f("forgotPassword")}
         </Link>
       </div>
 
@@ -76,7 +76,7 @@ const LoginForm = () => {
         className="w-full *:w-full [&>button]:after:-inset-55"
         type="submit"
       >
-        Login to flow
+        {f("submit")}
       </PrimaryFlowButton>
     </form>
   );

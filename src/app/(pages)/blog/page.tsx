@@ -5,6 +5,8 @@ import BlogSection from "@/components/blog/blog-section/blog-section";
 import HeroSection from "@/components/blog/hero-section/hero-section";
 import SectionSeparator from "@/components/section-separator";
 import { getPosts } from "@/lib/posts";
+import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
+import { siteMessages } from "@/lib/site-messages";
 import {
   getSiteUrl,
   SITE_KEYWORDS,
@@ -12,36 +14,39 @@ import {
   websiteJsonLd,
 } from "@/lib/site-seo";
 
-const blogDescription =
-  "News, speaker stories, and updates from PyCon Colombia 2026—July 24–26 in Medellín at Universidad EAFIT.";
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = siteMessages[STATIC_PRERENDER_LOCALE].pageMeta.blog;
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: blogDescription,
-  keywords: [
-    ...SITE_KEYWORDS,
-    "PyCon blog",
-    "conference news",
-    "Python community",
-  ],
-  alternates: {
-    canonical: `${getSiteUrl()}/blog`,
-  },
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    websiteJsonLd(),
-    webPageJsonLd({
-      name: "Blog — PyCon Colombia 2026",
-      description: blogDescription,
-      url: `${getSiteUrl()}/blog`,
-    }),
-  ],
-};
+  return {
+    title: meta.title,
+    description: meta.description,
+    keywords: [
+      ...SITE_KEYWORDS,
+      "PyCon blog",
+      "conference news",
+      "Python community",
+    ],
+    alternates: {
+      canonical: `${getSiteUrl()}/blog`,
+    },
+  };
+}
 
 const BlogPage = async () => {
+  const pageMeta = siteMessages[STATIC_PRERENDER_LOCALE].pageMeta.blog;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      websiteJsonLd(),
+      webPageJsonLd({
+        name: pageMeta.jsonLdName,
+        description: pageMeta.description,
+        url: `${getSiteUrl()}/blog`,
+      }),
+    ],
+  };
+
   const blogPosts = await getPosts();
 
   const featuredPosts = blogPosts.filter((post) => post.featured);

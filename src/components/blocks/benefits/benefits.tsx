@@ -15,9 +15,11 @@ import {
   useTransform,
 } from "motion/react";
 import Image from "next/image";
-import { type ReactNode, useRef } from "react";
+import { type ReactNode, useMemo, useRef } from "react";
 
+import { getBenefitsFeatures } from "@/assets/data/benefits";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { assetPath, cn } from "@/lib/utils";
 
 export type Features = {
@@ -47,6 +49,8 @@ const SpeakerTitle = ({
   feature: Features[number];
   className?: string;
 }) => {
+  const { t } = useTranslations();
+
   return (
     <div className="flex items-center gap-3">
       <div className={cn("font-medium", className)}>{feature.title}</div>
@@ -59,7 +63,7 @@ const SpeakerTitle = ({
             src={assetPath(feature.flag)}
             alt={
               feature.country
-                ? `Flag of ${feature.country}`
+                ? `${t("blocks.benefits.flagAltPrefix")} ${feature.country}`
                 : `${feature.title} flag`
             }
             width={32}
@@ -247,7 +251,10 @@ const ImageItem = ({
   );
 };
 
-const Benefits = ({ featuresList }: { featuresList: Features }) => {
+const Benefits = () => {
+  const { locale } = useLanguage();
+  const { t } = useTranslations();
+  const featuresList = useMemo(() => getBenefitsFeatures(locale), [locale]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -283,11 +290,11 @@ const Benefits = ({ featuresList }: { featuresList: Features }) => {
         className="mb-12 space-y-4 text-center max-md:px-4 sm:mb-16 lg:mb-24"
       >
         <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
-          Keynote Speakers
+          {t("blocks.benefits.title")}
         </h2>
 
         <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-          Meet the voices shaping PyCon Colombia 2026.
+          {t("blocks.benefits.subtitle")}
         </p>
       </MotionPreset>
 
