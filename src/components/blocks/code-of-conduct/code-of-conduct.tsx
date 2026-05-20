@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon, MailIcon } from "lucide-react";
+import { ArrowRightIcon, ClipboardListIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { SVGAttributes } from "react";
@@ -99,9 +99,13 @@ const CodeOfConduct = () => {
                   className="rounded-lg text-base shadow-none"
                   asChild
                 >
-                  <Link href={`mailto:${codeOfConduct.contactEmail}`}>
-                    {t("blocks.codeOfConductUi.contactUs")}
-                    <MailIcon />
+                  <Link
+                    href={codeOfConduct.reportSection.formUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {codeOfConduct.reportSection.heroCta}
+                    <ClipboardListIcon />
                   </Link>
                 </Button>
               </div>
@@ -212,8 +216,8 @@ const CodeOfConduct = () => {
                 {[
                   ...codeOfConduct.sections,
                   {
-                    id: codeOfConduct.contactInformation.id,
-                    title: codeOfConduct.contactInformation.title,
+                    id: codeOfConduct.reportSection.id,
+                    title: codeOfConduct.reportSection.title,
                   },
                 ].map((section) => (
                   <Link
@@ -265,14 +269,14 @@ const CodeOfConduct = () => {
             </div>
 
             <section
-              id={codeOfConduct.contactInformation.id}
+              id={codeOfConduct.reportSection.id}
               className="scroll-mt-24 border-t pt-8"
             >
               <h3 className="text-xl font-semibold md:text-2xl">
-                {codeOfConduct.contactInformation.title}
+                {codeOfConduct.reportSection.title}
               </h3>
               <div className="bg-primary text-primary-foreground mt-6 space-y-4 rounded-3xl p-6 text-base leading-7 shadow-lg sm:p-8">
-                <p>{codeOfConduct.contactInformation.intro}</p>
+                <p>{codeOfConduct.reportSection.intro}</p>
                 <Button
                   size="lg"
                   variant="secondary"
@@ -280,17 +284,14 @@ const CodeOfConduct = () => {
                   className="h-11 rounded-full px-6 text-base shadow-sm"
                 >
                   <Link
-                    href={codeOfConduct.contactInformation.reportForm.href}
-                    {...(codeOfConduct.contactInformation.reportForm.href.startsWith(
-                      "http",
-                    )
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
+                    href={codeOfConduct.reportSection.formUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {codeOfConduct.contactInformation.reportForm.label}
+                    {codeOfConduct.reportSection.heroCta}
                   </Link>
                 </Button>
-                {codeOfConduct.contactInformation.paragraphsAfterButton.map(
+                {codeOfConduct.reportSection.paragraphsAfterForm.map(
                   (paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ),

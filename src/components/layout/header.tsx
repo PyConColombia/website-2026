@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarDaysIcon, ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,14 +10,8 @@ import {
   type Navigation,
 } from "@/components/layout/header-navigation";
 import { LanguageSwitch } from "@/components/layout/language-switch";
+import YearSelect from "@/components/layout/year-select";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Tooltip,
   TooltipContent,
@@ -109,27 +103,9 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         />
 
         {/* Actions */}
-        <div className="flex gap-4 sm:gap-6">
-          <div className="max-sm:hidden flex items-center gap-2">
-            <div className="ring-secondary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2">
-              <Select defaultValue="2026" onValueChange={openYearSite}>
-                <SelectTrigger
-                  className={cn(
-                    "hover:bg-secondary ring-0 shadow-none relative rounded-lg border border-transparent bg-secondary bg-clip-padding duration-500 text-shadow-xs",
-                    "h-10 px-6 text-base",
-                  )}
-                >
-                  <SelectValue placeholder={t("header.yearPlaceholder")} />
-                </SelectTrigger>
-                <SelectContent>
-                  {years.map((y) => (
-                    <SelectItem key={y} value={y}>
-                      {y}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+        <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-2">
+            <YearSelect years={years} onValueChange={openYearSite} />
             <LanguageSwitch />
           </div>
 
@@ -138,38 +114,6 @@ const Header = ({ navigationData, className }: HeaderProps) => {
               {t("header.getTickets")}
             </Link>
           </PrimaryFlowButton>
-
-          <div className="sm:hidden flex items-center gap-2">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div>
-                  <div className="ring-secondary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2">
-                    <Select defaultValue="2026" onValueChange={openYearSite}>
-                      <SelectTrigger
-                        aria-label={t("header.selectYearAria")}
-                        className={cn(
-                          "hover:bg-secondary ring-0 shadow-none relative rounded-lg border border-transparent bg-secondary bg-clip-padding duration-500 text-shadow-xs",
-                          "size-10 justify-center px-0 [&_[data-slot=select-value]]:hidden",
-                        )}
-                      >
-                        <SelectValue />
-                        <CalendarDaysIcon className="size-4" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {years.map((y) => (
-                          <SelectItem key={y} value={y}>
-                            {y}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>{t("header.pyconByYear")}</TooltipContent>
-            </Tooltip>
-            <LanguageSwitch />
-          </div>
 
           <Tooltip>
             <TooltipTrigger asChild>

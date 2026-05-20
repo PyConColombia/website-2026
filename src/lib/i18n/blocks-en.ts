@@ -201,7 +201,6 @@ export const blocksEn = {
   },
   codeOfConductUi: {
     readPolicy: "Read policy",
-    contactUs: "Contact us",
     onThisPage: "On this page",
     policyDetails: "Policy details",
     communityImageAlt: "PyCon Colombia community",

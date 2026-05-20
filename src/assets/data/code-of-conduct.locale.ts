@@ -5,13 +5,13 @@ export type CodeOfConductBundle = {
   eyebrow: string;
   description: string;
   updatedAt: string;
-  contactEmail: string;
-  contactInformation: {
+  reportSection: {
     id: string;
     title: string;
     intro: string;
-    reportForm: { label: string; href: string };
-    paragraphsAfterButton: string[];
+    heroCta: string;
+    formUrl: string;
+    paragraphsAfterForm: string[];
   };
   sections: Array<{
     id: string;
@@ -21,8 +21,7 @@ export type CodeOfConductBundle = {
   }>;
 };
 
-const contactEmail = "hello@pycon.co";
-const reportHref = "https://forms.gle/Q92DS8RvrzW8sUN67";
+const reportFormUrl = "https://forms.gle/Q92DS8RvrzW8sUN67";
 
 export const codeOfConductByLocale: Record<SiteLocale, CodeOfConductBundle> = {
   en: {
@@ -31,19 +30,16 @@ export const codeOfConductByLocale: Record<SiteLocale, CodeOfConductBundle> = {
     description:
       "PyCon Colombia is committed to providing a welcoming, respectful, and harassment-free conference experience for everyone in the Python community.",
     updatedAt: "Last updated for PyCon Colombia 2026",
-    contactEmail,
-    contactInformation: {
-      id: "contact-information",
-      title: "Contact Information",
+    reportSection: {
+      id: "report-form",
+      title: "Report form",
       intro:
-        "If you have been harassed, or realize that someone else is being harassed or is violating the International Terms of the PyCon Colombia or have any problems, please contact our organizers:",
-      reportForm: {
-        label: "Open report form",
-        href: reportHref,
-      },
-      paragraphsAfterButton: [
-        "Our team at the conference will also be available to collaborate and contact local security or assist you to ensure your safety. We value your presence in our events.",
-        "In case of any violation of the terms of this code of conduct by the organizers please contact the main organizer of the conference, John Roa or as a last resort to the PSF.",
+        "If you have been harassed, if someone else is being harassed, if the PyCon Colombia terms are being violated, or if you have any related concern, submit a report using the form:",
+      heroCta: "Open report form",
+      formUrl: reportFormUrl,
+      paragraphsAfterForm: [
+        "Our team at the conference will also be available to collaborate with local security or assist you to ensure your safety. We value your presence at our events.",
+        "If you believe an organizer has violated this code of conduct, you may also reach out to the main conference organizer, John Roa, or as a last resort to the PSF.",
       ],
     },
     sections: [
@@ -94,19 +90,16 @@ export const codeOfConductByLocale: Record<SiteLocale, CodeOfConductBundle> = {
     description:
       "PyCon Colombia se compromete a ofrecer una experiencia de conferencia acogedora, respetuosa y libre de acoso para todas las personas de la comunidad Python.",
     updatedAt: "Actualizado para PyCon Colombia 2026",
-    contactEmail,
-    contactInformation: {
-      id: "contact-information",
-      title: "Información de contacto",
+    reportSection: {
+      id: "report-form",
+      title: "Formulario de reporte",
       intro:
-        "Si has sido acosado/a, observas que otra persona está siendo acosada o se vulneran los términos internacionales de PyCon Colombia, o tienes cualquier problema, comunícate con nuestra organización:",
-      reportForm: {
-        label: "Abrir formulario de reporte",
-        href: reportHref,
-      },
-      paragraphsAfterButton: [
-        "El equipo durante la conferencia también estará disponible para colaborar, contactar seguridad local o ayudarte a garantizar tu seguridad. Valoramos tu participación en nuestros eventos.",
-        "Si observas una vulneración de este código por parte de la organización, contacta al organizador principal de la conferencia, John Roa, o en último recurso a la PSF.",
+        "Si has sido acosado/a, si observas que otra persona está siendo acosada, si se vulneran los términos de PyCon Colombia o tienes cualquier inquietud relacionada, envía un reporte con el formulario:",
+      heroCta: "Abrir formulario de reporte",
+      formUrl: reportFormUrl,
+      paragraphsAfterForm: [
+        "El equipo durante la conferencia también estará disponible para colaborar con seguridad local o ayudarte a garantizar tu seguridad. Valoramos tu participación en nuestros eventos.",
+        "Si observas una vulneración de este código por parte de la organización, también puedes comunicarte con el organizador principal de la conferencia, John Roa, o en último recurso con la PSF.",
       ],
     },
     sections: [

@@ -206,7 +206,6 @@ export const blocksEs: BlocksMessages = {
   },
   codeOfConductUi: {
     readPolicy: "Leer política",
-    contactUs: "Contáctanos",
     onThisPage: "En esta página",
     policyDetails: "Detalle de la política",
     communityImageAlt: "Comunidad PyCon Colombia",
