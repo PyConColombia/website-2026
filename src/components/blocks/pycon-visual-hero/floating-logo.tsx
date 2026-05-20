@@ -8,7 +8,7 @@ const FloatingLogo = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-0 z-20 grid translate-y-[90px] place-items-center",
+        "pointer-events-none absolute inset-0 z-20 grid translate-y-[52px] place-items-center max-sm:scale-[0.92] sm:translate-y-[90px]",
         className,
       )}
     >
@@ -21,7 +21,7 @@ const FloatingLogo = ({ className }: { className?: string }) => {
         delay={0.15}
         className="flex flex-col items-center"
       >
-        <div className="animate-pycon-float relative z-10 size-44 sm:size-55 lg:size-65">
+        <div className="animate-pycon-float relative z-10 size-36 sm:size-55 lg:size-65">
           <Image
             src={assetPath("/images/pycon/logo-flotante.png")}
             alt="PyCon Colombia logo"

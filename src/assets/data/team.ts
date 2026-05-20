@@ -39,11 +39,11 @@ export const teamMembers: TeamMember[] = [
     github: "https://github.com/arendondiosa",
   },
   {
-    name: "Javier Daza",
-    role: "Speakers",
-    image: "/images/avatar/javier-daza.webp",
-    linkedin: "https://www.linkedin.com/in/javierdazaco",
-    x: "https://twitter.com/@pyjavo",
+    name: "Gonzalo Peña-Castellanos",
+    role: "Keynotes, Website",
+    image: "/images/avatar/gonzalo-pena-castellanos.png",
+    linkedin: "https://www.linkedin.com/in/goanpeca",
+    github: "https://github.com/goanpeca",
   },
   {
     name: "Leonardo Romo",
@@ -70,6 +70,14 @@ export const teamMembers: TeamMember[] = [
     name: "Nancy Acuña",
     role: "Logistics/Finance",
     image: "/images/avatar/nancy-acuna.webp",
+  },
+  {
+    name: "Maria Franco",
+    role: "Website",
+    image: "/images/avatar/maria-franco.webp",
+    linkedin: "https://www.linkedin.com/in/mariafrancodev",
+    github: "https://github.com/mariafrancodev",
+    x: "https://twitter.com/mariafrancodev",
   },
   {
     name: "Wendy Rueda",

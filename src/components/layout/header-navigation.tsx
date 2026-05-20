@@ -430,7 +430,11 @@ const HeaderNavigationSmallScreen = ({
       <SheetTrigger asChild>
         <SecondaryFlowButton
           size="icon-lg"
-          className={cn("inline-flex lg:hidden", triggerClassName)}
+          className={cn(
+            "inline-flex lg:hidden",
+            open && "pointer-events-none opacity-0",
+            triggerClassName,
+          )}
         >
           <MenuIcon />
           <span className="sr-only">{t("blocks.headerUi.menuSrOnly")}</span>
@@ -440,7 +444,11 @@ const HeaderNavigationSmallScreen = ({
         <SheetHeader className="p-4">
           <SheetTitle hidden />
           <SheetDescription hidden />
-          <Link href="#" onClick={handleLinkClick} className="self-start">
+          <Link
+            href="/#pycon-hero"
+            onClick={handleLinkClick}
+            className="self-start"
+          >
             <Logo />
           </Link>
         </SheetHeader>
