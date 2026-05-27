@@ -168,7 +168,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       scholarships: {
         title: "Scholarships",
         description:
-          "Apply for PyCon Colombia diversity scholarships—financial support for students and underrepresented groups in the Python community.",
+          "Apply for PyCon Colombia opportunity scholarships—financial support for students and underrepresented groups in the Python community.",
       },
     },
     blocks: blocksEn,
@@ -261,7 +261,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       scholarships: {
         title: "Becas",
         description:
-          "Postúlate a las becas de diversidad de PyCon Colombia—apoyo económico para estudiantes y grupos subrepresentados en la comunidad Python.",
+          "Postúlate a las becas de oportunidad de PyCon Colombia—apoyo económico para estudiantes y grupos subrepresentados en la comunidad Python.",
       },
     },
     blocks: blocksEs,

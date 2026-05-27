@@ -40,7 +40,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Gonzalo Peña-Castellanos",
-    role: "Keynotes, Website",
+    role: "Keynotes",
     image: "/images/avatar/gonzalo-pena-castellanos.png",
     linkedin: "https://www.linkedin.com/in/goanpeca",
     github: "https://github.com/goanpeca",
@@ -73,7 +73,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Maria Franco",
-    role: "Website, Interviews",
+    role: "Interviews",
     image: "/images/avatar/maria-franco.jpg",
     linkedin: "https://www.linkedin.com/in/mariafrancodev",
     github: "https://github.com/mariafrancodev",
@@ -81,7 +81,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Wendy Rueda",
-    role: "Social Networks and sponsors",
+    role: "Social Networks",
     image: "/images/avatar/wendy-rueda.webp",
     linkedin: "https://www.linkedin.com/in/wendy-rueda-cifuentes-84a617215",
     x: "https://twitter.com/@wen_rueda",

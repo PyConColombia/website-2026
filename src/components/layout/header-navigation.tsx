@@ -78,7 +78,7 @@ const ListItem = (props: {
   description?: NavigationItem["description"];
   splitItems?: boolean;
   activeSection?: string;
-  pathname?: string;
+  pathname?: string | null;
 }) => {
   const {
     title,

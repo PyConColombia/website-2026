@@ -27,12 +27,12 @@ export type ScholarshipsBundle = {
 export const scholarshipsByLocale: Record<SiteLocale, ScholarshipsBundle> = {
   en: {
     eyebrow: "PyCon Colombia",
-    title: "Diversity Scholarships",
+    title: "Opportunity Scholarships",
     description:
       "Financial support for students and members of underrepresented groups in the Python community to attend PyCon Colombia.",
     intro: {
       paragraphs: [
-        "Python's presence in software development worldwide continues to increase, leading to new outcomes changing our time. At PyCon Colombia, in addition to promoting open source and sharing among all attendees, we strive every year to ensure that our community is as accessible and diverse as possible. We see diversity and inclusion as a benefit to the ecosystem and its individuals.",
+        "Python's presence in software development around the world continues to grow, driving innovations that are transforming the way we live and work. At PyCon Colombia, beyond promoting open source and fostering knowledge sharing among attendees, we work every year to make the conference more accessible to people who may face financial barriers to attending.",
         "We aim for PyCon Colombia to be inclusive of the entire Python community in our country. In order to help alleviate financial barriers to attending the conference, the PyCon organizing committee is offering scholarships to individuals who face financial obstacles, including students and members of underrepresented groups within the Python community. These scholarships cover the cost of conference admission.",
         "It should be noted that scholarship recipients will be responsible for covering all other expenses, such as travel, accommodations, visa fees, and transportation.",
       ],
@@ -57,8 +57,8 @@ export const scholarshipsByLocale: Record<SiteLocale, ScholarshipsBundle> = {
         id: "acknowledgments",
         title: "Acknowledgments",
         paragraphs: [
-          "The PyCon Colombia 2026 Diversity Program is made possible thanks to the support of PyCon Colombia 2026 sponsors.",
-          "If your organization is interested in participating in the Diversity Program, please contact: scholarships@pycon.co",
+          "The PyCon Colombia 2026 Opportunity Scholarship Program is made possible thanks to the support of PyCon Colombia 2026 sponsors.",
+          "If your organization is interested in participating in the Opportunity Scholarship Program, please contact: scholarships@pycon.co",
         ],
       },
       {
@@ -96,12 +96,12 @@ export const scholarshipsByLocale: Record<SiteLocale, ScholarshipsBundle> = {
   },
   es: {
     eyebrow: "PyCon Colombia",
-    title: "Becas de Diversidad",
+    title: "Becas de Oportunidad",
     description:
       "Apoyo económico para estudiantes y personas de grupos subrepresentados en la comunidad Python para asistir a PyCon Colombia.",
     intro: {
       paragraphs: [
-        "La presencia de Python en el desarrollo de software a nivel mundial sigue creciendo, dando lugar a nuevos resultados que cambian nuestro tiempo. En PyCon Colombia, además de promover el código abierto y el compartir entre todos los asistentes, nos esforzamos cada año para que nuestra comunidad sea lo más accesible y diversa posible. Vemos la diversidad y la inclusión como un beneficio para el ecosistema y sus individuos.",
+        "La presencia de Python en el desarrollo de software a nivel mundial sigue creciendo, dando lugar a nuevos resultados que cambian nuestro tiempo. En PyCon Colombia, además de promover el código abierto y el compartir entre todos los asistentes, nos esforzamos cada año para que nuestra comunidad sea lo más accesible y diversa posible. Vemos la inclusión y la igualdad de oportunidades como un beneficio para el ecosistema y sus individuos.",
         "Buscamos que PyCon Colombia sea inclusiva para toda la comunidad Python en nuestro país. Para ayudar a aliviar las barreras financieras para asistir a la conferencia, el comité organizador de PyCon está ofreciendo becas a personas que enfrentan obstáculos económicos, incluyendo estudiantes y miembros de grupos subrepresentados dentro de la comunidad Python. Estas becas cubren el costo de la admisión a la conferencia.",
         "Cabe aclarar que los beneficiarios de las becas serán responsables de cubrir todos los demás gastos, como transporte, alojamiento, visa y traslados.",
       ],
@@ -126,8 +126,8 @@ export const scholarshipsByLocale: Record<SiteLocale, ScholarshipsBundle> = {
         id: "acknowledgments",
         title: "Agradecimientos",
         paragraphs: [
-          "El Programa de Diversidad de PyCon Colombia 2026 es posible gracias al apoyo de los patrocinadores de PyCon Colombia 2026.",
-          "Si su organización está interesada en participar en el Programa de Diversidad, por favor contacte: scholarships@pycon.co",
+          "El Programa de Becas de Oportunidad de PyCon Colombia 2026 es posible gracias al apoyo de los patrocinadores de PyCon Colombia 2026.",
+          "Si su organización está interesada en participar en el Programa de Becas de Oportunidad, por favor contacte: scholarships@pycon.co",
         ],
       },
       {

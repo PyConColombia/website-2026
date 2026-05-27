@@ -55,7 +55,7 @@ export const testimonials: TestimonialItem[] = [
     rating: 5,
     content: (
       <>
-        The diversity scholarship program brought a{" "}
+        The Opportunity Scholarship Program brought a{" "}
         <span className="bg-primary/5 text-primary">
           truly global mix of speakers and attendees
         </span>{" "}

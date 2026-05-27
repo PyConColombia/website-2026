@@ -30,7 +30,7 @@ export const faqItemsEn: FAQs = [
   {
     question: "Are there scholarships available to attend PyCon Colombia?",
     answer:
-      "Yes. We offer Diversity Scholarships every year to help reduce financial barriers. They cover the cost of conference admission for students and members of underrepresented groups within the Python community.",
+      "Yes. We offer Opportunity Scholarships every year to help reduce financial barriers. They cover the cost of conference admission for students and members of underrepresented groups within the Python community.",
   },
   {
     question: "When and where is PyCon Colombia 2026 happening?",
@@ -73,7 +73,7 @@ const faqItemsEs: FAQs = [
   {
     question: "¿Hay becas para asistir a PyCon Colombia?",
     answer:
-      "Sí. Cada año ofrecemos becas de diversidad para reducir barreras económicas; cubren el costo de la entrada para estudiantes y personas de grupos subrepresentados en la comunidad Python.",
+      "Sí. Cada año ofrecemos becas de oportunidad para reducir barreras económicas; cubren el costo de la entrada para estudiantes y personas de grupos subrepresentados en la comunidad Python.",
   },
   {
     question: "¿Cuándo y dónde será PyCon Colombia 2026?",

@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: [
       ...SITE_KEYWORDS,
       "PyCon scholarships",
-      "diversity scholarships",
+      "opportunity scholarships",
       "Python Colombia",
     ],
     alternates: {
