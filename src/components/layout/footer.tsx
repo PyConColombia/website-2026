@@ -80,6 +80,10 @@ const Footer = () => {
       label: t("footer.codeOfConduct"),
       href: "/code-of-conduct",
     },
+    {
+      label: t("footer.scholarships"),
+      href: "/scholarships",
+    },
   ];
 
   const footerLinks = [

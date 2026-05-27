@@ -7,6 +7,7 @@ export type NavTitleKey =
   | "home"
   | "keynotes"
   | "sponsors"
+  | "scholarships"
   | "team"
   | "codeOfConduct";
 
@@ -25,6 +26,7 @@ export type SiteMessagesShape = {
     contact: string;
     links: string;
     codeOfConduct: string;
+    scholarships: string;
     home: string;
     keynoteSpeakers: string;
     gallery: string;
@@ -69,6 +71,10 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
     };
+    scholarships: {
+      title: string;
+      description: string;
+    };
   };
   blocks: typeof blocksEn;
 };
@@ -79,6 +85,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       home: "Home",
       keynotes: "Keynotes",
       sponsors: "Sponsors",
+      scholarships: "Scholarships",
       team: "Team",
       codeOfConduct: "Code of Conduct",
     },
@@ -95,6 +102,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       contact: "Contact",
       links: "Links",
       codeOfConduct: "Code of Conduct",
+      scholarships: "Scholarships",
       home: "Home",
       keynoteSpeakers: "Keynote Speakers",
       gallery: "Gallery",
@@ -157,6 +165,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Read the PyCon Colombia Code of Conduct, enforcement procedure, and health and safety policy.",
       },
+      scholarships: {
+        title: "Scholarships",
+        description:
+          "Apply for PyCon Colombia diversity scholarships—financial support for students and underrepresented groups in the Python community.",
+      },
     },
     blocks: blocksEn,
   },
@@ -165,6 +178,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       home: "Inicio",
       keynotes: "Oradores principales",
       sponsors: "Patrocinadores",
+      scholarships: "Becas",
       team: "Equipo",
       codeOfConduct: "Código de conducta",
     },
@@ -181,6 +195,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       contact: "Contacto",
       links: "Enlaces",
       codeOfConduct: "Código de conducta",
+      scholarships: "Becas",
       home: "Inicio",
       keynoteSpeakers: "Oradores principales",
       gallery: "Galería",
@@ -242,6 +257,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         title: "Código de conducta",
         description:
           "Consulta el código de conducta de PyCon Colombia, el procedimiento de aplicación y la política de salud y seguridad.",
+      },
+      scholarships: {
+        title: "Becas",
+        description:
+          "Postúlate a las becas de diversidad de PyCon Colombia—apoyo económico para estudiantes y grupos subrepresentados en la comunidad Python.",
       },
     },
     blocks: blocksEs,

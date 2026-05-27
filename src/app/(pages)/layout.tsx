@@ -17,6 +17,10 @@ const navigationData: Navigation[] = [
     href: "/#sponsors",
   },
   {
+    titleKey: "scholarships",
+    href: "/scholarships",
+  },
+  {
     titleKey: "team",
     href: "/team",
   },

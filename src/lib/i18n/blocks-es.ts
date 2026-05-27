@@ -210,6 +210,12 @@ export const blocksEs: BlocksMessages = {
     policyDetails: "Detalle de la política",
     communityImageAlt: "Comunidad PyCon Colombia",
   },
+  scholarshipsUi: {
+    readProgram: "Leer programa",
+    contact: "Contactar becas",
+    onThisPage: "En esta página",
+    overview: "Resumen",
+  },
   headerUi: {
     brandAlt: "PyCon Colombia",
     menuSrOnly: "Menú",

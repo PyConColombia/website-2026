@@ -205,6 +205,12 @@ export const blocksEn = {
     policyDetails: "Policy details",
     communityImageAlt: "PyCon Colombia community",
   },
+  scholarshipsUi: {
+    readProgram: "Read program",
+    contact: "Contact scholarships",
+    onThisPage: "On this page",
+    overview: "Overview",
+  },
   headerUi: {
     brandAlt: "PyCon Colombia",
     menuSrOnly: "Menu",
