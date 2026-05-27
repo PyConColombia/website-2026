@@ -5,13 +5,13 @@ import {
   GithubIcon,
   InstagramIcon,
   LinkedinIcon,
-  XIcon,
   YoutubeIcon,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 
+import { XSocialIcon } from "@/components/icons/x-social-icon";
 import { useTranslations } from "@/contexts/language-context";
 import { assetPath } from "@/lib/utils";
 
@@ -36,8 +36,8 @@ type SocialLink = {
 const socialLinks: SocialLink[] = [
   {
     label: "X",
-    href: "https://twitter.com/pyconcolombia",
-    icon: XIcon,
+    href: "https://x.com/pyconcolombia",
+    icon: XSocialIcon,
   },
   {
     label: "Facebook",

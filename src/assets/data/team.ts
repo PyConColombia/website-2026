@@ -73,8 +73,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Maria Franco",
-    role: "Website",
-    image: "/images/avatar/maria-franco.webp",
+    role: "Website, Interviews",
+    image: "/images/avatar/maria-franco.jpg",
     linkedin: "https://www.linkedin.com/in/mariafrancodev",
     github: "https://github.com/mariafrancodev",
     x: "https://twitter.com/mariafrancodev",
