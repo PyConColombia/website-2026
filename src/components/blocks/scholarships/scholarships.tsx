@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon, ClipboardListIcon, MailIcon } from "lucide-react";
+import { ArrowRightIcon, ClipboardListIcon } from "lucide-react";
 import Link from "next/link";
 
 import { scholarshipsByLocale } from "@/assets/data/scholarships";
@@ -87,9 +87,20 @@ const Scholarships = () => {
                   className="rounded-lg text-base shadow-none"
                   asChild
                 >
-                  <Link href="mailto:scholarships@pycon.co">
+                  <Link
+                    href={
+                      scholarships.intro.formUrl ??
+                      "mailto:scholarships@pycon.co"
+                    }
+                    target={scholarships.intro.formUrl ? "_blank" : undefined}
+                    rel={
+                      scholarships.intro.formUrl
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
                     {t("blocks.scholarshipsUi.contact")}
-                    <MailIcon />
+                    <ClipboardListIcon />
                   </Link>
                 </Button>
               </div>
@@ -137,23 +148,16 @@ const Scholarships = () => {
                 {scholarships.intro.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
-                <p>
-                  {scholarships.intro.applyLead}{" "}
-                  {scholarships.intro.formUrl ? (
-                    <Link
-                      href={scholarships.intro.formUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary font-medium underline-offset-4 hover:underline"
-                    >
-                      {scholarships.intro.formLabel}
-                    </Link>
-                  ) : (
+                {scholarships.intro.formUrl ? (
+                  <p>{scholarships.intro.applyLead}</p>
+                ) : (
+                  <p>
+                    {scholarships.intro.applyLead}{" "}
                     <span className="text-foreground font-medium">
                       {scholarships.intro.formFallback}
                     </span>
-                  )}
-                </p>
+                  </p>
+                )}
               </div>
 
               {scholarships.intro.formUrl ? (

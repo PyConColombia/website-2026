@@ -212,7 +212,7 @@ export const blocksEs: BlocksMessages = {
   },
   scholarshipsUi: {
     readProgram: "Leer programa",
-    contact: "Contactar becas",
+    contact: "Postúlate a la beca",
     onThisPage: "En esta página",
     overview: "Resumen",
   },

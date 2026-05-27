@@ -114,7 +114,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       copyright: "©{year} PyCon Colombia. All rights reserved.",
     },
     alert: {
-      line: "PyCon Colombia 2026 Call for Speakers.",
+      line: "PyCon Colombia 2026 — Opportunity Scholarships are open.",
       applyNow: "Apply now",
       dismissAria: "Dismiss alert",
     },
@@ -207,7 +207,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       copyright: "©{year} PyCon Colombia. Todos los derechos reservados.",
     },
     alert: {
-      line: "PyCon Colombia 2026 — Convocatoria de ponentes.",
+      line: "PyCon Colombia 2026 — Becas de oportunidad abiertas.",
       applyNow: "Postúlate aquí",
       dismissAria: "Cerrar aviso",
     },

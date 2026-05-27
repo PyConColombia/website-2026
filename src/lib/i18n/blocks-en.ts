@@ -207,7 +207,7 @@ export const blocksEn = {
   },
   scholarshipsUi: {
     readProgram: "Read program",
-    contact: "Contact scholarships",
+    contact: "Apply for scholarship",
     onThisPage: "On this page",
     overview: "Overview",
   },

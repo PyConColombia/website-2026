@@ -7,9 +7,6 @@ import { useState } from "react";
 import { useTranslations } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
 
-const callForSpeakersUrl =
-  "https://docs.google.com/forms/d/e/1FAIpQLSexSz8lpdYXD9DYQbM0jChmWL4GVwFTU5JEYxx_xYVPaPJvEA/viewform";
-
 const SiteAlert = ({ className }: { className?: string }) => {
   const [isVisible, setIsVisible] = useState(true);
   const { t } = useTranslations();
@@ -30,12 +27,7 @@ const SiteAlert = ({ className }: { className?: string }) => {
         <MegaphoneIcon className="hidden size-4 shrink-0 sm:block" />
         <p className="text-balance">
           {t("alert.line")}{" "}
-          <Link
-            href={callForSpeakersUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold underline"
-          >
+          <Link href="/scholarships" className="font-semibold underline">
             {t("alert.applyNow")}
           </Link>
         </p>

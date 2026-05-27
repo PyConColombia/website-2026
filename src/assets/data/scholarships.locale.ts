@@ -1,5 +1,8 @@
 import type { SiteLocale } from "@/lib/site-messages";
 
+export const SCHOLARSHIP_FORM_URL =
+  "https://docs.google.com/forms/d/11yGDwLiRIOWYP93iGw-gJ5hlkIjFhSF61Jph36I5H98/";
+
 export type ScholarshipsSection = {
   id: string;
   title: string;
@@ -34,6 +37,7 @@ export const scholarshipsByLocale: Record<SiteLocale, ScholarshipsBundle> = {
         "It should be noted that scholarship recipients will be responsible for covering all other expenses, such as travel, accommodations, visa fees, and transportation.",
       ],
       applyLead: "If you want to apply, please go to this form:",
+      formUrl: SCHOLARSHIP_FORM_URL,
       formLabel: "Application form",
       formFallback:
         "The application form for PyCon Colombia 2026 will be published here when applications open. For questions, contact scholarships@pycon.co.",
@@ -102,6 +106,7 @@ export const scholarshipsByLocale: Record<SiteLocale, ScholarshipsBundle> = {
         "Cabe aclarar que los beneficiarios de las becas serán responsables de cubrir todos los demás gastos, como transporte, alojamiento, visa y traslados.",
       ],
       applyLead: "Si quieres aplicar, por favor ingresa a este formulario:",
+      formUrl: SCHOLARSHIP_FORM_URL,
       formLabel: "Formulario",
       formFallback:
         "El formulario de postulación para PyCon Colombia 2026 se publicará aquí cuando abran las convocatorias. Para consultas, escribe a scholarships@pycon.co.",
