@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Tereza Iofciu",
+    "role": "Experta en datos e IA, coach de liderazgo y Fellow de la Python Software Foundation",
+    "country": "Rumanía",
+    "description": "Tereza Iofciu es experta en datos e IA, coach de liderazgo y Fellow de la PSF con más de 15 años liderando equipos de datos y producto en neuefische, FREE NOW y New Work (XING). Ayuda a profesionales a liderar y adaptarse en la era de la IA con su Data Diplomat Framework™, combinando profundidad técnica con liderazgo humano. Ha sido voluntaria en la comunidad Python en muchos roles: organizadora de PyLadies Hamburg, junta del Python Software Verband, NumFocus DISC, equipo de código de conducta de la PSF, PyConDE & PyData Berlin, Python Pizza Hamburg y coproductora de PyPodcats. En 2021 recibió el premio de servicio comunitario de la PSF y en 2025 fue nombrada Fellow.",
+    "image": "/images/keynotes/keynote-01.webp",
+    "flag": "/images/flags/flag-ro.svg",
+    "linkedin": "https://www.linkedin.com/in/tereza-iofciu/",
+    "github": "https://github.com/terezaif",
+    "website": "https://www.terezaiofciu.com/",
+    "youtube": "https://www.youtube.com/playlist?list=PLPNST8XbhlFpuJgsSI8AfXzh5BwtfHh5Z",
+    "x": ""
+  },
+  {
+    "name": "Anna Pristoupilova",
+    "role": "Bioinformática e investigadora",
+    "country": "República Checa",
+    "description": "Anna es científica bioinformática enfocada en el análisis del genoma y su aplicación al estudio de enfermedades genéticas raras. Obtuvo el Premio Bolzano por su tesis doctoral. Tiene un doctorado en Biología Molecular, Celular, Genética y Virología y dos másteres de la Universidad Carlos en Praga. Ha coautorado más de 25 publicaciones y presentado en conferencias científicas. Trabaja como Senior Bioinformatics Scientist en DNAnexus y también investiga en la Unidad de Investigación de Enfermedades Raras de la Primera Facultad de Medicina de la Universidad Carlos.",
+    "image": "/images/keynotes/keynote-02.webp",
+    "flag": "/images/flags/flag-cz.svg",
+    "linkedin": "https://www.linkedin.com/in/pristanna/",
+    "github": "https://github.com/pristanna",
+    "website": "",
+    "youtube": "",
+    "x": ""
+  },
+  {
+    "name": "Malvika Sharan",
+    "role": "Senior Director of Data Science en St. Jude Children's Research Hospital",
+    "country": "India",
+    "description": "Malvika Sharan es Senior Director of Data Science en St. Jude Children's Research Hospital y líder reconocida en ciencia abierta e investigación impulsada por la comunidad. Cofundadora de Open Life Science y contribuidora clave de The Turing Way, promueve prácticas reproducibles, éticas y colaborativas de ciencia de datos. Con formación en bioinformática y roles de liderazgo en instituciones como el Alan Turing Institute y EMBL, construye comunidades de investigación inclusivas y empodera a profesionales con enfoques abiertos y responsables de IA y datos.",
+    "image": "/images/keynotes/keynote-03.webp",
+    "flag": "/images/flags/flag-in.svg",
+    "linkedin": "https://www.linkedin.com/in/malvikasharan/",
+    "github": "https://github.com/malvikasharan",
+    "website": "https://malvikasharan.github.io/",
+    "youtube": "",
+    "x": ""
+  },
+  {
+    "name": "Dr. Kari L. Jordan",
+    "role": "Directora ejecutiva de The Carpentries",
+    "country": "Estados Unidos",
+    "description": "La Dra. Kari L. Jordan es directora ejecutiva de The Carpentries, organización sin fines de lucro reconocida mundialmente, y figura destacada en educación en ciencia de datos. Tras licenciatura y maestría en Ingeniería Mecánica en Michigan Tech, realizó un doctorado en Educación en Ingeniería en Ohio State, especializada en intervenciones para fortalecer la pertenencia de personas racializadas en STEM. Su liderazgo ha impulsado la misión de The Carpentries en academia, industria y gobierno. Como ponente y defensora de la diversidad e inclusión, promueve alfabetización de datos accesible y reduce la brecha de habilidades digitales mediante iniciativas estratégicas y colaboración internacional.",
+    "image": "/images/keynotes/keynote-04.webp",
+    "flag": "/images/flags/flag-us.svg",
+    "linkedin": "https://www.linkedin.com/in/kariljordan/",
+    "github": "",
+    "website": "",
+    "youtube": "",
+    "x": ""
+  },
+  {
+    "name": "Irit Katriel",
+    "role": "Principal Software Engineer en Microsoft, desarrolladora núcleo de CPython",
+    "country": "Reino Unido",
+    "description": "Irit Katriel es Principal Software Engineer en Microsoft, desarrolladora núcleo de CPython y contribuidora enfocada en diseño de lenguajes y compiladores. Sus aportes recientes incluyen grupos de excepciones (PEP 654), la construcción except*, simplificaciones en el manejo de excepciones y una refactorización importante del compilador de bytecode de CPython para mejorar mantenibilidad y pruebas. También forma parte del equipo de ingeniería de rendimiento de Python en Microsoft y ha publicado trabajos académicos.",
+    "image": "/images/keynotes/keynote-05.webp",
+    "flag": "/images/flags/flag-gb.svg",
+    "linkedin": "https://www.linkedin.com/in/irit-katriel/",
+    "github": "https://github.com/iritkatriel",
+    "website": "",
+    "youtube": "",
+    "x": ""
+  },
+  {
+    "name": "Luciano Ramalho",
+    "role": "Autor de Fluent Python y Fellow de la Python Software Foundation",
+    "country": "Brasil",
+    "description": "Luciano Ramalho es educador, autor y desarrollador Python, conocido sobre todo por Fluent Python, uno de los libros más influyentes sobre programación pitónica y artesanía de software. Fellow de la PSF y defensor del código abierto y la educación de desarrolladores, ha ayudado a profundizar el diseño de Python, sus buenas prácticas y su expresividad. Durante décadas de enseñanza, charlas y escritura ha marcado cómo escribimos Python más efectivo, idiomático y reflexivo.",
+    "image": "/images/keynotes/keynote-06.webp",
+    "flag": "/images/flags/flag-br.svg",
+    "linkedin": "https://www.linkedin.com/in/lucianoramalho/",
+    "github": "https://github.com/ramalho",
+    "website": "",
+    "youtube": "",
+    "x": "https://x.com/ramalhoorg"
+  }
+]

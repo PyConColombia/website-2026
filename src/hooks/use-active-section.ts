@@ -1,0 +1,76 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+export const useActiveSection = (sectionIds: string[]) => {
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  const _pathname = usePathname();
+
+  // Reset active section when pathname changes (route navigation)
+  useEffect(() => {
+    setActiveSection("");
+  }, []);
+
+  // Scroll to hash on mount if present
+  useEffect(() => {
+    const hash = window.location.hash.slice(1); // Remove the '#'
+
+    if (hash && sectionIds.includes(hash)) {
+      const element = document.getElementById(hash);
+
+      if (element) {
+        // Small delay to ensure page is fully loaded
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [sectionIds.includes]); // Run only once on mount
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find all visible sections
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => {
+            // Sort by how much of the section is visible (intersection ratio)
+            // and by position on screen (top edge)
+            const ratioComparison = b.intersectionRatio - a.intersectionRatio;
+
+            if (ratioComparison !== 0) return ratioComparison;
+
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+
+        // Set the most visible section as active, or clear if none are visible
+        if (visibleSections.length > 0) {
+          setActiveSection(visibleSections[0].target.id);
+        } else {
+          setActiveSection("");
+        }
+      },
+      {
+        rootMargin: "-20% 0px -35% 0px", // Adjust when sections become "active"
+        threshold: [0, 0.25, 0.5, 0.75, 1], // Multiple thresholds for better detection
+      },
+    );
+
+    // Observe all sections
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [sectionIds]);
+
+  return activeSection;
+};

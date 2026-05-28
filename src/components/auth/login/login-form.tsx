@@ -1,0 +1,85 @@
+"use client";
+
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { PrimaryFlowButton } from "@/components/ui/flow-button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useTranslations } from "@/contexts/language-context";
+
+const LoginForm = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
+  const { t } = useTranslations();
+  const f = (key: string) => t(`blocks.auth.loginForm.${key}`);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/");
+  };
+
+  return (
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      <div className="space-y-1">
+        <Label className="leading-5" htmlFor="userEmail">
+          {f("emailLabel")}
+        </Label>
+        <Input
+          type="email"
+          id="userEmail"
+          placeholder={f("emailPlaceholder")}
+        />
+      </div>
+
+      <div className="w-full space-y-1">
+        <Label className="leading-5" htmlFor="password">
+          {f("passwordLabel")}
+        </Label>
+        <div className="relative">
+          <Input
+            id="password"
+            type={isVisible ? "text" : "password"}
+            placeholder="••••••••••••••••"
+            className="pr-9"
+          />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsVisible((prevState) => !prevState)}
+            className="text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent"
+          >
+            {isVisible ? <EyeOffIcon /> : <EyeIcon />}
+            <span className="sr-only">
+              {isVisible ? f("hidePassword") : f("showPassword")}
+            </span>
+          </Button>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between gap-y-2">
+        <div className="flex items-center gap-3">
+          <Checkbox id="rememberMe" className="size-6" />
+          <Label htmlFor="rememberMe">{f("rememberMe")}</Label>
+        </div>
+
+        <Link href="/forgot-password" className="hover:underline">
+          {f("forgotPassword")}
+        </Link>
+      </div>
+
+      <PrimaryFlowButton
+        className="w-full *:w-full [&>button]:after:-inset-55"
+        type="submit"
+      >
+        {f("submit")}
+      </PrimaryFlowButton>
+    </form>
+  );
+};
+
+export default LoginForm;

@@ -1,5 +1,11 @@
 name: Deploy static content to website-develop
 
+# GitHub Actions is non-TTY; these make Node/Next (chalk) and similar tools emit ANSI colors
+# that render in the Actions log viewer.
+env:
+  FORCE_COLOR: "1"
+  TERM: xterm-256color
+
 on:
   push:
     branches:
@@ -31,11 +37,11 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: '25.2'
+          node-version: '22'
       - name: Install node dependencies
         run: |
           cd pycon-website/
-          npm ci
+          npm install
       - name: Show node environment
         run: |
           node --version
@@ -55,16 +61,35 @@ jobs:
       - name: Setup nodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: '25.2'
+          node-version: '22'
       - name: Install dependencies
         run: npm ci
+      - name: Set Pages environment
+        shell: bash
+        run: |
+          if [ -n "${{ vars.NEXT_PUBLIC_APP_URL }}" ]; then
+            echo "BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_APP_URL=${{ vars.NEXT_PUBLIC_APP_URL }}" >> "$GITHUB_ENV"
+          elif [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
+            echo "BASEPATH=" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASEPATH=" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_APP_URL=https://${{ github.repository_owner }}.github.io" >> "$GITHUB_ENV"
+          else
+            echo "BASEPATH=/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASEPATH=/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_APP_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+          fi
       - name: Build project
         run: npm run build
       - name: Upload dist folder as artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist-artifact
-          path: dist/
+          path: out/
+          # Required so `public/.nojekyll` → `out/.nojekyll` is included. Without it, GitHub Pages
+          # Jekyll ignores `_next/` and every chunk returns 404.
+          include-hidden-files: true
 
   deploy:
     if: github.event_name == 'push'
@@ -90,11 +115,15 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-artifact
-          path: dist
+          path: out
       - name: Prepare deployment
         run: |
           find website-develop/ -mindepth 1 ! -name 'CNAME' ! -path "website-develop/.git*" -delete
-          mv dist/* website-develop/
+          # `mv out/*` skips dotfiles; `.nojekyll` must be present or GitHub Pages ignores `_next/`.
+          cp -a out/. website-develop/
+          # Belt-and-suspenders: artifact uploads omit dotfiles unless include-hidden-files is set;
+          # an empty file is enough to disable Jekyll for the whole site.
+          touch website-develop/.nojekyll
       - name: Commit and push changes
         run: |
           cd website-develop
