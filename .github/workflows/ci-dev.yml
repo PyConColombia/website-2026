@@ -21,7 +21,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages-dev'
+  group: "pages-dev"
   cancel-in-progress: true
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: "22"
       - name: Install node dependencies
         run: |
           cd pycon-website/
@@ -61,9 +61,9 @@ jobs:
       - name: Setup nodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: "22"
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Set Pages environment
         shell: bash
         run: |
