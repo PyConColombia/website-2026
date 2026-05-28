@@ -106,10 +106,10 @@ export const metadata: Metadata = {
     url: `${getSiteUrl()}/`,
     images: [
       {
-        url: absoluteAssetUrl("/images/og-image.png"),
-        type: "image/png",
-        width: 1200,
-        height: 630,
+        url: absoluteAssetUrl("/images/cfp.jpg"),
+        type: "image/jpeg",
+        width: 840,
+        height: 768,
         alt: `${SITE_NAME} — Medellín, July 24–26, 2026`,
       },
     ],
@@ -121,6 +121,12 @@ export const metadata: Metadata = {
       default: SITE_NAME,
     },
     description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: absoluteAssetUrl("/images/cfp.jpg"),
+        alt: `${SITE_NAME} — Medellín, July 24–26, 2026`,
+      },
+    ],
   },
 };
 

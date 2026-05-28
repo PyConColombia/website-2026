@@ -52,7 +52,7 @@ const jsonLd = {
       name: SITE_NAME,
       description: SITE_DESCRIPTION_LONG,
       url: `${getSiteUrl()}/`,
-      image: [absoluteAssetUrl("/images/og-image.png")],
+      image: [absoluteAssetUrl("/images/cfp.jpg")],
       startDate: "2026-07-24",
       endDate: "2026-07-26",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
