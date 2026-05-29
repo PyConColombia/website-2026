@@ -4,6 +4,7 @@ import { Bebas_Neue, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import type { ReactNode } from "react";
 
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/language-context";
@@ -144,6 +145,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       suppressHydrationWarning
     >
       <body className="flex min-h-full w-full flex-auto flex-col">
+        <GoogleAnalytics />
         <ThemeProvider
           attribute="class"
           enableSystem={false}

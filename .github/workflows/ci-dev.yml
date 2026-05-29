@@ -67,6 +67,13 @@ jobs:
       - name: Set Pages environment
         shell: bash
         run: |
+          GA_ID="${{ vars.NEXT_PUBLIC_GA_ID }}"
+          if [ -z "$GA_ID" ]; then
+            GA_ID="${{ secrets.NEXT_PUBLIC_GA_ID }}"
+          fi
+          if [ -n "$GA_ID" ]; then
+            echo "NEXT_PUBLIC_GA_ID=$GA_ID" >> "$GITHUB_ENV"
+          fi
           if [ -n "${{ vars.NEXT_PUBLIC_APP_URL }}" ]; then
             echo "BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
             echo "NEXT_PUBLIC_BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
