@@ -75,6 +75,9 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
     };
+    sponsorDetail: {
+      titleSuffix: string;
+    };
   };
   blocks: typeof blocksEn;
 };
@@ -170,6 +173,9 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Apply for PyCon Colombia opportunity scholarships—financial support for students and underrepresented groups in the Python community.",
       },
+      sponsorDetail: {
+        titleSuffix: "Sponsor",
+      },
     },
     blocks: blocksEn,
   },
@@ -262,6 +268,9 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         title: "Becas",
         description:
           "Postúlate a las becas de oportunidad de PyCon Colombia—apoyo económico para estudiantes y grupos subrepresentados en la comunidad Python.",
+      },
+      sponsorDetail: {
+        titleSuffix: "Patrocinador",
       },
     },
     blocks: blocksEs,

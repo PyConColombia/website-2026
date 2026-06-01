@@ -1,25 +1,18 @@
 "use client";
 
 import { ArrowRightIcon } from "lucide-react";
-
-import Image from "next/image";
 import Link from "next/link";
 
 import { galleryImages } from "@/assets/data/gallery";
+import GalleryMarqueeCarousel from "@/components/gallery/gallery-marquee-carousel";
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
-import { Marquee } from "@/components/ui/marquee";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { useTranslations } from "@/contexts/language-context";
-import { assetPath } from "@/lib/utils";
+
+const galleryUrl = "https://photos.app.goo.gl/JKTcdNn8HBLNYWgH6";
 
 const Gallery = () => {
   const { t } = useTranslations();
-  const midpoint = Math.ceil(galleryImages.length / 2);
-  const galleryRows = [
-    galleryImages.slice(0, midpoint),
-    galleryImages.slice(midpoint),
-  ];
-  const galleryUrl = "https://photos.app.goo.gl/JKTcdNn8HBLNYWgH6";
 
   return (
     <section
@@ -55,42 +48,16 @@ const Gallery = () => {
         slide={{ direction: "down", offset: 30 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="relative">
-          <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-1 w-35 bg-linear-to-r to-transparent max-sm:hidden" />
-          <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-1 w-35 bg-linear-to-l to-transparent max-sm:hidden" />
-
-          <div className="w-full overflow-hidden">
-            <Marquee pauseOnHover duration={22} gap={1.5}>
-              {galleryRows[0].map((image) => (
-                <Image
-                  key={image.src}
-                  src={assetPath(image.src)}
-                  alt={image.alt}
-                  width={268}
-                  height={274}
-                  sizes="268px"
-                  className="h-68.5 w-67 shrink-0 rounded-lg border object-cover shadow-sm"
-                />
-              ))}
-            </Marquee>
-          </div>
-
-          <div className="w-full overflow-hidden">
-            <Marquee pauseOnHover duration={22} gap={1.5} reverse>
-              {galleryRows[1].map((image) => (
-                <Image
-                  key={image.src}
-                  src={assetPath(image.src)}
-                  alt={image.alt}
-                  width={268}
-                  height={274}
-                  sizes="268px"
-                  className="h-68.5 w-67 shrink-0 rounded-lg border object-cover shadow-sm"
-                />
-              ))}
-            </Marquee>
-          </div>
-        </div>
+        <GalleryMarqueeCarousel
+          images={galleryImages}
+          lightbox
+          lightboxLabels={{
+            previous: t("blocks.gallery.lightboxPrevious"),
+            next: t("blocks.gallery.lightboxNext"),
+            close: t("blocks.gallery.lightboxClose"),
+            viewImage: t("blocks.gallery.lightboxViewImage"),
+          }}
+        />
       </MotionPreset>
     </section>
   );

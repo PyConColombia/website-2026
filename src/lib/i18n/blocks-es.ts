@@ -41,12 +41,26 @@ export const blocksEs: BlocksMessages = {
       },
     },
   },
+  sponsorDetailPage: {
+    breadcrumbHome: "Inicio",
+    breadcrumbSponsors: "Patrocinadores",
+    visitWebsite: "Visitar sitio web",
+    backToSponsors: "Volver a patrocinadores",
+    aboutTitle: "Sobre este patrocinador",
+    becomeSponsorTitle: "¿Quieres ser patrocinador?",
+    becomeSponsorLead:
+      "Únete a las organizaciones que apoyan PyCon Colombia y ayuda a fortalecer la comunidad Python en Colombia y Latinoamérica.",
+  },
   gallery: {
     eyebrow: "Galería",
     title: "PyCon Colombia en imágenes",
     subtitle:
       "Un vistazo a las charlas, los pasillos y los momentos comunitarios que hacen especial a PyCon Colombia.",
     seeAll: "VER TODO",
+    lightboxPrevious: "Imagen anterior",
+    lightboxNext: "Imagen siguiente",
+    lightboxClose: "Cerrar visor de imágenes",
+    lightboxViewImage: "Ver imagen",
   },
   team: {
     eyebrow: "Equipo",

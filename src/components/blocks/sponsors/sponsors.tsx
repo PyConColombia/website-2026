@@ -103,14 +103,9 @@ const SponsorCard = ({
     </div>
   );
 
-  if (sponsor.href) {
+  if (sponsor.slug) {
     return (
-      <Link
-        href={sponsor.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full"
-      >
+      <Link href={`/sponsors/${sponsor.slug}`} className="block w-full">
         {inner}
       </Link>
     );
