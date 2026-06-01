@@ -42,7 +42,9 @@ export const blocksEn = {
     breadcrumbSponsors: "Sponsors",
     visitWebsite: "Visit website",
     backToSponsors: "Back to sponsors",
+    aboutEyebrow: "About us",
     aboutTitle: "About this sponsor",
+    faqTopicsAria: "Sponsor FAQ topics",
     becomeSponsorTitle: "Want to be a sponsor?",
     becomeSponsorLead:
       "Join the organizations supporting PyCon Colombia and help grow the Python community in Colombia and Latin America.",

@@ -46,7 +46,9 @@ export const blocksEs: BlocksMessages = {
     breadcrumbSponsors: "Patrocinadores",
     visitWebsite: "Visitar sitio web",
     backToSponsors: "Volver a patrocinadores",
+    aboutEyebrow: "Acerca de",
     aboutTitle: "Sobre este patrocinador",
+    faqTopicsAria: "Temarios FAQ del patrocinador",
     becomeSponsorTitle: "¿Quieres ser patrocinador?",
     becomeSponsorLead:
       "Únete a las organizaciones que apoyan PyCon Colombia y ayuda a fortalecer la comunidad Python en Colombia y Latinoamérica.",
