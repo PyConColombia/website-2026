@@ -9,6 +9,7 @@ import {
   sponsorDetailsByLocale,
 } from "@/assets/data/sponsors-detail.locale";
 import type { SiteLocale } from "@/lib/site-messages";
+import { siteMessages } from "@/lib/site-messages";
 
 export type SponsorWithTier = Sponsor & {
   tierKey: SponsorTierKey;
@@ -75,6 +76,17 @@ export function getSponsorPageDescription(
 
   if (detail?.tagline) {
     return detail.tagline;
+  }
+
+  const sponsor = getSponsorBySlug(slug);
+
+  if (sponsor) {
+    const tierTitle =
+      siteMessages[locale].blocks.sponsors.tiers[sponsor.tierKey].title;
+
+    return locale === "es"
+      ? `${sponsorName}, patrocinador ${tierTitle} de PyCon Colombia 2026. Medellín, 24–26 de julio.`
+      : `${sponsorName}, ${tierTitle} sponsor of PyCon Colombia 2026. Medellín, July 24–26.`;
   }
 
   return `${sponsorName} — PyCon Colombia 2026`;

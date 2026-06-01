@@ -70,6 +70,7 @@ export function webPageJsonLd(args: {
   name: string;
   description?: string;
   url: string;
+  image?: string;
 }): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
@@ -78,6 +79,14 @@ export function webPageJsonLd(args: {
     name: args.name,
     ...(args.description ? { description: args.description } : {}),
     url: args.url,
+    ...(args.image
+      ? {
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: args.image,
+          },
+        }
+      : {}),
     isPartOf: { "@id": `${getSiteUrl()}#website` },
     potentialAction: {
       "@type": "ReadAction",
