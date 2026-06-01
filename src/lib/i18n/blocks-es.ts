@@ -51,6 +51,13 @@ export const blocksEs: BlocksMessages = {
     becomeSponsorLead:
       "Únete a las organizaciones que apoyan PyCon Colombia y ayuda a fortalecer la comunidad Python en Colombia y Latinoamérica.",
   },
+  afterMovie: {
+    sectionAriaLabel: "Video after movie de la conferencia 2025",
+    title: "After movie 2025",
+    subtitle:
+      "Revive la magia de nuestro encuentro anterior. Descubre qué hace única la experiencia de PyCon Colombia.",
+    playLabel: "Reproducir video del after movie",
+  },
   gallery: {
     eyebrow: "Galería",
     title: "PyCon Colombia en imágenes",

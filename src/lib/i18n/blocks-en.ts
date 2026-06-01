@@ -47,6 +47,13 @@ export const blocksEn = {
     becomeSponsorLead:
       "Join the organizations supporting PyCon Colombia and help grow the Python community in Colombia and Latin America.",
   },
+  afterMovie: {
+    sectionAriaLabel: "2025 conference after movie",
+    title: "2025 After Movie",
+    subtitle:
+      "Relive the magic of our previous gathering. See what makes PyCon Colombia a unique experience.",
+    playLabel: "Play after movie video",
+  },
   gallery: {
     eyebrow: "Gallery",
     title: "PyCon Colombia in Frames",

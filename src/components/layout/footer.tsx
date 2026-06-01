@@ -123,7 +123,7 @@ const Footer = () => {
   const footerLinks = [
     {
       label: t("footer.home"),
-      href: "/#pycon-hero",
+      href: "/",
     },
     {
       label: t("footer.keynoteSpeakers"),
@@ -143,7 +143,7 @@ const Footer = () => {
     <footer className="bg-[#0F172B] text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-16 lg:grid-cols-[1.3fr_1fr] lg:px-8 lg:py-20">
         <div className="max-w-2xl space-y-6">
-          <Link href="/#pycon-hero" className="inline-flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center gap-3">
             <span className="size-10 overflow-hidden rounded-full bg-white ring-2 ring-white/25">
               <Image
                 src={assetPath("/favicon/apple-touch-icon.png")}

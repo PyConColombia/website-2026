@@ -78,7 +78,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         style={{ fontFamily: "var(--font-button)" }}
       >
         {/* Logo */}
-        <Link href="/#pycon-hero">
+        <Link href="/">
           <div className="flex items-center gap-3">
             <div className="bg-primary ring-primary/30 size-8 overflow-hidden rounded-full ring-2">
               <Image

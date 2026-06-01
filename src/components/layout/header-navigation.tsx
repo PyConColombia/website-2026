@@ -444,11 +444,7 @@ const HeaderNavigationSmallScreen = ({
         <SheetHeader className="p-4">
           <SheetTitle hidden />
           <SheetDescription hidden />
-          <Link
-            href="/#pycon-hero"
-            onClick={handleLinkClick}
-            className="self-start"
-          >
+          <Link href="/" onClick={handleLinkClick} className="self-start">
             <Logo />
           </Link>
         </SheetHeader>

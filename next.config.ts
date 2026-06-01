@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         hostname: "cdn.shadcnstudio.com",
         pathname: "/ss-assets/**",
       },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
     ],
   },
   trailingSlash: true,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { topicsByLocale } from "@/assets/data/trusted-brands";
+import Aftermovie from "@/components/blocks/aftermovie/aftermovie";
 import Benefits from "@/components/blocks/benefits/benefits";
 import CTA from "@/components/blocks/cta/cta";
 import Gallery from "@/components/blocks/gallery/gallery";
@@ -101,6 +102,10 @@ const Home = () => {
       <SectionSeparator />
 
       <Sponsors />
+
+      <SectionSeparator />
+
+      <Aftermovie />
 
       <SectionSeparator />
 
