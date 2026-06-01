@@ -21,11 +21,23 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       ],
       highlights: [],
     },
+    lovelytics: {
+      paragraphs: [
+        "Lovelytics is a team of elite data and AI professionals who know how to make complex problems feel manageable—and even enjoyable. We bring clarity, speed, and heart to every project, partnering with clients to solve real problems with smart, sustainable solutions.",
+      ],
+      highlights: [],
+    },
   },
   es: {
     loka: {
       paragraphs: [
         "Loka es una empresa de consultoría de software nacida en Silicon Valley nombrada AWS Partner de innovación en el 2024. Resolvemos problemas complejos para startups y empresas utilizando tecnología de punta, incluyendo GenAI, ML, DevOps y Big Data. Como AWS Premier Tier Partner, ayudamos a nuestros clientes a acelerar su llegada a producción con los programas de financiamiento de AWS. Para más información, visita loka.com.",
+      ],
+      highlights: [],
+    },
+    lovelytics: {
+      paragraphs: [
+        "Somos una empresa 100% especializada en Data & AI. Contamos con un equipo de primer nivel compuesto por más de 550 personas, con clientes en Estados Unidos, LATAM y Europa.",
       ],
       highlights: [],
     },
