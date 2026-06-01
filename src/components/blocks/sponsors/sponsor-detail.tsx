@@ -3,27 +3,18 @@
 import { ArrowLeftIcon, ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { getSponsorGalleryImages } from "@/assets/data/sponsor-gallery";
 import SponsorBecomeSection from "@/components/blocks/sponsors/sponsor-become-section";
-import GalleryMarqueeCarousel from "@/components/gallery/gallery-marquee-carousel";
+import GalleryImageLightbox from "@/components/gallery/gallery-image-lightbox";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { PrimaryFlowButton } from "@/components/ui/flow-button";
+import { Marquee } from "@/components/ui/marquee";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getSponsorBySlug, getSponsorDetail } from "@/lib/sponsors";
@@ -36,6 +27,9 @@ type SponsorDetailProps = {
 const SponsorDetail = ({ slug }: SponsorDetailProps) => {
   const { locale } = useLanguage();
   const { t } = useTranslations();
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null,
+  );
   const sponsor = useMemo(() => getSponsorBySlug(slug), [slug]);
   const detail = useMemo(() => getSponsorDetail(slug, locale), [slug, locale]);
   const galleryImages = useMemo(() => getSponsorGalleryImages(slug), [slug]);
@@ -46,73 +40,22 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
 
   const tierTitle = t(`blocks.sponsors.tiers.${sponsor.tierKey}.title`);
   const isVenue = sponsor.tier.accent === "venue";
-  const hasAbout = Boolean(detail?.paragraphs.length);
+  const summaryParagraph = detail?.paragraphs[0] ?? detail?.tagline ?? "";
+  const extendedParagraphs = detail?.paragraphs.slice(1) ?? [];
+  const hasExtendedAbout = extendedParagraphs.length > 0;
   const hasFaqTopics = Boolean(detail?.faqTopics?.length);
   const hasGallery = galleryImages.length > 0;
-  const aboutLead = detail?.paragraphs[0];
-  const aboutSupportingParagraphs = detail?.paragraphs.slice(1) ?? [];
-  const aboutImage = galleryImages[0];
-  const aboutHighlights = detail?.highlights ?? [];
 
   return (
     <>
-      <section className="py-8 sm:py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:space-y-12 lg:px-8">
-          <MotionPreset
-            fade
-            blur
-            slide={{ direction: "up", offset: 30 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/">
-                      {t("blocks.sponsorDetailPage.breadcrumbHome")}
-                    </Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/#sponsors">
-                      {t("blocks.sponsorDetailPage.breadcrumbSponsors")}
-                    </Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{sponsor.name}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </MotionPreset>
-
-          <div className="space-y-6 text-center">
+      <section className="bg-muted overflow-hidden py-8 sm:py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-12 max-w-6xl space-y-4 text-center md:mb-16 lg:mb-20">
             <MotionPreset
               fade
               blur
               slide={{ direction: "up", offset: 50 }}
               delay={0.1}
-              transition={{ duration: 0.5 }}
-            >
-              <Badge
-                variant="outline"
-                className={cn(
-                  "bg-background text-sm font-normal",
-                  isVenue && "border-primary/30 text-primary",
-                )}
-              >
-                {tierTitle}
-              </Badge>
-            </MotionPreset>
-
-            <MotionPreset
-              fade
-              blur
-              slide={{ direction: "up", offset: 50 }}
-              delay={0.2}
               transition={{ duration: 0.5 }}
             >
               <h1 className="sr-only">{sponsor.name}</h1>
@@ -132,56 +75,80 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
               </div>
             </MotionPreset>
 
-            {detail?.tagline ? (
+            <MotionPreset
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              delay={0.2}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-primary text-sm font-medium uppercase">
+                {t("blocks.sponsorDetailPage.aboutEyebrow")}
+              </p>
+            </MotionPreset>
+
+            <MotionPreset
+              component="h2"
+              className="whitespace-pre-line text-2xl font-semibold md:text-3xl lg:text-4xl"
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              delay={0.3}
+              transition={{ duration: 0.5 }}
+            >
+              {detail?.tagline ?? t("blocks.sponsorDetailPage.aboutTitle")}
+            </MotionPreset>
+
+            {summaryParagraph ? (
               <MotionPreset
+                component="p"
+                className="text-muted-foreground mx-auto max-w-4xl whitespace-pre-line text-xl"
                 fade
                 blur
                 slide={{ direction: "up", offset: 50 }}
-                delay={0.3}
+                delay={0.4}
                 transition={{ duration: 0.5 }}
               >
-                <div className="space-y-3">
-                  <p
-                    className={cn(
-                      "text-xs font-semibold tracking-[0.2em] uppercase",
-                      isVenue ? "text-primary" : "text-muted-foreground",
-                    )}
-                  >
-                    {tierTitle}
-                  </p>
-                  <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-                    {detail.tagline}
-                  </p>
-                </div>
+                {summaryParagraph}
               </MotionPreset>
             ) : null}
+
+            <MotionPreset
+              component="p"
+              className={cn(
+                "text-xs font-semibold tracking-[0.2em] uppercase",
+                isVenue ? "text-primary" : "text-muted-foreground",
+              )}
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              delay={0.45}
+              transition={{ duration: 0.5 }}
+            >
+              {tierTitle}
+            </MotionPreset>
 
             <MotionPreset
               fade
               blur
               slide={{ direction: "up", offset: 50 }}
-              delay={0.4}
+              delay={0.5}
               transition={{ duration: 0.5 }}
             >
               <div className="flex flex-wrap justify-center gap-4">
                 {sponsor.href ? (
-                  <PrimaryFlowButton size="lg" asChild>
+                  <Button size="lg" className="group" asChild>
                     <a
                       href={sponsor.href}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       {t("blocks.sponsorDetailPage.visitWebsite")}
-                      <ExternalLinkIcon />
+                      <ExternalLinkIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
                     </a>
-                  </PrimaryFlowButton>
+                  </Button>
                 ) : null}
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-lg text-base shadow-none"
-                  asChild
-                >
+                <Button size="lg" variant="outline" asChild>
                   <Link href="/#sponsors">
                     <ArrowLeftIcon />
                     {t("blocks.sponsorDetailPage.backToSponsors")}
@@ -189,13 +156,65 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
                 </Button>
               </div>
             </MotionPreset>
+
+            {hasGallery ? (
+              <MotionPreset
+                fade
+                blur
+                slide={{ direction: "up", offset: 40 }}
+                delay={0.55}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="relative pt-4">
+                  <div className="from-muted pointer-events-none absolute inset-y-0 left-0 z-1 w-28 bg-linear-to-r to-transparent max-sm:hidden" />
+                  <div className="from-muted pointer-events-none absolute inset-y-0 right-0 z-1 w-28 bg-linear-to-l to-transparent max-sm:hidden" />
+                  <div className="w-full overflow-hidden">
+                    <Marquee
+                      pauseOnHover
+                      duration={24}
+                      gap={1.25}
+                      className="py-2"
+                    >
+                      {galleryImages.map((image, index) => (
+                        <button
+                          key={`${image.src}-${index}`}
+                          type="button"
+                          className="shrink-0 cursor-zoom-in rounded-2xl transition-opacity hover:opacity-90 focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                          onClick={() => setSelectedImageIndex(index)}
+                          aria-label={`${t("blocks.gallery.lightboxViewImage")}: ${image.alt}`}
+                        >
+                          <Image
+                            src={assetPath(image.src)}
+                            alt={image.alt}
+                            width={320}
+                            height={260}
+                            className="h-56 w-70 rounded-2xl object-cover shadow-sm sm:h-60 sm:w-75"
+                          />
+                        </button>
+                      ))}
+                    </Marquee>
+                  </div>
+                </div>
+              </MotionPreset>
+            ) : null}
           </div>
         </div>
       </section>
 
-      {hasAbout ? (
+      {hasGallery ? (
+        <GalleryImageLightbox
+          images={galleryImages}
+          selectedIndex={selectedImageIndex}
+          onSelectedIndexChange={setSelectedImageIndex}
+          previousLabel={t("blocks.gallery.lightboxPrevious")}
+          nextLabel={t("blocks.gallery.lightboxNext")}
+          closeLabel={t("blocks.gallery.lightboxClose")}
+        />
+      ) : null}
+
+      {hasExtendedAbout ? (
         <section className="px-4 pb-8 sm:px-6 sm:pb-16 lg:px-8 lg:pb-24">
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-7xl space-y-10">
             <MotionPreset
               fade
               blur
@@ -203,77 +222,13 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
               delay={0.1}
               transition={{ duration: 0.5 }}
             >
-              <div id="about" className="scroll-mt-24">
-                <div className="grid gap-8 lg:grid-cols-6 lg:gap-10">
-                  <div className="lg:col-span-2">
-                    <div className="lg:sticky lg:top-24">
-                      <p
-                        className={cn(
-                          "flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase",
-                          isVenue ? "text-primary" : "text-muted-foreground",
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            "size-1.5 rounded-xs",
-                            isVenue ? "bg-primary" : "bg-primary/80",
-                          )}
-                          aria-hidden
-                        />
-                        {t("blocks.sponsorDetailPage.aboutEyebrow")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-7 lg:col-span-4">
-                    <p className="text-muted-foreground text-sm font-medium uppercase">
-                      {t("blocks.sponsorDetailPage.aboutTitle")}
+              <div id="about" className="mx-auto max-w-4xl scroll-mt-24">
+                <div className="text-muted-foreground space-y-4 text-base leading-7">
+                  {extendedParagraphs.map((paragraph) => (
+                    <p key={paragraph} className="whitespace-pre-line">
+                      {paragraph}
                     </p>
-
-                    {aboutLead ? (
-                      <h2 className="text-3xl font-semibold leading-tight md:text-4xl">
-                        "{aboutLead}"
-                      </h2>
-                    ) : null}
-
-                    {aboutSupportingParagraphs.length > 0 ? (
-                      <div className="text-muted-foreground space-y-3 text-lg leading-8">
-                        {aboutSupportingParagraphs.map((paragraph) => (
-                          <p key={paragraph}>{paragraph}</p>
-                        ))}
-                      </div>
-                    ) : null}
-
-                    {aboutImage ? (
-                      <div className="overflow-hidden border">
-                        <Image
-                          src={assetPath(aboutImage.src)}
-                          alt={aboutImage.alt}
-                          width={1200}
-                          height={640}
-                          className="h-72 w-full object-cover sm:h-84 lg:h-96"
-                        />
-                      </div>
-                    ) : null}
-
-                    {aboutHighlights.length > 0 ? (
-                      <div className="border-t">
-                        {aboutHighlights.map((highlight) => (
-                          <div
-                            key={`${highlight.title}-${highlight.description}`}
-                            className="grid border-b py-5 md:grid-cols-5 md:gap-6"
-                          >
-                            <p className="text-foreground md:col-span-2 text-3xl font-semibold">
-                              {highlight.title}
-                            </p>
-                            <p className="text-muted-foreground md:col-span-3 text-base leading-7">
-                              {highlight.description}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
+                  ))}
                 </div>
               </div>
             </MotionPreset>
@@ -302,7 +257,7 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
                           {faqTopic.topic}
                         </AccordionTrigger>
                         {faqTopic.description ? (
-                          <AccordionContent className="text-muted-foreground text-base leading-7">
+                          <AccordionContent className="text-muted-foreground whitespace-pre-line text-base leading-7">
                             {faqTopic.description}
                           </AccordionContent>
                         ) : null}
@@ -313,27 +268,6 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
               </MotionPreset>
             ) : null}
           </div>
-        </section>
-      ) : null}
-
-      {hasGallery ? (
-        <section className="pb-8 sm:pb-16 lg:pb-24">
-          <MotionPreset
-            fade
-            slide={{ direction: "down", offset: 30 }}
-            transition={{ duration: 0.5 }}
-          >
-            <GalleryMarqueeCarousel
-              images={galleryImages}
-              lightbox
-              lightboxLabels={{
-                previous: t("blocks.gallery.lightboxPrevious"),
-                next: t("blocks.gallery.lightboxNext"),
-                close: t("blocks.gallery.lightboxClose"),
-                viewImage: t("blocks.gallery.lightboxViewImage"),
-              }}
-            />
-          </MotionPreset>
         </section>
       ) : null}
 
