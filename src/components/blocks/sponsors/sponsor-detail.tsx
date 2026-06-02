@@ -13,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/marquee";
 import { MotionPreset } from "@/components/ui/motion-preset";
@@ -39,7 +40,16 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
   }
 
   const tierTitle = t(`blocks.sponsors.tiers.${sponsor.tierKey}.title`);
-  const isVenue = sponsor.tier.accent === "venue";
+  const tierBadgeClassName = {
+    venue: "border-primary/40 bg-primary/10 text-primary",
+    platinum:
+      "border-cyan-500/35 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300",
+    gold: "border-amber-500/35 bg-amber-500/15 text-amber-700 dark:text-amber-300",
+    silverPlus:
+      "border-violet-500/35 bg-violet-500/10 text-violet-700 dark:text-violet-300",
+    silver:
+      "border-slate-500/35 bg-slate-500/10 text-slate-700 dark:text-slate-300",
+  }[sponsor.tierKey];
   const summaryParagraph = detail?.paragraphs[0] ?? detail?.tagline ?? "";
   const extendedParagraphs = detail?.paragraphs.slice(1) ?? [];
   const hasExtendedAbout = extendedParagraphs.length > 0;
@@ -48,9 +58,24 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
 
   return (
     <>
-      <section className="bg-muted overflow-hidden py-8 sm:py-16 lg:py-24">
+      <section className="overflow-hidden py-8 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mb-12 max-w-6xl space-y-4 text-center md:mb-16 lg:mb-20">
+            <MotionPreset
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              delay={0.05}
+              transition={{ duration: 0.5 }}
+            >
+              <Badge
+                variant="outline"
+                className={cn("text-sm font-medium", tierBadgeClassName)}
+              >
+                {tierTitle}
+              </Badge>
+            </MotionPreset>
+
             <MotionPreset
               fade
               blur
@@ -114,21 +139,6 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
             ) : null}
 
             <MotionPreset
-              component="p"
-              className={cn(
-                "text-xs font-semibold tracking-[0.2em] uppercase",
-                isVenue ? "text-primary" : "text-muted-foreground",
-              )}
-              fade
-              blur
-              slide={{ direction: "up", offset: 50 }}
-              delay={0.45}
-              transition={{ duration: 0.5 }}
-            >
-              {tierTitle}
-            </MotionPreset>
-
-            <MotionPreset
               fade
               blur
               slide={{ direction: "up", offset: 50 }}
@@ -166,8 +176,8 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="relative pt-4">
-                  <div className="from-muted pointer-events-none absolute inset-y-0 left-0 z-1 w-28 bg-linear-to-r to-transparent max-sm:hidden" />
-                  <div className="from-muted pointer-events-none absolute inset-y-0 right-0 z-1 w-28 bg-linear-to-l to-transparent max-sm:hidden" />
+                  <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-1 w-28 bg-linear-to-r to-transparent max-sm:hidden" />
+                  <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-1 w-28 bg-linear-to-l to-transparent max-sm:hidden" />
                   <div className="w-full overflow-hidden">
                     <Marquee
                       pauseOnHover
