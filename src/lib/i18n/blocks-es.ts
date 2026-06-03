@@ -29,6 +29,11 @@ export const blocksEs: BlocksMessages = {
         description:
           "Aliados de alto impacto para charlas, comunidad y aprendizaje.",
       },
+      goldPlus: {
+        title: "Oro +",
+        description:
+          "Patrocinadores oro ampliados con mayor visibilidad e impacto en la comunidad.",
+      },
       silverPlus: {
         title: "Plata +",
         description:

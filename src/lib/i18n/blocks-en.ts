@@ -27,6 +27,11 @@ export const blocksEn = {
         description:
           "High-impact partners supporting talks, community, and learning.",
       },
+      goldPlus: {
+        title: "Gold +",
+        description:
+          "Enhanced gold partners with expanded visibility and community impact.",
+      },
       silverPlus: {
         title: "Silver +",
         description: "Partners helping us strengthen the attendee experience.",
