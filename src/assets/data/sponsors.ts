@@ -9,6 +9,7 @@ export type SponsorTierKey =
 
 export type Sponsor = {
   name: string;
+  slug?: string;
   logo?: string;
   href?: string;
 };
@@ -35,6 +36,7 @@ export const sponsorTiers: SponsorTier[] = [
     sponsors: [
       {
         name: "Universidad EAFIT",
+        slug: "eafit",
         logo: "/images/sponsors/eafit.svg",
         href: "https://www.eafit.edu.co/",
       },
@@ -49,6 +51,7 @@ export const sponsorTiers: SponsorTier[] = [
     sponsors: [
       {
         name: "Aimpoint Digital",
+        slug: "aimpoint",
         logo: "/images/sponsors/aimpoint.svg",
         href: "https://aimpointdigital.com/",
       },
@@ -63,6 +66,7 @@ export const sponsorTiers: SponsorTier[] = [
     sponsors: [
       {
         name: "Loka",
+        slug: "loka",
         logo: "/images/sponsors/loka.svg",
         href: "https://loka.com/",
       },
@@ -76,6 +80,7 @@ export const sponsorTiers: SponsorTier[] = [
     sponsors: [
       {
         name: "Lovelytics",
+        slug: "lovelytics",
         logo: "/images/sponsors/lovelytics.svg",
         href: "https://lovelytics.com/",
       },
@@ -89,11 +94,13 @@ export const sponsorTiers: SponsorTier[] = [
     sponsors: [
       {
         name: "Genlogs",
+        slug: "genlogs",
         logo: "/images/sponsors/genlogs.svg",
         href: "https://genlogs.io/",
       },
       {
         name: "Provectus",
+        slug: "provectus",
         logo: "/images/sponsors/provectus.svg",
         href: "https://provectus.com/",
       },

@@ -54,7 +54,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Karen Romo",
-    role: "Sponsors, Keynotes, Logistics",
+    role: "Event manager",
     image: "/images/avatar/karen-romo.webp",
     linkedin: "https://www.linkedin.com/in/karen-lisette-romo-b1383b270",
     x: "https://twitter.com/@karenlis727",

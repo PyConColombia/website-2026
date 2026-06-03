@@ -15,6 +15,30 @@ import { XSocialIcon } from "@/components/icons/x-social-icon";
 import { useTranslations } from "@/contexts/language-context";
 import { assetPath } from "@/lib/utils";
 
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <title>TikTok</title>
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+  </svg>
+);
+
+const MediumIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <title>Medium</title>
+    <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.6 6.42-3.57 6.42-1.97 0-3.57-2.88-3.57-6.42s1.6-6.42 3.57-6.42 3.57 2.88 3.57 6.42zm5.5 0c0 3.17-.73 5.74-1.62 5.74-.9 0-1.62-2.57-1.62-5.74s.73-5.74 1.62-5.74 1.62 2.57 1.62 5.74z" />
+  </svg>
+);
+
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +84,16 @@ const socialLinks: SocialLink[] = [
     icon: YoutubeIcon,
   },
   {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@pycon.colombia",
+    icon: TikTokIcon,
+  },
+  {
+    label: "Medium",
+    href: "https://medium.com/@pyconcolombia",
+    icon: MediumIcon,
+  },
+  {
     label: "GitHub",
     href: "https://github.com/pyconcolombia",
     icon: GithubIcon,
@@ -89,7 +123,7 @@ const Footer = () => {
   const footerLinks = [
     {
       label: t("footer.home"),
-      href: "/#pycon-hero",
+      href: "/",
     },
     {
       label: t("footer.keynoteSpeakers"),
@@ -109,7 +143,7 @@ const Footer = () => {
     <footer className="bg-[#0F172B] text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-16 lg:grid-cols-[1.3fr_1fr] lg:px-8 lg:py-20">
         <div className="max-w-2xl space-y-6">
-          <Link href="/#pycon-hero" className="inline-flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center gap-3">
             <span className="size-10 overflow-hidden rounded-full bg-white ring-2 ring-white/25">
               <Image
                 src={assetPath("/favicon/apple-touch-icon.png")}

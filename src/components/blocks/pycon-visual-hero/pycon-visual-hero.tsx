@@ -9,7 +9,6 @@ const PyconVisualHero = () => {
 
   return (
     <section
-      id="pycon-hero"
       aria-label={t("heroVisual.ariaLabel")}
       className="relative isolate min-h-[560px] overflow-hidden bg-background px-4 py-8 sm:min-h-[650px] sm:px-6 sm:py-12 lg:px-8"
     >

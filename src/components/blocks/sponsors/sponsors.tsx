@@ -19,7 +19,7 @@ const OPEN_SLOT_NAME = "Open slot";
 
 const sizeStyles = {
   XL: {
-    container: "w-full max-w-4xl",
+    container: "w-full max-w-5xl",
     card: "min-h-48 px-8 py-10 sm:min-h-56 sm:px-10 sm:py-12",
     logo: "max-h-28 max-w-[min(100%,20rem)] sm:max-h-32 sm:max-w-[22rem]",
     imageWidth: 320,
@@ -103,14 +103,9 @@ const SponsorCard = ({
     </div>
   );
 
-  if (sponsor.href) {
+  if (sponsor.slug) {
     return (
-      <Link
-        href={sponsor.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full"
-      >
+      <Link href={`/sponsors/${sponsor.slug}`} className="block w-full">
         {inner}
       </Link>
     );
@@ -158,8 +153,7 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
       <div
         className={cn(
           "flex w-full justify-center",
-          tier.accent === "venue" &&
-            "bg-primary/10 rounded-3xl p-5 sm:p-8 lg:p-10",
+          tier.accent === "venue" && "rounded-3xl p-5 sm:p-8 lg:p-10",
         )}
       >
         <div

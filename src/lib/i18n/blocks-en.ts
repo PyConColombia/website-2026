@@ -37,12 +37,35 @@ export const blocksEn = {
       },
     },
   },
+  sponsorDetailPage: {
+    breadcrumbHome: "Home",
+    breadcrumbSponsors: "Sponsors",
+    visitWebsite: "Visit website",
+    backToSponsors: "Back to sponsors",
+    aboutEyebrow: "About us",
+    aboutTitle: "About this sponsor",
+    faqTopicsAria: "Sponsor FAQ topics",
+    becomeSponsorTitle: "Want to be a sponsor?",
+    becomeSponsorLead:
+      "Join the organizations supporting PyCon Colombia and help grow the Python community in Colombia and Latin America.",
+  },
+  afterMovie: {
+    sectionAriaLabel: "2025 conference after movie",
+    title: "2025 After Movie",
+    subtitle:
+      "Relive the magic of our previous gathering. See what makes PyCon Colombia a unique experience.",
+    playLabel: "Play after movie video",
+  },
   gallery: {
     eyebrow: "Gallery",
     title: "PyCon Colombia in Frames",
     subtitle:
       "A glimpse of the talks, hallway conversations, and community moments that make PyCon Colombia special.",
     seeAll: "SEE ALL",
+    lightboxPrevious: "Previous image",
+    lightboxNext: "Next image",
+    lightboxClose: "Close image viewer",
+    lightboxViewImage: "View image",
   },
   team: {
     eyebrow: "Team",
