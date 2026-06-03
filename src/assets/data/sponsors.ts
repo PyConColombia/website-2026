@@ -4,6 +4,7 @@ export type SponsorTierKey =
   | "venue"
   | "platinum"
   | "gold"
+  | "goldPlus"
   | "silverPlus"
   | "silver";
 
@@ -58,6 +59,21 @@ export const sponsorTiers: SponsorTier[] = [
     ],
   },
   {
+    tierKey: "goldPlus",
+    title: "Gold +",
+    size: "M",
+    description:
+      "Enhanced gold partners with expanded visibility and community impact.",
+    sponsors: [
+      {
+        name: "EPAM",
+        slug: "epam",
+        logo: "/images/sponsors/epam.svg",
+        href: "https://www.epam.com/",
+      },
+    ],
+  },
+  {
     tierKey: "gold",
     title: "Gold",
     size: "M",
@@ -103,6 +119,12 @@ export const sponsorTiers: SponsorTier[] = [
         slug: "provectus",
         logo: "/images/sponsors/provectus.svg",
         href: "https://provectus.com/",
+      },
+      {
+        name: "Licencias Online",
+        slug: "licencias-online",
+        logo: "/images/sponsors/LOL.svg",
+        href: "https://www.licenciasonline.com/",
       },
     ],
   },

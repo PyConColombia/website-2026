@@ -19,35 +19,36 @@ const OPEN_SLOT_NAME = "Open slot";
 
 const sizeStyles = {
   XL: {
-    container: "w-full max-w-5xl",
+    container: "mx-auto w-full max-w-5xl shrink-0",
     card: "min-h-48 px-8 py-10 sm:min-h-56 sm:px-10 sm:py-12",
     logo: "max-h-28 max-w-[min(100%,20rem)] sm:max-h-32 sm:max-w-[22rem]",
     imageWidth: 320,
     imageHeight: 112,
   },
   L: {
-    container: "w-full max-w-3xl",
+    container: "mx-auto w-full max-w-3xl shrink-0",
     card: "min-h-44 px-7 py-9 sm:min-h-52 sm:px-9 sm:py-10",
     logo: "max-h-24 max-w-[min(100%,18rem)] sm:max-h-28 sm:max-w-[20rem]",
     imageWidth: 288,
     imageHeight: 96,
   },
   M: {
-    container: "w-full max-w-xl",
+    container: "mx-auto w-full max-w-xl shrink-0",
     card: "min-h-36 px-6 py-8 sm:min-h-44 sm:px-8 sm:py-9",
     logo: "max-h-16 max-w-52 sm:max-h-20 sm:max-w-56",
     imageWidth: 224,
     imageHeight: 72,
   },
   S: {
-    container: "w-full max-w-xs sm:max-w-sm",
+    container:
+      "mx-auto w-full max-w-xs shrink-0 sm:max-w-sm sm:basis-[min(100%,24rem)]",
     card: "min-h-28 px-5 py-6 sm:min-h-32 sm:px-6 sm:py-7",
     logo: "max-h-11 max-w-40 sm:max-h-12 sm:max-w-44",
     imageWidth: 176,
     imageHeight: 48,
   },
   XS: {
-    container: "w-full max-w-[10.5rem] sm:max-w-44",
+    container: "mx-auto w-full max-w-[10.5rem] shrink-0 sm:max-w-44",
     card: "min-h-24 px-4 py-5 sm:min-h-28",
     logo: "max-h-9 max-w-32 sm:max-h-10 sm:max-w-36",
     imageWidth: 144,
@@ -132,7 +133,7 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
       transition={{ duration: 0.55 }}
       className="flex flex-col"
     >
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 flex items-center justify-center gap-3">
         <span
           className={cn(
             "h-px w-8 shrink-0",
@@ -148,6 +149,13 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
         >
           {tierTitle}
         </h3>
+        <span
+          className={cn(
+            "h-px w-8 shrink-0",
+            tier.accent === "venue" ? "bg-primary" : "bg-border",
+          )}
+          aria-hidden
+        />
       </div>
 
       <div
@@ -158,9 +166,10 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
       >
         <div
           className={cn(
+            "mx-auto grid w-full justify-items-center gap-4 sm:gap-5",
             isMulti
-              ? "grid w-full max-w-2xl grid-cols-2 gap-4 sm:gap-5"
-              : "flex justify-center",
+              ? "max-w-4xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              : "max-w-full grid-cols-1",
           )}
         >
           {sponsors.map((sponsor) => {
@@ -172,7 +181,11 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
             return (
               <div
                 key={`${tier.tierKey}-${sponsor.name}-${sponsor.href ?? ""}`}
-                className={cn(!isMulti && styles.container)}
+                className={cn(
+                  styles.container,
+                  "justify-self-center",
+                  !isMulti && "sm:w-fit",
+                )}
               >
                 <SponsorCard
                   sponsor={sponsor}

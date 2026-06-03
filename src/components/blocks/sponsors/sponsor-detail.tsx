@@ -45,6 +45,8 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
     platinum:
       "border-cyan-500/35 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300",
     gold: "border-amber-500/35 bg-amber-500/15 text-amber-700 dark:text-amber-300",
+    goldPlus:
+      "border-yellow-500/35 bg-yellow-500/15 text-yellow-800 dark:text-yellow-300",
     silverPlus:
       "border-violet-500/35 bg-violet-500/10 text-violet-700 dark:text-violet-300",
     silver:
