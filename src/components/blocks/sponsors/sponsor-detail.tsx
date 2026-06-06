@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { getSponsorGalleryImages } from "@/assets/data/sponsor-gallery";
+import { getSponsorVideos } from "@/assets/data/sponsor-videos";
 import SponsorBecomeSection from "@/components/blocks/sponsors/sponsor-become-section";
 import GalleryImageLightbox from "@/components/gallery/gallery-image-lightbox";
 import {
@@ -17,6 +18,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/marquee";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import YouTubeEmbedCard from "@/components/youtube/youtube-embed-card";
+import YouTubeVideoLightbox from "@/components/youtube/youtube-video-lightbox";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getSponsorBySlug, getSponsorDetail } from "@/lib/sponsors";
 import { assetPath, cn } from "@/lib/utils";
@@ -31,9 +34,13 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null,
   );
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(
+    null,
+  );
   const sponsor = useMemo(() => getSponsorBySlug(slug), [slug]);
   const detail = useMemo(() => getSponsorDetail(slug, locale), [slug, locale]);
   const galleryImages = useMemo(() => getSponsorGalleryImages(slug), [slug]);
+  const videos = useMemo(() => getSponsorVideos(slug), [slug]);
 
   if (!sponsor) {
     return null;
@@ -57,6 +64,7 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
   const hasExtendedAbout = extendedParagraphs.length > 0;
   const hasFaqTopics = Boolean(detail?.faqTopics?.length);
   const hasGallery = galleryImages.length > 0;
+  const hasVideos = videos.length > 0;
 
   return (
     <>
@@ -281,6 +289,59 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
             ) : null}
           </div>
         </section>
+      ) : null}
+
+      {hasVideos ? (
+        <section className="px-4 pb-8 sm:px-6 sm:pb-16 lg:px-8 lg:pb-24">
+          <div className="mx-auto max-w-7xl space-y-8">
+            <MotionPreset
+              fade
+              blur
+              slide={{ direction: "up", offset: 40 }}
+              delay={0.1}
+              transition={{ duration: 0.5 }}
+              className="mx-auto max-w-2xl space-y-4 text-center"
+            >
+              <p className="text-primary text-sm font-medium uppercase">
+                {t("blocks.sponsorDetailPage.videosEyebrow")}
+              </p>
+              <h2 className="text-2xl font-semibold md:text-3xl">
+                {t("blocks.sponsorDetailPage.videosTitle")}
+              </h2>
+            </MotionPreset>
+
+            <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {videos.map((video, index) => (
+                <MotionPreset
+                  key={video.youtubeId}
+                  fade
+                  blur
+                  slide={{ direction: "up", offset: 30 }}
+                  delay={0.15}
+                  transition={{ duration: 0.45 }}
+                >
+                  <YouTubeEmbedCard
+                    youtubeId={video.youtubeId}
+                    title={video.title}
+                    playLabel={t("blocks.sponsorDetailPage.playVideoLabel")}
+                    onClick={() => setSelectedVideoIndex(index)}
+                  />
+                </MotionPreset>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {hasVideos ? (
+        <YouTubeVideoLightbox
+          videos={videos}
+          selectedIndex={selectedVideoIndex}
+          onSelectedIndexChange={setSelectedVideoIndex}
+          previousLabel={t("blocks.gallery.lightboxPrevious")}
+          nextLabel={t("blocks.gallery.lightboxNext")}
+          closeLabel={t("blocks.gallery.lightboxClose")}
+        />
       ) : null}
 
       <SponsorBecomeSection />

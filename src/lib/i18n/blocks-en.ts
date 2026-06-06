@@ -50,6 +50,9 @@ export const blocksEn = {
     aboutEyebrow: "About us",
     aboutTitle: "About this sponsor",
     faqTopicsAria: "Sponsor FAQ topics",
+    videosEyebrow: "Videos",
+    videosTitle: "Watch more from this sponsor",
+    playVideoLabel: "Play video",
     becomeSponsorTitle: "Want to be a sponsor?",
     becomeSponsorLead:
       "Join the organizations supporting PyCon Colombia and help grow the Python community in Colombia and Latin America.",

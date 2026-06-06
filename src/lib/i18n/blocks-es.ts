@@ -54,6 +54,9 @@ export const blocksEs: BlocksMessages = {
     aboutEyebrow: "Acerca de",
     aboutTitle: "Sobre este patrocinador",
     faqTopicsAria: "Temarios FAQ del patrocinador",
+    videosEyebrow: "Videos",
+    videosTitle: "Conoce más de este patrocinador",
+    playVideoLabel: "Reproducir video",
     becomeSponsorTitle: "¿Quieres ser patrocinador?",
     becomeSponsorLead:
       "Únete a las organizaciones que apoyan PyCon Colombia y ayuda a fortalecer la comunidad Python en Colombia y Latinoamérica.",

@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { type RefObject, useEffect, useMemo, useRef, useState } from "react";
 
 import { type SponsorTier, sponsorTiers } from "@/assets/data/sponsors";
 import { Badge } from "@/components/ui/badge";
@@ -17,53 +18,136 @@ const sponsorDeckUrl =
 
 const OPEN_SLOT_NAME = "Open slot";
 
+const SPONSOR_GRID_GAP_PX = 16;
+const SPONSOR_GRID_GAP_PX_SM = 20;
+const SPONSOR_GRID_SM_BREAKPOINT = 640;
+
 const sizeStyles = {
   XL: {
     container: "mx-auto w-full max-w-5xl shrink-0",
+    gridMaxWidth: "max-w-5xl",
+    card: "min-h-52 px-9 py-11 sm:min-h-64 sm:px-11 sm:py-14",
+    logo: "max-h-32 max-w-[min(100%,22rem)] sm:max-h-36 sm:max-w-[24rem]",
+    imageWidth: 360,
+    imageHeight: 128,
+    layoutWidth: 1024,
+    layoutWidthSm: 1024,
+    minLayoutWidth: 1024,
+    minLayoutWidthSm: 1024,
+  },
+  L: {
+    container: "mx-auto w-full max-w-4xl shrink-0",
+    gridMaxWidth: "max-w-4xl",
     card: "min-h-48 px-8 py-10 sm:min-h-56 sm:px-10 sm:py-12",
     logo: "max-h-28 max-w-[min(100%,20rem)] sm:max-h-32 sm:max-w-[22rem]",
     imageWidth: 320,
     imageHeight: 112,
-  },
-  L: {
-    container: "mx-auto w-full max-w-3xl shrink-0",
-    card: "min-h-44 px-7 py-9 sm:min-h-52 sm:px-9 sm:py-10",
-    logo: "max-h-24 max-w-[min(100%,18rem)] sm:max-h-28 sm:max-w-[20rem]",
-    imageWidth: 288,
-    imageHeight: 96,
+    layoutWidth: 896,
+    layoutWidthSm: 896,
+    minLayoutWidth: 896,
+    minLayoutWidthSm: 896,
   },
   M: {
-    container: "mx-auto w-full max-w-xl shrink-0",
-    card: "min-h-36 px-6 py-8 sm:min-h-44 sm:px-8 sm:py-9",
-    logo: "max-h-16 max-w-52 sm:max-h-20 sm:max-w-56",
-    imageWidth: 224,
-    imageHeight: 72,
+    container: "mx-auto w-full max-w-2xl shrink-0",
+    gridMaxWidth: "max-w-2xl",
+    card: "min-h-40 px-7 py-9 sm:min-h-48 sm:px-9 sm:py-10",
+    logo: "max-h-20 max-w-56 sm:max-h-24 sm:max-w-64",
+    imageWidth: 256,
+    imageHeight: 84,
+    layoutWidth: 672,
+    layoutWidthSm: 672,
+    minLayoutWidth: 672,
+    minLayoutWidthSm: 672,
   },
   S: {
-    container:
-      "mx-auto w-full max-w-xs shrink-0 sm:max-w-sm sm:basis-[min(100%,24rem)]",
+    container: "mx-auto w-full max-w-52 shrink-0 sm:max-w-60",
+    gridMaxWidth: "max-w-2xl",
     card: "min-h-28 px-5 py-6 sm:min-h-32 sm:px-6 sm:py-7",
-    logo: "max-h-11 max-w-40 sm:max-h-12 sm:max-w-44",
-    imageWidth: 176,
-    imageHeight: 48,
+    logo: "max-h-12 max-w-44 sm:max-h-14 sm:max-w-48",
+    imageWidth: 192,
+    imageHeight: 52,
+    layoutWidth: 208,
+    layoutWidthSm: 240,
+    minLayoutWidth: 192,
+    minLayoutWidthSm: 220,
   },
   XS: {
     container: "mx-auto w-full max-w-[10.5rem] shrink-0 sm:max-w-44",
+    gridMaxWidth: "max-w-lg",
     card: "min-h-24 px-4 py-5 sm:min-h-28",
     logo: "max-h-9 max-w-32 sm:max-h-10 sm:max-w-36",
     imageWidth: 144,
     imageHeight: 40,
+    layoutWidth: 168,
+    layoutWidthSm: 176,
+    minLayoutWidth: 168,
+    minLayoutWidthSm: 176,
   },
 } satisfies Record<
   SponsorTier["size"],
   {
     container: string;
+    gridMaxWidth: string;
     card: string;
     logo: string;
     imageWidth: number;
     imageHeight: number;
+    layoutWidth: number;
+    layoutWidthSm: number;
+    minLayoutWidth: number;
+    minLayoutWidthSm: number;
   }
 >;
+
+function chunkIntoRows<T>(items: T[], columns: number): T[][] {
+  const rows: T[][] = [];
+
+  for (let index = 0; index < items.length; index += columns) {
+    rows.push(items.slice(index, index + columns));
+  }
+
+  return rows;
+}
+
+function useSponsorColumnsPerRow(
+  containerRef: RefObject<HTMLDivElement | null>,
+  minLayoutWidth: number,
+  minLayoutWidthSm: number,
+) {
+  const [columns, setColumns] = useState(1);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const update = () => {
+      const width = container.getBoundingClientRect().width;
+      const isSm = window.matchMedia(
+        `(min-width: ${SPONSOR_GRID_SM_BREAKPOINT}px)`,
+      ).matches;
+      const itemWidth = isSm ? minLayoutWidthSm : minLayoutWidth;
+      const gap = isSm ? SPONSOR_GRID_GAP_PX_SM : SPONSOR_GRID_GAP_PX;
+
+      setColumns(Math.max(1, Math.floor((width + gap) / (itemWidth + gap))));
+    };
+
+    update();
+
+    const resizeObserver = new ResizeObserver(update);
+    resizeObserver.observe(container);
+    window.addEventListener("resize", update);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [containerRef, minLayoutWidth, minLayoutWidthSm]);
+
+  return columns;
+}
 
 type SponsorCardProps = {
   sponsor: SponsorTier["sponsors"][number];
@@ -117,10 +201,23 @@ const SponsorCard = ({
 
 const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
   const { t } = useTranslations();
+  const gridRef = useRef<HTMLDivElement>(null);
   const styles = sizeStyles[tier.size];
   const sponsors =
     tier.sponsors.length > 0 ? tier.sponsors : [{ name: OPEN_SLOT_NAME }];
   const isMulti = sponsors.length > 1;
+  const columns = Math.min(
+    useSponsorColumnsPerRow(
+      gridRef,
+      styles.minLayoutWidth,
+      styles.minLayoutWidthSm,
+    ),
+    sponsors.length,
+  );
+  const sponsorRows = useMemo(
+    () => chunkIntoRows(sponsors, columns),
+    [columns, sponsors],
+  );
   const tierTitle = t(`blocks.sponsors.tiers.${tier.tierKey}.title`);
 
   return (
@@ -165,33 +262,51 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
         )}
       >
         <div
+          ref={gridRef}
           className={cn(
-            "mx-auto grid w-full justify-items-center gap-4 sm:gap-5",
-            isMulti
-              ? "max-w-4xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-              : "max-w-full grid-cols-1",
+            "mx-auto flex w-full flex-col gap-4 sm:gap-5",
+            isMulti ? styles.gridMaxWidth : "max-w-full",
           )}
         >
-          {sponsors.map((sponsor) => {
-            const sponsorDisplayName =
-              sponsor.name === OPEN_SLOT_NAME
-                ? t("blocks.sponsors.openSlot")
-                : sponsor.name;
+          {sponsorRows.map((row, rowIndex) => {
+            const isFullRow = row.length === columns;
 
             return (
               <div
-                key={`${tier.tierKey}-${sponsor.name}-${sponsor.href ?? ""}`}
+                key={`${tier.tierKey}-row-${rowIndex}`}
                 className={cn(
-                  styles.container,
-                  "justify-self-center",
-                  !isMulti && "sm:w-fit",
+                  "w-full gap-4 sm:gap-5",
+                  isFullRow
+                    ? "grid justify-items-center"
+                    : "flex flex-wrap justify-center",
                 )}
+                style={
+                  isFullRow
+                    ? {
+                        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+                      }
+                    : undefined
+                }
               >
-                <SponsorCard
-                  sponsor={sponsor}
-                  tier={tier}
-                  sponsorDisplayName={sponsorDisplayName}
-                />
+                {row.map((sponsor) => {
+                  const sponsorDisplayName =
+                    sponsor.name === OPEN_SLOT_NAME
+                      ? t("blocks.sponsors.openSlot")
+                      : sponsor.name;
+
+                  return (
+                    <div
+                      key={`${tier.tierKey}-${sponsor.name}-${sponsor.href ?? ""}`}
+                      className={cn(styles.container, !isMulti && "sm:w-fit")}
+                    >
+                      <SponsorCard
+                        sponsor={sponsor}
+                        tier={tier}
+                        sponsorDisplayName={sponsorDisplayName}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             );
           })}
@@ -264,7 +379,7 @@ const Sponsors = () => {
           </MotionPreset>
         </div>
 
-        <div className="mx-auto flex max-w-4xl flex-col gap-10 sm:gap-12 lg:gap-14">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 sm:gap-12 lg:gap-14">
           {sponsorTiers.map((tier, index) => (
             <TierRow key={tier.tierKey} tier={tier} index={index} />
           ))}
