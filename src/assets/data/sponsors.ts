@@ -126,6 +126,12 @@ export const sponsorTiers: SponsorTier[] = [
         logo: "/images/sponsors/LOL.svg",
         href: "https://www.licenciasonline.com/",
       },
+      {
+        name: "Slalom",
+        slug: "slalom",
+        logo: "/images/sponsors/slalom.svg",
+        href: "https://www.slalom.com/",
+      },
     ],
   },
 ];
