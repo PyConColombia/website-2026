@@ -310,7 +310,14 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
               </h2>
             </MotionPreset>
 
-            <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div
+              className={cn(
+                "mx-auto grid gap-6",
+                videos.length === 1
+                  ? "max-w-2xl"
+                  : "max-w-6xl md:grid-cols-2 lg:grid-cols-3",
+              )}
+            >
               {videos.map((video, index) => (
                 <MotionPreset
                   key={video.youtubeId}
