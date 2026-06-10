@@ -2,6 +2,7 @@
 
 import { PlayIcon } from "lucide-react";
 import Image from "next/image";
+import { useCallback, useMemo, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,14 +13,55 @@ type YouTubeEmbedCardProps = {
   onClick: () => void;
 };
 
+const MIN_THUMB_WIDTH = 480;
+
+function getYouTubeThumbnailUrls(youtubeId: string) {
+  return [
+    `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`,
+    `https://i.ytimg.com/vi/${youtubeId}/sddefault.jpg`,
+    `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
+  ];
+}
+
 const YouTubeEmbedCard = ({
   youtubeId,
   title,
   playLabel,
   onClick,
 }: YouTubeEmbedCardProps) => {
-  const thumbMax = `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
-  const thumbHq = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+  const thumbUrls = useMemo(
+    () => getYouTubeThumbnailUrls(youtubeId),
+    [youtubeId],
+  );
+  const [thumbState, setThumbState] = useState({
+    youtubeId,
+    thumbIndex: 0,
+  });
+
+  if (thumbState.youtubeId !== youtubeId) {
+    setThumbState({ youtubeId, thumbIndex: 0 });
+  }
+
+  const thumbIndex = thumbState.thumbIndex;
+  const thumbSrc =
+    thumbUrls[thumbIndex] ?? thumbUrls[thumbUrls.length - 1] ?? "";
+
+  const tryNextThumbnail = useCallback(
+    (naturalWidth: number) => {
+      if (
+        naturalWidth >= MIN_THUMB_WIDTH ||
+        thumbIndex >= thumbUrls.length - 1
+      ) {
+        return;
+      }
+
+      setThumbState((state) => ({
+        ...state,
+        thumbIndex: state.thumbIndex + 1,
+      }));
+    },
+    [thumbIndex, thumbUrls.length],
+  );
 
   return (
     <button
@@ -29,17 +71,22 @@ const YouTubeEmbedCard = ({
       aria-label={`${playLabel}: ${title}`}
     >
       <Image
-        src={thumbMax}
+        key={thumbSrc}
+        src={thumbSrc}
         alt=""
         fill
         unoptimized
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-        onError={(event) => {
-          const target = event.currentTarget;
-          if (!target.src.includes("hqdefault")) {
-            target.src = thumbHq;
-          }
+        onLoad={(event) => {
+          tryNextThumbnail(event.currentTarget.naturalWidth);
+        }}
+        onError={() => {
+          setThumbState((state) =>
+            state.thumbIndex < thumbUrls.length - 1
+              ? { ...state, thumbIndex: state.thumbIndex + 1 }
+              : state,
+          );
         }}
       />
       <span

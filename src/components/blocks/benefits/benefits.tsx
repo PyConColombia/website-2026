@@ -116,7 +116,7 @@ const FeatureItem = ({
   return (
     <motion.div
       style={{ opacity, y }}
-      className={cn("flex h-125 items-center justify-center")}
+      className={cn("flex min-h-125 items-start justify-center py-10")}
     >
       <div className="space-y-4">
         <div className="space-y-2">
@@ -134,7 +134,7 @@ const FeatureItem = ({
             </p>
           )}
         </div>
-        <div className="text-muted-foreground line-clamp-7 md:line-clamp-8">
+        <div className="text-muted-foreground whitespace-pre-line">
           {feature.description}
         </div>
         {(feature.linkedin ||
@@ -407,7 +407,7 @@ const Benefits = () => {
                       </p>
                     )}
                   </div>
-                  <div className="text-muted-foreground">
+                  <div className="text-muted-foreground whitespace-pre-line">
                     {feature.description}
                   </div>
                   {(feature.linkedin ||

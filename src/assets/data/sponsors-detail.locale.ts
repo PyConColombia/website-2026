@@ -64,6 +64,13 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    slalom: {
+      paragraphs: [
+        "Slalom is a fiercely human business and technology consulting company that leads with outcomes and partners with leaders—bringing more together. From strategy through delivery, our agile teams across 54 offices in 12 countries collaborate with clients to bring powerful customer experiences, innovative ways of working, and new products and services to life. We are trusted by leaders across the Global 1000, many successful enterprise and mid-market companies, and 500+ public sector organizations to improve operations, drive growth, and create value. At Slalom, we believe that together, we can move faster, dream bigger, and build better tomorrows for all.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
     "licencias-online": {
       tagline:
         "At Licencias OnLine we drive our partners' growth with technology, strategy, and value",
@@ -134,6 +141,13 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
         "Además de la optimización operativa, GenLogs desempeña un papel clave en la recuperación de activos y la prevención del fraude. La compañía ha contribuido a la recuperación de más de 1000 activos robados o mal utilizados y ofrece servicios de investigación para combatir el robo de carga, el doble corretaje y el fraude en el transporte de mercancías.",
         "Fundada en 2022 y con sede en Washington, D.C., GenLogs ha asegurado una inversión significativa para expandir su red de sensores y sus capacidades tecnológicas. La empresa ha recaudado 21 millones de dólares desde 2023, incluyendo una ronda de financiación Serie A de 14,6 millones de dólares liderada por Venrock y HOF Capital.",
         "Asimismo, GenLogs colabora con agencias de seguridad y autoridades para abordar problemáticas como la trata de personas, el tráfico de fentanilo, el robo y el fraude, demostrando su compromiso con la seguridad y la protección dentro de la industria del transporte de carga.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    slalom: {
+      paragraphs: [
+        "Slalom es una empresa de consultoría de negocio y tecnología profundamente humana que lidera con resultados y se asocia con líderes para unir más. Desde la estrategia hasta la entrega, nuestros equipos ágiles en 54 oficinas en 12 países colaboran con los clientes para dar vida a experiencias de cliente potentes, formas innovadoras de trabajar y nuevos productos y servicios. Líderes de las Global 1000, muchas empresas exitosas de mercado enterprise y mid-market, y más de 500 organizaciones del sector público confían en nosotros para mejorar operaciones, impulsar el crecimiento y crear valor. En Slalom creemos que juntos podemos avanzar más rápido, soñar en grande y construir mejores mañanas para todos.",
       ],
       highlights: [],
       faqTopics: [],
