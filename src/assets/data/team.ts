@@ -41,7 +41,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Gonzalo Peña-Castellanos",
     role: "Keynotes",
-    image: "/images/avatar/gonzalo-pena-castellanos.png",
+    image: "/images/avatar/gonzalo-pena-castellanos.jpeg",
     linkedin: "https://www.linkedin.com/in/goanpeca",
     github: "https://github.com/goanpeca",
   },
