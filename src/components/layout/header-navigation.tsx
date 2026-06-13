@@ -42,7 +42,8 @@ type NavigationSection = {
 };
 
 type NavigationItem = {
-  title: string;
+  title?: string;
+  titleKey?: NavTitleKey;
   href: string;
   icon?: ReactNode;
   badge?: ReactNode;
@@ -70,8 +71,48 @@ type Navigation = {
     }
 );
 
+const getSectionId = (href: string) => {
+  if (href.startsWith("/#")) {
+    return href.slice(2);
+  }
+
+  if (href.startsWith("#")) {
+    return href.slice(1);
+  }
+
+  return "";
+};
+
+const isNavItemActive = (
+  href: string,
+  activeSection: string,
+  pathname: string | null,
+) => {
+  const sectionId = getSectionId(href);
+
+  if (sectionId) {
+    return activeSection === sectionId;
+  }
+
+  if (href === "/") {
+    return pathname === "/";
+  }
+
+  return pathname?.startsWith(href) ?? false;
+};
+
+const navDropdownPanelClassName =
+  "bg-card text-foreground absolute left-1/2 w-max min-w-60 -translate-x-1/2 overflow-hidden rounded-lg border border-border/60 p-1.5 shadow-xs ring-2 ring-primary/10";
+
+const navDropdownItemClassName =
+  "rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium";
+
+const navDropdownTriggerClassName =
+  "text-muted-foreground! hover:text-foreground! data-[active=true]:text-foreground! data-[state=open]:text-primary! bg-transparent! p-0! text-base [&_svg]:size-4";
+
 const ListItem = (props: {
-  title: NavigationItem["title"];
+  title?: NavigationItem["title"];
+  titleKey?: NavigationItem["titleKey"];
   href: NavigationItem["href"];
   icon?: NavigationItem["icon"];
   badge?: NavigationItem["badge"];
@@ -79,9 +120,11 @@ const ListItem = (props: {
   splitItems?: boolean;
   activeSection?: string;
   pathname?: string | null;
+  navLabel: (key: NavTitleKey) => string;
 }) => {
   const {
     title,
+    titleKey,
     href,
     icon,
     badge,
@@ -89,29 +132,26 @@ const ListItem = (props: {
     splitItems,
     activeSection,
     pathname,
+    navLabel,
   } = props;
 
-  // Extract section id from href (e.g., '#home' -> 'home')
-  const sectionId = href.startsWith("/#")
-    ? href.slice(2)
-    : href.startsWith("#")
-      ? href.slice(1)
-      : "";
-  const isActive = sectionId
-    ? activeSection === sectionId
-    : pathname?.startsWith(href);
+  const itemTitle = titleKey ? navLabel(titleKey) : (title ?? "");
+  const isActive = isNavItemActive(href, activeSection ?? "", pathname ?? null);
 
   return (
-    <li className={cn({ "h-19.5": description && splitItems })}>
+    <li className={cn("w-full", { "h-19.5": description && splitItems })}>
       <NavigationMenuLink
         href={href}
         data-active={isActive}
-        className={cn({ "flex flex-row items-start gap-2": icon })}
+        className={cn(navDropdownItemClassName, "w-full", {
+          "flex flex-row items-start gap-2": icon,
+          block: !icon && !description,
+        })}
         asChild
       >
-        <Link href={href}>
+        <Link href={href} className="block w-full">
           {icon && (
-            <span className="bg-popover [&>svg]:text-popover-foreground! flex aspect-square size-7 shrink-0 items-center justify-center rounded-sm border [&>svg]:size-4">
+            <span className="bg-primary/10 text-primary flex aspect-square size-7 shrink-0 items-center justify-center rounded-lg border border-primary/20 [&>svg]:size-4">
               {icon}
             </span>
           )}
@@ -122,7 +162,7 @@ const ListItem = (props: {
                   "flex items-center gap-1.5": badge,
                 })}
               >
-                {title}
+                {itemTitle}
                 {badge}
               </div>
               <p className="text-muted-foreground line-clamp-2">
@@ -131,11 +171,11 @@ const ListItem = (props: {
             </div>
           ) : (
             <div
-              className={cn("font-medium", {
+              className={cn("font-medium whitespace-nowrap", {
                 "flex items-center gap-1.5": badge,
               })}
             >
-              {title}
+              {itemTitle}
               {badge}
             </div>
           )}
@@ -160,11 +200,7 @@ const HeaderNavigation = ({
   // Extract all section IDs from navigation data
   const sectionIds = navigationData.flatMap((navItem) => {
     if (navItem.href) {
-      const id = navItem.href.startsWith("/#")
-        ? navItem.href.slice(2)
-        : navItem.href.startsWith("#")
-          ? navItem.href.slice(1)
-          : "";
+      const id = getSectionId(navItem.href);
 
       return id ? [id] : [];
     }
@@ -172,30 +208,12 @@ const HeaderNavigation = ({
     if (navItem.items) {
       if (navItem.splitItems) {
         return navItem.items.flatMap((section) =>
-          section.items
-            .map((item) => {
-              const id = item.href.startsWith("/#")
-                ? item.href.slice(2)
-                : item.href.startsWith("#")
-                  ? item.href.slice(1)
-                  : "";
-
-              return id;
-            })
-            .filter(Boolean),
+          section.items.map((item) => getSectionId(item.href)).filter(Boolean),
         );
       }
 
       return navItem.items
-        .map((item) => {
-          const id = item.href.startsWith("/#")
-            ? item.href.slice(2)
-            : item.href.startsWith("#")
-              ? item.href.slice(1)
-              : "";
-
-          return id;
-        })
+        .map((item) => getSectionId(item.href))
         .filter(Boolean);
     }
 
@@ -213,15 +231,11 @@ const HeaderNavigation = ({
         {navigationData.map((navItem) => {
           if (navItem.href) {
             // Root link item
-            const sectionId = navItem.href.startsWith("/#")
-              ? navItem.href.slice(2)
-              : navItem.href.startsWith("#")
-                ? navItem.href.slice(1)
-                : "";
-
-            const isActive = sectionId
-              ? activeSection === sectionId
-              : pathname?.startsWith(navItem.href);
+            const isActive = isNavItemActive(
+              navItem.href,
+              activeSection ?? "",
+              pathname,
+            );
 
             return (
               <NavigationMenuItem key={navItem.titleKey}>
@@ -246,26 +260,14 @@ const HeaderNavigation = ({
           if (navItem.items) {
             if (navItem.splitItems) {
               hasActiveChild = navItem.items.some((section) =>
-                section.items.some((item) => {
-                  const id = item.href.startsWith("/#")
-                    ? item.href.slice(2)
-                    : item.href.startsWith("#")
-                      ? item.href.slice(1)
-                      : "";
-
-                  return id && activeSection === id;
-                }),
+                section.items.some((item) =>
+                  isNavItemActive(item.href, activeSection ?? "", pathname),
+                ),
               );
             } else {
-              hasActiveChild = navItem.items.some((item) => {
-                const id = item.href.startsWith("/#")
-                  ? item.href.slice(2)
-                  : item.href.startsWith("#")
-                    ? item.href.slice(1)
-                    : "";
-
-                return id && activeSection === id;
-              });
+              hasActiveChild = navItem.items.some((item) =>
+                isNavItemActive(item.href, activeSection ?? "", pathname),
+              );
             }
           }
 
@@ -273,11 +275,16 @@ const HeaderNavigation = ({
             <NavigationMenuItem key={navItem.titleKey}>
               <NavigationMenuTrigger
                 data-active={hasActiveChild}
-                className="text-muted-foreground! data-[active=true]:text-foreground! bg-transparent! p-0! text-base [&_svg]:size-4"
+                className={navDropdownTriggerClassName}
               >
                 {navLabel(navItem.titleKey)}
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="absolute left-1/2 w-auto -translate-x-1/2 shadow-lg!">
+              <NavigationMenuContent
+                className={cn(
+                  navDropdownPanelClassName,
+                  navItem.contentClassName,
+                )}
+              >
                 {navItem.splitItems ? (
                   <div
                     className={cn(
@@ -305,11 +312,13 @@ const HeaderNavigation = ({
                               key={index}
                               icon={item.icon}
                               title={item.title}
+                              titleKey={item.titleKey}
                               description={item.description}
                               href={item.href}
                               badge={item.badge}
                               splitItems={navItem.splitItems}
                               activeSection={activeSection}
+                              navLabel={navLabel}
                             />
                           ))}
                         </ul>
@@ -319,7 +328,7 @@ const HeaderNavigation = ({
                 ) : (
                   <ul
                     className={cn(
-                      "grid grid-cols-1 gap-0.5",
+                      "grid w-full min-w-60 grid-cols-1 gap-1",
                       {
                         "gap-2": navItem.items?.find(
                           (item) => item.description,
@@ -333,11 +342,13 @@ const HeaderNavigation = ({
                         key={index}
                         icon={item.icon}
                         title={item.title}
+                        titleKey={item.titleKey}
                         description={item.description}
                         href={item.href}
                         badge={item.badge}
                         activeSection={activeSection}
                         pathname={pathname}
+                        navLabel={navLabel}
                       />
                     ))}
                   </ul>
@@ -371,11 +382,7 @@ const HeaderNavigationSmallScreen = ({
   // Extract all section IDs from navigation data
   const sectionIds = navigationData.flatMap((navItem) => {
     if (navItem.href) {
-      const id = navItem.href.startsWith("/#")
-        ? navItem.href.slice(2)
-        : navItem.href.startsWith("#")
-          ? navItem.href.slice(1)
-          : "";
+      const id = getSectionId(navItem.href);
 
       return id ? [id] : [];
     }
@@ -383,30 +390,12 @@ const HeaderNavigationSmallScreen = ({
     if (navItem.items) {
       if (navItem.splitItems) {
         return navItem.items.flatMap((section) =>
-          section.items
-            .map((item) => {
-              const id = item.href.startsWith("/#")
-                ? item.href.slice(2)
-                : item.href.startsWith("#")
-                  ? item.href.slice(1)
-                  : "";
-
-              return id;
-            })
-            .filter(Boolean),
+          section.items.map((item) => getSectionId(item.href)).filter(Boolean),
         );
       }
 
       return navItem.items
-        .map((item) => {
-          const id = item.href.startsWith("/#")
-            ? item.href.slice(2)
-            : item.href.startsWith("#")
-              ? item.href.slice(1)
-              : "";
-
-          return id;
-        })
+        .map((item) => getSectionId(item.href))
         .filter(Boolean);
     }
 
@@ -451,15 +440,11 @@ const HeaderNavigationSmallScreen = ({
         <div className="space-y-0.5 overflow-y-auto p-2">
           {navigationData.map((navItem) => {
             if (navItem.href) {
-              const sectionId = navItem.href.startsWith("/#")
-                ? navItem.href.slice(2)
-                : navItem.href.startsWith("#")
-                  ? navItem.href.slice(1)
-                  : "";
-
-              const isActive = sectionId
-                ? activeSection === sectionId
-                : pathname?.startsWith(navItem.href);
+              const isActive = isNavItemActive(
+                navItem.href,
+                activeSection ?? "",
+                pathname,
+              );
 
               return (
                 <Link
@@ -480,26 +465,14 @@ const HeaderNavigationSmallScreen = ({
             if (navItem.items) {
               if (navItem.splitItems) {
                 hasActiveChild = navItem.items.some((section) =>
-                  section.items.some((item) => {
-                    const id = item.href.startsWith("/#")
-                      ? item.href.slice(2)
-                      : item.href.startsWith("#")
-                        ? item.href.slice(1)
-                        : "";
-
-                    return id && activeSection === id;
-                  }),
+                  section.items.some((item) =>
+                    isNavItemActive(item.href, activeSection ?? "", pathname),
+                  ),
                 );
               } else {
-                hasActiveChild = navItem.items.some((item) => {
-                  const id = item.href.startsWith("/#")
-                    ? item.href.slice(2)
-                    : item.href.startsWith("#")
-                      ? item.href.slice(1)
-                      : "";
-
-                  return id && activeSection === id;
-                });
+                hasActiveChild = navItem.items.some((item) =>
+                  isNavItemActive(item.href, activeSection ?? "", pathname),
+                );
               }
             }
 
@@ -522,22 +495,21 @@ const HeaderNavigationSmallScreen = ({
                             {item.title}
                           </div>
                           {item.items.map((subItem, j) => {
-                            const sectionId = subItem.href.startsWith("/#")
-                              ? subItem.href.slice(2)
-                              : subItem.href.startsWith("#")
-                                ? subItem.href.slice(1)
-                                : "";
-
-                            const isActive = sectionId
-                              ? activeSection === sectionId
-                              : pathname?.startsWith(subItem.href);
+                            const isActive = isNavItemActive(
+                              subItem.href,
+                              activeSection ?? "",
+                              pathname,
+                            );
 
                             return (
                               <Link
                                 key={j}
                                 href={subItem.href}
                                 data-active={isActive}
-                                className="hover:bg-accent data-[active=true]:text-primary ml-4.5 flex items-center gap-2 rounded-sm px-3 py-2 text-sm data-[active=true]:font-medium"
+                                className={cn(
+                                  navDropdownItemClassName,
+                                  "ml-4.5 flex items-center gap-2",
+                                )}
                                 onClick={handleLinkClick}
                               >
                                 {subItem.icon ? (
@@ -545,29 +517,33 @@ const HeaderNavigationSmallScreen = ({
                                 ) : (
                                   <CircleSmallIcon className="size-4" />
                                 )}
-                                {subItem.title}
+                                {subItem.titleKey
+                                  ? navLabel(subItem.titleKey)
+                                  : subItem.title}
                               </Link>
                             );
                           })}
                         </div>
                       ))
                     : navItem.items?.map((item) => {
-                        const sectionId = item.href.startsWith("/#")
-                          ? item.href.slice(2)
-                          : item.href.startsWith("#")
-                            ? item.href.slice(1)
-                            : "";
-
-                        const isActive = sectionId
-                          ? activeSection === sectionId
-                          : pathname?.startsWith(item.href);
+                        const isActive = isNavItemActive(
+                          item.href,
+                          activeSection ?? "",
+                          pathname,
+                        );
+                        const itemLabel = item.titleKey
+                          ? navLabel(item.titleKey)
+                          : item.title;
 
                         return (
                           <Link
-                            key={item.title}
+                            key={item.href}
                             href={item.href}
                             data-active={isActive}
-                            className="hover:bg-accent data-[active=true]:text-primary ml-3 flex items-center gap-2 rounded-sm px-3 py-2 text-sm data-[active=true]:font-medium"
+                            className={cn(
+                              navDropdownItemClassName,
+                              "ml-3 flex items-center gap-2",
+                            )}
                             onClick={handleLinkClick}
                           >
                             {item.icon ? (
@@ -575,7 +551,7 @@ const HeaderNavigationSmallScreen = ({
                             ) : (
                               <CircleSmallIcon className="size-4" />
                             )}
-                            {item.title}
+                            {itemLabel}
                           </Link>
                         );
                       })}

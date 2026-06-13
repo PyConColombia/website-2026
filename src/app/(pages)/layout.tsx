@@ -10,8 +10,17 @@ const navigationData: Navigation[] = [
     href: "/",
   },
   {
-    titleKey: "keynotes",
-    href: "/#benefits",
+    titleKey: "agenda",
+    items: [
+      {
+        titleKey: "speakers",
+        href: "/speakers",
+      },
+      {
+        titleKey: "keynotes",
+        href: "/#benefits",
+      },
+    ],
   },
   {
     titleKey: "sponsors",

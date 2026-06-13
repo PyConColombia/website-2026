@@ -5,6 +5,8 @@ export type SiteLocale = "en" | "es";
 
 export type NavTitleKey =
   | "home"
+  | "agenda"
+  | "speakers"
   | "keynotes"
   | "sponsors"
   | "scholarships"
@@ -62,6 +64,10 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
     };
+    speakers: {
+      title: string;
+      description: string;
+    };
     pricing: {
       title: string;
       description: string;
@@ -86,6 +92,8 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
   en: {
     nav: {
       home: "Home",
+      agenda: "Agenda",
+      speakers: "Speakers",
       keynotes: "Keynotes",
       sponsors: "Sponsors",
       scholarships: "Scholarships",
@@ -157,6 +165,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Organizers and volunteers behind PyCon Colombia 2026 in Medellín—July 24–26 at Universidad EAFIT.",
       },
+      speakers: {
+        title: "Speakers",
+        description:
+          "Meet the speakers at PyCon Colombia 2026—talks on Python, AI, community, and more in Medellín, July 24–26.",
+      },
       pricing: {
         title: "Tickets",
         description:
@@ -182,6 +195,8 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
   es: {
     nav: {
       home: "Inicio",
+      agenda: "Agenda",
+      speakers: "Ponentes",
       keynotes: "Oradores principales",
       sponsors: "Patrocinadores",
       scholarships: "Becas",
@@ -252,6 +267,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         title: "Equipo",
         description:
           "Organizadores y voluntarios detrás de PyCon Colombia 2026 en Medellín—del 24 al 26 de julio en la Universidad EAFIT.",
+      },
+      speakers: {
+        title: "Ponentes",
+        description:
+          "Conoce a los ponentes de PyCon Colombia 2026—charlas sobre Python, IA, comunidad y más en Medellín, del 24 al 26 de julio.",
       },
       pricing: {
         title: "Entradas",
