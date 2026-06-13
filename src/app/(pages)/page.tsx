@@ -7,6 +7,7 @@ import CTA from "@/components/blocks/cta/cta";
 import Gallery from "@/components/blocks/gallery/gallery";
 import Hero from "@/components/blocks/hero-section/hero-section";
 import PyconVisualHero from "@/components/blocks/pycon-visual-hero/pycon-visual-hero";
+import SpeakersCarousel from "@/components/blocks/speakers/speakers-carousel";
 import Sponsors from "@/components/blocks/sponsors/sponsors";
 import TrustedBrands from "@/components/blocks/trusted-brands/trusted-brands";
 
@@ -98,6 +99,10 @@ const Home = () => {
       <SectionSeparator />
 
       <Benefits />
+
+      <SectionSeparator />
+
+      <SpeakersCarousel />
 
       <SectionSeparator />
 

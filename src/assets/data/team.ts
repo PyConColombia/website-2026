@@ -1,7 +1,7 @@
 export type TeamMember = {
   name: string;
   role: string;
-  image: string;
+  image?: string;
   linkedin?: string;
   github?: string;
   x?: string;

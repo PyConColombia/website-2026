@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRightIcon } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 
 import { type Speaker, speakers } from "@/assets/data/speakers";
 import GithubIcon from "@/assets/svg/github-icon";
@@ -10,10 +10,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import PersonImage from "@/components/ui/person-image";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "@/contexts/language-context";
-import { assetPath, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 type SpeakerCardProps = {
   speaker: Speaker;
@@ -37,7 +38,7 @@ const SpeakerSocialLinks = ({ speaker }: { speaker: Speaker }) => {
           aria-label={`${speaker.name} GitHub`}
           className="text-foreground hover:text-muted-foreground transition-colors"
         >
-          <GithubIcon className="size-5 shrink-0" />
+          <GithubIcon className="size-4 shrink-0" />
         </a>
       ) : null}
       {speaker.linkedin ? (
@@ -48,7 +49,7 @@ const SpeakerSocialLinks = ({ speaker }: { speaker: Speaker }) => {
           aria-label={`${speaker.name} LinkedIn`}
           className="text-foreground hover:text-muted-foreground transition-colors"
         >
-          <LinkedinIcon className="size-5 shrink-0" />
+          <LinkedinIcon className="size-4 shrink-0" />
         </a>
       ) : null}
     </div>
@@ -56,55 +57,69 @@ const SpeakerSocialLinks = ({ speaker }: { speaker: Speaker }) => {
 };
 
 const speakerGridClassName =
-  "mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 md:grid-cols-6 md:gap-12 lg:gap-16 2xl:gap-24";
+  "mx-auto grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6";
 
 const getCenteredRowClassName = (index: number, total: number) => {
   const lastRowCardCount = total % 3;
   const firstLastRowIndex = total - lastRowCardCount;
 
   if (lastRowCardCount === 1 && index === firstLastRowIndex) {
-    return "md:col-start-3";
+    return "lg:col-start-2";
   }
 
   if (lastRowCardCount === 2 && index === firstLastRowIndex) {
-    return "md:col-start-2";
+    return "lg:col-start-1";
+  }
+
+  if (lastRowCardCount === 2 && index === firstLastRowIndex + 1) {
+    return "lg:col-start-2";
   }
 
   return undefined;
 };
 
 const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
-  <Card className="bg-card h-full gap-0 overflow-hidden rounded-[18px] border border-border/60 py-0 shadow-xs">
-    <CardContent className="p-4 pb-0">
-      <Image
-        src={assetPath(speaker.image)}
+  <Card className="bg-card group relative h-full w-full gap-0 overflow-hidden rounded-[14px] border border-border/60 py-0 shadow-xs transition-colors hover:border-primary/40">
+    <Link
+      href={`/speakers/${speaker.slug}`}
+      className="absolute inset-0 z-0 rounded-[inherit]"
+      aria-label={speaker.name}
+    />
+    <CardContent className="pointer-events-none relative z-10 p-3 pb-0">
+      <PersonImage
+        src={speaker.image}
         alt={speaker.name}
-        width={400}
-        height={304}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="h-76 w-full rounded-[14px] object-cover"
+        width={320}
+        height={427}
+        sizes="(max-width: 640px) 70vw, (max-width: 1024px) 40vw, 240px"
+        className="aspect-3/4 w-full rounded-[10px] object-cover object-top"
       />
     </CardContent>
 
-    <CardContent className="-mt-23 p-4 pt-0">
-      <div className="from-background/60 flex flex-col items-center justify-center gap-3 rounded-t-[14px] bg-linear-to-b from-100% to-transparent p-5 text-center backdrop-blur-md">
-        <div className="space-y-1">
-          <h3 className="text-xl font-semibold">{speaker.name}</h3>
-          <p className="text-muted-foreground text-sm font-normal">
+    <CardContent className="pointer-events-none relative z-10 px-3 pt-0 pb-3">
+      <div className="from-background/60 -mt-22 rounded-t-[10px] bg-linear-to-b from-100% to-transparent px-3 pt-3 pb-10 text-center backdrop-blur-md sm:-mt-24 sm:px-3.5 sm:pt-3.5 sm:pb-12">
+        <div className="space-y-0.5">
+          <h3 className="text-base font-semibold sm:text-lg">{speaker.name}</h3>
+          <p className="text-muted-foreground text-xs font-normal sm:text-sm">
             {speaker.title}
           </p>
         </div>
+      </div>
+
+      <div className="space-y-2.5 pt-3 text-center">
         <p
           className={
             descriptionLines === 3
-              ? "text-muted-foreground line-clamp-3 text-base leading-relaxed"
-              : "text-muted-foreground line-clamp-2 text-base leading-relaxed"
+              ? "text-muted-foreground line-clamp-3 text-xs leading-relaxed sm:text-sm"
+              : "text-muted-foreground line-clamp-2 text-xs leading-relaxed sm:text-sm"
           }
         >
           {speaker.description}
         </p>
         <Separator />
-        <SpeakerSocialLinks speaker={speaker} />
+        <div className="pointer-events-auto">
+          <SpeakerSocialLinks speaker={speaker} />
+        </div>
       </div>
     </CardContent>
   </Card>
@@ -214,13 +229,13 @@ const Speakers = () => {
           <TabsContent value="view-all" className={speakerGridClassName}>
             {speakers.map((speaker, index) => (
               <MotionPreset
-                key={speaker.name}
+                key={speaker.slug}
                 fade
                 slide={{ direction: "down", offset: 50 }}
                 delay={0.3 + 0.15 * index}
                 transition={{ duration: 0.5 }}
                 className={cn(
-                  "h-full w-full md:col-span-2",
+                  "h-full w-full",
                   getCenteredRowClassName(index, speakers.length),
                 )}
               >
@@ -242,13 +257,13 @@ const Speakers = () => {
               >
                 {filteredSpeakers.map((speaker, index) => (
                   <MotionPreset
-                    key={speaker.name}
+                    key={speaker.slug}
                     fade
                     slide={{ direction: "down", offset: 50 }}
                     delay={0.5 + 0.15 * index}
                     transition={{ duration: 0.5 }}
                     className={cn(
-                      "h-full w-full md:col-span-2",
+                      "h-full w-full",
                       getCenteredRowClassName(index, filteredSpeakers.length),
                     )}
                   >

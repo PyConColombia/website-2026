@@ -2,15 +2,14 @@
 
 import { GithubIcon, LinkedinIcon } from "lucide-react";
 
-import Image from "next/image";
-
 import { type TeamMember, teamMembers } from "@/assets/data/team";
 import { XSocialIcon } from "@/components/icons/x-social-icon";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { MotionPreset } from "@/components/ui/motion-preset";
+import PersonImage from "@/components/ui/person-image";
 import { useTranslations } from "@/contexts/language-context";
-import { assetPath, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const socialButtonClassName =
   "bg-primary/10 text-primary hover:bg-primary/20 focus-visible:ring-primary/20 dark:focus-visible:ring-primary/40 size-8";
@@ -69,13 +68,13 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => {
     <Card className="group hover:border-primary/60 h-full gap-0 overflow-hidden rounded-sm border-2 py-0 shadow-none transition-colors duration-300">
       <CardContent className="overflow-hidden px-0">
         <div className="overflow-hidden">
-          <Image
-            src={assetPath(member.image)}
+          <PersonImage
+            src={member.image}
             alt={member.name}
             width={400}
-            height={304}
+            height={400}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="mx-auto h-76 w-full object-cover transition-transform duration-200 group-hover:scale-105"
+            className="mx-auto aspect-square h-76 w-full object-cover transition-transform duration-200 group-hover:scale-105"
           />
         </div>
         <div className="flex items-center gap-1 p-5">

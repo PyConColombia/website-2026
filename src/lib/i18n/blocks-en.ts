@@ -92,9 +92,24 @@ export const blocksEn = {
       "Driven by purpose, our speakers blend creativity, innovation, and expertise to shape remarkable outcomes.",
     explore: "Explore",
     viewAll: "View All",
+    carousel: {
+      eyebrow: "Speakers",
+      title: "Meet the Voices Behind the Talks",
+      subtitle:
+        "Discover the experts sharing knowledge, experience, and inspiration at PyCon Colombia 2026.",
+      viewAll: "View all speakers",
+    },
     tracks: {
       "artificial-intelligence": "Artificial Intelligence",
       community: "Community",
+    },
+    detail: {
+      back: "Back to speakers",
+      about: "About",
+      talk: "Talk",
+      country: "Country",
+      language: "Language",
+      level: "Level",
     },
   },
   testimonials: {
