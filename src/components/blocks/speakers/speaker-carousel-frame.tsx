@@ -63,11 +63,7 @@ const SpeakerCarouselFrame = ({
       >
         <defs>
           <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
-            {isOval ? (
-              <path d={OVAL_CLIP} />
-            ) : (
-              <path d={ARCH_CLIP} />
-            )}
+            {isOval ? <path d={OVAL_CLIP} /> : <path d={ARCH_CLIP} />}
           </clipPath>
         </defs>
 

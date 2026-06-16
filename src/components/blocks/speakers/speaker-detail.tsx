@@ -6,10 +6,10 @@ import { useMemo } from "react";
 
 import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
+import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MotionPreset } from "@/components/ui/motion-preset";
-import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "@/contexts/language-context";
 import { getSpeakerBySlug } from "@/lib/speakers";
