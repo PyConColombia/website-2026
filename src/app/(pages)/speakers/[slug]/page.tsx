@@ -6,11 +6,11 @@ import SpeakerDetail from "@/components/blocks/speakers/speaker-detail";
 import SectionSeparator from "@/components/section-separator";
 import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
 import { siteMessages } from "@/lib/site-messages";
+import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
 import {
   buildSpeakerPageMetadata,
   getSpeakerShareImageUrl,
 } from "@/lib/speaker-seo";
-import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
 import { getAllSpeakerSlugs, getSpeakerBySlug } from "@/lib/speakers";
 
 export async function generateStaticParams() {

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 import type { SiteLocale } from "@/lib/site-messages";
-import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
 import {
   absoluteAssetUrl,
   getSiteUrl,
   SITE_KEYWORDS,
   SITE_NAME,
 } from "@/lib/site-seo";
+import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
 import { getSpeakerBySlug } from "@/lib/speakers";
 
 const META_DESCRIPTION_MAX = 200;
