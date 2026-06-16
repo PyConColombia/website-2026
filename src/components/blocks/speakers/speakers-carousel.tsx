@@ -55,7 +55,7 @@ const SpeakersCarousel = () => {
         />
       </div>
 
-      <div className="mx-auto mb-12 max-w-7xl px-4 sm:mb-16 sm:px-6 lg:mb-24 lg:px-8">
+      <div className="mx-auto mb-4 max-w-7xl px-4 sm:mb-6 sm:px-6 lg:mb-8 lg:px-8">
         <div className="mx-auto space-y-4 text-center">
           <MotionPreset
             fade
@@ -134,7 +134,7 @@ const SpeakersCarousel = () => {
                   frameIndex={index % speakers.length}
                 />
 
-                <div className="mt-7 min-h-14 space-y-0.5 text-center">
+                <div className="mt-2 min-h-12 space-y-0.5 text-center">
                   <div className="opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <p className="text-foreground text-base leading-tight font-medium sm:text-lg">
                       {speaker.name}

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MotionPreset } from "@/components/ui/motion-preset";
-import PersonImage from "@/components/ui/person-image";
+import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "@/contexts/language-context";
@@ -86,7 +86,7 @@ const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
       aria-label={speaker.name}
     />
     <CardContent className="pointer-events-none relative z-10 p-3 pb-0">
-      <PersonImage
+      <SpeakerImage
         src={speaker.image}
         alt={speaker.name}
         width={320}

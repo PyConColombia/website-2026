@@ -9,7 +9,7 @@ import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MotionPreset } from "@/components/ui/motion-preset";
-import PersonImage from "@/components/ui/person-image";
+import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "@/contexts/language-context";
 import { getSpeakerBySlug } from "@/lib/speakers";
@@ -55,7 +55,7 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
             transition={{ duration: 0.5 }}
           >
             <div className="bg-card overflow-hidden rounded-[18px] border border-border/60 p-4 shadow-xs">
-              <PersonImage
+              <SpeakerImage
                 src={speaker.image}
                 alt={speaker.name}
                 width={400}

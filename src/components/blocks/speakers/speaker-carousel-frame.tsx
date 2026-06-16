@@ -3,64 +3,38 @@
 import { useId } from "react";
 
 import type { Speaker } from "@/assets/data/speakers";
-import PersonImage from "@/components/ui/person-image";
-import { cn } from "@/lib/utils";
+import { PERSON_PLACEHOLDER_IMAGE } from "@/lib/person-image";
+import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
+import { assetPath, cn } from "@/lib/utils";
 
-export type SpeakerFrameVariant = "double-arch" | "arch" | "oval";
+export type SpeakerFrameVariant = "arch" | "oval";
 
-type FrameShape = {
-  fill: string;
-  clip: string;
-  imageScale: number;
-  imageY: number;
-};
+const FRAME_CENTER_X = 140;
+const FRAME_HALF_WIDTH = 120;
+const FRAME_LEFT = FRAME_CENTER_X - FRAME_HALF_WIDTH;
+const FRAME_RIGHT = FRAME_CENTER_X + FRAME_HALF_WIDTH;
 
-const FRAME_VARIANTS: Record<SpeakerFrameVariant, FrameShape> = {
-  "double-arch": {
-    fill: "#FADCE4",
-    clip: `M 140 22
-      C 92 22, 54 58, 54 98
-      C 54 128, 92 144, 140 150
-      C 188 144, 226 128, 226 98
-      C 226 58, 188 22, 140 22
-      Z
-      M 140 150
-      C 92 156, 54 192, 54 232
-      C 54 288, 92 338, 140 338
-      C 188 338, 226 288, 226 232
-      C 226 192, 188 156, 140 150
-      Z`,
-    imageScale: 1.08,
-    imageY: -4,
-  },
-  arch: {
-    fill: "#D4EBD8",
-    clip: `M 62 340
-      L 62 128
-      C 62 38, 140 16, 218 128
-      L 218 340
-      Z`,
-    imageScale: 1.06,
-    imageY: 0,
-  },
-  oval: {
-    fill: "#EBEBEB",
-    clip: "",
-    imageScale: 1.05,
-    imageY: 0,
-  },
-};
+const ARCH_CLIP = `M ${FRAME_LEFT} 340
+  L ${FRAME_LEFT} 115
+  C ${FRAME_LEFT} 22, ${FRAME_CENTER_X} 4, ${FRAME_RIGHT} 115
+  L ${FRAME_RIGHT} 340
+  Z`;
 
-const FRAME_SEQUENCE: SpeakerFrameVariant[] = [
-  "double-arch",
-  "arch",
-  "oval",
-  "arch",
-  "oval",
-];
+const OVAL_RY = 158;
+const OVAL_CY = 172;
+const OVAL_TOP = OVAL_CY - OVAL_RY;
+const OVAL_BOTTOM = OVAL_CY + OVAL_RY;
+const OVAL_SIDE_TOP = OVAL_TOP + FRAME_HALF_WIDTH;
+const OVAL_SIDE_BOTTOM = OVAL_BOTTOM - FRAME_HALF_WIDTH;
+
+const OVAL_CLIP = `M ${FRAME_LEFT} ${OVAL_SIDE_TOP}
+  A ${FRAME_HALF_WIDTH} ${FRAME_HALF_WIDTH} 0 0 1 ${FRAME_RIGHT} ${OVAL_SIDE_TOP}
+  L ${FRAME_RIGHT} ${OVAL_SIDE_BOTTOM}
+  A ${FRAME_HALF_WIDTH} ${FRAME_HALF_WIDTH} 0 0 1 ${FRAME_LEFT} ${OVAL_SIDE_BOTTOM}
+  Z`;
 
 export const getSpeakerFrameVariant = (index: number): SpeakerFrameVariant =>
-  FRAME_SEQUENCE[index % FRAME_SEQUENCE.length] ?? "oval";
+  index % 2 === 0 ? "arch" : "oval";
 
 type SpeakerCarouselFrameProps = {
   speaker: Speaker;
@@ -75,8 +49,9 @@ const SpeakerCarouselFrame = ({
 }: SpeakerCarouselFrameProps) => {
   const clipId = useId();
   const variant = getSpeakerFrameVariant(frameIndex);
-  const frame = FRAME_VARIANTS[variant];
   const isOval = variant === "oval";
+  const imageUrl = resolveSpeakerImageUrl(speaker.image);
+  const imageSrc = imageUrl ?? assetPath(PERSON_PLACEHOLDER_IMAGE);
 
   return (
     <div className={cn("mx-auto h-84.25 w-full", className)}>
@@ -89,18 +64,12 @@ const SpeakerCarouselFrame = ({
         <defs>
           <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
             {isOval ? (
-              <ellipse cx="140" cy="178" rx="84" ry="152" />
+              <path d={OVAL_CLIP} />
             ) : (
-              <path d={frame.clip} />
+              <path d={ARCH_CLIP} />
             )}
           </clipPath>
         </defs>
-
-        {isOval ? (
-          <ellipse cx="140" cy="178" rx="84" ry="152" fill={frame.fill} />
-        ) : (
-          <path d={frame.clip} fill={frame.fill} />
-        )}
 
         <foreignObject
           x="0"
@@ -109,21 +78,13 @@ const SpeakerCarouselFrame = ({
           height="360"
           clipPath={`url(#${clipId})`}
         >
-          <div
-            className="relative size-full overflow-hidden"
-            style={{
-              transform: `translateY(${frame.imageY}px) scale(${frame.imageScale})`,
-              transformOrigin: "50% 18%",
-            }}
-          >
-            <PersonImage
-              src={speaker.image}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 50vw, 20vw"
-              className="object-cover object-top"
-            />
-          </div>
+          {/* biome-ignore lint/performance/noImgElement: Next/Image does not render inside SVG foreignObject */}
+          <img
+            src={imageSrc}
+            alt={speaker.name}
+            className="size-full object-cover object-top"
+            referrerPolicy="no-referrer"
+          />
         </foreignObject>
       </svg>
     </div>
