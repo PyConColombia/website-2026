@@ -87,6 +87,35 @@ export const blocksEs: BlocksMessages = {
     cardDescription:
       "Parte del equipo que acerca ponentes, patrocinadores, voluntarios y asistentes a PyCon Colombia 2026.",
   },
+  speakers: {
+    eyebrow: "Ponentes",
+    titlePrefix: "Presentamos a nuestros ponentes, las",
+    titleHighlight: "Voces",
+    titleSuffix: "detrás de las charlas ✨",
+    subtitle:
+      "Impulsados por un propósito, nuestros ponentes combinan creatividad, innovación y experiencia para lograr resultados extraordinarios.",
+    explore: "Explorar",
+    viewAll: "Ver todos",
+    carousel: {
+      eyebrow: "Ponentes",
+      title: "Conoce las voces detrás de las charlas",
+      subtitle:
+        "Descubre a los expertos que compartirán conocimiento, experiencia e inspiración en PyCon Colombia 2026.",
+      viewAll: "Ver todos los speakers",
+    },
+    tracks: {
+      "artificial-intelligence": "Inteligencia Artificial",
+      community: "Comunidad",
+    },
+    detail: {
+      back: "Volver a ponentes",
+      about: "Acerca de",
+      talk: "Charla",
+      country: "País",
+      language: "Idioma",
+      level: "Nivel",
+    },
+  },
   testimonials: {
     eyebrow: "Testimonios",
     title: "Lo que dice nuestra comunidad",

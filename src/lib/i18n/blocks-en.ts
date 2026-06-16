@@ -83,6 +83,35 @@ export const blocksEn = {
     cardDescription:
       "Part of the team bringing speakers, sponsors, volunteers, and attendees together for PyCon Colombia 2026.",
   },
+  speakers: {
+    eyebrow: "Speakers",
+    titlePrefix: "Introducing our speakers, the",
+    titleHighlight: "Voices",
+    titleSuffix: "behind the talks ✨",
+    subtitle:
+      "Driven by purpose, our speakers blend creativity, innovation, and expertise to shape remarkable outcomes.",
+    explore: "Explore",
+    viewAll: "View All",
+    carousel: {
+      eyebrow: "Speakers",
+      title: "Meet the Voices Behind the Talks",
+      subtitle:
+        "Discover the experts sharing knowledge, experience, and inspiration at PyCon Colombia 2026.",
+      viewAll: "View all speakers",
+    },
+    tracks: {
+      "artificial-intelligence": "Artificial Intelligence",
+      community: "Community",
+    },
+    detail: {
+      back: "Back to speakers",
+      about: "About",
+      talk: "Talk",
+      country: "Country",
+      language: "Language",
+      level: "Level",
+    },
+  },
   testimonials: {
     eyebrow: "Testimonials",
     title: "What our community says",
