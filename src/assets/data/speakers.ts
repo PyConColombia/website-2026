@@ -20,8 +20,7 @@ export const speakers: Speaker[] = [
   {
     slug: "cristhian-david-recalde-arevalo",
     name: "Cristhian David Recalde Arévalo",
-    image:
-      "https://drive.google.com/thumbnail?id=16WUKxy4RMU2Z-H0pbk98nGI9K8BwOwSD&sz=w800",
+    image: "/images/speakers/cristhian-david-recalde-arevalo.jpg",
     title: "Mobile Developer @ HomeTeam Network",
     description:
       "Soy un desarrollador Full Stack apasionado por crear soluciones digitales elegantes y funcionales. Mi enfoque está en escribir código limpio, mantenible y escalable que no solo funcione, sino que también proporcione una excelente experiencia de usuario. Trabajo principalmente con tecnologías modernas que me permitieron construir aplicaciones robustas y de alto rendimiento para StartUps de Estados Unidos y Ecuador. Además del desarrollo, disfruto aprendiendo continuamente, compartiendo conocimiento en comunidades tecnológicas y contribuyendo a proyectos open source cuando es posible.",
@@ -38,8 +37,7 @@ export const speakers: Speaker[] = [
   {
     slug: "jeronimo-hoyos-botero",
     name: "Jerónimo Hoyos Botero",
-    image:
-      "https://drive.google.com/thumbnail?id=1vVDvUNhiyNiTWj5BlfqFFOmffeAl4-Pj&sz=w800",
+    image: "/images/speakers/jeronimo-hoyos-botero.png",
     title: "Estudiante @ Universidad Nacional de Colombia Sede Medellín",
     description:
       "Soy estudiante en la Universidad Nacional, con un gran interés en el machine learning. Me gusta crear animaciones en Manim porque son súper chéveres y me permiten enseñar cómo funcionan estos sistemas por dentro. Mi intención es tomar conceptos que suelen parecer raros o abstractos y mostrarlos de forma visual y animada para que resulten mucho más claros y accesibles.",
@@ -57,8 +55,7 @@ export const speakers: Speaker[] = [
   {
     slug: "brayan-echenique-ardila",
     name: "Brayan Echenique Ardila",
-    image:
-      "https://drive.google.com/thumbnail?id=1VyIiyogxJiux07oDTR06cdMnUePRVRth&sz=w800",
+    image: "/images/speakers/brayan-echenique-ardila.jpg",
     title: "AI Software Engineer @ Proteccion S.A",
     description:
       "Soy Brayan Echenique, AI Software Engineer en Protección, donde diseño e implemento soluciones de inteligencia artificial integrando tecnologías emergentes con arquitecturas robustas. Soy defensor del pragmatismo técnico y creo firmemente que la mejor solución no siempre es la más compleja, sino la que resuelve el problema correcto con las herramientas correctas.",
@@ -75,8 +72,7 @@ export const speakers: Speaker[] = [
   {
     slug: "daniel-arango-sohm",
     name: "Daniel Arango Sohm",
-    image:
-      "https://drive.google.com/thumbnail?id=1bg89j8gGNctpH_DQQIPe-FXh4B_3e-uW&sz=w800",
+    image: "/images/speakers/daniel-arango-sohm.jpg",
     title: "Python Junior Software Engineer @ Epam",
     description:
       "I have won 3 times the best project award in Systems Engineering at EAFIT. I have given talks at Medellín JS, Python Medellín twice, Medellín AI, PyCon Colombia, Python Moscow, and BarNLP. I am half Colombian, I also have German and Russian heritage, and I speak Russian and German.",
@@ -92,8 +88,7 @@ export const speakers: Speaker[] = [
   {
     slug: "christian-urcuqui",
     name: "Christian Urcuqui",
-    image:
-      "https://drive.google.com/thumbnail?id=1m7D7gXcP1r03PdIa6-5C4zMDeWP-kMOo&sz=w800",
+    image: "/images/speakers/christian-urcuqui.jpg",
     title: "Senior Data Scientist @ TryHackMe",
     description:
       "Soy Christian Urcuqui, Cybersecurity Data Scientist con más de 11 años de experiencia en inteligencia artificial, ciberseguridad y sistemas de machine learning en producción. He trabajado en el diseño y evaluación de sistemas de IA para detección de amenazas, análisis de comportamiento y arquitecturas basadas en agentes. Actualmente colaboro con organizaciones internacionales en el desarrollo de contenido y soluciones en AI Security, incluyendo pentesting de agentes y modelado de amenazas. He sido speaker en eventos como DEF CON, Ekoparty, BSides y PyCon, y soy autor de libros sobre inteligencia artificial aplicada a ciberseguridad. Mi enfoque combina investigación, práctica ofensiva (adversarial ML) y diseño de sistemas seguros.",
@@ -110,8 +105,7 @@ export const speakers: Speaker[] = [
   {
     slug: "david-cardozo",
     name: "David Cardozo",
-    image:
-      "https://drive.google.com/thumbnail?id=1AtbayE9fUVuDI2yKb2KN-85869nGsxjT&sz=w800",
+    image: "/images/speakers/david-cardozo.jpg",
     title: "Senior AI Engineer @ Dataiku",
     description:
       "Científico de Aprendizaje Automático y Arquitecto de Infraestructura Cloud. Con una trayectoria que abarca desde la seguridad de la información hasta DevOps, soy Google Developer Expert en ML y Docker Captain. Apasionado por multiplicar matrices a gran velocidad, actualmente me desempeño como Ingeniero de IA en Dataiku.",
@@ -128,8 +122,7 @@ export const speakers: Speaker[] = [
   {
     slug: "juan-diego-david-melo-alarcon",
     name: "Juan Diego David Melo Alarcón",
-    image:
-      "https://drive.google.com/thumbnail?id=133ubCsJodm9-JK8gM9-vAbh5vwC3i-3N&sz=w800",
+    image: "/images/speakers/juan-diego-david-melo-alarcon.jpg",
     title: "Application Architect @ IBM",
     description:
       "Soy un arquitecto de soluciones enfocado en la eficiencia sistémica y en la construcción de software diseñado para los retos del mundo real. Mi enfoque profesional se sitúa en la intersección de la IA generativa y las arquitecturas cloud native, donde el verdadero desafío no es solo lograr que un modelo responda, sino que lo haga de forma resiliente, escalable y financieramente lógica. A lo largo de mi trayectoria, he liderado la modernización de aplicaciones en entornos de nube híbrida, enfrentando la complejidad de integrar servicios de vanguardia con infraestructuras críticas.",
@@ -146,8 +139,7 @@ export const speakers: Speaker[] = [
   {
     slug: "jonatan-esteban-gonzalez-balaguera",
     name: "Jonatan Esteban Gonzalez Balaguera",
-    image:
-      "https://drive.google.com/thumbnail?id=1Qx2jmhFHVs2XjuBM_i-KsIveLjmt6pJA&sz=w800",
+    image: "/images/speakers/jonatan-esteban-gonzalez-balaguera.jpg",
     title: "Profesional @ Procuraduría General de la Nación",
     description:
       "Soy físico con maestría en física teórica y una segunda maestría en Visual Analytics and Big Data, actualmente cursando una especialización en estadística en la Universidad Nacional de Colombia. Trabajo como analista en la Procuraduría General de la Nación, donde aplico aprendizaje automático, NLP y análisis geoespacial a problemas de vigilancia preventiva y monitoreo. Mi trayectoria va desde la simulación de sistemas superconductores hasta el desarrollo de herramientas de detección de deforestación y análisis electoral, siempre con Python como hilo conductor.",
@@ -166,8 +158,7 @@ export const speakers: Speaker[] = [
   {
     slug: "elbano-mibelli",
     name: "Elbano Mibelli P.",
-    image:
-      "https://drive.google.com/thumbnail?id=1Th0CaLY6N4LE4SpE0HkDNzDcYDEM35Sv&sz=w800",
+    image: "/images/speakers/elbano-mibelli.jpg",
     title: "Senior DevOps Solutions Architect @ Provectus",
     description:
       "Elbano is a Senior DevOps Solutions Architect at Provectus, an AWS Premier Consulting Partner and official Anthropic partner, with over 9 years of experience in cloud-native, AI, DevOps, and distributed systems design. He holds two AWS certifications, three AWS Black Belt specializations, and an ITIL Foundation credential. Today, he works at the intersection of cloud infrastructure, agentic AI, and enterprise delivery, designing solutions that range from multi-account AWS platforms for AI agent orchestration to intelligent contact centers with Amazon Connect and Bedrock.",
@@ -185,8 +176,7 @@ export const speakers: Speaker[] = [
   {
     slug: "cristhian-jesid-garcia-solarte",
     name: "Cristhian Jesid Garcia Solarte",
-    image:
-      "https://drive.google.com/thumbnail?id=1l9Qfu7ud8wcbeudTevJJ2bHTgAC-WCY5&sz=w800",
+    image: "/images/speakers/cristhian-jesid-garcia-solarte.jpg",
     title: "Senior Data Engineer @ Provectus",
     description:
       "Machine Learning Engineer and Data Engineer with a background in Astronomy and Astrophysics and over 5 years of experience designing, building, and deploying scalable data pipelines, ML systems, and Big Data solutions on AWS and Databricks. I specialize in building end-to-end machine learning pipelines, RAG systems, and agentic AI workflows, as well as optimizing big data processes using Apache Spark, SQL/NoSQL data modeling, and cloud-native architectures.",
@@ -204,8 +194,7 @@ export const speakers: Speaker[] = [
   {
     slug: "nieng-yordan-lee-gaitan",
     name: "Nieng Yordan Lee Gaitan",
-    image:
-      "https://drive.google.com/thumbnail?id=1GIEvs2s86ecAwdBF11aLk5z33LJvNrhb&sz=w800",
+    image: "/images/speakers/nieng-yordan-lee-gaitan.jpg",
     title:
       "Estudiante de maestría en Ingeniería Química @ Universidad Nacional de Colombia - Grupo TAYEA",
     description:
@@ -224,8 +213,7 @@ export const speakers: Speaker[] = [
   {
     slug: "pablo-restrepo-henao",
     name: "Pablo Restrepo Henao",
-    image:
-      "https://drive.google.com/thumbnail?id=1R17wFAlgBiHGna4czN6NM_itI96H2vRK&sz=w800",
+    image: "/images/speakers/pablo-restrepo-henao.jpg",
     title: "Machine Learning Lead @ Loka",
     description:
       "Pablo Restrepo is a Colombian software and ML engineer with over 11 years of experience building AI and software systems across Colombia, Germany, the UK, and the US. He is currently Machine Learning Lead at Loka, where he designs and deploys end-to-end GenAI solutions for global clients. He holds a Master's in Informatics from the Technical University of Munich and a BSc in Computer Science from Universidad EAFIT. He is also a published researcher in NLP and has spoken at conferences across Germany, Sweden, Norway, and the US.",
