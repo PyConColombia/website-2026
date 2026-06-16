@@ -17,7 +17,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/team",
     "/speakers",
     ...getAllSpeakerSlugs().map((slug) => `/speakers/${slug}`),
-    "/scholarships",
     "/code-of-conduct",
     ...getAllSponsorSlugs().map((slug) => `/sponsors/${slug}`),
     ...posts.map((post) => `/blog/${post.slug}`),
