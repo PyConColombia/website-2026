@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
 import { type Speaker, speakers } from "@/assets/data/speakers";
@@ -8,7 +7,6 @@ import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
@@ -180,25 +178,6 @@ const Speakers = () => {
             <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
               {t("blocks.speakers.subtitle")}
             </p>
-          </MotionPreset>
-
-          <MotionPreset
-            fade
-            blur
-            slide={{ direction: "up", offset: 50 }}
-            delay={0.6}
-            transition={{ duration: 0.5 }}
-          >
-            <Button
-              size="lg"
-              className="group relative overflow-hidden before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-size-[250%_250%,100%_100%] before:bg-position-[200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-position-[-100%_0,0_0] dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]"
-              asChild
-            >
-              <a href="#speakers-grid">
-                {t("blocks.speakers.explore")}{" "}
-                <ArrowRightIcon className="transition-transform duration-200 group-hover/button:translate-x-0.5" />
-              </a>
-            </Button>
           </MotionPreset>
         </div>
 
