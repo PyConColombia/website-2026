@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
+import type { SpeakerTrack } from "@/assets/data/speakers";
 import type { SiteLocale } from "@/lib/site-messages";
+import { siteMessages } from "@/lib/site-messages";
 import {
   absoluteAssetUrl,
   getSiteUrl,
@@ -8,6 +10,7 @@ import {
   SITE_NAME,
 } from "@/lib/site-seo";
 import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
+import { isSpeakerTrack } from "@/lib/speaker-tracks";
 import { getSpeakerBySlug } from "@/lib/speakers";
 
 const META_DESCRIPTION_MAX = 200;
@@ -94,4 +97,47 @@ export function buildSpeakerPageMetadata(
       ],
     },
   };
+}
+
+export function buildSpeakerTrackPageMetadata(
+  track: SpeakerTrack,
+  locale: SiteLocale,
+): Metadata {
+  const label = siteMessages[locale].blocks.speakers.tracks[track];
+  const description = siteMessages[locale].pageMeta.speakers.description;
+  const canonical = `${getSiteUrl()}/speakers/${track}`;
+  const title = `${label} — PyCon Colombia 2026 Speakers`;
+
+  return {
+    title: label,
+    description,
+    keywords: [...SITE_KEYWORDS, label, "PyCon speakers", "Python talks"],
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      siteName: SITE_NAME,
+      locale: locale === "es" ? "es_CO" : "en_US",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
+  };
+}
+
+export function buildSpeakerSlugPageMetadata(
+  slug: string,
+  locale: SiteLocale,
+): Metadata {
+  if (isSpeakerTrack(slug)) {
+    return buildSpeakerTrackPageMetadata(slug, locale);
+  }
+
+  return buildSpeakerPageMetadata(slug, locale);
 }

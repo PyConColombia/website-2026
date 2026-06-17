@@ -92,7 +92,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
   en: {
     nav: {
       home: "Home",
-      agenda: "Agenda",
+      agenda: "Schedule",
       speakers: "Speakers",
       keynotes: "Keynotes",
       sponsors: "Sponsors",

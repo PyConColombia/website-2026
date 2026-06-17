@@ -3,18 +3,23 @@ import { notFound } from "next/navigation";
 
 import CTASection from "@/components/blocks/cta/cta";
 import SpeakerDetail from "@/components/blocks/speakers/speaker-detail";
+import Speakers from "@/components/blocks/speakers/speakers";
 import SectionSeparator from "@/components/section-separator";
 import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
 import { siteMessages } from "@/lib/site-messages";
 import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
 import {
-  buildSpeakerPageMetadata,
+  buildSpeakerSlugPageMetadata,
   getSpeakerShareImageUrl,
 } from "@/lib/speaker-seo";
+import { getAllSpeakerTrackSlugs, isSpeakerTrack } from "@/lib/speaker-tracks";
 import { getAllSpeakerSlugs, getSpeakerBySlug } from "@/lib/speakers";
 
 export async function generateStaticParams() {
-  return getAllSpeakerSlugs().map((slug) => ({ slug }));
+  return [
+    ...getAllSpeakerSlugs().map((slug) => ({ slug })),
+    ...getAllSpeakerTrackSlugs().map((slug) => ({ slug })),
+  ];
 }
 
 export async function generateMetadata({
@@ -24,17 +29,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  return buildSpeakerPageMetadata(slug, STATIC_PRERENDER_LOCALE);
+  return buildSpeakerSlugPageMetadata(slug, STATIC_PRERENDER_LOCALE);
 }
 
 export const dynamicParams = false;
 
-const SpeakerDetailPage = async ({
+const SpeakerSlugPage = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
+
+  if (isSpeakerTrack(slug)) {
+    return <Speakers activeTrack={slug} />;
+  }
+
   const speaker = getSpeakerBySlug(slug);
 
   if (!speaker) {
@@ -101,4 +111,4 @@ const SpeakerDetailPage = async ({
   );
 };
 
-export default SpeakerDetailPage;
+export default SpeakerSlugPage;

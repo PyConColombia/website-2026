@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
-import { Badge } from "@/components/ui/badge";
+import SpeakerTrackBadge from "@/components/blocks/speakers/speaker-track-badge";
 import { Button } from "@/components/ui/button";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
@@ -25,9 +25,6 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
   if (!speaker) {
     return null;
   }
-
-  const getTrackLabel = (track: (typeof speaker.tracks)[number]) =>
-    t(`blocks.speakers.tracks.${track}`);
 
   return (
     <section className="overflow-hidden py-8 sm:py-16 lg:py-24">
@@ -54,7 +51,7 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
             slide={{ direction: "up", offset: 50 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-card overflow-hidden rounded-[18px] border border-border/60 p-4 shadow-xs">
+            <div className="bg-card border-border/60 overflow-hidden rounded-[18px] border p-4 shadow-xs">
               <SpeakerImage
                 src={speaker.image}
                 alt={speaker.name}
@@ -77,9 +74,7 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
             >
               <div className="flex flex-wrap gap-2">
                 {speaker.tracks.map((track) => (
-                  <Badge key={track} variant="outline">
-                    {getTrackLabel(track)}
-                  </Badge>
+                  <SpeakerTrackBadge key={track} track={track} asLink />
                 ))}
               </div>
 

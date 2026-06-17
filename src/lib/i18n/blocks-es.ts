@@ -105,7 +105,15 @@ export const blocksEs: BlocksMessages = {
     },
     tracks: {
       "artificial-intelligence": "Inteligencia Artificial",
+      "machine-learning": "Machine Learning",
+      "data-science": "Ciencia de Datos",
+      "core-python": "Core Python",
+      web: "Web",
+      security: "Seguridad",
+      devops: "DevOps",
       community: "Comunidad",
+      "open-source": "Código Abierto",
+      "scientific-computing": "Computación Científica",
     },
     detail: {
       back: "Volver a ponentes",

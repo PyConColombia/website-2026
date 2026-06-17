@@ -101,7 +101,15 @@ export const blocksEn = {
     },
     tracks: {
       "artificial-intelligence": "Artificial Intelligence",
+      "machine-learning": "Machine Learning",
+      "data-science": "Data Science",
+      "core-python": "Core Python",
+      web: "Web",
+      security: "Security",
+      devops: "DevOps",
       community: "Community",
+      "open-source": "Open Source",
+      "scientific-computing": "Scientific Computing",
     },
     detail: {
       back: "Back to speakers",
