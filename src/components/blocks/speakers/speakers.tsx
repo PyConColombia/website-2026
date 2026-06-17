@@ -1,8 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-import { type Speaker, speakers } from "@/assets/data/speakers";
+import {
+  type Speaker,
+  type SpeakerTrack,
+  speakers,
+} from "@/assets/data/speakers";
 import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
@@ -12,7 +17,17 @@ import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "@/contexts/language-context";
+import {
+  getActiveSpeakerTracks,
+  getSpeakerTrackHref,
+  type SpeakerTrackFilter,
+  speakerTrackStyles,
+} from "@/lib/speaker-tracks";
 import { cn } from "@/lib/utils";
+
+type SpeakersProps = {
+  activeTrack?: SpeakerTrack;
+};
 
 type SpeakerCardProps = {
   speaker: Speaker;
@@ -123,12 +138,19 @@ const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
   </Card>
 );
 
-const Speakers = () => {
+const Speakers = ({ activeTrack }: SpeakersProps) => {
   const { t } = useTranslations();
-  const tracks = [...new Set(speakers.flatMap((speaker) => speaker.tracks))];
+  const router = useRouter();
+  const tracks = getActiveSpeakerTracks();
+  const selectedTrack: SpeakerTrackFilter = activeTrack ?? "view-all";
 
-  const getTrackLabel = (track: Speaker["tracks"][number]) =>
+  const getTrackLabel = (track: SpeakerTrack) =>
     t(`blocks.speakers.tracks.${track}`);
+
+  const handleTrackChange = (value: string) => {
+    const nextTrack = value as SpeakerTrackFilter;
+    router.push(getSpeakerTrackHref(nextTrack));
+  };
 
   return (
     <section id="speakers" className="py-8 sm:py-16 lg:py-24">
@@ -181,7 +203,12 @@ const Speakers = () => {
           </MotionPreset>
         </div>
 
-        <Tabs defaultValue="view-all" className="gap-8" id="speakers-grid">
+        <Tabs
+          value={selectedTrack}
+          onValueChange={handleTrackChange}
+          className="gap-8"
+          id="speakers-grid"
+        >
           <div className="flex justify-start overflow-x-auto overflow-y-hidden sm:justify-center">
             <MotionPreset fade zoom delay={0.5} transition={{ duration: 0.5 }}>
               <TabsList variant="line" className="gap-2">
@@ -196,8 +223,18 @@ const Speakers = () => {
                   <TabsTrigger
                     key={track}
                     value={track}
-                    className="text-base group-data-horizontal/tabs:after:-bottom-1"
+                    className={cn(
+                      "text-base group-data-horizontal/tabs:after:-bottom-1",
+                      speakerTrackStyles[track].tabActive,
+                    )}
                   >
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "size-2 shrink-0 rounded-full",
+                        speakerTrackStyles[track].dot,
+                      )}
+                    />
                     {getTrackLabel(track)}
                   </TabsTrigger>
                 ))}
