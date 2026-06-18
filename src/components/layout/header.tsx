@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLinkIcon } from "lucide-react";
+import { CalendarDaysIcon, ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -11,13 +11,17 @@ import {
 } from "@/components/layout/header-navigation";
 import { LanguageSwitch } from "@/components/layout/language-switch";
 import YearSelect from "@/components/layout/year-select";
-import { PrimaryFlowButton } from "@/components/ui/flow-button";
+import {
+  PrimaryFlowButton,
+  SecondaryFlowButton,
+} from "@/components/ui/flow-button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useTranslations } from "@/contexts/language-context";
+import { SCHEDULE_URL } from "@/lib/site-links";
 
 import { assetPath, cn } from "@/lib/utils";
 
@@ -109,29 +113,60 @@ const Header = ({ navigationData, className }: HeaderProps) => {
             <LanguageSwitch />
           </div>
 
-          <PrimaryFlowButton size="lg" className="max-sm:hidden" asChild>
-            <Link href={ticketsUrl} target="_blank" rel="noopener noreferrer">
-              {t("header.getTickets")}
-            </Link>
-          </PrimaryFlowButton>
+          <div className="hidden items-center gap-2 sm:flex">
+            <PrimaryFlowButton size="lg" asChild>
+              <Link href={ticketsUrl} target="_blank" rel="noopener noreferrer">
+                {t("header.getTickets")}
+              </Link>
+            </PrimaryFlowButton>
+            <SecondaryFlowButton size="lg" asChild>
+              <Link
+                href={SCHEDULE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("header.seeSchedule")}
+              </Link>
+            </SecondaryFlowButton>
+          </div>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <PrimaryFlowButton size="icon-lg" className="sm:hidden" asChild>
-                <Link
-                  href={ticketsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLinkIcon />
-                  <span className="sr-only">
-                    {t("header.getTicketsSrOnly")}
-                  </span>
-                </Link>
-              </PrimaryFlowButton>
-            </TooltipTrigger>
-            <TooltipContent>{t("header.getTicketsTooltip")}</TooltipContent>
-          </Tooltip>
+          <div className="flex items-center gap-2 sm:hidden">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <SecondaryFlowButton size="icon-lg" asChild>
+                  <Link
+                    href={SCHEDULE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <CalendarDaysIcon />
+                    <span className="sr-only">
+                      {t("header.seeScheduleSrOnly")}
+                    </span>
+                  </Link>
+                </SecondaryFlowButton>
+              </TooltipTrigger>
+              <TooltipContent>{t("header.seeScheduleTooltip")}</TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <PrimaryFlowButton size="icon-lg" asChild>
+                  <Link
+                    href={ticketsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLinkIcon />
+                    <span className="sr-only">
+                      {t("header.getTicketsSrOnly")}
+                    </span>
+                  </Link>
+                </PrimaryFlowButton>
+              </TooltipTrigger>
+              <TooltipContent>{t("header.getTicketsTooltip")}</TooltipContent>
+            </Tooltip>
+          </div>
 
           <HeaderNavigationSmallScreen navigationData={navigationData} />
         </div>
