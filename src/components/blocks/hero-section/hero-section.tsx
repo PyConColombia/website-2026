@@ -6,9 +6,13 @@ import Link from "next/link";
 import TextFlip from "@/components/blocks/hero-section/text-flip";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { Badge } from "@/components/ui/badge";
-import { PrimaryFlowButton } from "@/components/ui/flow-button";
+import {
+  PrimaryFlowButton,
+  SecondaryFlowButton,
+} from "@/components/ui/flow-button";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { useTranslations } from "@/contexts/language-context";
+import { SCHEDULE_URL } from "@/lib/site-links";
 
 const HeroSection = () => {
   const { t, ta } = useTranslations();
@@ -69,7 +73,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           inView={false}
           delay={0.6}
-          className="z-10"
+          className="z-10 flex flex-wrap items-center justify-center gap-4"
         >
           <PrimaryFlowButton size="lg" asChild>
             <Link href={ticketsUrl} target="_blank" rel="noopener noreferrer">
@@ -77,6 +81,12 @@ const HeroSection = () => {
               <ArrowUpRightIcon />
             </Link>
           </PrimaryFlowButton>
+          <SecondaryFlowButton size="lg" asChild>
+            <Link href={SCHEDULE_URL} target="_blank" rel="noopener noreferrer">
+              {t("header.seeSchedule")}
+              <ArrowUpRightIcon />
+            </Link>
+          </SecondaryFlowButton>
         </MotionPreset>
       </div>
     </section>

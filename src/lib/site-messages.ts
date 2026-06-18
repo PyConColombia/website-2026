@@ -6,6 +6,7 @@ export type SiteLocale = "en" | "es";
 export type NavTitleKey =
   | "home"
   | "agenda"
+  | "schedule"
   | "speakers"
   | "keynotes"
   | "sponsors"
@@ -19,6 +20,9 @@ export type SiteMessagesShape = {
     getTickets: string;
     getTicketsSrOnly: string;
     getTicketsTooltip: string;
+    seeSchedule: string;
+    seeScheduleSrOnly: string;
+    seeScheduleTooltip: string;
     yearPlaceholder: string;
     selectYearAria: string;
     pyconByYear: string;
@@ -52,6 +56,7 @@ export type SiteMessagesShape = {
     titlePrefix: string;
     subtitle: string;
     getTickets: string;
+    seeSchedule: string;
     flipWords: string[];
   };
   pageMeta: {
@@ -93,6 +98,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
     nav: {
       home: "Home",
       agenda: "Schedule",
+      schedule: "Schedule",
       speakers: "Speakers",
       keynotes: "Keynotes",
       sponsors: "Sponsors",
@@ -104,6 +110,9 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       getTickets: "GET YOUR TICKETS",
       getTicketsSrOnly: "Get your tickets",
       getTicketsTooltip: "Get your tickets",
+      seeSchedule: "SEE SCHEDULE",
+      seeScheduleSrOnly: "See schedule",
+      seeScheduleTooltip: "See schedule",
       yearPlaceholder: "Year",
       selectYearAria: "Select year",
       pyconByYear: "PyCon by year",
@@ -140,6 +149,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       subtitle:
         "The biggest Python conference in Colombia. Come explore, learn, and connect with others just as passionate as you are.",
       getTickets: "GET YOUR TICKETS",
+      seeSchedule: "SEE SCHEDULE",
       flipWords: [
         "Python",
         "Data Science",
@@ -196,6 +206,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
     nav: {
       home: "Inicio",
       agenda: "Agenda",
+      schedule: "Agenda",
       speakers: "Ponentes",
       keynotes: "Oradores principales",
       sponsors: "Patrocinadores",
@@ -207,6 +218,9 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       getTickets: "COMPRA TUS ENTRADAS",
       getTicketsSrOnly: "Comprar entradas",
       getTicketsTooltip: "Comprar entradas",
+      seeSchedule: "VER AGENDA",
+      seeScheduleSrOnly: "Ver agenda",
+      seeScheduleTooltip: "Ver agenda",
       yearPlaceholder: "Año",
       selectYearAria: "Seleccionar año",
       pyconByYear: "PyCon por año",
@@ -243,6 +257,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       subtitle:
         "La conferencia de Python más grande de Colombia. Explora, aprende y conecta con personas tan apasionadas como tú.",
       getTickets: "COMPRA TUS ENTRADAS",
+      seeSchedule: "VER AGENDA",
       flipWords: [
         "Python",
         "Ciencia de datos",

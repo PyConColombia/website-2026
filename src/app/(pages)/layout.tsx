@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import type { Navigation } from "@/components/layout/header-navigation";
+import { SCHEDULE_URL } from "@/lib/site-links";
 
 const navigationData: Navigation[] = [
   {
@@ -11,6 +12,10 @@ const navigationData: Navigation[] = [
   {
     titleKey: "agenda",
     items: [
+      {
+        titleKey: "schedule",
+        href: SCHEDULE_URL,
+      },
       {
         titleKey: "speakers",
         href: "/speakers",

@@ -83,6 +83,8 @@ const getSectionId = (href: string) => {
   return "";
 };
 
+const isExternalHref = (href: string) => href.startsWith("http");
+
 const isNavItemActive = (
   href: string,
   activeSection: string,
@@ -149,7 +151,13 @@ const ListItem = (props: {
         })}
         asChild
       >
-        <Link href={href} className="block w-full">
+        <Link
+          href={href}
+          className="block w-full"
+          {...(isExternalHref(href)
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+        >
           {icon && (
             <span className="bg-primary/10 text-primary flex aspect-square size-7 shrink-0 items-center justify-center rounded-lg border border-primary/20 [&>svg]:size-4">
               {icon}
@@ -511,6 +519,12 @@ const HeaderNavigationSmallScreen = ({
                                   "ml-4.5 flex items-center gap-2",
                                 )}
                                 onClick={handleLinkClick}
+                                {...(isExternalHref(subItem.href)
+                                  ? {
+                                      target: "_blank",
+                                      rel: "noopener noreferrer",
+                                    }
+                                  : {})}
                               >
                                 {subItem.icon ? (
                                   subItem.icon
@@ -545,6 +559,9 @@ const HeaderNavigationSmallScreen = ({
                               "ml-3 flex items-center gap-2",
                             )}
                             onClick={handleLinkClick}
+                            {...(isExternalHref(item.href)
+                              ? { target: "_blank", rel: "noopener noreferrer" }
+                              : {})}
                           >
                             {item.icon ? (
                               item.icon
