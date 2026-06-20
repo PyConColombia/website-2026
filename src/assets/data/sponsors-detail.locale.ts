@@ -15,6 +15,10 @@ export type SponsorDetailContent = {
   paragraphs: string[];
   highlights: SponsorHighlight[];
   faqTopics?: SponsorFaqTopic[];
+  caseStudiesLink?: {
+    href: string;
+    label: string;
+  };
 };
 
 export type SponsorDetailBySlug = Record<string, SponsorDetailContent>;
@@ -45,11 +49,30 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    provectus: {
+      tagline: "AI-first Technology Consultancy & Solutions Provider",
+      paragraphs: [
+        "We bring the power of cloud, data and AI to reimagine the way businesses operate, compete, and deliver customer value.",
+      ],
+      caseStudiesLink: {
+        href: "https://provectus.com/case-studies/",
+        label: "Case studies",
+      },
+      highlights: [],
+      faqTopics: [],
+    },
     epam: {
       paragraphs: [
         "EPAM Systems is a global leader in software engineering, digital transformation, and AI-based solutions. The company works with organizations from the Forbes Global 2000 list, as well as high-growth companies, to develop high-impact products, platforms, and digital experiences.",
         "With over thirty years of experience in software engineering and custom platform development, EPAM helps organizations evolve toward AI-driven business models, generating tangible value from innovation and digital investment.",
         "Recognized by leading industry analysts and various industry rankings, EPAM combines global scale with a strong local presence to drive the future of its clients, partners, and teams.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    nequi: {
+      paragraphs: [
+        "Nequi is a Colombian neobank that is transforming the way people manage their money by building a digital financial ecosystem that goes far beyond a traditional account or digital wallet. Through a simple, customer-centric, and fully digital experience, Nequi offers solutions for saving, making payments, transferring funds, receiving remittances, accessing credit, managing personal finances, and connecting users with a wide range of services that simplify everyday life. With more than 28 million users, Nequi has established itself as a world of financial and non-financial possibilities, fostering inclusion, empowerment, and access to opportunities, enabling people to achieve their goals in an easier, safer, and more convenient way.",
       ],
       highlights: [],
       faqTopics: [],
@@ -126,11 +149,31 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    provectus: {
+      tagline:
+        "Consultoría tecnológica y proveedor de soluciones con enfoque en IA",
+      paragraphs: [
+        "Impulsamos la transformación empresarial con el poder de la nube, los datos y la inteligencia artificial, reinventando la forma en que las compañías operan, compiten y entregan valor a sus clientes.",
+      ],
+      caseStudiesLink: {
+        href: "https://provectus.com/case-studies/",
+        label: "Casos de estudio",
+      },
+      highlights: [],
+      faqTopics: [],
+    },
     epam: {
       paragraphs: [
         "EPAM Systems es una empresa global líder en ingeniería de software, transformación digital y soluciones basadas en inteligencia artificial. La compañía trabaja con organizaciones de la lista Forbes Global 2000, así como con empresas de alto crecimiento, para desarrollar productos, plataformas y experiencias digitales de alto impacto.",
         "Con más de treinta años de experiencia en ingeniería de software y desarrollo de plataformas personalizadas, EPAM ayuda a las organizaciones a evolucionar hacia modelos de negocio impulsados por la IA, generando valor tangible a partir de la innovación y la inversión digital.",
         "Reconocida por analistas líderes del sector y por diversos rankings de la industria, EPAM combina escala global con una sólida presencia local para impulsar el futuro de sus clientes, socios y equipos.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    nequi: {
+      paragraphs: [
+        "Nequi es un neobanco colombiano que está transformando la manera en que las personas gestionan su plata, construyendo un ecosistema financiero digital que va más allá de una cuenta o una billetera. A través de una experiencia simple, cercana y 100% digital, ofrece soluciones para ahorrar, pagar, transferir, recibir remesas, acceder a créditos, administrar finanzas y conectar con múltiples servicios que facilitan la vida diaria. Con más de 28 millones de usuarios, Nequi se ha consolidado como un mundo de posibilidades financieras y no financieras que impulsa la inclusión, la autonomía y el acceso a oportunidades, permitiendo que cada persona alcance sus metas de forma más fácil, segura y conveniente.",
       ],
       highlights: [],
       faqTopics: [],
