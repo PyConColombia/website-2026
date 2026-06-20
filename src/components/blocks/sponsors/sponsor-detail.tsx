@@ -168,6 +168,18 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
                     </a>
                   </Button>
                 ) : null}
+                {detail?.caseStudiesLink ? (
+                  <Button size="lg" variant="outline" className="group" asChild>
+                    <a
+                      href={detail.caseStudiesLink.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {detail.caseStudiesLink.label}
+                      <ExternalLinkIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </a>
+                  </Button>
+                ) : null}
                 <Button size="lg" variant="outline" asChild>
                   <Link href="/#sponsors">
                     <ArrowLeftIcon />

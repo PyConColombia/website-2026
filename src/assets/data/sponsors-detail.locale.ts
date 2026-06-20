@@ -15,6 +15,10 @@ export type SponsorDetailContent = {
   paragraphs: string[];
   highlights: SponsorHighlight[];
   faqTopics?: SponsorFaqTopic[];
+  caseStudiesLink?: {
+    href: string;
+    label: string;
+  };
 };
 
 export type SponsorDetailBySlug = Record<string, SponsorDetailContent>;
@@ -42,6 +46,18 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       paragraphs: [
         "Lovelytics is a team of elite data and AI professionals who know how to make complex problems feel manageable—and even enjoyable. We bring clarity, speed, and heart to every project, partnering with clients to solve real problems with smart, sustainable solutions.",
       ],
+      highlights: [],
+      faqTopics: [],
+    },
+    provectus: {
+      tagline: "AI-first Technology Consultancy & Solutions Provider",
+      paragraphs: [
+        "We bring the power of cloud, data and AI to reimagine the way businesses operate, compete, and deliver customer value.",
+      ],
+      caseStudiesLink: {
+        href: "https://provectus.com/case-studies/",
+        label: "Case studies",
+      },
       highlights: [],
       faqTopics: [],
     },
@@ -123,6 +139,19 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       paragraphs: [
         "Somos una empresa 100% especializada en Data & AI. Contamos con un equipo de primer nivel compuesto por más de 550 personas, con clientes en Estados Unidos, LATAM y Europa.",
       ],
+      highlights: [],
+      faqTopics: [],
+    },
+    provectus: {
+      tagline:
+        "Consultoría tecnológica y proveedor de soluciones con enfoque en IA",
+      paragraphs: [
+        "Impulsamos la transformación empresarial con el poder de la nube, los datos y la inteligencia artificial, reinventando la forma en que las compañías operan, compiten y entregan valor a sus clientes.",
+      ],
+      caseStudiesLink: {
+        href: "https://provectus.com/case-studies/",
+        label: "Casos de estudio",
+      },
       highlights: [],
       faqTopics: [],
     },
