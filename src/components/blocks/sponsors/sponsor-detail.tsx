@@ -203,7 +203,7 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
                   <div className="w-full overflow-hidden">
                     <Marquee
                       pauseOnHover
-                      duration={24}
+                      duration={60}
                       gap={1.25}
                       className="py-2"
                     >
