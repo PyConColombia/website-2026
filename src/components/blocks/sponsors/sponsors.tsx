@@ -99,6 +99,31 @@ const sizeStyles = {
   }
 >;
 
+type TierStyle = (typeof sizeStyles)[SponsorTier["size"]];
+
+/** Gold+ uses M-tier logos but caps container width at Platinum (L). */
+function getTierStyles(tier: SponsorTier): TierStyle {
+  const base = sizeStyles[tier.size];
+
+  if (tier.tierKey !== "goldPlus") {
+    return base;
+  }
+
+  const platinum = sizeStyles.L;
+
+  return {
+    ...base,
+    container: platinum.container,
+    gridMaxWidth: platinum.gridMaxWidth,
+    minLayoutWidth: base.layoutWidth,
+    minLayoutWidthSm: base.layoutWidthSm,
+  };
+}
+
+function shouldFitContainerToContent(tier: SponsorTier, isMulti: boolean) {
+  return !isMulti || tier.tierKey === "goldPlus";
+}
+
 function chunkIntoRows<T>(items: T[], columns: number): T[][] {
   const rows: T[][] = [];
 
@@ -159,7 +184,7 @@ const SponsorCard = ({
   tier,
   sponsorDisplayName,
 }: SponsorCardProps & { sponsorDisplayName: string }) => {
-  const styles = sizeStyles[tier.size];
+  const styles = getTierStyles(tier);
   const isPlaceholder = !sponsor.logo;
 
   const inner = (
@@ -202,7 +227,7 @@ const SponsorCard = ({
 const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
   const { t } = useTranslations();
   const gridRef = useRef<HTMLDivElement>(null);
-  const styles = sizeStyles[tier.size];
+  const styles = getTierStyles(tier);
   const sponsors =
     tier.sponsors.length > 0 ? tier.sponsors : [{ name: OPEN_SLOT_NAME }];
   const isMulti = sponsors.length > 1;
@@ -297,7 +322,11 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
                   return (
                     <div
                       key={`${tier.tierKey}-${sponsor.name}-${sponsor.href ?? ""}`}
-                      className={cn(styles.container, !isMulti && "sm:w-fit")}
+                      className={cn(
+                        styles.container,
+                        shouldFitContainerToContent(tier, isMulti) &&
+                          "sm:w-fit",
+                      )}
                     >
                       <SponsorCard
                         sponsor={sponsor}

@@ -70,6 +70,13 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    nequi: {
+      paragraphs: [
+        "Nequi is a Colombian neobank that is transforming the way people manage their money by building a digital financial ecosystem that goes far beyond a traditional account or digital wallet. Through a simple, customer-centric, and fully digital experience, Nequi offers solutions for saving, making payments, transferring funds, receiving remittances, accessing credit, managing personal finances, and connecting users with a wide range of services that simplify everyday life. With more than 28 million users, Nequi has established itself as a world of financial and non-financial possibilities, fostering inclusion, empowerment, and access to opportunities, enabling people to achieve their goals in an easier, safer, and more convenient way.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
     genlogs: {
       paragraphs: [
         "GenLogs is a truck intelligence company that provides real-time data and analytics to optimize logistics operations and combat fraud in the transportation industry. Leveraging a nationwide network of sensors, artificial intelligence, and real-time mobility data, GenLogs offers insights into freight patterns, carrier capacities, and asset tracking. This enables freight brokers, carriers, and shippers to make informed decisions, reduce costs, and enhance operational efficiency.",
@@ -160,6 +167,13 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
         "EPAM Systems es una empresa global líder en ingeniería de software, transformación digital y soluciones basadas en inteligencia artificial. La compañía trabaja con organizaciones de la lista Forbes Global 2000, así como con empresas de alto crecimiento, para desarrollar productos, plataformas y experiencias digitales de alto impacto.",
         "Con más de treinta años de experiencia en ingeniería de software y desarrollo de plataformas personalizadas, EPAM ayuda a las organizaciones a evolucionar hacia modelos de negocio impulsados por la IA, generando valor tangible a partir de la innovación y la inversión digital.",
         "Reconocida por analistas líderes del sector y por diversos rankings de la industria, EPAM combina escala global con una sólida presencia local para impulsar el futuro de sus clientes, socios y equipos.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    nequi: {
+      paragraphs: [
+        "Nequi es un neobanco colombiano que está transformando la manera en que las personas gestionan su plata, construyendo un ecosistema financiero digital que va más allá de una cuenta o una billetera. A través de una experiencia simple, cercana y 100% digital, ofrece soluciones para ahorrar, pagar, transferir, recibir remesas, acceder a créditos, administrar finanzas y conectar con múltiples servicios que facilitan la vida diaria. Con más de 28 millones de usuarios, Nequi se ha consolidado como un mundo de posibilidades financieras y no financieras que impulsa la inclusión, la autonomía y el acceso a oportunidades, permitiendo que cada persona alcance sus metas de forma más fácil, segura y conveniente.",
       ],
       highlights: [],
       faqTopics: [],

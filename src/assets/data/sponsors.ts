@@ -71,6 +71,12 @@ export const sponsorTiers: SponsorTier[] = [
         logo: "/images/sponsors/epam.svg",
         href: "https://www.epam.com/",
       },
+      {
+        name: "Nequi",
+        slug: "nequi",
+        logo: "/images/sponsors/nequi.svg",
+        href: "https://www.nequi.com.co/",
+      },
     ],
   },
   {
