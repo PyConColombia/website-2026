@@ -82,7 +82,7 @@ const HeroSection = () => {
             </Link>
           </PrimaryFlowButton>
           <SecondaryFlowButton size="lg" asChild>
-            <Link href={SCHEDULE_URL} target="_blank" rel="noopener noreferrer">
+            <Link href={SCHEDULE_URL}>
               {t("header.seeSchedule")}
               <ArrowUpRightIcon />
             </Link>

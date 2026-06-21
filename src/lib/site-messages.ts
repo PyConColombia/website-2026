@@ -86,6 +86,10 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
     };
+    schedule: {
+      title: string;
+      description: string;
+    };
     sponsorDetail: {
       titleSuffix: string;
     };
@@ -196,6 +200,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Apply for PyCon Colombia opportunity scholarships—financial support for students and underrepresented groups in the Python community.",
       },
+      schedule: {
+        title: "Schedule",
+        description:
+          "Official PyCon Colombia 2026 schedule—talks, keynotes, and workshops in Medellín, July 24–26 at Universidad EAFIT.",
+      },
       sponsorDetail: {
         titleSuffix: "Sponsor",
       },
@@ -303,6 +312,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         title: "Becas",
         description:
           "Postúlate a las becas de oportunidad de PyCon Colombia—apoyo económico para estudiantes y grupos subrepresentados en la comunidad Python.",
+      },
+      schedule: {
+        title: "Agenda",
+        description:
+          "Agenda oficial de PyCon Colombia 2026—charlas, keynotes y talleres en Medellín, del 24 al 26 de julio en la Universidad EAFIT.",
       },
       sponsorDetail: {
         titleSuffix: "Patrocinador",
