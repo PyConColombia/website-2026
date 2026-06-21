@@ -107,10 +107,14 @@ function matchesTab(event: ScheduleEvent, tab: ScheduleTab) {
   return category === "workshop";
 }
 
+type ScheduleDayDate = (typeof scheduleDays)[number]["date"];
+
 const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
   const { locale } = useLanguage();
   const { t } = useTranslations();
-  const [selectedDate, setSelectedDate] = useState(scheduleDays[0].date);
+  const [selectedDate, setSelectedDate] = useState<ScheduleDayDate>(
+    scheduleDays[0].date,
+  );
   const [activeTab, setActiveTab] = useState<ScheduleTab>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"time" | "name" | "default">("default");
