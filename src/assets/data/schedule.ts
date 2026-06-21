@@ -119,7 +119,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Talk: Sistemas de IA vulnerables: datos reales, diseño responsable",
     displayTitle:
       "Sistemas de IA vulnerables: datos reales, diseño responsable",
-    speaker: "Andrés Estrada",
+    speaker: "Andrés Felipe Estrada Rodriguez",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -133,8 +133,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: Estrategias de Optimización de Costos en GenAI con Python y AWS",
     displayTitle:
       "Estrategias de Optimización de Costos en GenAI con Python y AWS",
-    speaker: "Juan Melo",
-    label: "DevOps",
+    speaker: "Juan Diego David Melo Alarcón",
+    label: "Artificial Intelligence",
     language: ["ES"],
   },
   {
@@ -171,7 +171,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: Python y Machine Learning para Optimización Termoquímica Sostenible",
     displayTitle:
       "Python y Machine Learning para Optimización Termoquímica Sostenible",
-    speaker: "Nieng Lee",
+    speaker: "Nieng Yordan Lee Gaitan",
     label: "Machine Learning",
     language: ["ES"],
   },
@@ -205,7 +205,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-24",
     title: "Talk: STUART: Un agente hacker autónomo hecho en Python",
     displayTitle: "STUART: Un agente hacker autónomo hecho en Python",
-    speaker: "Ana María López",
+    speaker: "Ana María López Moreno",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -219,8 +219,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: Camila Plejia, asistente virtual, aplicado a personas con tetraplejia",
     displayTitle:
       "Camila Plejia, asistente virtual, aplicado a personas con tetraplejia",
-    speaker: "Sergio Valenzuela",
-    label: "Computer Vision",
+    speaker: "Sergio Hernán Valenzuela Cámara",
+    label: "Artificial Intelligence",
     language: ["ES"],
   },
   {
@@ -231,7 +231,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-24",
     title: "Talk: The GenAI Revolution Reaches RecSys",
     displayTitle: "The GenAI Revolution Reaches RecSys",
-    speaker: "Carlos Osorio",
+    speaker: "Carlos Andrés Osorio Alcalde",
     label: "Artificial Intelligence",
     language: ["EN"],
   },
@@ -279,9 +279,9 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-24",
     title: "Talk: Provenance by Default: AI Media Pipelines in Python",
     displayTitle: "Provenance by Default: AI Media Pipelines in Python",
-    speaker: "Gonzalo Peña",
+    speaker: "Gonzalo Andrés Peña Castellanos",
     label: "Artificial Intelligence",
-    language: ["EN"],
+    language: ["ES"],
   },
   {
     id: "21",
@@ -293,7 +293,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: Clean Code in the Era of LLMs: Do Good Practices Still Matter?",
     displayTitle:
       "Clean Code in the Era of LLMs: Do Good Practices Still Matter?",
-    speaker: "Pablo Restrepo",
+    speaker: "Pablo Restrepo Henao",
     label: "Software Engineering",
     language: ["ES"],
   },
@@ -404,7 +404,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: From Expert Judgment to Autonomous Optimization: Encoding Human Expertise into LLM Judges with DSPy",
     displayTitle:
       "From Expert Judgment to Autonomous Optimization: Encoding Human Expertise into LLM Judges with DSPy",
-    speaker: "Sebastián Gómez / Mateo Ríos",
+    speaker: "Sebastián Gómez Ahumada / Mateo Rios Querubin",
     label: "Artificial Intelligence",
     language: ["EN"],
   },
@@ -442,7 +442,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: From Vibe Coding to Spec-Driven Development with AWOS in Claude Code",
     displayTitle:
       "From Vibe Coding to Spec-Driven Development with AWOS in Claude Code",
-    speaker: "Elbano Mibelli",
+    speaker: "Elbano Mibelli P.",
     label: "Artificial Intelligence",
     language: ["EN"],
   },
@@ -456,7 +456,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: Structured Learning. Plataforma impulsada por IA que transforma papers académicos en experiencias de aprendizaje interactivas",
     displayTitle:
       "Structured Learning. Plataforma impulsada por IA que transforma papers académicos en experiencias de aprendizaje interactivas",
-    speaker: "Cristhian García",
+    speaker: "Cristhian Jesid Garcia Solarte",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -468,7 +468,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-25",
     title: "Talk: From Typosquatting to Infrastructure Poisoning",
     displayTitle: "From Typosquatting to Infrastructure Poisoning",
-    speaker: "David Cortéz",
+    speaker: "Orlin David Cortez Alban",
     label: "Cybersecurity",
     language: ["ES"],
   },
@@ -504,7 +504,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: De voz a acción: construyendo un asistente de IA con Python y Google Workspace",
     displayTitle:
       "De voz a acción: construyendo un asistente de IA con Python y Google Workspace",
-    speaker: "Juan Marin / Juliana Suarez",
+    speaker: "Juan Manuel Marín Bedoya / Juliana Suárez Ávila",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -532,7 +532,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: NLP sin etiquetas: cómo clusterizar N procesos jurídicos del Estado colombiano y convertir el caos en un clasificador en producción",
     displayTitle:
       "NLP sin etiquetas: cómo clusterizar N procesos jurídicos del Estado colombiano y convertir el caos en un clasificador en producción",
-    speaker: "Jonatan González",
+    speaker: "Jonatan Esteban Gonzalez Balaguera",
     label: "Machine Learning",
     language: ["ES"],
   },
@@ -546,7 +546,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
     displayTitle:
       "No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
-    speaker: "Brayan Ardila",
+    speaker: "Brayan Echenique Ardila",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -596,7 +596,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Talk: Feeding the Invisible: Seguridad alimentaria en ciudades intermedias con Python",
     displayTitle:
       "Feeding the Invisible: Seguridad alimentaria en ciudades intermedias con Python",
-    speaker: "David Rivera",
+    speaker: "David Alejandro Rivera Correa",
     label: "Data Science",
     language: ["ES"],
   },
@@ -608,7 +608,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-25",
     title: "Talk: Understanding Cognitive Complexity in Python",
     displayTitle: "Understanding Cognitive Complexity in Python",
-    speaker: "Robin Quintero",
+    speaker: "Robin Hafid Quintero Lopez",
     label: "Core Python",
     language: ["ES"],
   },

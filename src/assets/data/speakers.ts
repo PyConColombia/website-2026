@@ -55,7 +55,7 @@ const speakerList: Speaker[] = [
     language: "Spanish / Español",
     level: "Beginner / Principiante",
     talkDescription:
-      "La inteligencia artificial está cambiando el mercado laboral más rápido que nunca. Muchos desarrolladores se preguntan: ¿la IA me reemplazará o me potenciará? En esta charla compartiré mi experiencia real pasando de ser desarrollador en Latinoamérica a trabajar para empresas de Estados Unidos, enfrentando entrevistas, optimizando mi perfil profesional y adaptándome a un entorno donde la IA ya es parte del día a día.",
+      "La inteligencia artificial está cambiando el mercado laboral más rápido que nunca. Muchos desarrolladores se preguntan: ¿la IA me reemplazará o me potenciará? En esta charla compartiré mi experiencia real pasando de ser desarrollador en Latinoamérica a trabajar para empresas de Estados Unidos, enfrentando entrevistas, optimizando mi perfil profesional y adaptándome a un entorno donde la IA ya es parte del día a día. Exploraremos cómo la IA no reemplaza al desarrollador, sino que redefine el valor que aportamos: desde escribir código hasta resolver problemas reales, comunicar ideas y construir soluciones completas. La charla incluirá el futuro de la programación, cómo cambiar tu mentalidad frente a la IA, qué habilidades realmente importan hoy, cómo destacar en procesos de selección internacionales, el rol de herramientas de IA en tu crecimiento profesional y errores comunes que frenan tu empleabilidad.",
   },
   {
     slug: "jeronimo-hoyos-botero",
@@ -64,7 +64,11 @@ const speakerList: Speaker[] = [
     title: "Estudiante @ Universidad Nacional de Colombia Sede Medellín",
     description:
       "Soy estudiante en la Universidad Nacional, con un gran interés en el machine learning. Me gusta crear animaciones en Manim porque son súper chéveres y me permiten enseñar cómo funcionan estos sistemas por dentro. Mi intención es tomar conceptos que suelen parecer raros o abstractos y mostrarlos de forma visual y animada para que resulten mucho más claros y accesibles.",
-    tracks: ["machine-learning", "artificial-intelligence"],
+    tracks: [
+      "artificial-intelligence",
+      "machine-learning",
+      "scientific-computing",
+    ],
     github: "https://github.com/JeroHoyos",
     linkedin:
       "https://www.linkedin.com/in/jer%C3%B3nimo-hoyos-botero-8b692928b/",
@@ -82,7 +86,7 @@ const speakerList: Speaker[] = [
     title: "AI Software Engineer @ Proteccion S.A",
     description:
       "Soy Brayan Echenique, AI Software Engineer en Protección, donde diseño e implemento soluciones de inteligencia artificial integrando tecnologías emergentes con arquitecturas robustas. Soy defensor del pragmatismo técnico y creo firmemente que la mejor solución no siempre es la más compleja, sino la que resuelve el problema correcto con las herramientas correctas.",
-    tracks: ["artificial-intelligence"],
+    tracks: ["artificial-intelligence", "machine-learning"],
     linkedin: "https://www.linkedin.com/in/brayan-echenique-3ba556205",
     talkTitle:
       "No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
@@ -99,7 +103,8 @@ const speakerList: Speaker[] = [
     title: "Python Junior Software Engineer @ Epam",
     description:
       "I have won 3 times the best project award in Systems Engineering at EAFIT. I have given talks at Medellín JS, Python Medellín twice, Medellín AI, PyCon Colombia, Python Moscow, and BarNLP. I am half Colombian, I also have German and Russian heritage, and I speak Russian and German.",
-    tracks: ["core-python"],
+    tracks: ["core-python", "scientific-computing"],
+    github: "https://github.com/jero98772",
     linkedin: "https://www.linkedin.com/in/daniel-arango-sohm-352b4822a/",
     talkTitle: "Leverage your Python skill using the Python interpreter",
     country: "Colombia",
@@ -166,7 +171,7 @@ const speakerList: Speaker[] = [
     title: "Profesional @ Procuraduría General de la Nación",
     description:
       "Soy físico con maestría en física teórica y una segunda maestría en Visual Analytics and Big Data, actualmente cursando una especialización en estadística en la Universidad Nacional de Colombia. Trabajo como analista en la Procuraduría General de la Nación, donde aplico aprendizaje automático, NLP y análisis geoespacial a problemas de vigilancia preventiva y monitoreo. Mi trayectoria va desde la simulación de sistemas superconductores hasta el desarrollo de herramientas de detección de deforestación y análisis electoral, siempre con Python como hilo conductor.",
-    tracks: ["machine-learning", "artificial-intelligence"],
+    tracks: ["machine-learning", "data-science", "core-python", "devops"],
     github: "https://github.com/jegonzalezba01",
     linkedin:
       "https://www.linkedin.com/in/jonatan-e-gonzalez-balaguera-b36500246/",
@@ -176,7 +181,7 @@ const speakerList: Speaker[] = [
     language: "Spanish / Español",
     level: "Advanced / Avanzado",
     talkDescription:
-      "¿Qué haces cuando tienes 600.000 quejas jurídicas, cero datos etiquetados y una entidad del Estado esperando resultados? Esta charla recorre el proceso completo de construcción de un sistema de clasificación NLP no supervisado para la Procuraduría General de la Nación. Partiendo de texto administrativo en bruto — ruidoso, lleno de abreviaciones y jerga institucional — mostraré cómo TF-IDF, SVD truncado y KMeans se combinaron para organizar más de medio millón de registros en 64 grupos semánticamente coherentes, sin una sola etiqueta manual. Pero la clusterización es solo el punto de partida. Cubriré cómo se validaron los clusters, cómo se entrenó un clasificador de Regresión Logística sobre ellos para hacer el sistema desplegable, y cómo el pipeline final fue empaquetado en un .pkl que hoy usan colegas no técnicos en producción. En el camino, enfrentaremos los problemas reales: curvas de codo que no se comportan, desbalances de tamaño entre clusters de 1:20, y la tensión entre elegancia matemática y usabilidad institucional.",
+      "¿Qué haces cuando tienes 600.000 quejas jurídicas, cero datos etiquetados y una entidad del Estado esperando resultados? Esta charla recorre el proceso completo de construcción de un sistema de clasificación NLP no supervisado para la Procuraduría General de la Nación. Partiendo de texto administrativo en bruto — ruidoso, lleno de abreviaciones y jerga institucional — mostraré cómo TF-IDF, SVD truncado y KMeans se combinaron para organizar más de medio millón de registros en 64 grupos semánticamente coherentes, sin una sola etiqueta manual. Pero la clusterización es solo el punto de partida. Cubriré cómo se validaron los clusters, cómo se entrenó un clasificador de Regresión Logística sobre ellos para hacer el sistema desplegable, y cómo el pipeline final fue empaquetado en un .pkl que hoy usan colegas no técnicos en producción. En el camino, enfrentaremos los problemas reales: curvas de codo que no se comportan, desbalances de tamaño entre clusters de 1:20, y la tensión entre elegancia matemática y usabilidad institucional. Porque en el sector público, un modelo que nadie usa no es un modelo — es un PDF acumulando polvo.",
   },
   {
     slug: "elbano-mibelli",
@@ -203,7 +208,12 @@ const speakerList: Speaker[] = [
     title: "Senior Data Engineer @ Provectus",
     description:
       "Machine Learning Engineer and Data Engineer with a background in Astronomy and Astrophysics and over 5 years of experience designing, building, and deploying scalable data pipelines, ML systems, and Big Data solutions on AWS and Databricks. I specialize in building end-to-end machine learning pipelines, RAG systems, and agentic AI workflows, as well as optimizing big data processes using Apache Spark, SQL/NoSQL data modeling, and cloud-native architectures.",
-    tracks: ["artificial-intelligence", "community"],
+    tracks: [
+      "artificial-intelligence",
+      "community",
+      "data-science",
+      "scientific-computing",
+    ],
     github: "https://github.com/cristhiancjgs",
     linkedin: "https://www.linkedin.com/in/cristhiancjgs20",
     talkTitle:
@@ -212,7 +222,7 @@ const speakerList: Speaker[] = [
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
     talkDescription:
-      "Structured Learning es una plataforma que convierte un paper de investigación en un módulo completo de aprendizaje — explicaciones capítulo por capítulo, código ejecutable incremental, chat con RAG, flashcards con repetición espaciada FSRS, derivaciones de ecuaciones, y un grafo de conocimiento en Neo4j. Esta charla cubre el producto, la ingeniería de un pipeline de workflows agénticos que lleva un issue de GitHub hasta un PR fusionado, y cómo corre en AWS con LocalStack para paridad dev-prod. Los agentes no reemplazan ingenieros, reemplazan el pegamento entre ingenieros y el aburrido 80% del SDLC.",
+      "Structured Learning es una plataforma que convierte un paper de investigación en un módulo completo de aprendizaje — explicaciones capítulo por capítulo, código ejecutable incremental, chat con RAG, flashcards con repetición espaciada FSRS, derivaciones de ecuaciones, y un grafo de conocimiento en Neo4j. Esta charla cubre el producto, la ingeniería de un pipeline de workflows agénticos que lleva un issue de GitHub hasta un PR fusionado con worktrees aislados, auto-patching tras review fallido y GitHub como API de los agentes, y cómo corre en AWS con LocalStack para paridad dev-prod. Los agentes no reemplazan ingenieros, reemplazan el pegamento entre ingenieros y el aburrido 80% del SDLC — y ahí es donde viven los retornos compuestos.",
   },
   {
     slug: "nieng-yordan-lee-gaitan",
@@ -240,7 +250,7 @@ const speakerList: Speaker[] = [
     title: "Machine Learning Lead @ Loka",
     description:
       "Pablo Restrepo is a Colombian software and ML engineer with over 11 years of experience building AI and software systems across Colombia, Germany, the UK, and the US. He is currently Machine Learning Lead at Loka, where he designs and deploys end-to-end GenAI solutions for global clients. He holds a Master's in Informatics from the Technical University of Munich and a BSc in Computer Science from Universidad EAFIT. He is also a published researcher in NLP and has spoken at conferences across Germany, Sweden, Norway, and the US.",
-    tracks: ["artificial-intelligence", "core-python"],
+    tracks: ["artificial-intelligence", "machine-learning", "core-python"],
     github: "https://github.com/prestrepoh",
     linkedin: "https://www.linkedin.com/in/pablo-restrepo-838a7879/",
     talkTitle: "Clean Code in the Era of LLMs: Do Good Practices Still Matter?",
@@ -257,7 +267,7 @@ const speakerList: Speaker[] = [
     title: "Data Science Manager @ Visa",
     description:
       "Soy Data Science Manager en Visa, donde lidero proyectos de inteligencia artificial para la región andina enfocados en convertir modelos de machine learning y GenAI en productos reales con impacto en negocio. Mi trabajo se centra en cerrar la brecha entre investigación y producción: desde diseñar modelos hasta desplegarlos como sistemas escalables usados por bancos y empresas en múltiples países. Mi carrera ha sido un recorrido acelerado dentro del ecosistema tecnológico en Latinoamérica, pasando por compañías como Mercado Libre y Rappi, donde trabajé en problemas de alto impacto como fraude, pricing en tiempo real y sistemas distribuidos a gran escala. Paralelamente, soy cofundador y COO de una startup de inteligencia artificial enfocada en entrenamiento comercial mediante sistemas speech-to-speech, donde estoy construyendo arquitecturas modernas integrando modelos de voz, LLMs y sistemas en tiempo real. Más allá de lo profesional, siempre he estado motivado por construir comunidad y acelerar el desarrollo tecnológico en Colombia. He sido profesor asistente en la Universidad de los Andes, he enseñado a cientos de personas sobre machine learning y sistemas con Python, y participé en la creación de un nuevo programa de Data Science en el país.",
-    tracks: ["artificial-intelligence", "machine-learning", "devops"],
+    tracks: ["artificial-intelligence", "machine-learning", "devops", "web"],
     linkedin: "https://www.linkedin.com/in/nicolas-danies",
     talkTitle: "Real-Time Voice Systems: diseño y arquitectura en 5 niveles",
     country: "Colombia",
@@ -358,7 +368,7 @@ const speakerList: Speaker[] = [
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
     talkDescription:
-      "El 29% de los ataques pasan los filtros de seguridad de los LLMs más usados en producción. No es un bug. Es la naturaleza del sistema. Los LLMs son procesos estocásticos entrenados sobre lenguaje humano, el medio más flexible, ambiguo y manipulable que existe. Eso los hace increíblemente poderosos. Y exactamente por eso son vulnerables. No hay parche para eso. Solo hay diseño. Esta charla presenta los resultados de llm-break-bench: 3.360 pruebas adversariales sobre GPT-4o, Claude, Gemini, Grok y DeepSeek usando MLCommons AI Safety v0.5 y OWASP LLM Top 10 como estándares. Los números rompen las intuiciones. Los datos son el punto de partida. La charla los conecta con los casos de uso reales donde los LLMs están en producción: RAGs, chatbots, agentes, asistentes de código. Muestra dónde falla el diseño, qué consecuencias tiene (Air Canada pagó por eso) y cómo se construye diferente. El cierre es accionable: 5 pilares de diseño para sistemas de IA que no dependan del modelo para su propia seguridad, con código real de NVIDIA NeMo Guardrails y Meta LlamaFirewall.",
+      "El 29% de los ataques pasan los filtros de seguridad de los LLMs más usados en producción. No es un bug. Es la naturaleza del sistema. Los LLMs son procesos estocásticos entrenados sobre lenguaje humano, el medio más flexible, ambiguo y manipulable que existe. Esta charla presenta los resultados de llm-break-bench: 3.360 pruebas adversariales sobre GPT-4o, Claude, Gemini, Grok y DeepSeek usando MLCommons AI Safety v0.5 y OWASP LLM Top 10 como estándares. El modelo más inteligente del benchmark es 5 veces más vulnerable que el más barato. Los datos se conectan con casos de uso reales donde los LLMs están en producción: RAGs, chatbots, agentes, asistentes de código. El cierre es accionable: 5 pilares de diseño para sistemas de IA que no dependan del modelo para su propia seguridad, con código real de NVIDIA NeMo Guardrails y Meta LlamaFirewall.",
   },
   {
     slug: "sergio-hernan-valenzuela-camara",
@@ -372,7 +382,7 @@ const speakerList: Speaker[] = [
     linkedin:
       "https://www.linkedin.com/in/sergio-hern%C3%A1n-valenzuela-c%C3%A1mara-4b965733/",
     talkTitle:
-      "Camila Plejia, asistente virtual aplicado a personas con tetraplejia",
+      "Camila Plejia, asistente virtual, aplicado a personas con tetraplejia",
     country: "Bolivia",
     language: "Spanish / Español",
     level: "All / Para todos los niveles",
@@ -385,7 +395,7 @@ const speakerList: Speaker[] = [
     image: "/images/speakers/kevin-hernandez.jpg",
     title: "Senior Software Engineer @ trellis.law",
     description:
-      "I'm a software engineer who loves learning new stuff and working on exciting projects.",
+      "I'm a software engineer who loves learning new stuff and working on exciting projects. I enjoy building tools that push the boundaries of what Python can do, from backend systems to interactive experiences in the browser.",
     tracks: ["core-python", "web"],
     github: "https://github.com/kevteg",
     linkedin: "https://www.linkedin.com/in/keeeevin/",
@@ -502,6 +512,77 @@ const speakerList: Speaker[] = [
     language: "English / Inglés",
     level: "Intermediate / Intermedio",
     talkDescription:
+      'A single misread clause in a reinsurance contract can mean millions in liability. Our LLM pipeline could extract and summarize these documents, but how do you know the output is actually correct? String matching fails ("USD 5,000,000" vs "$5M" scores zero), human review at scale is unaffordable, and a single LLM-as-judge prompt gives inconsistent, uncalibrated scores. The real bottleneck was never generation; it was evaluation. This talk shows how we solved it in two steps, both built entirely in Python. First, we encoded expert evaluation at scale using DSPy to distill judgments from five domain experts into a panel of calibrated LLM judges, each targeting a single quality dimension, weighted to reflect what experts actually care about. Then we closed the loop using DSPy\'s MIPROv2 and GEPA optimizers, wiring the judge panel as a fitness function and letting the system rewrite prompts autonomously, with regression guards and CI gates so humans review only the final score delta. The stack is Python-native: DSPy, MLflow, LiteLLM, Pydantic. You will leave with a concrete recipe for encoding expert knowledge into automated LLM evaluation and self-improving optimization, applicable to any domain where "correct" is nuanced.',
+  },
+  {
+    slug: "carlos-andres-osorio-alcalde",
+    name: "Carlos Andrés Osorio Alcalde",
+    title: "Sr Machine Learning Engineer @ Factored",
+    description:
+      "Mathematician (Summa Cum Laude) and MSc in mathematics. Machine Learning Engineer and Data Scientist with 6+ years of experience delivering Data Science and AI solutions across industries like retail, finance, education, and social enterprises. Skilled in developing and deploying advanced models for tasks such as recommendation systems, customer clustering, churn prediction, transactional risk, LLM-powered chatbots, Gen-AI applications and search engines using tools like Python, PyTorch, PySpark, FastAPI, PydanticAI, Qdrant, LangChain and cloud platforms (AWS, GCP and Azure). Passionate about leveraging math and AI to drive meaningful change.",
+    tracks: ["artificial-intelligence", "machine-learning", "data-science"],
+    linkedin:
+      "https://www.linkedin.com/in/carlos-andr%C3%A9s-osorio-alcalde-1a7ba9137/",
+    talkTitle: "The GenAI Revolution Reaches RecSys",
+    country: "Colombia",
+    language: "English / Inglés",
+    level: "Intermediate / Intermedio",
+    talkDescription:
+      "When we talk about the generative AI revolution, the conversation usually stays close to chatbots, image generation, and code assistants. But the same architectures that powered that wave (transformers, autoregressive modeling, scaling laws) are quietly reshaping fields most people don't associate with GenAI at all. Recommender systems are one of the most interesting examples. Meta, Netflix, Google, Spotify and others are replacing decades-old recsys pipelines with transformer-based foundation models, and the results are hard to ignore. This talk is a practical tour of that shift from a Python engineer's seat.",
+  },
+  {
+    slug: "sankalp-gilda",
+    name: "Sankalp Gilda",
+    title: "Staff MLE @ DeepThought Solutions",
+    description:
+      "Sankalp Gilda, PhD (Astrophysics, University of Florida, 2021). Staff Machine Learning Engineer at DeepThought Solutions, where he leads work on production AI evaluation tooling, host-side instrumentation for agentic execution sandboxes, and LLM-based knowledge-graph extraction. Author of tsbootstrap, an open-source Python library for time-series bootstrapping. Previously built ML systems at Marathon Petroleum, Fermata Energy, and the Canada-France-Hawaii Telescope.",
+    tracks: [
+      "artificial-intelligence",
+      "data-science",
+      "core-python",
+      "machine-learning",
+    ],
+    github: "https://github.com/astrogilda",
+    linkedin: "https://www.linkedin.com/in/sankalp-gilda/",
+    talkTitle: "Your AI Eval Is Lying To You",
+    country: "United States",
+    language: "English / Inglés",
+    level: "Intermediate / Intermedio",
+    talkDescription:
+      'When you set temperature=0 and run your AI eval, you expect the same input to give the same output. It doesn\'t. Recent measurements on Qwen3-235B at temperature=0 produced 80 unique completions on a single prompt. So when your eval reports "92% pass rate," what does that actually mean? This talk is about the gap between how the AI eval ecosystem talks about scores and what those scores can actually support. We walk through five specific tools that fix the gap: Pass@k versus pass^k, Wilson confidence intervals, Bayesian pass@k with Beta-Binomial conjugacy, sequential drift detection with EWMA, CUSUM, and OLS, and family-wise error control via Benjamini-Hochberg procedures. Each method gets a short demo in pure Python with no framework dependency. The audience leaves with reference implementations they can paste into an existing pytest setup tonight.',
+  },
+  {
+    slug: "marcela-hoyos-cano",
+    name: "Marcela Hoyos Cano",
+    title: "Team Lead Data Analytics @ Snappr",
+    description:
+      "I'm a data scientist and engineer based in Medellín. I started my career in Mechatronic Engineering and somewhere along the way fell in love with data, which led me to a Master's in Data Science & Analytics. Since then I've worked remotely across LATAM and the US at companies like Holafly, Lemontech, and the ICIPC. These days I lead Data Analytics at Snappr, a global photography marketplace. I've built data pipelines and custom connectors, designed our dbt architecture, set up dashboards, managed Snowflake permissions and roles, built tools to give non-technical teammates direct access to data, and worked closely with ops, finance, and engineering to turn messy business processes into something measurable.",
+    tracks: ["artificial-intelligence", "data-science"],
+    github: "https://github.com/MarcelaHoyos",
+    linkedin: "https://www.linkedin.com/in/marcelahoyos1205/",
+    talkTitle:
+      "How We Stopped Answering Data Questions and Built the Stack That Answers Them",
+    country: "Colombia",
+    language: "English / Inglés",
+    level: "All / Para todos los niveles",
+    talkDescription:
+      "If you've worked at a growing startup, you probably know the feeling: multiple teams pulling different numbers for the same metric, ops constantly asking engineering for basic answers, and creating or organizing metrics that's a real pain. Every new question feels like starting from scratch. This talk is the story of how a small team fixed that. First, by building a proper dbt architecture from scratch with Sources, Staging, Intermediate, and Marts so that things like bookings, revenue, and providers were defined in one place and everyone was looking at the same number. Once the data was reliable, we connected an LLM so non-technical teammates could ask questions in plain English and get real answers directly from Snowflake. No SQL, no ticket, no waiting on engineering. You'll walk away with a clear mental model for building a dbt layer people actually trust, a practical architecture for connecting an LLM to your warehouse, and the one thing that made it all click: your dbt docs are your LLM prompt.",
+  },
+  {
+    slug: "sebastian-gomez-ahumada",
+    name: "Sebastián Gómez Ahumada",
+    title: "Middle ML Engineer @ Provectus",
+    description:
+      "Biomedical engineer from Universidad de los Andes, with a minor in neuroscience and an MSc in biomedical engineering focused on machine learning. Currently working as a machine learning engineer building production AI systems, extraction pipelines, and conversational agents. Python was my first programming language and the one where I learned how to think in code, not just write it. For the past two and a half years I was a teaching assistant for ML fundamentals at Los Andes, a role that reinforced a conviction I'll happily defend on stage: complexity is rarely the answer and almost always the excuse.",
+    tracks: ["artificial-intelligence", "devops", "machine-learning"],
+    github: "https://github.com/gomez2608",
+    linkedin: "https://www.linkedin.com/in/sebastiangahumada/",
+    talkTitle:
+      "From Expert Judgment to Autonomous Optimization: Encoding Human Expertise into LLM Judges with DSPy",
+    country: "Colombia",
+    language: "English / Inglés",
+    level: "Intermediate / Intermedio",
+    talkDescription:
       "A single misread clause in a reinsurance contract can mean millions in liability. Our LLM pipeline could extract and summarize these documents, but how do you know the output is actually correct? String matching fails, human review at scale is unaffordable, and a single LLM-as-judge prompt gives inconsistent, uncalibrated scores. The real bottleneck was never generation; it was evaluation. This talk shows how we solved it in two steps, both built entirely in Python. First, we encoded expert evaluation at scale using DSPy to distill judgments from five domain experts into a panel of calibrated LLM judges. Then we closed the loop using DSPy's MIPROv2 and GEPA optimizers, wiring the judge panel as a fitness function and letting the system rewrite prompts autonomously. The stack is Python-native: DSPy, MLflow, LiteLLM, Pydantic. You will leave with a concrete recipe for encoding expert knowledge into automated LLM evaluation and self-improving optimization.",
   },
   {
@@ -511,7 +592,12 @@ const speakerList: Speaker[] = [
     title: "Data Scientist @ Cuesta Partners",
     description:
       "Ingeniera Industrial convertida en Data Scientist por amor a los números y a la tecnología. Juliana pasó de modelar probabilidades en la Javeriana a modelos de detección de fraude en MercadoLibre y MercadoPago, y hoy construye soluciones de IA en Cuesta Partners, una consultoría de Tech y AI. Attento es su experimento más reciente: demostrar que Python puede conectar una voz humana con diez APIs corporativas sin perder la cabeza en el camino. Fuera del teclado, se acaba de graduar como Chef, donde aplica la misma rigurosidad técnica que en su vida laboral.",
-    tracks: ["artificial-intelligence", "core-python", "web"],
+    tracks: [
+      "artificial-intelligence",
+      "core-python",
+      "web",
+      "machine-learning",
+    ],
     linkedin: "https://www.linkedin.com/in/juliana-suarez-avila/",
     talkTitle:
       "De voz a acción: construyendo un asistente de IA con Python y Google Workspace",
@@ -519,7 +605,7 @@ const speakerList: Speaker[] = [
     language: "Spanish / Español",
     level: "All / Para todos los niveles",
     talkDescription:
-      "Saltar entre pestañas de Gmail, Calendar, Drive y Jira para tareas repetitivas es agotador. Por eso construimos Attento, un asistente que permite ejecutar acciones reales en Google Workspace usando lenguaje natural. En esta charla construimos Attento, un asistente de voz end-to-end que convierte lenguaje natural en acciones reales sobre Google Workspace. Veremos cómo funciona por dentro: desde capturar audio en el navegador, hasta orquestar múltiples APIs en paralelo, persistir contexto entre sesiones y tomar decisiones de infraestructura que escalan. Cubriremos arquitectura con FastAPI, autenticación OAuth 2.0 con PKCE, function calling con Gemini, streaming con NDJSON, buenas prácticas con uv y Pydantic Settings, y el camino de demo a producción.",
+      "Saltar entre pestañas de Gmail, Calendar, Drive y Jira para tareas repetitivas es agotador. Por eso construimos Attento, un asistente que permite ejecutar acciones reales en Google Workspace usando lenguaje natural. En esta charla construimos Attento, un asistente de voz end-to-end que convierte lenguaje natural en acciones reales sobre Google Workspace. Veremos arquitectura con FastAPI, autenticación OAuth 2.0 con PKCE, function calling con Gemini, streaming con NDJSON, buenas prácticas con uv y Pydantic Settings, y el camino de demo a producción con Postgres y briefings matutinos automatizados.",
   },
   {
     slug: "juan-manuel-marin-bedoya",
@@ -528,7 +614,12 @@ const speakerList: Speaker[] = [
     title: "Senior Data Engineer @ Huge",
     description:
       "Creció aprendiendo inglés con los menús de instalación del software y los tutoriales de YouTube antes de que existieran en español. Esa curiosidad temprana por la tecnología lo llevó de Ingeniería Industrial y análisis financiero en la Javeriana a construir pipelines de datos para empresas en tres países. Juan Manuel es Senior Data Engineer con experiencia en GCP, Python y automatización, y ha trabajado desde plataformas B2B de comercio con Asia hasta proyectos de BI en Cisco. En Attento se encargó de lo que más le gusta: que los datos fluyan limpio, que la infraestructura no se note, y que el sistema recuerde lo que hiciste ayer.",
-    tracks: ["artificial-intelligence", "core-python", "web"],
+    tracks: [
+      "artificial-intelligence",
+      "core-python",
+      "web",
+      "machine-learning",
+    ],
     linkedin: "https://www.linkedin.com/in/juanmmb/",
     talkTitle:
       "De voz a acción: construyendo un asistente de IA con Python y Google Workspace",
@@ -536,7 +627,7 @@ const speakerList: Speaker[] = [
     language: "Spanish / Español",
     level: "All / Para todos los niveles",
     talkDescription:
-      "Saltar entre pestañas de Gmail, Calendar, Drive y Jira para tareas repetitivas es agotador. Por eso construimos Attento, un asistente que permite ejecutar acciones reales en Google Workspace usando lenguaje natural. En esta charla construimos Attento, un asistente de voz end-to-end que convierte lenguaje natural en acciones reales sobre Google Workspace. Veremos cómo funciona por dentro: desde capturar audio en el navegador, hasta orquestar múltiples APIs en paralelo, persistir contexto entre sesiones y tomar decisiones de infraestructura que escalan. Cubriremos arquitectura con FastAPI, autenticación OAuth 2.0 con PKCE, function calling con Gemini, streaming con NDJSON, buenas prácticas con uv y Pydantic Settings, y el camino de demo a producción.",
+      "Saltar entre pestañas de Gmail, Calendar, Drive y Jira para tareas repetitivas es agotador. Por eso construimos Attento, un asistente que permite ejecutar acciones reales en Google Workspace usando lenguaje natural. En esta charla construimos Attento, un asistente de voz end-to-end que convierte lenguaje natural en acciones reales sobre Google Workspace. Veremos arquitectura con FastAPI, autenticación OAuth 2.0 con PKCE, function calling con Gemini, streaming con NDJSON, buenas prácticas con uv y Pydantic Settings, y el camino de demo a producción con Postgres y briefings matutinos automatizados.",
   },
 ];
 
