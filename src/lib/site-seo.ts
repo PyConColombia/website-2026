@@ -1,8 +1,15 @@
 import { assetPath } from "@/lib/utils";
 
+/** Production canonical origin (no trailing slash). */
+export const PRODUCTION_SITE_URL = "https://2026.pycon.co";
+
 /** Canonical origin for metadata and JSON-LD (no trailing slash). */
 export function getSiteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const url =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    (process.env.NODE_ENV === "production"
+      ? PRODUCTION_SITE_URL
+      : "http://localhost:3000");
   return url.replace(/\/$/, "");
 }
 

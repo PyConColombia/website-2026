@@ -120,13 +120,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
               </Link>
             </PrimaryFlowButton>
             <SecondaryFlowButton size="lg" asChild>
-              <Link
-                href={SCHEDULE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("header.seeSchedule")}
-              </Link>
+              <Link href={SCHEDULE_URL}>{t("header.seeSchedule")}</Link>
             </SecondaryFlowButton>
           </div>
 
@@ -134,11 +128,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <SecondaryFlowButton size="icon-lg" asChild>
-                  <Link
-                    href={SCHEDULE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <Link href={SCHEDULE_URL}>
                     <CalendarDaysIcon />
                     <span className="sr-only">
                       {t("header.seeScheduleSrOnly")}
