@@ -61,9 +61,7 @@ const Schedule = () => {
           delay={0.6}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex justify-center">
-            <ScheduleCard scheduleData={scheduleData} />
-          </div>
+          <ScheduleCard scheduleData={scheduleData} />
         </MotionPreset>
 
         <MotionPreset
