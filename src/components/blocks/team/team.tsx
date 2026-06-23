@@ -135,6 +135,7 @@ const Team = () => {
               blur
               slide={{ direction: "up", offset: 50 }}
               delay={0.1 + index * 0.08}
+              inView={false}
               transition={{ duration: 0.5 }}
               className={cn(
                 "h-full w-full md:col-span-2",
