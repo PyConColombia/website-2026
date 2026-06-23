@@ -10,7 +10,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SecondaryFlowButton } from "@/components/ui/flow-button";
 import { Input } from "@/components/ui/input";
 import { MotionPreset } from "@/components/ui/motion-preset";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import type { PostMetadata } from "@/lib/posts";
@@ -176,21 +175,18 @@ const BlogSection = ({ posts }: { posts: PostMetadata[] }) => {
             inView={false}
             delay={0.2}
           >
-            <div className="flex justify-between gap-4 max-sm:flex-col sm:flex-wrap sm:items-center">
-              <ScrollArea className="w-full sm:w-auto">
-                <TabsList className="gap-1 p-1">
-                  {categories.map((category) => (
-                    <TabsTrigger
-                      key={category}
-                      value={category}
-                      className="hover:bg-primary/10 dark:data-[state=active]:bg-background dark:data-[state=active]:border-background min-w-30 cursor-pointer px-4 text-base"
-                    >
-                      {tabLabel(category)}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
+            <div className="mb-2 flex justify-between gap-4 max-sm:flex-col sm:flex-wrap sm:items-center">
+              <TabsList className="h-auto w-full flex-wrap gap-x-1 gap-y-2 p-1 sm:w-auto sm:justify-start">
+                {categories.map((category) => (
+                  <TabsTrigger
+                    key={category}
+                    value={category}
+                    className="hover:bg-primary/10 dark:data-[state=active]:bg-background dark:data-[state=active]:border-background min-w-30 shrink-0 grow-0 basis-auto flex-none cursor-pointer px-4 text-base"
+                  >
+                    {tabLabel(category)}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
               <div className="relative w-full max-w-82 max-md:w-full max-md:max-w-89">
                 <div className="text-muted-foreground pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">

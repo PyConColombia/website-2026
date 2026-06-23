@@ -1,37 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-import {
-  type Speaker,
-  type SpeakerTrack,
-  speakers,
-} from "@/assets/data/speakers";
+import { type Speaker, speakers } from "@/assets/data/speakers";
 import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { CountryFlagTooltip } from "@/components/ui/country-flag";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "@/contexts/language-context";
-import {
-  getActiveSpeakerTracks,
-  getSpeakerTrackHref,
-  type SpeakerTrackFilter,
-  speakerTrackStyles,
-} from "@/lib/speaker-tracks";
 import { cn } from "@/lib/utils";
-
-type SpeakersProps = {
-  activeTrack?: SpeakerTrack;
-};
 
 type SpeakerCardProps = {
   speaker: Speaker;
-  descriptionLines?: 2 | 3;
 };
 
 const SpeakerSocialLinks = ({ speaker }: { speaker: Speaker }) => {
@@ -91,7 +75,7 @@ const getCenteredRowClassName = (index: number, total: number) => {
   return undefined;
 };
 
-const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
+const SpeakerCard = ({ speaker }: SpeakerCardProps) => (
   <Card className="bg-card group relative h-full w-full gap-0 overflow-hidden rounded-[14px] border border-border/60 py-0 shadow-xs transition-colors hover:border-primary/40">
     <Link
       href={`/speakers/${speaker.slug}`}
@@ -112,7 +96,16 @@ const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
     <CardContent className="pointer-events-none relative z-10 px-3 pt-0 pb-3">
       <div className="from-background/60 -mt-22 rounded-t-[10px] bg-linear-to-b from-100% to-transparent px-3 pt-3 pb-10 text-center backdrop-blur-md sm:-mt-24 sm:px-3.5 sm:pt-3.5 sm:pb-12">
         <div className="space-y-0.5">
-          <h3 className="text-base font-semibold sm:text-lg">{speaker.name}</h3>
+          <div className="flex items-center justify-center gap-2">
+            <h3 className="text-base font-semibold sm:text-lg">
+              {speaker.name}
+            </h3>
+            <CountryFlagTooltip
+              country={speaker.country}
+              size="md"
+              className="pointer-events-auto"
+            />
+          </div>
           <p className="text-muted-foreground text-xs font-normal sm:text-sm">
             {speaker.title}
           </p>
@@ -120,13 +113,7 @@ const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
       </div>
 
       <div className="space-y-2.5 pt-3 text-center">
-        <p
-          className={
-            descriptionLines === 3
-              ? "text-muted-foreground line-clamp-3 text-xs leading-relaxed sm:text-sm"
-              : "text-muted-foreground line-clamp-2 text-xs leading-relaxed sm:text-sm"
-          }
-        >
+        <p className="text-muted-foreground line-clamp-2 text-xs leading-relaxed sm:text-sm">
           {speaker.description}
         </p>
         <Separator />
@@ -138,19 +125,8 @@ const SpeakerCard = ({ speaker, descriptionLines = 2 }: SpeakerCardProps) => (
   </Card>
 );
 
-const Speakers = ({ activeTrack }: SpeakersProps) => {
+const Speakers = () => {
   const { t } = useTranslations();
-  const router = useRouter();
-  const tracks = getActiveSpeakerTracks();
-  const selectedTrack: SpeakerTrackFilter = activeTrack ?? "view-all";
-
-  const getTrackLabel = (track: SpeakerTrack) =>
-    t(`blocks.speakers.tracks.${track}`);
-
-  const handleTrackChange = (value: string) => {
-    const nextTrack = value as SpeakerTrackFilter;
-    router.push(getSpeakerTrackHref(nextTrack));
-  };
 
   return (
     <section id="speakers" className="py-8 sm:py-16 lg:py-24">
@@ -203,95 +179,24 @@ const Speakers = ({ activeTrack }: SpeakersProps) => {
           </MotionPreset>
         </div>
 
-        <Tabs
-          value={selectedTrack}
-          onValueChange={handleTrackChange}
-          className="gap-8"
-          id="speakers-grid"
-        >
-          <div className="flex justify-start overflow-x-auto overflow-y-hidden sm:justify-center">
-            <MotionPreset fade zoom delay={0.5} transition={{ duration: 0.5 }}>
-              <TabsList variant="line" className="gap-2">
-                <TabsTrigger
-                  value="view-all"
-                  className="text-base group-data-horizontal/tabs:after:-bottom-1"
-                >
-                  {t("blocks.speakers.viewAll")}
-                </TabsTrigger>
-
-                {tracks.map((track) => (
-                  <TabsTrigger
-                    key={track}
-                    value={track}
-                    className={cn(
-                      "text-base group-data-horizontal/tabs:after:-bottom-1",
-                      speakerTrackStyles[track].tabActive,
-                    )}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "size-2 shrink-0 rounded-full",
-                        speakerTrackStyles[track].dot,
-                      )}
-                    />
-                    {getTrackLabel(track)}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+        <div id="speakers-grid" className={speakerGridClassName}>
+          {speakers.map((speaker, index) => (
+            <MotionPreset
+              key={speaker.slug}
+              fade
+              slide={{ direction: "down", offset: 50 }}
+              delay={0.3 + 0.15 * index}
+              inView={false}
+              transition={{ duration: 0.5 }}
+              className={cn(
+                "h-full w-full",
+                getCenteredRowClassName(index, speakers.length),
+              )}
+            >
+              <SpeakerCard speaker={speaker} />
             </MotionPreset>
-          </div>
-
-          <TabsContent value="view-all" className={speakerGridClassName}>
-            {speakers.map((speaker, index) => (
-              <MotionPreset
-                key={speaker.slug}
-                fade
-                slide={{ direction: "down", offset: 50 }}
-                delay={0.3 + 0.15 * index}
-                inView={false}
-                transition={{ duration: 0.5 }}
-                className={cn(
-                  "h-full w-full",
-                  getCenteredRowClassName(index, speakers.length),
-                )}
-              >
-                <SpeakerCard speaker={speaker} />
-              </MotionPreset>
-            ))}
-          </TabsContent>
-
-          {tracks.map((track) => {
-            const filteredSpeakers = speakers.filter((speaker) =>
-              speaker.tracks.includes(track),
-            );
-
-            return (
-              <TabsContent
-                key={track}
-                value={track}
-                className={speakerGridClassName}
-              >
-                {filteredSpeakers.map((speaker, index) => (
-                  <MotionPreset
-                    key={speaker.slug}
-                    fade
-                    slide={{ direction: "down", offset: 50 }}
-                    delay={0.5 + 0.15 * index}
-                    inView={false}
-                    transition={{ duration: 0.5 }}
-                    className={cn(
-                      "h-full w-full",
-                      getCenteredRowClassName(index, filteredSpeakers.length),
-                    )}
-                  >
-                    <SpeakerCard speaker={speaker} descriptionLines={3} />
-                  </MotionPreset>
-                ))}
-              </TabsContent>
-            );
-          })}
-        </Tabs>
+          ))}
+        </div>
       </div>
     </section>
   );

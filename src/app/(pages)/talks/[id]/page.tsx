@@ -2,62 +2,76 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import CTASection from "@/components/blocks/cta/cta";
-import SpeakerDetail from "@/components/blocks/speakers/speaker-detail";
+import TalkDetail from "@/components/blocks/talks/talk-detail";
+import Talks from "@/components/blocks/talks/talks";
 import SectionSeparator from "@/components/section-separator";
 import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
 import { siteMessages } from "@/lib/site-messages";
 import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
+import { getAllSpeakerTrackSlugs, isSpeakerTrack } from "@/lib/speaker-tracks";
 import {
-  buildSpeakerJsonLd,
-  buildSpeakerPageMetadata,
-  getSpeakerShareImageUrl,
-} from "@/lib/speaker-seo";
-import { getAllSpeakerSlugs, getSpeakerBySlug } from "@/lib/speakers";
+  buildTalkJsonLd,
+  buildTalkPageMetadata,
+  buildTalkTrackPageMetadata,
+  getTalkShareImageUrl,
+} from "@/lib/talk-seo";
+import { getAllTalkIds, getTalkById, getTalkHref, isTalkId } from "@/lib/talks";
 
 export async function generateStaticParams() {
-  return getAllSpeakerSlugs().map((slug) => ({ slug }));
+  return [
+    ...getAllSpeakerTrackSlugs().map((slug) => ({ id: slug })),
+    ...getAllTalkIds().map((id) => ({ id: String(id) })),
+  ];
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { id } = await params;
 
-  return buildSpeakerPageMetadata(slug, STATIC_PRERENDER_LOCALE);
+  if (isSpeakerTrack(id)) {
+    return buildTalkTrackPageMetadata(id, STATIC_PRERENDER_LOCALE);
+  }
+
+  if (isTalkId(id)) {
+    return buildTalkPageMetadata(id, STATIC_PRERENDER_LOCALE);
+  }
+
+  return {};
 }
 
 export const dynamicParams = false;
 
-const SpeakerSlugPage = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
-  const { slug } = await params;
+const TalkIdPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
 
-  const speaker = getSpeakerBySlug(slug);
+  if (isSpeakerTrack(id)) {
+    return <Talks activeTrack={id} />;
+  }
 
-  if (!speaker) {
+  const talk = getTalkById(id);
+
+  if (!talk) {
     notFound();
   }
 
   const messages = siteMessages[STATIC_PRERENDER_LOCALE];
-  const speakerUrl = `${getSiteUrl()}/speakers/${slug}`;
-  const shareImageUrl = getSpeakerShareImageUrl(slug);
+  const talkUrl = `${getSiteUrl()}${getTalkHref(talk.id)}`;
+  const shareImageUrl = getTalkShareImageUrl(talk.id);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       websiteJsonLd(),
       webPageJsonLd({
-        name: `${speaker.name} — ${speaker.talkTitle}`,
-        description: speaker.talkDescription,
-        url: speakerUrl,
+        name: talk.talkTitle,
+        description: talk.talkDescription,
+        url: talkUrl,
         image: shareImageUrl,
       }),
-      buildSpeakerJsonLd(speaker, STATIC_PRERENDER_LOCALE, speakerUrl),
+      buildTalkJsonLd(talk, STATIC_PRERENDER_LOCALE, talkUrl),
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -71,14 +85,14 @@ const SpeakerSlugPage = async ({
           {
             "@type": "ListItem",
             position: 2,
-            name: messages.nav.speakers,
-            item: `${getSiteUrl()}/speakers`,
+            name: messages.nav.talks,
+            item: `${getSiteUrl()}/talks`,
           },
           {
             "@type": "ListItem",
             position: 3,
-            name: speaker.name,
-            item: speakerUrl,
+            name: talk.talkTitle,
+            item: talkUrl,
           },
         ],
       },
@@ -87,7 +101,7 @@ const SpeakerSlugPage = async ({
 
   return (
     <>
-      <SpeakerDetail slug={slug} />
+      <TalkDetail talkId={talk.id} />
 
       <SectionSeparator />
 
@@ -104,4 +118,4 @@ const SpeakerSlugPage = async ({
   );
 };
 
-export default SpeakerSlugPage;
+export default TalkIdPage;

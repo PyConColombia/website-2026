@@ -24,6 +24,7 @@ export const speakerTrackOrder: SpeakerTrack[] = [
 ];
 
 export type Speaker = {
+  id: number;
   slug: string;
   name: string;
   image?: string;
@@ -39,7 +40,9 @@ export type Speaker = {
   talkDescription: string;
 };
 
-const speakerList: Speaker[] = [
+type SpeakerInput = Omit<Speaker, "id">;
+
+const speakerList: SpeakerInput[] = [
   {
     slug: "cristhian-david-recalde-arevalo",
     name: "Cristhian David Recalde Arévalo",
@@ -631,6 +634,11 @@ const speakerList: Speaker[] = [
   },
 ];
 
-export const speakers: Speaker[] = speakerList.toSorted((a, b) =>
-  a.name.localeCompare(b.name, "es", { sensitivity: "base" }),
-);
+export const speakers: Speaker[] = speakerList
+  .toSorted((a, b) =>
+    a.name.localeCompare(b.name, "es", { sensitivity: "base" }),
+  )
+  .map((speaker, index) => ({
+    ...speaker,
+    id: index + 1,
+  }));
