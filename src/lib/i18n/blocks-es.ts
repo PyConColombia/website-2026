@@ -284,6 +284,43 @@ export const blocksEs: BlocksMessages = {
     onThisPage: "En esta página",
     overview: "Resumen",
   },
+  talks: {
+    eyebrow: "Charlas",
+    titlePrefix: "Descubre las",
+    titleHighlight: "Charlas",
+    titleSuffix: "de PyCon Colombia 2026 ✨",
+    subtitle:
+      "Explora cada sesión aceptada—títulos, tracks, niveles y ponentes—antes de planear tus días en Medellín.",
+    viewAll: "Ver todas",
+    searchPlaceholder: "Buscar charlas, ponentes, tracks...",
+    searchSrOnly: "Buscar charlas",
+    viewSpeaker: "Ver ponente",
+    viewTalk: "Ver charla",
+    emptyTitle: "No se encontraron charlas",
+    filterLevel: "Todos los niveles",
+    filterLevelSrOnly: "Filtrar por nivel",
+    filterLanguage: "Todos los idiomas",
+    filterLanguageSrOnly: "Filtrar por idioma",
+    emptyDescription:
+      "Prueba otro término de búsqueda, track, nivel o idioma para explorar más sesiones.",
+    levelLabel: "NIVEL:",
+    languageLabel: "IDIOMA:",
+    languages: {
+      spanish: "Español",
+      english: "Inglés",
+    },
+    levels: {
+      beginner: "Principiante",
+      intermediate: "Intermedio",
+      advanced: "Avanzado",
+      all: "Para todos los niveles",
+    },
+    detail: {
+      back: "Volver a charlas",
+      speaker: "Ponente",
+      speakers: "Ponentes",
+    },
+  },
   scheduleUi: {
     eyebrow: "Agenda del evento",
     pageTitle: "Agenda PyCon Colombia 2026",

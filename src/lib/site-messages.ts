@@ -8,6 +8,7 @@ export type NavTitleKey =
   | "agenda"
   | "schedule"
   | "speakers"
+  | "talks"
   | "keynotes"
   | "sponsors"
   | "scholarships"
@@ -73,6 +74,10 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
     };
+    talks: {
+      title: string;
+      description: string;
+    };
     pricing: {
       title: string;
       description: string;
@@ -104,6 +109,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       agenda: "Schedule",
       schedule: "Schedule",
       speakers: "Speakers",
+      talks: "Talks",
       keynotes: "Keynotes",
       sponsors: "Sponsors",
       scholarships: "Scholarships",
@@ -184,6 +190,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Meet the speakers at PyCon Colombia 2026—talks on Python, AI, community, and more in Medellín, July 24–26.",
       },
+      talks: {
+        title: "Talks",
+        description:
+          "Browse all talks at PyCon Colombia 2026—sessions across AI, web, DevOps, community, and more in Medellín, July 24–26.",
+      },
       pricing: {
         title: "Tickets",
         description:
@@ -217,6 +228,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       agenda: "Agenda",
       schedule: "Agenda",
       speakers: "Ponentes",
+      talks: "Charlas",
       keynotes: "Oradores principales",
       sponsors: "Patrocinadores",
       scholarships: "Becas",
@@ -296,6 +308,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         title: "Ponentes",
         description:
           "Conoce a los ponentes de PyCon Colombia 2026—charlas sobre Python, IA, comunidad y más en Medellín, del 24 al 26 de julio.",
+      },
+      talks: {
+        title: "Charlas",
+        description:
+          "Explora todas las charlas de PyCon Colombia 2026—sesiones de IA, web, DevOps, comunidad y más en Medellín, del 24 al 26 de julio.",
       },
       pricing: {
         title: "Entradas",

@@ -93,7 +93,7 @@ export function getSpeakersByTrack(track: SpeakerTrack): Speaker[] {
 }
 
 export function getSpeakerTrackHref(track: SpeakerTrackFilter): string {
-  return track === "view-all" ? "/speakers" : `/speakers/${track}`;
+  return track === "view-all" ? "/talks" : `/talks/${track}`;
 }
 
 export function getAllSpeakerTrackSlugs(): SpeakerTrack[] {

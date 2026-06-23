@@ -279,6 +279,43 @@ export const blocksEn = {
     onThisPage: "On this page",
     overview: "Overview",
   },
+  talks: {
+    eyebrow: "Talks",
+    titlePrefix: "Discover the",
+    titleHighlight: "Talks",
+    titleSuffix: "at PyCon Colombia 2026 ✨",
+    subtitle:
+      "Browse every accepted session—titles, tracks, levels, and speakers—before you plan your days in Medellín.",
+    viewAll: "View All",
+    searchPlaceholder: "Search talks, speakers, tracks...",
+    searchSrOnly: "Search talks",
+    viewSpeaker: "View speaker",
+    viewTalk: "View talk",
+    emptyTitle: "No talks found",
+    filterLevel: "All levels",
+    filterLevelSrOnly: "Filter by level",
+    filterLanguage: "All languages",
+    filterLanguageSrOnly: "Filter by language",
+    emptyDescription:
+      "Try a different search term, track, level, or language filter to explore more sessions.",
+    levelLabel: "LEVEL:",
+    languageLabel: "LANGUAGE:",
+    languages: {
+      spanish: "Spanish",
+      english: "English",
+    },
+    levels: {
+      beginner: "Beginner",
+      intermediate: "Intermediate",
+      advanced: "Advanced",
+      all: "All levels",
+    },
+    detail: {
+      back: "Back to talks",
+      speaker: "Speaker",
+      speakers: "Speakers",
+    },
+  },
   scheduleUi: {
     eyebrow: "Event Schedule",
     pageTitle: "PyCon Colombia 2026 Schedule",

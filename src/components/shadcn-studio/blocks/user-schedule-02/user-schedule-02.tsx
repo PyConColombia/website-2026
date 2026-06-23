@@ -17,6 +17,7 @@ import {
   scheduleDays,
 } from "@/assets/data/schedule";
 import { speakers } from "@/assets/data/speakers";
+import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -42,6 +43,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
+import { getTalkHrefForSpeaker } from "@/lib/talks";
 import { cn } from "@/lib/utils";
 
 type ScheduleCardProps = {
@@ -135,6 +137,8 @@ function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
   const category = getScheduleEventCategory(event);
   const speaker = getSpeakerForEvent(event);
   const speakerImage = resolveSpeakerImageUrl(speaker?.image);
+  const talkHref = speaker ? getTalkHrefForSpeaker(speaker.slug) : undefined;
+  const showTalkLink = talkHref !== undefined && category !== "other";
 
   return (
     <Card className="h-full transition-all">
@@ -150,7 +154,16 @@ function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
               {getCategoryLabel(category, t)}
             </Badge>
             <h3 className="text-lg font-medium lg:text-xl">
-              {event.displayTitle}
+              {showTalkLink ? (
+                <Link
+                  href={talkHref}
+                  className="underline-offset-4 transition-colors hover:text-primary hover:underline"
+                >
+                  {event.displayTitle}
+                </Link>
+              ) : (
+                event.displayTitle
+              )}
             </h3>
           </div>
         </div>
@@ -179,22 +192,32 @@ function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
         </div>
 
         {speaker ? (
-          <Link
-            href={`/speakers/${speaker.slug}`}
-            className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
-          >
-            <Avatar className="ring-background size-10 ring-2">
-              {speakerImage ? (
-                <AvatarImage src={speakerImage} alt={event.speaker} />
-              ) : null}
-              <AvatarFallback className="text-xs">
-                <MicIcon className="size-4" />
-              </AvatarFallback>
-            </Avatar>
-            <p className="text-sm font-medium underline-offset-4 hover:underline">
-              {event.speaker}
-            </p>
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={`/speakers/${speaker.slug}`}
+              className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
+            >
+              <SpeakerImage
+                src={speaker.image}
+                alt={event.speaker}
+                width={40}
+                height={40}
+                sizes="40px"
+                className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
+              />
+              <p className="text-sm font-medium underline-offset-4 hover:underline">
+                {event.speaker}
+              </p>
+            </Link>
+            {showTalkLink ? (
+              <Link
+                href={talkHref}
+                className="text-primary text-sm font-medium underline-offset-4 hover:underline"
+              >
+                {t("blocks.talks.viewTalk")}
+              </Link>
+            ) : null}
+          </div>
         ) : (
           <div className="flex items-center gap-2.5">
             <Avatar className="ring-background size-10 ring-2">

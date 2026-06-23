@@ -3,7 +3,7 @@
 import { ChevronRightIcon, CircleSmallIcon, MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useMedia } from "react-use";
 import Logo from "@/components/logo";
 
@@ -123,6 +123,7 @@ const ListItem = (props: {
   activeSection?: string;
   pathname?: string | null;
   navLabel: (key: NavTitleKey) => string;
+  onNavigate?: () => void;
 }) => {
   const {
     title,
@@ -135,6 +136,7 @@ const ListItem = (props: {
     activeSection,
     pathname,
     navLabel,
+    onNavigate,
   } = props;
 
   const itemTitle = titleKey ? navLabel(titleKey) : (title ?? "");
@@ -154,6 +156,7 @@ const ListItem = (props: {
         <Link
           href={href}
           className="block w-full"
+          onClick={onNavigate}
           {...(isExternalHref(href)
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
@@ -202,8 +205,28 @@ const HeaderNavigation = ({
 }) => {
   const pathname = usePathname();
   const { t } = useTranslations();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [pinnedKey, setPinnedKey] = useState<NavTitleKey | null>(null);
+  const [hoveredKey, setHoveredKey] = useState<NavTitleKey | null>(null);
+
+  const openKey = pinnedKey ?? hoveredKey ?? "";
 
   const navLabel = (key: NavTitleKey) => t(`nav.${key}`);
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setPinnedKey(null);
+        setHoveredKey(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
 
   // Extract all section IDs from navigation data
   const sectionIds = navigationData.flatMap((navItem) => {
@@ -230,143 +253,179 @@ const HeaderNavigation = ({
 
   const activeSection = useActiveSection(sectionIds);
 
+  const closeMenu = () => {
+    setPinnedKey(null);
+    setHoveredKey(null);
+  };
+
   return (
-    <NavigationMenu
-      viewport={false}
-      className={cn("hidden lg:block", navigationClassName)}
-    >
-      <NavigationMenuList className="h-fit flex-wrap gap-6!">
-        {navigationData.map((navItem) => {
-          if (navItem.href) {
-            // Root link item
-            const isActive = isNavItemActive(
-              navItem.href,
-              activeSection ?? "",
-              pathname,
-            );
-
-            return (
-              <NavigationMenuItem key={navItem.titleKey}>
-                <NavigationMenuLink
-                  data-active={isActive}
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "text-muted-foreground! hover:text-foreground! data-[active=true]:text-foreground! bg-transparent! p-0! text-base",
-                  )}
-                  asChild
-                >
-                  <Link href={navItem.href}>{navLabel(navItem.titleKey)}</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            );
-          }
-
-          // Section with dropdown
-          // Check if any child item is active
-          let hasActiveChild = false;
-
-          if (navItem.items) {
-            if (navItem.splitItems) {
-              hasActiveChild = navItem.items.some((section) =>
-                section.items.some((item) =>
-                  isNavItemActive(item.href, activeSection ?? "", pathname),
-                ),
+    <div ref={menuRef}>
+      <NavigationMenu
+        viewport={false}
+        delayDuration={0}
+        skipDelayDuration={0}
+        value={openKey}
+        onValueChange={() => {}}
+        className={cn("hidden lg:block", navigationClassName)}
+      >
+        <NavigationMenuList className="h-fit flex-wrap gap-6!">
+          {navigationData.map((navItem) => {
+            if (navItem.href) {
+              // Root link item
+              const isActive = isNavItemActive(
+                navItem.href,
+                activeSection ?? "",
+                pathname,
               );
-            } else {
-              hasActiveChild = navItem.items.some((item) =>
-                isNavItemActive(item.href, activeSection ?? "", pathname),
+
+              return (
+                <NavigationMenuItem key={navItem.titleKey}>
+                  <NavigationMenuLink
+                    data-active={isActive}
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "text-muted-foreground! hover:text-foreground! data-[active=true]:text-foreground! bg-transparent! p-0! text-base",
+                    )}
+                    asChild
+                  >
+                    <Link href={navItem.href}>
+                      {navLabel(navItem.titleKey)}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
               );
             }
-          }
 
-          return (
-            <NavigationMenuItem key={navItem.titleKey}>
-              <NavigationMenuTrigger
-                data-active={hasActiveChild}
-                className={navDropdownTriggerClassName}
+            // Section with dropdown
+            // Check if any child item is active
+            let hasActiveChild = false;
+
+            if (navItem.items) {
+              if (navItem.splitItems) {
+                hasActiveChild = navItem.items.some((section) =>
+                  section.items.some((item) =>
+                    isNavItemActive(item.href, activeSection ?? "", pathname),
+                  ),
+                );
+              } else {
+                hasActiveChild = navItem.items.some((item) =>
+                  isNavItemActive(item.href, activeSection ?? "", pathname),
+                );
+              }
+            }
+
+            return (
+              <NavigationMenuItem
+                key={navItem.titleKey}
+                value={navItem.titleKey}
+                onMouseEnter={() => {
+                  if (!pinnedKey) {
+                    setHoveredKey(navItem.titleKey);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (pinnedKey !== navItem.titleKey) {
+                    setHoveredKey((current) =>
+                      current === navItem.titleKey ? null : current,
+                    );
+                  }
+                }}
               >
-                {navLabel(navItem.titleKey)}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent
-                className={cn(
-                  navDropdownPanelClassName,
-                  navItem.contentClassName,
-                )}
-              >
-                {navItem.splitItems ? (
-                  <div
-                    className={cn(
-                      "grid grid-cols-1 gap-2",
-                      navItem.contentClassName,
-                    )}
-                  >
-                    {navItem.items.map((section) => (
-                      <div
-                        key={section.title}
-                        className="grid grid-cols-1 gap-2"
-                      >
-                        <div className="text-muted-foreground px-2 text-sm">
-                          {section.title}
-                        </div>
-                        <ul
-                          className={cn("grid grid-cols-1 gap-0.5", {
-                            "gap-2": section.items.find(
-                              (item) => item.description,
-                            ),
-                          })}
+                <NavigationMenuTrigger
+                  data-active={hasActiveChild}
+                  className={navDropdownTriggerClassName}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setPinnedKey((current) =>
+                      current === navItem.titleKey ? null : navItem.titleKey,
+                    );
+                  }}
+                >
+                  {navLabel(navItem.titleKey)}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent
+                  className={cn(
+                    navDropdownPanelClassName,
+                    navItem.contentClassName,
+                  )}
+                >
+                  {navItem.splitItems ? (
+                    <div
+                      className={cn(
+                        "grid grid-cols-1 gap-2",
+                        navItem.contentClassName,
+                      )}
+                    >
+                      {navItem.items.map((section) => (
+                        <div
+                          key={section.title}
+                          className="grid grid-cols-1 gap-2"
                         >
-                          {section.items.map((item, index) => (
-                            <ListItem
-                              key={index}
-                              icon={item.icon}
-                              title={item.title}
-                              titleKey={item.titleKey}
-                              description={item.description}
-                              href={item.href}
-                              badge={item.badge}
-                              splitItems={navItem.splitItems}
-                              activeSection={activeSection}
-                              navLabel={navLabel}
-                            />
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <ul
-                    className={cn(
-                      "grid w-full min-w-60 grid-cols-1 gap-1",
-                      {
-                        "gap-2": navItem.items?.find(
-                          (item) => item.description,
-                        ),
-                      },
-                      navItem.contentClassName,
-                    )}
-                  >
-                    {navItem.items?.map((item, index) => (
-                      <ListItem
-                        key={index}
-                        icon={item.icon}
-                        title={item.title}
-                        titleKey={item.titleKey}
-                        description={item.description}
-                        href={item.href}
-                        badge={item.badge}
-                        activeSection={activeSection}
-                        pathname={pathname}
-                        navLabel={navLabel}
-                      />
-                    ))}
-                  </ul>
-                )}
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          );
-        })}
-      </NavigationMenuList>
-    </NavigationMenu>
+                          <div className="text-muted-foreground px-2 text-sm">
+                            {section.title}
+                          </div>
+                          <ul
+                            className={cn("grid grid-cols-1 gap-0.5", {
+                              "gap-2": section.items.find(
+                                (item) => item.description,
+                              ),
+                            })}
+                          >
+                            {section.items.map((item, index) => (
+                              <ListItem
+                                key={index}
+                                icon={item.icon}
+                                title={item.title}
+                                titleKey={item.titleKey}
+                                description={item.description}
+                                href={item.href}
+                                badge={item.badge}
+                                splitItems={navItem.splitItems}
+                                activeSection={activeSection}
+                                navLabel={navLabel}
+                                onNavigate={closeMenu}
+                              />
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul
+                      className={cn(
+                        "grid w-full min-w-60 grid-cols-1 gap-1",
+                        {
+                          "gap-2": navItem.items?.find(
+                            (item) => item.description,
+                          ),
+                        },
+                        navItem.contentClassName,
+                      )}
+                    >
+                      {navItem.items?.map((item, index) => (
+                        <ListItem
+                          key={index}
+                          icon={item.icon}
+                          title={item.title}
+                          titleKey={item.titleKey}
+                          description={item.description}
+                          href={item.href}
+                          badge={item.badge}
+                          activeSection={activeSection}
+                          pathname={pathname}
+                          navLabel={navLabel}
+                          onNavigate={closeMenu}
+                        />
+                      ))}
+                    </ul>
+                  )}
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            );
+          })}
+        </NavigationMenuList>
+      </NavigationMenu>
+    </div>
   );
 };
 

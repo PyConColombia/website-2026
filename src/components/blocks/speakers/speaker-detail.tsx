@@ -7,12 +7,14 @@ import { useMemo } from "react";
 import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
-import SpeakerTrackBadge from "@/components/blocks/speakers/speaker-track-badge";
+import TalkLinkCard from "@/components/blocks/talks/talk-link-card";
 import { Button } from "@/components/ui/button";
+import { CountryFlagTooltip } from "@/components/ui/country-flag";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "@/contexts/language-context";
 import { getSpeakerBySlug } from "@/lib/speakers";
+import { getTalkBySpeakerSlug } from "@/lib/talks";
 
 type SpeakerDetailProps = {
   slug: string;
@@ -21,6 +23,7 @@ type SpeakerDetailProps = {
 const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
   const { t } = useTranslations();
   const speaker = useMemo(() => getSpeakerBySlug(slug), [slug]);
+  const talk = useMemo(() => getTalkBySpeakerSlug(slug), [slug]);
 
   if (!speaker) {
     return null;
@@ -72,16 +75,13 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
               transition={{ duration: 0.5 }}
               className="space-y-4"
             >
-              <div className="flex flex-wrap gap-2">
-                {speaker.tracks.map((track) => (
-                  <SpeakerTrackBadge key={track} track={track} asLink />
-                ))}
-              </div>
-
               <div className="space-y-2">
-                <h1 className="text-3xl font-semibold md:text-4xl">
-                  {speaker.name}
-                </h1>
+                <div className="flex flex-wrap items-center gap-3">
+                  <h1 className="text-3xl font-semibold md:text-4xl">
+                    {speaker.name}
+                  </h1>
+                  <CountryFlagTooltip country={speaker.country} size="lg" />
+                </div>
                 <p className="text-muted-foreground text-xl">{speaker.title}</p>
               </div>
 
@@ -140,31 +140,7 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
               <h2 className="text-2xl font-semibold">
                 {t("blocks.speakers.detail.talk")}
               </h2>
-              <h3 className="text-xl font-medium">{speaker.talkTitle}</h3>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                {speaker.talkDescription}
-              </p>
-
-              <dl className="grid gap-4 sm:grid-cols-3">
-                <div>
-                  <dt className="text-muted-foreground text-sm">
-                    {t("blocks.speakers.detail.country")}
-                  </dt>
-                  <dd className="font-medium">{speaker.country}</dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground text-sm">
-                    {t("blocks.speakers.detail.language")}
-                  </dt>
-                  <dd className="font-medium">{speaker.language}</dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground text-sm">
-                    {t("blocks.speakers.detail.level")}
-                  </dt>
-                  <dd className="font-medium">{speaker.level}</dd>
-                </div>
-              </dl>
+              {talk ? <TalkLinkCard talk={talk} /> : null}
             </MotionPreset>
           </div>
         </div>
