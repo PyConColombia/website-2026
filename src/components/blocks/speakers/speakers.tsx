@@ -249,6 +249,7 @@ const Speakers = ({ activeTrack }: SpeakersProps) => {
                 fade
                 slide={{ direction: "down", offset: 50 }}
                 delay={0.3 + 0.15 * index}
+                inView={false}
                 transition={{ duration: 0.5 }}
                 className={cn(
                   "h-full w-full",
@@ -277,6 +278,7 @@ const Speakers = ({ activeTrack }: SpeakersProps) => {
                     fade
                     slide={{ direction: "down", offset: 50 }}
                     delay={0.5 + 0.15 * index}
+                    inView={false}
                     transition={{ duration: 0.5 }}
                     className={cn(
                       "h-full w-full",

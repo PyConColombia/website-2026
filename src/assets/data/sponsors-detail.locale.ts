@@ -77,6 +77,13 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    interledger: {
+      paragraphs: [
+        "The Interledger Foundation is a nonprofit organization that supports the development and adoption of open payment protocols. Its mission is to build an inclusive global payments network where value can move as easily as information, enabling interoperability across banks, wallets, and payment systems worldwide.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
     genlogs: {
       paragraphs: [
         "GenLogs is a truck intelligence company that provides real-time data and analytics to optimize logistics operations and combat fraud in the transportation industry. Leveraging a nationwide network of sensors, artificial intelligence, and real-time mobility data, GenLogs offers insights into freight patterns, carrier capacities, and asset tracking. This enables freight brokers, carriers, and shippers to make informed decisions, reduce costs, and enhance operational efficiency.",
@@ -174,6 +181,13 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
     nequi: {
       paragraphs: [
         "Nequi es un neobanco colombiano que está transformando la manera en que las personas gestionan su plata, construyendo un ecosistema financiero digital que va más allá de una cuenta o una billetera. A través de una experiencia simple, cercana y 100% digital, ofrece soluciones para ahorrar, pagar, transferir, recibir remesas, acceder a créditos, administrar finanzas y conectar con múltiples servicios que facilitan la vida diaria. Con más de 28 millones de usuarios, Nequi se ha consolidado como un mundo de posibilidades financieras y no financieras que impulsa la inclusión, la autonomía y el acceso a oportunidades, permitiendo que cada persona alcance sus metas de forma más fácil, segura y conveniente.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    interledger: {
+      paragraphs: [
+        "La Interledger Foundation es una organización sin fines de lucro que apoya el desarrollo y la adopción de protocolos abiertos de pagos. Su misión es construir una red global de pagos inclusiva en la que el valor pueda moverse tan fácilmente como la información, habilitando la interoperabilidad entre bancos, billeteras y sistemas de pago en todo el mundo.",
       ],
       highlights: [],
       faqTopics: [],
