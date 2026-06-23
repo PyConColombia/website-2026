@@ -77,6 +77,12 @@ export const sponsorTiers: SponsorTier[] = [
         logo: "/images/sponsors/nequi.svg",
         href: "https://www.nequi.com.co/",
       },
+      {
+        name: "Interledger Foundation",
+        slug: "interledger",
+        logo: "/images/sponsors/interledger.svg",
+        href: "https://interledger.org/",
+      },
     ],
   },
   {
