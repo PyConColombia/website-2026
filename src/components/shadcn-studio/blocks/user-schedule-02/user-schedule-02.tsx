@@ -107,7 +107,111 @@ function matchesTab(event: ScheduleEvent, tab: ScheduleTab) {
   return category === "workshop";
 }
 
+function groupEventsByHour(events: ScheduleEvent[]) {
+  const groups: ScheduleEvent[][] = [];
+  const hourToIndex = new Map<string, number>();
+
+  for (const event of events) {
+    const existing = hourToIndex.get(event.hour);
+    if (existing !== undefined) {
+      groups[existing].push(event);
+    } else {
+      hourToIndex.set(event.hour, groups.length);
+      groups.push([event]);
+    }
+  }
+
+  return groups;
+}
+
 type ScheduleDayDate = (typeof scheduleDays)[number]["date"];
+
+type ScheduleEventCardProps = {
+  event: ScheduleEvent;
+  t: (key: string) => string;
+};
+
+function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
+  const category = getScheduleEventCategory(event);
+  const speaker = getSpeakerForEvent(event);
+  const speakerImage = resolveSpeakerImageUrl(speaker?.image);
+
+  return (
+    <Card className="h-full transition-all">
+      <CardContent className="space-y-2.5">
+        <div className="mb-1 flex items-start justify-between gap-2.5 max-sm:flex-col">
+          <div>
+            <Badge
+              className={cn(
+                "bg-card! mb-0.5 rounded-none px-0 py-px text-xs font-medium capitalize",
+                getCategoryColor(category),
+              )}
+            >
+              {getCategoryLabel(category, t)}
+            </Badge>
+            <h3 className="text-lg font-medium lg:text-xl">
+              {event.displayTitle}
+            </h3>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5">
+          <p className="text-muted-foreground text-sm text-nowrap">
+            {event.hour}
+          </p>
+          {event.label && category !== "other" ? (
+            <Badge variant="outline" className="text-xs">
+              {event.label === "keynote"
+                ? t("blocks.scheduleUi.keynote")
+                : event.label}
+            </Badge>
+          ) : null}
+          {event.language?.map((language) => (
+            <Badge key={language} variant="secondary" className="text-xs">
+              {language}
+            </Badge>
+          ))}
+        </div>
+
+        <div className="text-muted-foreground flex items-start gap-2 text-sm">
+          <MapPinIcon className="mt-0.5 size-4 shrink-0" />
+          <span>{event.room}</span>
+        </div>
+
+        {speaker ? (
+          <Link
+            href={`/speakers/${speaker.slug}`}
+            className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
+          >
+            <Avatar className="ring-background size-10 ring-2">
+              {speakerImage ? (
+                <AvatarImage src={speakerImage} alt={event.speaker} />
+              ) : null}
+              <AvatarFallback className="text-xs">
+                <MicIcon className="size-4" />
+              </AvatarFallback>
+            </Avatar>
+            <p className="text-sm font-medium underline-offset-4 hover:underline">
+              {event.speaker}
+            </p>
+          </Link>
+        ) : (
+          <div className="flex items-center gap-2.5">
+            <Avatar className="ring-background size-10 ring-2">
+              {speakerImage ? (
+                <AvatarImage src={speakerImage} alt={event.speaker} />
+              ) : null}
+              <AvatarFallback className="text-xs">
+                <MicIcon className="size-4" />
+              </AvatarFallback>
+            </Avatar>
+            <p className="text-sm font-medium">{event.speaker}</p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
 
 const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
   const { locale } = useLanguage();
@@ -151,13 +255,18 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
     return items;
   }, [activeTab, scheduleData, searchQuery, selectedDate, sortBy]);
 
+  const groupedEvents = useMemo(
+    () => groupEventsByHour(filteredEvents),
+    [filteredEvents],
+  );
+
   const getEventCountByType = (type: ScheduleTab) => {
     const daySchedule = scheduleData[selectedDate] ?? { events: [] };
     return daySchedule.events.filter((event) => matchesTab(event, type)).length;
   };
 
   return (
-    <Card className="w-full max-w-121.5 gap-4">
+    <Card className="w-full gap-4">
       <CardHeader className="grid-rows-auto">
         <CardTitle className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 text-2xl font-semibold">
@@ -323,99 +432,20 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
                   {t("blocks.scheduleUi.empty")}
                 </div>
               ) : (
-                filteredEvents.map((event) => {
-                  const category = getScheduleEventCategory(event);
-                  const speaker = getSpeakerForEvent(event);
-                  const speakerImage = resolveSpeakerImageUrl(speaker?.image);
-
-                  return (
-                    <Card key={event.id} className="transition-all">
-                      <CardContent className="space-y-2.5">
-                        <div className="mb-1 flex items-start justify-between gap-2.5 max-sm:flex-col">
-                          <div>
-                            <Badge
-                              className={cn(
-                                "bg-card! mb-0.5 rounded-none px-0 py-px text-xs font-medium capitalize",
-                                getCategoryColor(category),
-                              )}
-                            >
-                              {getCategoryLabel(category, t)}
-                            </Badge>
-                            <h3 className="text-xl font-medium">
-                              {event.displayTitle}
-                            </h3>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap items-center gap-2.5">
-                          <p className="text-muted-foreground text-sm text-nowrap">
-                            {event.hour}
-                          </p>
-                          {event.label && category !== "other" ? (
-                            <Badge variant="outline" className="text-xs">
-                              {event.label === "keynote"
-                                ? t("blocks.scheduleUi.keynote")
-                                : event.label}
-                            </Badge>
-                          ) : null}
-                          {event.language?.map((language) => (
-                            <Badge
-                              key={language}
-                              variant="secondary"
-                              className="text-xs"
-                            >
-                              {language}
-                            </Badge>
-                          ))}
-                        </div>
-
-                        <div className="text-muted-foreground flex items-start gap-2 text-sm">
-                          <MapPinIcon className="mt-0.5 size-4 shrink-0" />
-                          <span>{event.room}</span>
-                        </div>
-
-                        {speaker ? (
-                          <Link
-                            href={`/speakers/${speaker.slug}`}
-                            className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
-                          >
-                            <Avatar className="ring-background size-10 ring-2">
-                              {speakerImage ? (
-                                <AvatarImage
-                                  src={speakerImage}
-                                  alt={event.speaker}
-                                />
-                              ) : null}
-                              <AvatarFallback className="text-xs">
-                                <MicIcon className="size-4" />
-                              </AvatarFallback>
-                            </Avatar>
-                            <p className="text-sm font-medium underline-offset-4 hover:underline">
-                              {event.speaker}
-                            </p>
-                          </Link>
-                        ) : (
-                          <div className="flex items-center gap-2.5">
-                            <Avatar className="ring-background size-10 ring-2">
-                              {speakerImage ? (
-                                <AvatarImage
-                                  src={speakerImage}
-                                  alt={event.speaker}
-                                />
-                              ) : null}
-                              <AvatarFallback className="text-xs">
-                                <MicIcon className="size-4" />
-                              </AvatarFallback>
-                            </Avatar>
-                            <p className="text-sm font-medium">
-                              {event.speaker}
-                            </p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  );
-                })
+                groupedEvents.map((group) => (
+                  <div
+                    key={group.map((event) => event.id).join("-")}
+                    className={cn(
+                      "gap-4",
+                      group.length > 1 &&
+                        "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3",
+                    )}
+                  >
+                    {group.map((event) => (
+                      <ScheduleEventCard key={event.id} event={event} t={t} />
+                    ))}
+                  </div>
+                ))
               )}
             </div>
           </TabsContent>
