@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Card, CardContent } from "@/components/ui/card";
-import { useTranslations } from "@/contexts/language-context";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getTalkSpeakers, type Talk } from "@/lib/talks";
 
 type TalkSpeakersListProps = {
@@ -19,8 +19,9 @@ const TalkSpeakersList = ({
   variant = "compact",
   linkable = true,
 }: TalkSpeakersListProps) => {
+  const { locale } = useLanguage();
   const { t } = useTranslations();
-  const speakers = getTalkSpeakers(talk as Talk);
+  const speakers = getTalkSpeakers(talk as Talk, locale);
 
   if (speakers.length === 0) {
     return null;

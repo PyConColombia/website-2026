@@ -11,7 +11,7 @@ import TalkSpeakersList from "@/components/blocks/talks/talk-speakers-list";
 import { Button } from "@/components/ui/button";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
-import { useTranslations } from "@/contexts/language-context";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getTalkById } from "@/lib/talks";
 
 type TalkDetailProps = {
@@ -19,8 +19,9 @@ type TalkDetailProps = {
 };
 
 const TalkDetail = ({ talkId }: TalkDetailProps) => {
+  const { locale } = useLanguage();
   const { t } = useTranslations();
-  const talk = useMemo(() => getTalkById(talkId), [talkId]);
+  const talk = useMemo(() => getTalkById(talkId, locale), [talkId, locale]);
 
   if (!talk) {
     return null;

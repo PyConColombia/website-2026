@@ -51,7 +51,7 @@ const TalkIdPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     return <Talks activeTrack={id} />;
   }
 
-  const talk = getTalkById(id);
+  const talk = getTalkById(id, STATIC_PRERENDER_LOCALE);
 
   if (!talk) {
     notFound();
@@ -59,7 +59,7 @@ const TalkIdPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const messages = siteMessages[STATIC_PRERENDER_LOCALE];
   const talkUrl = `${getSiteUrl()}${getTalkHref(talk.id)}`;
-  const shareImageUrl = getTalkShareImageUrl(talk.id);
+  const shareImageUrl = getTalkShareImageUrl(talk.id, STATIC_PRERENDER_LOCALE);
 
   const jsonLd = {
     "@context": "https://schema.org",

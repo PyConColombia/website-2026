@@ -4,11 +4,16 @@ import {
   speakers,
   speakerTrackOrder,
 } from "@/assets/data/speakers";
+import type { SiteLocale } from "@/lib/site-messages";
 import {
   getActiveSpeakerTracks,
   type SpeakerTrackFilter,
 } from "@/lib/speaker-tracks";
-import { getSpeakerBySlug } from "@/lib/speakers";
+import {
+  getSpeakerBySlug,
+  getSpeakerContent,
+  type LocalizedSpeaker,
+} from "@/lib/speakers";
 import {
   parseTalkLanguage,
   type TalkLanguage,
@@ -24,6 +29,7 @@ import {
 
 export type Talk = {
   id: number;
+  talkKey: string;
   talkTitle: string;
   talkDescription: string;
   tracks: SpeakerTrack[];
@@ -46,15 +52,17 @@ function mergeTracks(group: Speaker[]): SpeakerTrack[] {
   return speakerTrackOrder.filter((track) => trackSet.has(track));
 }
 
-function buildTalks(): Talk[] {
+function buildTalksForLocale(locale: SiteLocale): Talk[] {
   const groups = new Map<string, Speaker[]>();
 
   for (const speaker of speakers) {
-    if (!speaker.talkTitle.trim()) {
+    const content = getSpeakerContent(speaker.slug, locale);
+
+    if (!content?.talkTitle.trim()) {
       continue;
     }
 
-    const key = speaker.talkTitle.trim();
+    const key = speaker.talkKey;
     const group = groups.get(key) ?? [];
     group.push(speaker);
     groups.set(key, group);
@@ -62,23 +70,22 @@ function buildTalks(): Talk[] {
 
   return [...groups.values()]
     .sort((a, b) =>
-      a[0].talkTitle.localeCompare(b[0].talkTitle, "es", {
-        sensitivity: "base",
-      }),
+      a[0].talkKey.localeCompare(b[0].talkKey, "en", { sensitivity: "base" }),
     )
     .map((group, index) => {
       const primary = group[0];
-      const talkDescription = group.reduce(
-        (longest, speaker) =>
-          speaker.talkDescription.length > longest.length
-            ? speaker.talkDescription
-            : longest,
-        primary.talkDescription,
-      );
+      const primaryContent = getSpeakerContent(primary.slug, locale);
+      const talkDescription = group.reduce((longest, speaker) => {
+        const description =
+          getSpeakerContent(speaker.slug, locale)?.talkDescription ?? "";
+
+        return description.length > longest.length ? description : longest;
+      }, primaryContent?.talkDescription ?? "");
 
       return {
         id: index + 1,
-        talkTitle: primary.talkTitle,
+        talkKey: primary.talkKey,
+        talkTitle: primaryContent?.talkTitle ?? "",
         talkDescription,
         tracks: mergeTracks(group),
         level: parseTalkLevel(primary.level),
@@ -90,53 +97,79 @@ function buildTalks(): Talk[] {
     });
 }
 
-const talks = buildTalks();
+const talksByLocale: Record<SiteLocale, Talk[]> = {
+  en: buildTalksForLocale("en"),
+  es: buildTalksForLocale("es"),
+};
 
-export function getAllTalks(): Talk[] {
-  return talks;
+export function getAllTalks(locale: SiteLocale = "en"): Talk[] {
+  return talksByLocale[locale];
 }
 
-export function getAllTalkIds(): number[] {
-  return talks.map((talk) => talk.id);
+export function getAllTalkIds(locale: SiteLocale = "en"): number[] {
+  return getAllTalks(locale).map((talk) => talk.id);
 }
 
-export function getTalkById(id: string | number): Talk | undefined {
+export function getTalkById(
+  id: string | number,
+  locale: SiteLocale = "en",
+): Talk | undefined {
   const talkId = typeof id === "number" ? id : Number(id);
 
   if (!Number.isInteger(talkId) || talkId <= 0) {
     return undefined;
   }
 
-  return talks.find((talk) => talk.id === talkId);
+  return talksByLocale[locale].find((talk) => talk.id === talkId);
 }
 
-export function getTalkBySpeakerSlug(slug: string): Talk | undefined {
-  return talks.find((talk) => talk.speakerSlugs.includes(slug));
+export function getTalkBySpeakerSlug(
+  slug: string,
+  locale: SiteLocale = "en",
+): Talk | undefined {
+  return talksByLocale[locale].find((talk) => talk.speakerSlugs.includes(slug));
 }
 
-export function getTalkSpeakers(talk: Talk): Speaker[] {
+export function getTalkSpeakers(
+  talk: Talk,
+  locale: SiteLocale = "en",
+): LocalizedSpeaker[] {
   return talk.speakerSlugs
-    .map((slug) => getSpeakerBySlug(slug))
-    .filter((speaker): speaker is Speaker => speaker !== undefined);
+    .map((slug) => {
+      const speaker = getSpeakerBySlug(slug);
+      const content = getSpeakerContent(slug, locale);
+
+      if (!speaker || !content) {
+        return undefined;
+      }
+
+      return { ...speaker, ...content };
+    })
+    .filter((speaker): speaker is LocalizedSpeaker => speaker !== undefined);
 }
 
-export function isTalkId(value: string): boolean {
-  return getTalkById(value) !== undefined;
+export function isTalkId(value: string, locale: SiteLocale = "en"): boolean {
+  return getTalkById(value, locale) !== undefined;
 }
 
 export function getTalkHref(id: number): string {
   return `/talks/${id}`;
 }
 
-export function getTalkHrefForSpeaker(slug: string): string | undefined {
-  const talk = getTalkBySpeakerSlug(slug);
+export function getTalkHrefForSpeaker(
+  slug: string,
+  locale: SiteLocale = "en",
+): string | undefined {
+  const talk = getTalkBySpeakerSlug(slug, locale);
 
   return talk ? getTalkHref(talk.id) : undefined;
 }
 
 export function getTalkCountsByLevel(
   activeTrack: SpeakerTrackFilter = "view-all",
+  locale: SiteLocale = "en",
 ): Record<TalkLevelFilter, number> {
+  const talks = getAllTalks(locale);
   const filteredByTrack =
     activeTrack === "view-all"
       ? talks
@@ -157,7 +190,9 @@ export function getTalkCountsByLevel(
 
 export function getTalkCountsByLanguage(
   activeTrack: SpeakerTrackFilter = "view-all",
+  locale: SiteLocale = "en",
 ): Record<TalkLanguageFilter, number> {
+  const talks = getAllTalks(locale);
   const filteredByTrack =
     activeTrack === "view-all"
       ? talks
@@ -176,7 +211,10 @@ export function getTalkCountsByLanguage(
   return counts;
 }
 
-export function getTalkCountsByTrack(): Record<SpeakerTrackFilter, number> {
+export function getTalkCountsByTrack(
+  locale: SiteLocale = "en",
+): Record<SpeakerTrackFilter, number> {
+  const talks = getAllTalks(locale);
   const counts = {
     "view-all": talks.length,
   } as Record<SpeakerTrackFilter, number>;

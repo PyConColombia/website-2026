@@ -33,15 +33,15 @@ function truncateMetaDescription(text: string): string {
   return `${normalized.slice(0, META_DESCRIPTION_MAX - 1).trimEnd()}…`;
 }
 
-function formatSpeakerNames(talk: Talk): string {
-  return getTalkSpeakers(talk)
+function formatSpeakerNames(talk: Talk, locale: SiteLocale): string {
+  return getTalkSpeakers(talk, locale)
     .map((speaker) => speaker.name)
     .join(", ");
 }
 
-function buildTalkDescription(talk: Talk): string {
+function buildTalkDescription(talk: Talk, locale: SiteLocale): string {
   return truncateMetaDescription(
-    `${talk.talkTitle} by ${formatSpeakerNames(talk)} at PyCon Colombia 2026. ${talk.talkDescription}`,
+    `${talk.talkTitle} by ${formatSpeakerNames(talk, locale)} at PyCon Colombia 2026. ${talk.talkDescription}`,
   );
 }
 
@@ -49,7 +49,7 @@ function buildTalkKeywords(talk: Talk, locale: SiteLocale): string[] {
   const trackLabels = talk.tracks.map(
     (track) => siteMessages[locale].blocks.speakers.tracks[track],
   );
-  const speakers = getTalkSpeakers(talk);
+  const speakers = getTalkSpeakers(talk, locale);
 
   return [
     ...SITE_KEYWORDS,
@@ -62,14 +62,17 @@ function buildTalkKeywords(talk: Talk, locale: SiteLocale): string[] {
   ];
 }
 
-export function getTalkShareImageUrl(id: string | number): string {
-  const talk = getTalkById(id);
+export function getTalkShareImageUrl(
+  id: string | number,
+  locale: SiteLocale = "en",
+): string {
+  const talk = getTalkById(id, locale);
 
   if (!talk) {
     return absoluteAssetUrl(DEFAULT_OG_IMAGE);
   }
 
-  const primarySpeaker = getTalkSpeakers(talk)[0];
+  const primarySpeaker = getTalkSpeakers(talk, locale)[0];
 
   return (
     getSpeakerProfileImageUrl(primarySpeaker?.slug ?? "") ??
@@ -81,17 +84,17 @@ export function buildTalkPageMetadata(
   id: string | number,
   locale: SiteLocale,
 ): Metadata {
-  const talk = getTalkById(id);
+  const talk = getTalkById(id, locale);
 
   if (!talk) {
     return {};
   }
 
-  const description = buildTalkDescription(talk);
+  const description = buildTalkDescription(talk, locale);
   const canonical = `${getSiteUrl()}${getTalkHref(talk.id)}`;
   const ogTitle = `${talk.talkTitle} — PyCon Colombia 2026`;
-  const imageUrl = getTalkShareImageUrl(talk.id);
-  const imageAlt = `${talk.talkTitle} — ${formatSpeakerNames(talk)}`;
+  const imageUrl = getTalkShareImageUrl(talk.id, locale);
+  const imageAlt = `${talk.talkTitle} — ${formatSpeakerNames(talk, locale)}`;
 
   return {
     title: talk.talkTitle,
@@ -217,7 +220,7 @@ export function buildTalkJsonLd(
   locale: SiteLocale,
   talkUrl: string,
 ): Record<string, unknown> {
-  const speakers = getTalkSpeakers(talk);
+  const speakers = getTalkSpeakers(talk, locale);
   const trackLabels = talk.tracks.map(
     (track) => siteMessages[locale].blocks.speakers.tracks[track],
   );

@@ -23,7 +23,8 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTranslations } from "@/contexts/language-context";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
+import type { SiteLocale } from "@/lib/site-messages";
 import {
   getActiveSpeakerTracks,
   getSpeakerTrackHref,
@@ -104,6 +105,7 @@ const TalkCard = ({ talk }: TalkCardProps) => {
 const matchesSearch = (
   talk: Talk,
   query: string,
+  locale: SiteLocale,
   getTrackLabel: (track: SpeakerTrack) => string,
   getLevelLabel: (level: Talk["level"]) => string,
   getLanguageLabel: (language: Talk["language"]) => string,
@@ -114,7 +116,7 @@ const matchesSearch = (
     return true;
   }
 
-  const speakers = getTalkSpeakers(talk);
+  const speakers = getTalkSpeakers(talk, locale);
   const haystack = [
     talk.talkTitle,
     talk.talkDescription,
@@ -140,6 +142,7 @@ const Talks = ({
   activeLevel?: TalkLevel;
   activeLanguage?: TalkLanguage;
 }) => {
+  const { locale } = useLanguage();
   const { t } = useTranslations();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -149,11 +152,14 @@ const Talks = ({
   const [selectedLanguage, setSelectedLanguage] = useState<TalkLanguageFilter>(
     activeLanguage ?? "view-all",
   );
-  const talks = getAllTalks();
+  const talks = getAllTalks(locale);
   const tracks = getActiveSpeakerTracks();
-  const talkCounts = getTalkCountsByTrack();
-  const levelCounts = getTalkCountsByLevel(activeTrack ?? "view-all");
-  const languageCounts = getTalkCountsByLanguage(activeTrack ?? "view-all");
+  const talkCounts = getTalkCountsByTrack(locale);
+  const levelCounts = getTalkCountsByLevel(activeTrack ?? "view-all", locale);
+  const languageCounts = getTalkCountsByLanguage(
+    activeTrack ?? "view-all",
+    locale,
+  );
   const selectedTrack: SpeakerTrackFilter = activeTrack ?? "view-all";
 
   useEffect(() => {
@@ -197,10 +203,25 @@ const Talks = ({
         matchesTrack &&
         matchesLevel &&
         matchesLanguage &&
-        matchesSearch(talk, searchQuery, trackLabel, levelLabel, languageLabel)
+        matchesSearch(
+          talk,
+          searchQuery,
+          locale,
+          trackLabel,
+          levelLabel,
+          languageLabel,
+        )
       );
     });
-  }, [talks, searchQuery, selectedLanguage, selectedLevel, selectedTrack, t]);
+  }, [
+    talks,
+    searchQuery,
+    selectedLanguage,
+    selectedLevel,
+    selectedTrack,
+    locale,
+    t,
+  ]);
 
   return (
     <section id="talks" className="py-8 sm:py-16 lg:py-24">
