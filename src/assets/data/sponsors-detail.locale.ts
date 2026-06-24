@@ -89,7 +89,7 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
     },
     interledger: {
       paragraphs: [
-        "The Interledger Foundation is a nonprofit organization that supports the development and adoption of open payment protocols. Its mission is to build an inclusive global payments network where value can move as easily as information, enabling interoperability across banks, wallets, and payment systems worldwide.",
+        "The Interledger Foundation works to create the conditions for financial access at a global scale. We build the tech, grow the movement and shift the system to advance financial infrastructure that is open, connected, and designed to serve people.",
       ],
       highlights: [],
       faqTopics: [],
@@ -207,7 +207,7 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
     },
     interledger: {
       paragraphs: [
-        "La Interledger Foundation es una organización sin fines de lucro que apoya el desarrollo y la adopción de protocolos abiertos de pagos. Su misión es construir una red global de pagos inclusiva en la que el valor pueda moverse tan fácilmente como la información, habilitando la interoperabilidad entre bancos, billeteras y sistemas de pago en todo el mundo.",
+        "Interledger Foundation impulsa el acceso financiero global mediante el desarrollo de tecnología abierta, el fortalecimiento de las comunidades, y la promoción de cambios estructurales en el ecosistema financiero. Nuestro objetivo es construir una infraestructura financiera interoperable, conectada y centrada en las personas, que facilite el movimiento de valor a través de fronteras, plataformas y sistemas.",
       ],
       highlights: [],
       faqTopics: [],
