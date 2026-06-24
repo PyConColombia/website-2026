@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-
-import { speakers } from "@/assets/data/speakers";
 import SpeakerCarouselFrame from "@/components/blocks/speakers/speaker-carousel-frame";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,14 +11,19 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { MotionPreset } from "@/components/ui/motion-preset";
-import { useTranslations } from "@/contexts/language-context";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { getAllLocalizedSpeakers } from "@/lib/speakers";
 
 const AUTOPLAY_DELAY_MS = 2000;
 
 const SpeakersCarousel = () => {
+  const { locale } = useLanguage();
   const { t } = useTranslations();
   const [api, setApi] = useState<CarouselApi>();
-  const carouselSpeakers = useMemo(() => [...speakers, ...speakers], []);
+  const carouselSpeakers = useMemo(() => {
+    const localized = getAllLocalizedSpeakers(locale);
+    return [...localized, ...localized];
+  }, [locale]);
 
   useEffect(() => {
     if (!api) {
@@ -36,7 +39,7 @@ const SpeakersCarousel = () => {
     };
   }, [api]);
 
-  if (speakers.length === 0) {
+  if (carouselSpeakers.length === 0) {
     return null;
   }
 
@@ -131,7 +134,7 @@ const SpeakersCarousel = () => {
               >
                 <SpeakerCarouselFrame
                   speaker={speaker}
-                  frameIndex={index % speakers.length}
+                  frameIndex={index % (carouselSpeakers.length / 2)}
                 />
 
                 <div className="mt-2 min-h-12 space-y-0.5 text-center">

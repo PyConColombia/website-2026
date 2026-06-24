@@ -12,8 +12,8 @@ import { Button } from "@/components/ui/button";
 import { CountryFlagTooltip } from "@/components/ui/country-flag";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
-import { useTranslations } from "@/contexts/language-context";
-import { getSpeakerBySlug } from "@/lib/speakers";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { getLocalizedSpeaker } from "@/lib/speakers";
 import { getTalkBySpeakerSlug } from "@/lib/talks";
 
 type SpeakerDetailProps = {
@@ -21,9 +21,16 @@ type SpeakerDetailProps = {
 };
 
 const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
+  const { locale } = useLanguage();
   const { t } = useTranslations();
-  const speaker = useMemo(() => getSpeakerBySlug(slug), [slug]);
-  const talk = useMemo(() => getTalkBySpeakerSlug(slug), [slug]);
+  const speaker = useMemo(
+    () => getLocalizedSpeaker(slug, locale),
+    [slug, locale],
+  );
+  const talk = useMemo(
+    () => getTalkBySpeakerSlug(slug, locale),
+    [slug, locale],
+  );
 
   if (!speaker) {
     return null;

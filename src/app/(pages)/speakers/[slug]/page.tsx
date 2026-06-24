@@ -12,7 +12,7 @@ import {
   buildSpeakerPageMetadata,
   getSpeakerShareImageUrl,
 } from "@/lib/speaker-seo";
-import { getAllSpeakerSlugs, getSpeakerBySlug } from "@/lib/speakers";
+import { getAllSpeakerSlugs, getLocalizedSpeaker } from "@/lib/speakers";
 
 export async function generateStaticParams() {
   return getAllSpeakerSlugs().map((slug) => ({ slug }));
@@ -37,7 +37,7 @@ const SpeakerSlugPage = async ({
 }) => {
   const { slug } = await params;
 
-  const speaker = getSpeakerBySlug(slug);
+  const speaker = getLocalizedSpeaker(slug, STATIC_PRERENDER_LOCALE);
 
   if (!speaker) {
     notFound();

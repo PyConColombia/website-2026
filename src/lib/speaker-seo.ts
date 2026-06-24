@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import type { Speaker } from "@/assets/data/speakers";
 import type { SiteLocale } from "@/lib/site-messages";
 import { siteMessages } from "@/lib/site-messages";
 import {
@@ -10,7 +9,11 @@ import {
   SITE_NAME,
 } from "@/lib/site-seo";
 import { resolveSpeakerImageSource } from "@/lib/speaker-image.server";
-import { getSpeakerBySlug } from "@/lib/speakers";
+import {
+  getLocalizedSpeaker,
+  getSpeakerBySlug,
+  type LocalizedSpeaker,
+} from "@/lib/speakers";
 
 const META_DESCRIPTION_MAX = 200;
 const DEFAULT_OG_IMAGE = "/images/cfp.jpg";
@@ -25,13 +28,16 @@ function truncateMetaDescription(text: string): string {
   return `${normalized.slice(0, META_DESCRIPTION_MAX - 1).trimEnd()}…`;
 }
 
-function buildSpeakerDescription(speaker: Speaker): string {
+function buildSpeakerDescription(speaker: LocalizedSpeaker): string {
   return truncateMetaDescription(
     `${speaker.name} presents "${speaker.talkTitle}" at PyCon Colombia 2026. ${speaker.talkDescription}`,
   );
 }
 
-function buildSpeakerKeywords(speaker: Speaker, locale: SiteLocale): string[] {
+function buildSpeakerKeywords(
+  speaker: LocalizedSpeaker,
+  locale: SiteLocale,
+): string[] {
   const trackLabels = speaker.tracks.map(
     (track) => siteMessages[locale].blocks.speakers.tracks[track],
   );
@@ -78,7 +84,7 @@ export function buildSpeakerPageMetadata(
   slug: string,
   locale: SiteLocale,
 ): Metadata {
-  const speaker = getSpeakerBySlug(slug);
+  const speaker = getLocalizedSpeaker(slug, locale);
 
   if (!speaker) {
     return {};
@@ -126,7 +132,7 @@ export function buildSpeakerPageMetadata(
 }
 
 export function buildSpeakerJsonLd(
-  speaker: Speaker,
+  speaker: LocalizedSpeaker,
   locale: SiteLocale,
   speakerUrl: string,
 ): Record<string, unknown> {

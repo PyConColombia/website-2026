@@ -33,6 +33,16 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    aimpoint: {
+      tagline:
+        "Aimpoint Digital is a data and AI consulting firm that helps organizations unlock the value of their data through analytics, machine learning, optimization, and cloud technologies. The company partners with businesses to solve complex challenges, improve decision-making, and drive measurable results.",
+      paragraphs: [
+        "Aimpoint Digital is a leading data and AI consulting firm that helps organizations transform data into actionable insights and business value. By combining expertise in data engineering, analytics, artificial intelligence, machine learning, and optimization, Aimpoint Digital designs and delivers innovative solutions that enable smarter decisions, greater operational efficiency, and sustainable growth.",
+        "The company partners with organizations across a wide range of industries to build modern data platforms, develop advanced analytics capabilities, and implement AI-driven solutions that address complex business challenges. From strategy and solution design to implementation and enablement, Aimpoint Digital helps clients maximize the impact of their data and accelerate their digital transformation journeys.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
     loka: {
       tagline:
         "Loka is the Silicon Valley consultancy named AWS Innovation Partner of the Year for 2024",
@@ -136,6 +146,16 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
         "Somos el centro de formación tecnológica de la Universidad EAFIT. ",
       paragraphs: [
         "Formamos y acompañamos a través de la instalación de capacidades reales en organizaciones y personas que se transforman al ritmo de la tecnología con metodologías de aprendizaje prácticas orientadas a los desafíos reales. \n\nCon este enfoque, buscamos resolver los retos del presente y ser parte activa en la construcción de un futuro innovador.A través de nuestra conexión con el sector público y privado, generamos impacto y desarrollamos soluciones que trascienden, adaptándose a las necesidades de un entorno en constante cambio.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    aimpoint: {
+      tagline:
+        "Aimpoint Digital es una firma de consultoría en datos e inteligencia artificial que ayuda a las organizaciones a desbloquear el valor de sus datos mediante analítica, aprendizaje automático, optimización y tecnologías en la nube. La compañía colabora con empresas para resolver desafíos complejos, mejorar la toma de decisiones e impulsar resultados medibles.",
+      paragraphs: [
+        "Aimpoint Digital es una firma líder en consultoría de datos e inteligencia artificial que ayuda a las organizaciones a transformar sus datos en información accionable y valor de negocio. Al combinar experiencia en ingeniería de datos, analítica, inteligencia artificial, aprendizaje automático y optimización, Aimpoint Digital diseña e implementa soluciones innovadoras que permiten tomar decisiones más inteligentes, lograr mayor eficiencia operativa y un crecimiento sostenible.",
+        "La compañía colabora con organizaciones de diversos sectores para construir plataformas de datos modernas, desarrollar capacidades avanzadas de analítica e implementar soluciones impulsadas por IA que abordan desafíos empresariales complejos. Desde la estrategia y el diseño de soluciones hasta la implementación y la habilitación, Aimpoint Digital ayuda a sus clientes a maximizar el impacto de sus datos y acelerar sus procesos de transformación digital.",
       ],
       highlights: [],
       faqTopics: [],

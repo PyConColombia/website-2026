@@ -7,6 +7,10 @@ export type TeamMember = {
   x?: string;
 };
 
+export type VolunteerMember = TeamMember & {
+  slug: string;
+};
+
 export const teamMembers: TeamMember[] = [
   {
     name: "John Roa",
@@ -85,5 +89,15 @@ export const teamMembers: TeamMember[] = [
     image: "/images/avatar/wendy-rueda.webp",
     linkedin: "https://www.linkedin.com/in/wendy-rueda-cifuentes-84a617215",
     x: "https://twitter.com/@wen_rueda",
+  },
+];
+
+export const volunteerMembers: VolunteerMember[] = [
+  {
+    slug: "valerie-arismendy",
+    name: "Valerie Arismendy",
+    role: "Co-host de auditorio",
+    image: "/images/avatar/valerie-arismendy.webp",
+    linkedin: "https://www.linkedin.com/in/valerie-arismendy/",
   },
 ];

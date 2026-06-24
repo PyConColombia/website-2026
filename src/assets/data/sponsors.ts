@@ -13,6 +13,8 @@ export type Sponsor = {
   slug?: string;
   logo?: string;
   href?: string;
+  linkedin?: string;
+  x?: string;
 };
 
 export type SponsorTier = {
@@ -54,7 +56,9 @@ export const sponsorTiers: SponsorTier[] = [
         name: "Aimpoint Digital",
         slug: "aimpoint",
         logo: "/images/sponsors/aimpoint.svg",
-        href: "https://aimpointdigital.com/",
+        href: "https://www.aimpointdigital.com/",
+        linkedin: "https://www.linkedin.com/company/aimpoint-digital/",
+        x: "https://twitter.com/aimpointdigital",
       },
       {
         name: "Factored",

@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
-import { type Speaker, speakers } from "@/assets/data/speakers";
+import { useMemo } from "react";
 import GithubIcon from "@/assets/svg/github-icon";
 import LinkedinIcon from "@/assets/svg/linkedin-icon";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
@@ -11,14 +10,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CountryFlagTooltip } from "@/components/ui/country-flag";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
-import { useTranslations } from "@/contexts/language-context";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { getAllLocalizedSpeakers, type LocalizedSpeaker } from "@/lib/speakers";
 import { cn } from "@/lib/utils";
 
 type SpeakerCardProps = {
-  speaker: Speaker;
+  speaker: LocalizedSpeaker;
 };
 
-const SpeakerSocialLinks = ({ speaker }: { speaker: Speaker }) => {
+const SpeakerSocialLinks = ({ speaker }: { speaker: LocalizedSpeaker }) => {
   const hasSocial = Boolean(speaker.github || speaker.linkedin);
 
   if (!hasSocial) {
@@ -126,7 +126,9 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => (
 );
 
 const Speakers = () => {
+  const { locale } = useLanguage();
   const { t } = useTranslations();
+  const speakerList = useMemo(() => getAllLocalizedSpeakers(locale), [locale]);
 
   return (
     <section id="speakers" className="py-8 sm:py-16 lg:py-24">
@@ -180,7 +182,7 @@ const Speakers = () => {
         </div>
 
         <div id="speakers-grid" className={speakerGridClassName}>
-          {speakers.map((speaker, index) => (
+          {speakerList.map((speaker, index) => (
             <MotionPreset
               key={speaker.slug}
               fade
@@ -190,7 +192,7 @@ const Speakers = () => {
               transition={{ duration: 0.5 }}
               className={cn(
                 "h-full w-full",
-                getCenteredRowClassName(index, speakers.length),
+                getCenteredRowClassName(index, speakerList.length),
               )}
             >
               <SpeakerCard speaker={speaker} />
