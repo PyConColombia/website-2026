@@ -2,7 +2,12 @@
 
 import { GithubIcon, LinkedinIcon } from "lucide-react";
 
-import { type TeamMember, teamMembers } from "@/assets/data/team";
+import {
+  type TeamMember,
+  teamMembers,
+  type VolunteerMember,
+  volunteerMembers,
+} from "@/assets/data/team";
 import { XSocialIcon } from "@/components/icons/x-social-icon";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
@@ -61,8 +66,15 @@ const TeamMemberSocialLinks = ({ member }: { member: TeamMember }) => (
   </div>
 );
 
-const TeamMemberCard = ({ member }: { member: TeamMember }) => {
+const TeamMemberCard = ({
+  member,
+  role,
+}: {
+  member: TeamMember;
+  role?: string;
+}) => {
   const hasSocial = Boolean(member.linkedin || member.github || member.x);
+  const displayRole = role ?? formatRole(member.role);
 
   return (
     <Card className="group hover:border-primary/60 h-full gap-0 overflow-hidden rounded-sm border-2 py-0 shadow-none transition-colors duration-300">
@@ -82,7 +94,7 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => {
             <CardTitle className="text-lg font-semibold">
               {member.name}
             </CardTitle>
-            <p className="text-muted-foreground">{formatRole(member.role)}</p>
+            <p className="text-muted-foreground">{displayRole}</p>
           </div>
           {hasSocial ? <TeamMemberSocialLinks member={member} /> : null}
         </div>
@@ -91,10 +103,15 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => {
   );
 };
 
-const Team = () => {
-  const { t } = useTranslations();
-  const lastRowCardCount = teamMembers.length % 3;
-  const firstLastRowIndex = teamMembers.length - lastRowCardCount;
+const TeamMemberGrid = ({
+  members,
+  getRole,
+}: {
+  members: TeamMember[];
+  getRole?: (member: TeamMember, index: number) => string | undefined;
+}) => {
+  const lastRowCardCount = members.length % 3;
+  const firstLastRowIndex = members.length - lastRowCardCount;
 
   const getCenteredRowClassName = (index: number) => {
     if (lastRowCardCount === 1 && index === firstLastRowIndex) {
@@ -104,6 +121,40 @@ const Team = () => {
     if (lastRowCardCount === 2 && index === firstLastRowIndex) {
       return "md:col-start-2";
     }
+  };
+
+  return (
+    <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 md:grid-cols-6 md:gap-12 lg:gap-16 2xl:gap-24">
+      {members.map((member, index) => (
+        <MotionPreset
+          key={`${member.name}-${member.image}`}
+          fade
+          blur
+          slide={{ direction: "up", offset: 50 }}
+          delay={0.1 + index * 0.08}
+          inView={false}
+          transition={{ duration: 0.5 }}
+          className={cn(
+            "h-full w-full md:col-span-2",
+            getCenteredRowClassName(index),
+          )}
+        >
+          <TeamMemberCard member={member} role={getRole?.(member, index)} />
+        </MotionPreset>
+      ))}
+    </div>
+  );
+};
+
+const Team = () => {
+  const { t } = useTranslations();
+
+  const getVolunteerRole = (member: VolunteerMember) => {
+    const localizedRole = t(`blocks.team.volunteers.roles.${member.slug}`);
+
+    return localizedRole === `blocks.team.volunteers.roles.${member.slug}`
+      ? formatRole(member.role)
+      : localizedRole;
   };
 
   return (
@@ -127,25 +178,28 @@ const Team = () => {
           </p>
         </MotionPreset>
 
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 md:grid-cols-6 md:gap-12 lg:gap-16 2xl:gap-24">
-          {teamMembers.map((member, index) => (
+        <TeamMemberGrid members={teamMembers} />
+
+        {volunteerMembers.length > 0 ? (
+          <div className="mt-16 space-y-10 sm:mt-20 lg:mt-24">
             <MotionPreset
-              key={`${member.name}-${member.image}`}
               fade
+              slide={{ direction: "down", offset: 40 }}
               blur
-              slide={{ direction: "up", offset: 50 }}
-              delay={0.1 + index * 0.08}
-              inView={false}
               transition={{ duration: 0.5 }}
-              className={cn(
-                "h-full w-full md:col-span-2",
-                getCenteredRowClassName(index),
-              )}
+              className="mx-auto max-w-3xl text-center"
             >
-              <TeamMemberCard member={member} />
+              <h3 className="text-2xl font-semibold md:text-3xl">
+                {t("blocks.team.volunteers.title")}
+              </h3>
             </MotionPreset>
-          ))}
-        </div>
+
+            <TeamMemberGrid
+              members={volunteerMembers}
+              getRole={(member) => getVolunteerRole(member as VolunteerMember)}
+            />
+          </div>
+        ) : null}
       </div>
     </section>
   );
