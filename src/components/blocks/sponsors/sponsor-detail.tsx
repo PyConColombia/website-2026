@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeftIcon, ExternalLinkIcon } from "lucide-react";
+import { ArrowLeftIcon, ExternalLinkIcon, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -8,6 +8,7 @@ import { getSponsorGalleryImages } from "@/assets/data/sponsor-gallery";
 import { getSponsorVideos } from "@/assets/data/sponsor-videos";
 import SponsorBecomeSection from "@/components/blocks/sponsors/sponsor-become-section";
 import GalleryImageLightbox from "@/components/gallery/gallery-image-lightbox";
+import { XSocialIcon } from "@/components/icons/x-social-icon";
 import {
   Accordion,
   AccordionContent,
@@ -65,6 +66,7 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
   const hasFaqTopics = Boolean(detail?.faqTopics?.length);
   const hasGallery = galleryImages.length > 0;
   const hasVideos = videos.length > 0;
+  const hasSocialLinks = Boolean(sponsor.linkedin || sponsor.x);
 
   return (
     <>
@@ -187,6 +189,34 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
                   </Link>
                 </Button>
               </div>
+              {hasSocialLinks ? (
+                <div className="flex items-center justify-center gap-3 pt-2">
+                  {sponsor.linkedin ? (
+                    <Button size="icon" variant="outline" asChild>
+                      <a
+                        href={sponsor.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${sponsor.name} LinkedIn`}
+                      >
+                        <LinkedinIcon className="size-4" />
+                      </a>
+                    </Button>
+                  ) : null}
+                  {sponsor.x ? (
+                    <Button size="icon" variant="outline" asChild>
+                      <a
+                        href={sponsor.x}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${sponsor.name} X`}
+                      >
+                        <XSocialIcon className="size-4" />
+                      </a>
+                    </Button>
+                  ) : null}
+                </div>
+              ) : null}
             </MotionPreset>
 
             {hasGallery ? (
