@@ -56,6 +56,12 @@ export const sponsorTiers: SponsorTier[] = [
         logo: "/images/sponsors/aimpoint.svg",
         href: "https://aimpointdigital.com/",
       },
+      {
+        name: "Factored",
+        slug: "factored",
+        logo: "/images/sponsors/factored.svg",
+        href: "https://www.factored.ai/",
+      },
     ],
   },
   {
