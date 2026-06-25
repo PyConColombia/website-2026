@@ -30,4 +30,20 @@ export const pressCoverageItems: PressCoverageItem[] = [
       es: "PyCon Colombia 2026 se realizará del 24 al 26 de julio en la Universidad EAFIT de Medellín, con keynotes internacionales, talleres, charlas y más de 600 asistentes esperados.",
     },
   },
+  {
+    id: "andresospina-pycon-2026",
+    type: "article",
+    outlet: "andresospina.co",
+    url: "https://andresospina.co/eventos-ia/evento/pycon-colombia-2026/",
+    image: "/images/press/andresospina-pycon-2026.webp",
+    publishedAt: "2026-03-15",
+    title: {
+      en: "PyCon Colombia 2026 — Medellín's flagship Python conference",
+      es: "PyCon Colombia 2026 — la conferencia Python de referencia en Medellín",
+    },
+    description: {
+      en: "Colombia's largest annual Python conference returns to EAFIT in Medellín, July 24–26, with keynotes, workshops, and talks on AI, data science, DevOps, and intelligent agents.",
+      es: "La conferencia anual de Python más grande de Colombia regresa al NODO de la Universidad EAFIT en Medellín, del 24 al 26 de julio, con keynotes, talleres y charlas sobre IA, data science, DevOps y agentes inteligentes.",
+    },
+  },
 ];
