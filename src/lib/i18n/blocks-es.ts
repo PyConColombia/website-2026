@@ -101,6 +101,12 @@ export const blocksEs: BlocksMessages = {
       "Un equipo impulsado por la comunidad que une ponentes, patrocinadores, voluntarios y asistentes.",
     cardDescription:
       "Parte del equipo que acerca ponentes, patrocinadores, voluntarios y asistentes a PyCon Colombia 2026.",
+    share: "Compartir",
+    shareCopied: "¡Copiado!",
+    detail: {
+      back: "Volver al equipo",
+      about: "Acerca de",
+    },
     volunteers: {
       title: "Voluntarios",
       roles: {

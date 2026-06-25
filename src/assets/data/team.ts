@@ -1,4 +1,5 @@
 export type TeamMember = {
+  slug: string;
   name: string;
   role: string;
   image?: string;
@@ -7,12 +8,11 @@ export type TeamMember = {
   x?: string;
 };
 
-export type VolunteerMember = TeamMember & {
-  slug: string;
-};
+export type VolunteerMember = TeamMember;
 
 export const teamMembers: TeamMember[] = [
   {
+    slug: "john-roa",
     name: "John Roa",
     role: "Chief Organizer",
     image: "/images/avatar/john-roa.webp",
@@ -21,6 +21,7 @@ export const teamMembers: TeamMember[] = [
     x: "https://twitter.com/@jhonjairoroa87",
   },
   {
+    slug: "carlos-sierra",
     name: "Carlos Sierra",
     role: "Speakers, schedule and scholarships",
     image: "/images/avatar/carlos-sierra.webp",
@@ -28,6 +29,7 @@ export const teamMembers: TeamMember[] = [
     x: "https://twitter.com/@casierrav_alife",
   },
   {
+    slug: "juan-david-hernandez",
     name: "Juan David Hernandez",
     role: "Speakers",
     image: "/images/avatar/juan-david-hernandez.webp",
@@ -36,6 +38,7 @@ export const teamMembers: TeamMember[] = [
     x: "https://twitter.com/JuanDHernandezG",
   },
   {
+    slug: "alejandro-rendon",
     name: "Alejandro Rendon",
     role: "Website",
     image: "/images/avatar/alejandro-rendon.webp",
@@ -43,6 +46,7 @@ export const teamMembers: TeamMember[] = [
     github: "https://github.com/arendondiosa",
   },
   {
+    slug: "gonzalo-pena-castellanos",
     name: "Gonzalo Peña-Castellanos",
     role: "Keynotes",
     image: "/images/avatar/gonzalo-pena-castellanos.jpeg",
@@ -50,6 +54,7 @@ export const teamMembers: TeamMember[] = [
     github: "https://github.com/goanpeca",
   },
   {
+    slug: "leonardo-romo",
     name: "Leonardo Romo",
     role: "Executive assitant",
     image: "/images/avatar/leonardo-romo.webp",
@@ -57,6 +62,7 @@ export const teamMembers: TeamMember[] = [
     x: "https://twitter.com/@Leoromo97",
   },
   {
+    slug: "karen-romo",
     name: "Karen Romo",
     role: "Event manager",
     image: "/images/avatar/karen-romo.webp",
@@ -64,6 +70,7 @@ export const teamMembers: TeamMember[] = [
     x: "https://twitter.com/@karenlis727",
   },
   {
+    slug: "ivan-roa",
     name: "Ivan Roa",
     role: "Design/Venue Logistics",
     image: "/images/avatar/ivan-roa.webp",
@@ -71,11 +78,13 @@ export const teamMembers: TeamMember[] = [
     github: "https://github.com/naviroa92",
   },
   {
+    slug: "nancy-acuna",
     name: "Nancy Acuña",
     role: "Logistics/Finance",
     image: "/images/avatar/nancy-acuna.webp",
   },
   {
+    slug: "maria-franco",
     name: "Maria Franco",
     role: "Interviews",
     image: "/images/avatar/maria-franco.jpg",
@@ -84,6 +93,7 @@ export const teamMembers: TeamMember[] = [
     x: "https://twitter.com/mariafrancodev",
   },
   {
+    slug: "wendy-rueda",
     name: "Wendy Rueda",
     role: "Social Networks",
     image: "/images/avatar/wendy-rueda.webp",

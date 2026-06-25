@@ -97,6 +97,12 @@ export const blocksEn = {
       "A community-driven team working to bring speakers, sponsors, volunteers, and attendees together.",
     cardDescription:
       "Part of the team bringing speakers, sponsors, volunteers, and attendees together for PyCon Colombia 2026.",
+    share: "Share",
+    shareCopied: "Copied!",
+    detail: {
+      back: "Back to team",
+      about: "About",
+    },
     volunteers: {
       title: "Volunteers",
       roles: {
