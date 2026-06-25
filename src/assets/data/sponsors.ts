@@ -6,7 +6,8 @@ export type SponsorTierKey =
   | "gold"
   | "goldPlus"
   | "silverPlus"
-  | "silver";
+  | "silver"
+  | "media";
 
 export type Sponsor = {
   name: string;
@@ -153,6 +154,21 @@ export const sponsorTiers: SponsorTier[] = [
         slug: "slalom",
         logo: "/images/sponsors/slalom.svg",
         href: "https://www.slalom.com/",
+      },
+    ],
+  },
+  {
+    tierKey: "media",
+    title: "Media",
+    size: "XS",
+    description:
+      "Media partners amplifying PyCon Colombia stories and community news.",
+    sponsors: [
+      {
+        name: "Guapacho",
+        slug: "guapacho",
+        logo: "/images/sponsors/guapacho.svg",
+        href: "https://guapacho.com/",
       },
     ],
   },

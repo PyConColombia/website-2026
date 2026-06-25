@@ -35,73 +35,75 @@ const PressCoverageCard = ({ item }: { item: PressCoverageItem }) => {
   const TypeIcon = typeIcons[item.type];
 
   return (
-    <Card className="group h-full overflow-hidden shadow-none transition-all duration-300">
-      <CardContent className="flex h-full flex-col gap-3.5">
-        <Link
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mb-2.5 overflow-hidden rounded-lg"
-        >
-          <Image
-            src={assetPath(item.image)}
-            alt={item.title[locale]}
-            width={1225}
-            height={729}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        </Link>
+    <article className="group h-full">
+      <Card className="h-full overflow-hidden shadow-none transition-all duration-300">
+        <CardContent className="flex h-full flex-col gap-3.5">
+          <Link
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-2.5 overflow-hidden rounded-lg"
+          >
+            <Image
+              src={assetPath(item.image)}
+              alt={item.title[locale]}
+              width={1225}
+              height={729}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </Link>
 
-        <div className="flex items-center justify-between gap-1.5">
-          <div className="text-muted-foreground flex items-center gap-1.5">
-            <CalendarDaysIcon className="size-4.5" />
-            <time dateTime={item.publishedAt}>
-              {new Date(item.publishedAt).toLocaleDateString(dateLocale, {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              })}
-            </time>
+          <div className="flex items-center justify-between gap-1.5">
+            <div className="text-muted-foreground flex items-center gap-1.5">
+              <CalendarDaysIcon className="size-4.5" />
+              <time dateTime={item.publishedAt}>
+                {new Date(item.publishedAt).toLocaleDateString(dateLocale, {
+                  year: "numeric",
+                  month: "long",
+                  day: "2-digit",
+                })}
+              </time>
+            </div>
+            <Badge className="bg-primary/10 text-primary gap-1 rounded-full text-sm">
+              <TypeIcon className="size-3.5" />
+              {t(`blocks.pressCoverage.types.${item.type}`)}
+            </Badge>
           </div>
-          <Badge className="bg-primary/10 text-primary gap-1 rounded-full text-sm">
-            <TypeIcon className="size-3.5" />
-            {t(`blocks.pressCoverage.types.${item.type}`)}
-          </Badge>
-        </div>
 
-        <p className="text-muted-foreground text-sm font-medium">
-          {item.outlet}
-        </p>
+          <p className="text-muted-foreground text-sm font-medium">
+            {item.outlet}
+          </p>
 
-        <Link
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-        >
-          <h3 className="hover:text-primary line-clamp-3 text-lg font-medium transition-colors md:text-xl">
-            {item.title[locale]}
-          </h3>
-        </Link>
+          <Link
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <h3 className="hover:text-primary line-clamp-3 text-lg font-medium transition-colors md:text-xl">
+              {item.title[locale]}
+            </h3>
+          </Link>
 
-        <p className="text-muted-foreground line-clamp-3">
-          {item.description[locale]}
-        </p>
+          <p className="text-muted-foreground line-clamp-3">
+            {item.description[locale]}
+          </p>
 
-        <div className="flex flex-1 items-end justify-end">
-          <SecondaryFlowButton size="icon" asChild>
-            <Link href={item.url} target="_blank" rel="noopener noreferrer">
-              <ExternalLinkIcon className="size-4" />
-              <span className="sr-only">
-                {t("blocks.pressCoverage.readExternalSrOnly")}:{" "}
-                {item.title[locale]}
-              </span>
-            </Link>
-          </SecondaryFlowButton>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="flex flex-1 items-end justify-end">
+            <SecondaryFlowButton size="icon" asChild>
+              <Link href={item.url} target="_blank" rel="noopener noreferrer">
+                <ExternalLinkIcon className="size-4" />
+                <span className="sr-only">
+                  {t("blocks.pressCoverage.readExternalSrOnly")}:{" "}
+                  {item.title[locale]}
+                </span>
+              </Link>
+            </SecondaryFlowButton>
+          </div>
+        </CardContent>
+      </Card>
+    </article>
   );
 };
 
@@ -172,7 +174,10 @@ const PressCoverage = ({ items }: { items: PressCoverageItem[] }) => {
   }, [items, searchQuery, selectedTab]);
 
   return (
-    <section className="py-8 sm:py-16 lg:py-24">
+    <section
+      className="py-8 sm:py-16 lg:py-24"
+      aria-labelledby="press-coverage-heading"
+    >
       <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:space-y-16 lg:px-8">
         <MotionPreset
           fade
@@ -185,7 +190,10 @@ const PressCoverage = ({ items }: { items: PressCoverageItem[] }) => {
             {t("blocks.pressCoverage.eyebrow")}
           </p>
 
-          <h1 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
+          <h1
+            id="press-coverage-heading"
+            className="text-2xl font-semibold md:text-3xl lg:text-4xl"
+          >
             {t("blocks.pressCoverage.title")}
           </h1>
 

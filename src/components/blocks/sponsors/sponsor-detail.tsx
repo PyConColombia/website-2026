@@ -59,6 +59,7 @@ const SponsorDetail = ({ slug }: SponsorDetailProps) => {
       "border-violet-500/35 bg-violet-500/10 text-violet-700 dark:text-violet-300",
     silver:
       "border-slate-500/35 bg-slate-500/10 text-slate-700 dark:text-slate-300",
+    media: "border-teal-500/35 bg-teal-500/10 text-teal-700 dark:text-teal-300",
   }[sponsor.tierKey];
   const summaryParagraph = detail?.paragraphs[0] ?? detail?.tagline ?? "";
   const extendedParagraphs = detail?.paragraphs.slice(1) ?? [];

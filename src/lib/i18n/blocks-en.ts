@@ -40,6 +40,11 @@ export const blocksEn = {
         title: "Silver",
         description: "Community sponsors supporting the conference program.",
       },
+      media: {
+        title: "Media",
+        description:
+          "Media partners amplifying PyCon Colombia stories and community news.",
+      },
     },
   },
   sponsorDetailPage: {

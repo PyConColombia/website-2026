@@ -1,50 +1,21 @@
 import type { Metadata } from "next";
+
 import CTASection from "@/components/blocks/cta/cta";
 import PressCoverage from "@/components/blocks/press/press-coverage";
 import SectionSeparator from "@/components/section-separator";
 import { getPressCoverageItems } from "@/lib/press-coverage";
+import { buildPressPageJsonLd, buildPressPageMetadata } from "@/lib/press-seo";
 import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
-import { siteMessages } from "@/lib/site-messages";
-import {
-  getSiteUrl,
-  SITE_KEYWORDS,
-  webPageJsonLd,
-  websiteJsonLd,
-} from "@/lib/site-seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const meta = siteMessages[STATIC_PRERENDER_LOCALE].pageMeta.press;
+  const items = getPressCoverageItems();
 
-  return {
-    title: meta.title,
-    description: meta.description,
-    keywords: [
-      ...SITE_KEYWORDS,
-      "PyCon press",
-      "media coverage",
-      "Python conference news",
-    ],
-    alternates: {
-      canonical: `${getSiteUrl()}/press`,
-    },
-  };
+  return buildPressPageMetadata(STATIC_PRERENDER_LOCALE, items);
 }
 
 const PressPage = () => {
-  const pageMeta = siteMessages[STATIC_PRERENDER_LOCALE].pageMeta.press;
   const items = getPressCoverageItems();
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      websiteJsonLd(),
-      webPageJsonLd({
-        name: pageMeta.jsonLdName,
-        description: pageMeta.description,
-        url: `${getSiteUrl()}/press`,
-      }),
-    ],
-  };
+  const jsonLd = buildPressPageJsonLd(STATIC_PRERENDER_LOCALE, items);
 
   return (
     <>

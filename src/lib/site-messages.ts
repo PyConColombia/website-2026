@@ -104,6 +104,8 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
       jsonLdName: string;
+      ogImageAlt: string;
+      itemListName: string;
     };
   };
   blocks: typeof blocksEn;
@@ -231,8 +233,11 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       press: {
         title: "Press",
         description:
-          "Articles, posters, and media coverage about PyCon Colombia 2026 from outlets, blogs, and community partners.",
-        jsonLdName: "Press — PyCon Colombia 2026",
+          "Press coverage, articles, and posters about PyCon Colombia 2026—Colombia's flagship Python conference, July 24–26 in Medellín at Universidad EAFIT. Read what media and partners are saying about our 10th anniversary edition.",
+        jsonLdName: "Press & Media Coverage — PyCon Colombia 2026",
+        ogImageAlt:
+          "Press and media coverage about PyCon Colombia 2026 in Medellín",
+        itemListName: "PyCon Colombia 2026 press coverage and articles",
       },
     },
     blocks: blocksEn,
@@ -358,8 +363,12 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       press: {
         title: "Cobertura",
         description:
-          "Artículos, pósters y cobertura mediática sobre PyCon Colombia 2026 de medios, blogs y aliados de la comunidad.",
-        jsonLdName: "Cobertura — PyCon Colombia 2026",
+          "Cobertura mediática, artículos y pósters sobre PyCon Colombia 2026—la conferencia insignia de Python en Colombia, del 24 al 26 de julio en Medellín en la Universidad EAFIT. Lee lo que medios y aliados dicen de nuestra décima edición.",
+        jsonLdName: "Prensa y cobertura mediática — PyCon Colombia 2026",
+        ogImageAlt:
+          "Cobertura mediática y prensa sobre PyCon Colombia 2026 en Medellín",
+        itemListName:
+          "Cobertura mediática y artículos sobre PyCon Colombia 2026",
       },
     },
     blocks: blocksEs,

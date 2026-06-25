@@ -44,6 +44,11 @@ export const blocksEs: BlocksMessages = {
         description:
           "Patrocinadores comunitarios que apoyan la programación del evento.",
       },
+      media: {
+        title: "Media",
+        description:
+          "Aliados de medios que amplifican las historias y noticias de PyCon Colombia.",
+      },
     },
   },
   sponsorDetailPage: {
