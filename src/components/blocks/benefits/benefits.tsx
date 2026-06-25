@@ -15,6 +15,7 @@ import {
   useTransform,
 } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { type ReactNode, useMemo, useRef } from "react";
 
 import { getBenefitsFeatures } from "@/assets/data/benefits";
@@ -24,6 +25,7 @@ import { assetPath, cn } from "@/lib/utils";
 
 export type Features = {
   icon?: ReactNode;
+  slug?: string;
   title: string;
   role?: string;
   country?: string;
@@ -53,7 +55,19 @@ const SpeakerTitle = ({
 
   return (
     <div className="flex items-center gap-3">
-      <div className={cn("font-medium", className)}>{feature.title}</div>
+      {feature.slug ? (
+        <Link
+          href={`/keynotes/${feature.slug}`}
+          className={cn(
+            "font-medium underline-offset-4 transition-colors hover:text-primary hover:underline",
+            className,
+          )}
+        >
+          {feature.title}
+        </Link>
+      ) : (
+        <div className={cn("font-medium", className)}>{feature.title}</div>
+      )}
       {feature.flag && (
         <span
           className="border-primary/20 bg-background flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-sm"

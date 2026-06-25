@@ -181,24 +181,27 @@ const Speakers = () => {
           </MotionPreset>
         </div>
 
-        <div id="speakers-grid" className={speakerGridClassName}>
+        <MotionPreset
+          fade
+          slide={{ direction: "down", offset: 50 }}
+          delay={0.3}
+          inView={false}
+          transition={{ duration: 0.5 }}
+          className={speakerGridClassName}
+          motionProps={{ id: "speakers-grid" }}
+        >
           {speakerList.map((speaker, index) => (
-            <MotionPreset
+            <div
               key={speaker.slug}
-              fade
-              slide={{ direction: "down", offset: 50 }}
-              delay={0.3 + 0.15 * index}
-              inView={false}
-              transition={{ duration: 0.5 }}
               className={cn(
                 "h-full w-full",
                 getCenteredRowClassName(index, speakerList.length),
               )}
             >
               <SpeakerCard speaker={speaker} />
-            </MotionPreset>
+            </div>
           ))}
-        </div>
+        </MotionPreset>
       </div>
     </section>
   );

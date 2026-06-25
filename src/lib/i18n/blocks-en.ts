@@ -4,6 +4,16 @@ export const blocksEn = {
     subtitle: "Meet the voices shaping PyCon Colombia 2026.",
     flagAltPrefix: "Flag of",
   },
+  keynotes: {
+    eyebrow: "Keynotes",
+    title: "Keynote Speakers",
+    subtitle: "Meet the voices shaping PyCon Colombia 2026.",
+    detail: {
+      back: "Back to keynotes",
+      about: "About",
+      schedule: "Schedule",
+    },
+  },
   sponsors: {
     badge: "Sponsors",
     title: "Trusted by industry leaders",
@@ -39,6 +49,11 @@ export const blocksEn = {
       silver: {
         title: "Silver",
         description: "Community sponsors supporting the conference program.",
+      },
+      media: {
+        title: "Media",
+        description:
+          "Media partners amplifying PyCon Colombia stories and community news.",
       },
     },
   },
@@ -120,7 +135,8 @@ export const blocksEn = {
     detail: {
       back: "Back to speakers",
       about: "About",
-      talk: "Talk",
+      talk: "Session",
+      workshop: "Workshop",
       country: "Country",
       language: "Language",
       level: "Level",
@@ -300,12 +316,20 @@ export const blocksEn = {
     emptyTitle: "No talks found",
     filterLevel: "All levels",
     filterLevelSrOnly: "Filter by level",
+    filterFormat: "All formats",
+    filterFormatSrOnly: "Filter by format",
     filterLanguage: "All languages",
     filterLanguageSrOnly: "Filter by language",
     emptyDescription:
       "Try a different search term, track, level, or language filter to explore more sessions.",
     levelLabel: "LEVEL:",
+    formatLabel: "FORMAT:",
     languageLabel: "LANGUAGE:",
+    formats: {
+      talk: "Talk",
+      workshop: "Workshop",
+    },
+    workshopRequirements: "Workshop requirements",
     languages: {
       spanish: "Spanish",
       english: "English",
@@ -350,11 +374,34 @@ export const blocksEn = {
     workshop: "Workshop",
     other: "Event",
     viewSpeaker: "View speaker",
+    viewWorkshop: "View workshop",
+    viewKeynote: "View keynote",
     footerNote: "Schedule subject to change. Medellín, Colombia.",
   },
   headerUi: {
     brandAlt: "PyCon Colombia",
     menuSrOnly: "Menu",
+  },
+  pressCoverage: {
+    eyebrow: "Press & media",
+    title: "Coverage from the community",
+    subtitle:
+      "Articles, posters, and stories about PyCon Colombia 2026 published by media outlets, blogs, and partners.",
+    tabs: {
+      all: "All",
+      articles: "Articles",
+      posters: "Posters",
+    },
+    types: {
+      article: "Article",
+      poster: "Poster",
+    },
+    searchPlaceholder: "Search coverage...",
+    searchSrOnly: "Search press coverage",
+    readExternalSrOnly: "Read article on external site",
+    emptyTitle: "No coverage found",
+    emptyDescription:
+      "Try a different search term or filter to explore more articles and posters.",
   },
 };
 

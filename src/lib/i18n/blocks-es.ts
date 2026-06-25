@@ -6,6 +6,16 @@ export const blocksEs: BlocksMessages = {
     subtitle: "Conoce las voces que dan forma a PyCon Colombia 2026.",
     flagAltPrefix: "Bandera de",
   },
+  keynotes: {
+    eyebrow: "Oradores principales",
+    title: "Oradores principales",
+    subtitle: "Conoce las voces que dan forma a PyCon Colombia 2026.",
+    detail: {
+      back: "Volver a oradores principales",
+      about: "Acerca de",
+      schedule: "Agenda",
+    },
+  },
   sponsors: {
     badge: "Patrocinadores",
     title: "Respaldados por líderes de la industria",
@@ -43,6 +53,11 @@ export const blocksEs: BlocksMessages = {
         title: "Plata",
         description:
           "Patrocinadores comunitarios que apoyan la programación del evento.",
+      },
+      media: {
+        title: "Media",
+        description:
+          "Aliados de medios que amplifican las historias y noticias de PyCon Colombia.",
       },
     },
   },
@@ -125,6 +140,7 @@ export const blocksEs: BlocksMessages = {
       back: "Volver a ponentes",
       about: "Acerca de",
       talk: "Charla",
+      workshop: "Taller",
       country: "País",
       language: "Idioma",
       level: "Nivel",
@@ -305,12 +321,20 @@ export const blocksEs: BlocksMessages = {
     emptyTitle: "No se encontraron charlas",
     filterLevel: "Todos los niveles",
     filterLevelSrOnly: "Filtrar por nivel",
+    filterFormat: "Todos los formatos",
+    filterFormatSrOnly: "Filtrar por formato",
     filterLanguage: "Todos los idiomas",
     filterLanguageSrOnly: "Filtrar por idioma",
     emptyDescription:
       "Prueba otro término de búsqueda, track, nivel o idioma para explorar más sesiones.",
     levelLabel: "NIVEL:",
+    formatLabel: "FORMATO:",
     languageLabel: "IDIOMA:",
+    formats: {
+      talk: "Charla",
+      workshop: "Taller",
+    },
+    workshopRequirements: "Requisitos del taller",
     languages: {
       spanish: "Español",
       english: "Inglés",
@@ -355,10 +379,33 @@ export const blocksEs: BlocksMessages = {
     workshop: "Taller",
     other: "Evento",
     viewSpeaker: "Ver ponente",
+    viewWorkshop: "Ver taller",
+    viewKeynote: "Ver keynote",
     footerNote: "Agenda sujeta a cambios. Medellín, Colombia.",
   },
   headerUi: {
     brandAlt: "PyCon Colombia",
     menuSrOnly: "Menú",
+  },
+  pressCoverage: {
+    eyebrow: "Prensa y medios",
+    title: "Cobertura de la comunidad",
+    subtitle:
+      "Artículos, pósters y notas sobre PyCon Colombia 2026 publicados por medios, blogs y aliados.",
+    tabs: {
+      all: "Todos",
+      articles: "Artículos",
+      posters: "Pósters",
+    },
+    types: {
+      article: "Artículo",
+      poster: "Póster",
+    },
+    searchPlaceholder: "Buscar cobertura...",
+    searchSrOnly: "Buscar cobertura mediática",
+    readExternalSrOnly: "Leer artículo en sitio externo",
+    emptyTitle: "No se encontró cobertura",
+    emptyDescription:
+      "Prueba otro término de búsqueda o filtro para explorar más artículos y pósters.",
   },
 };

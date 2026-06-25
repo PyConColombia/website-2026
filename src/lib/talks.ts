@@ -15,6 +15,11 @@ import {
   type LocalizedSpeaker,
 } from "@/lib/speakers";
 import {
+  type TalkFormat,
+  type TalkFormatFilter,
+  talkFormatOrder,
+} from "@/lib/talk-formats";
+import {
   parseTalkLanguage,
   type TalkLanguage,
   type TalkLanguageFilter,
@@ -37,6 +42,8 @@ export type Talk = {
   levelLabel: string;
   language: TalkLanguage;
   languageLabel: string;
+  format: TalkFormat;
+  workshopRequirements?: string;
   speakerSlugs: string[];
 };
 
@@ -58,7 +65,7 @@ function buildTalksForLocale(locale: SiteLocale): Talk[] {
   for (const speaker of speakers) {
     const content = getSpeakerContent(speaker.slug, locale);
 
-    if (!content?.talkTitle.trim()) {
+    if (!content) {
       continue;
     }
 
@@ -69,11 +76,21 @@ function buildTalksForLocale(locale: SiteLocale): Talk[] {
   }
 
   return [...groups.values()]
+    .filter((group) =>
+      group.some(
+        (speaker) =>
+          getSpeakerContent(speaker.slug, locale)?.talkTitle.trim() ?? false,
+      ),
+    )
     .sort((a, b) =>
       a[0].talkKey.localeCompare(b[0].talkKey, "en", { sensitivity: "base" }),
     )
     .map((group, index) => {
-      const primary = group[0];
+      const primary =
+        group.find(
+          (speaker) =>
+            getSpeakerContent(speaker.slug, locale)?.talkTitle.trim() ?? false,
+        ) ?? group[0];
       const primaryContent = getSpeakerContent(primary.slug, locale);
       const talkDescription = group.reduce((longest, speaker) => {
         const description =
@@ -81,6 +98,12 @@ function buildTalksForLocale(locale: SiteLocale): Talk[] {
 
         return description.length > longest.length ? description : longest;
       }, primaryContent?.talkDescription ?? "");
+      const workshopRequirements = group.reduce((longest, speaker) => {
+        const requirements =
+          getSpeakerContent(speaker.slug, locale)?.workshopRequirements ?? "";
+
+        return requirements.length > longest.length ? requirements : longest;
+      }, primaryContent?.workshopRequirements ?? "");
 
       return {
         id: index + 1,
@@ -92,6 +115,10 @@ function buildTalksForLocale(locale: SiteLocale): Talk[] {
         levelLabel: primary.level,
         language: parseTalkLanguage(primary.language),
         languageLabel: primary.language,
+        format: group.some((speaker) => speaker.format === "workshop")
+          ? "workshop"
+          : "talk",
+        workshopRequirements: workshopRequirements || undefined,
         speakerSlugs: group.map((speaker) => speaker.slug),
       };
     });
@@ -121,6 +148,22 @@ export function getTalkById(
   }
 
   return talksByLocale[locale].find((talk) => talk.id === talkId);
+}
+
+export function getTalkByTalkKey(
+  talkKey: string,
+  locale: SiteLocale = "en",
+): Talk | undefined {
+  return talksByLocale[locale].find((talk) => talk.talkKey === talkKey);
+}
+
+export function getTalkHrefByTalkKey(
+  talkKey: string,
+  locale: SiteLocale = "en",
+): string | undefined {
+  const talk = getTalkByTalkKey(talkKey, locale);
+
+  return talk ? getTalkHref(talk.id) : undefined;
 }
 
 export function getTalkBySpeakerSlug(
@@ -205,6 +248,29 @@ export function getTalkCountsByLanguage(
   for (const language of talkLanguageOrder) {
     counts[language] = filteredByTrack.filter(
       (talk) => talk.language === language,
+    ).length;
+  }
+
+  return counts;
+}
+
+export function getTalkCountsByFormat(
+  activeTrack: SpeakerTrackFilter = "view-all",
+  locale: SiteLocale = "en",
+): Record<TalkFormatFilter, number> {
+  const talks = getAllTalks(locale);
+  const filteredByTrack =
+    activeTrack === "view-all"
+      ? talks
+      : talks.filter((talk) => talk.tracks.includes(activeTrack));
+
+  const counts = {
+    "view-all": filteredByTrack.length,
+  } as Record<TalkFormatFilter, number>;
+
+  for (const format of talkFormatOrder) {
+    counts[format] = filteredByTrack.filter(
+      (talk) => talk.format === format,
     ).length;
   }
 

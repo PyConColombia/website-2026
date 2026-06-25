@@ -8,7 +8,12 @@ const COUNTRY_FLAG_MAP: Record<string, CountryFlagSource> = {
   Ecuador: { emoji: "🇪🇨" },
   Canada: { emoji: "🇨🇦" },
   Bolivia: { emoji: "🇧🇴" },
+  Chile: { emoji: "🇨🇱" },
   Peru: { emoji: "🇵🇪" },
+  Guatemala: { emoji: "🇬🇹" },
+  Mexico: { emoji: "🇲🇽" },
+  Uruguay: { emoji: "🇺🇾" },
+  Venezuela: { emoji: "🇻🇪" },
   "United States": {
     emoji: "🇺🇸",
     image: "/images/flags/flag-us.svg",

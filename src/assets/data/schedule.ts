@@ -9,6 +9,8 @@ export type ScheduleEvent = {
   title: string;
   displayTitle: string;
   speaker: string;
+  talkKey?: string;
+  keynoteSlug?: string;
   label?: string;
   language?: string[];
 };
@@ -86,6 +88,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Irit Katriel",
     displayTitle: "Irit Katriel",
     speaker: "Irit Katriel",
+    keynoteSlug: "irit-katriel",
     label: "keynote",
   },
   {
@@ -341,6 +344,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Luciano Ramalho",
     displayTitle: "Luciano Ramalho",
     speaker: "Luciano Ramalho",
+    keynoteSlug: "luciano-ramalho",
     label: "keynote",
   },
   {
@@ -382,6 +386,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Anna Pristoupilova",
     displayTitle: "Anna Pristoupilova",
     speaker: "Anna Pristoupilova",
+    keynoteSlug: "anna-pristoupilova",
     label: "keynote",
   },
   {
@@ -642,6 +647,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Malvika Sharan",
     displayTitle: "Malvika Sharan",
     speaker: "Malvika Sharan",
+    keynoteSlug: "malvika-sharan",
     label: "keynote",
   },
   {
@@ -675,6 +681,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     displayTitle:
       "Skills ejecutables: cómo enseñarle a un agente cómo funciona tu empresa",
     speaker: "Johnny Montoya",
+    talkKey: "company-brain-skills",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -686,7 +693,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Workshop: From S3 to AI Agent: Your First Queryable Lakehouse",
     displayTitle: "From S3 to AI Agent: Your First Queryable Lakehouse",
-    speaker: "David Vanegas",
+    speaker: "David Felipe Vanegas Ramírez",
+    talkKey: "from-s3-to-ai-agent",
     label: "Data Engineering",
     language: ["ES"],
   },
@@ -698,7 +706,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Workshop: Tu LLM está sangrando dinero y Python puede pararlo",
     displayTitle: "Tu LLM está sangrando dinero y Python puede pararlo",
-    speaker: "Roberto Bedoya",
+    speaker: "Roberto Bedoya García",
+    talkKey: "llm-observability",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -712,7 +721,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: The Fellowship of Agentic Evaluations: How to evaluate an agent?",
     displayTitle:
       "The Fellowship of Agentic Evaluations: How to evaluate an agent?",
-    speaker: "Maria Rojas / Nicolas Roldan",
+    speaker: "María Fernanda Rojas Castro / Nicolás Roldán Fajardo",
+    talkKey: "fellowship-agentic-evaluations",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -726,7 +736,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: Más allá del Vibe Coding: Spec Driven Development con Code Graphs",
     displayTitle:
       "Más allá del Vibe Coding: Spec Driven Development con Code Graphs",
-    speaker: "Esneider Bravo / Jonathan Vallejo",
+    speaker: "Jonathan Vallejo Muñoz / Esneider Bravo Benítez",
+    talkKey: "spec-driven-code-graphs",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -738,7 +749,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Workshop: Patterns, Protocols and Tactics for Multi-Agent Systems",
     displayTitle: "Patterns, Protocols and Tactics for Multi-Agent Systems",
-    speaker: "Juan Gomez",
+    speaker: "Juan Guillermo Gómez",
+    talkKey: "multi-agent-patterns-protocols",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -752,9 +764,10 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
     displayTitle:
       "Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
-    speaker: "Jose Ortiz",
+    speaker: "José Hernán Ortiz Ocampo / Daniel Sabogal / Isabel Mora",
+    talkKey: "multi-agent-teams-ai-dev",
     label: "Artificial Intelligence",
-    language: ["ES"],
+    language: ["EN"],
   },
   {
     id: "60",
@@ -766,7 +779,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: De ETL a Agentic Workflows: la evolución de la ingeniería de datos en la era de la IA generativa",
     displayTitle:
       "De ETL a Agentic Workflows: la evolución de la ingeniería de datos en la era de la IA generativa",
-    speaker: "Jose Osorio",
+    speaker: "José Arturo Osorio Londoño",
+    talkKey: "etl-agentic-workflows",
     label: "Lovelytics Sponsor",
     language: ["ES"],
   },
@@ -778,7 +792,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Workshop: Future-proof Engineers with AI-DLC",
     displayTitle: "Future-proof Engineers with AI-DLC",
-    speaker: "Jesús Reyes / Carlos Riveros",
+    speaker: "Jesús Alfredo Reyes Vargas / Carlos Alberto Riveros Varela",
+    talkKey: "ai-dlc-future-proof",
     label: "EPAM Sponsor",
     language: ["ES"],
   },
@@ -792,7 +807,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: Dashboards que piensan: construye analítica agéntica con Sigma",
     displayTitle:
       "Dashboards que piensan: construye analítica agéntica con Sigma",
-    speaker: "Francisco Moya",
+    speaker: "Francisco Javier Moya Ortiz",
+    talkKey: "sigma-agentic-dashboards",
     label: "Aimpoint Sponsor",
     language: ["ES"],
   },
@@ -814,7 +830,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Workshop: Stop mocking, start containerizing",
     displayTitle: "Stop mocking, start containerizing",
-    speaker: "Felix Miño",
+    speaker: "Félix Miño",
+    talkKey: "stop-mocking-containerizing",
     label: "Testing",
     language: ["EN"],
   },
@@ -826,7 +843,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Workshop: De Notebook a Producción: MLOps End-to-End en Databricks",
     displayTitle: "De Notebook a Producción: MLOps End-to-End en Databricks",
-    speaker: "Emanuel Zapata",
+    speaker: "Emanuel Zapata Querubín",
+    talkKey: "mlops-databricks",
     label: "MLOps",
     language: ["ES"],
   },
@@ -840,7 +858,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: PyBlend: Towards an AI Food Scientist for Nutritional Product Design",
     displayTitle:
       "PyBlend: Towards an AI Food Scientist for Nutritional Product Design",
-    speaker: "Andrés Vasquéz",
+    speaker: "Andrés Vásquez Restrepo",
+    talkKey: "pyblend-ai-food-scientist",
     label: "Artificial Intelligence",
     language: ["EN"],
   },
@@ -851,10 +870,11 @@ export const scheduleEvents: ScheduleEvent[] = [
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
-      "Workshop: ¡Es ahora o nunca! Dieta de tokens con TOON para agrandar tu bolsillo y que la IA entienda más",
+      "Workshop: ¡Es ahorra o nunca! Dieta de tokens con TOON para agrandar tu bolsillo y que la IA entienda más",
     displayTitle:
-      "¡Es ahora o nunca! Dieta de tokens con TOON para agrandar tu bolsillo y que la IA entienda más",
-    speaker: "Andres Repetto",
+      "¡Es ahorra o nunca! Dieta de tokens con TOON para agrandar tu bolsillo y que la IA entienda más",
+    speaker: "Mauricio Repetto Ferrero",
+    talkKey: "toon-token-diet",
     label: "Artificial Intelligence",
     language: ["ES"],
   },
@@ -867,7 +887,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     title:
       "Workshop: Ingestión de video de alto rendimiento con Python asíncrono",
     displayTitle: "Ingestión de video de alto rendimiento con Python asíncrono",
-    speaker: "Darío Guzmán",
+    speaker: "Darío Jesús Guzmán Durán",
+    talkKey: "async-video-ingestion",
     label: "Computer Vision",
     language: ["ES"],
   },
@@ -881,7 +902,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: LangGraph and Strands Agents: Core Concepts, Patterns, and Tradeoffs",
     displayTitle:
       "LangGraph and Strands Agents: Core Concepts, Patterns, and Tradeoffs",
-    speaker: "Jose Ortiz",
+    speaker: "José Hernán Ortiz Ocampo / Isabel Mora",
+    talkKey: "langgraph-strands-agents",
     label: "LOKA Sponsor",
     language: ["ES"],
   },
@@ -895,7 +917,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: NLP en la práctica: de lingüística de corpus a RAG con Python",
     displayTitle:
       "NLP en la práctica: de lingüística de corpus a RAG con Python",
-    speaker: "Bibiana Suárez / Dora Alzáte",
+    speaker: "Biviana Marcela Suárez Sierra / Dora Cecilia Alzate Gallo",
+    talkKey: "nlp-corpus-rag",
     label: "EAFIT Sponsor",
     language: ["ES"],
   },
@@ -909,7 +932,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: Building Your First AI Tool Server: Creating a Pokédex with FastMCP and Python",
     displayTitle:
       "Building Your First AI Tool Server: Creating a Pokédex with FastMCP and Python",
-    speaker: "Felipe Sanchéz / Daniel Galvis",
+    speaker: "Felipe Sánchez / Daniel Galvis",
+    talkKey: "fastmcp-pokedex",
     label: "Aimpoint Sponsor",
     language: ["ES"],
   },
@@ -942,6 +966,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Tereza Iofciu",
     displayTitle: "Tereza Iofciu",
     speaker: "Tereza Iofciu",
+    keynoteSlug: "tereza-iofciu",
     label: "keynote",
   },
   {
@@ -974,6 +999,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Kari L. Jordan",
     displayTitle: "Kari L. Jordan",
     speaker: "Kari L. Jordan",
+    keynoteSlug: "kari-l-jordan",
     label: "keynote",
   },
   {

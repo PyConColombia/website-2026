@@ -12,6 +12,7 @@ export type NavTitleKey =
   | "keynotes"
   | "sponsors"
   | "scholarships"
+  | "press"
   | "team"
   | "codeOfConduct";
 
@@ -37,6 +38,7 @@ export type SiteMessagesShape = {
     home: string;
     keynoteSpeakers: string;
     gallery: string;
+    press: string;
     team: string;
     descriptionLead: string;
     descriptionJoin: string;
@@ -95,8 +97,19 @@ export type SiteMessagesShape = {
       title: string;
       description: string;
     };
+    keynotes: {
+      title: string;
+      description: string;
+    };
     sponsorDetail: {
       titleSuffix: string;
+    };
+    press: {
+      title: string;
+      description: string;
+      jsonLdName: string;
+      ogImageAlt: string;
+      itemListName: string;
     };
   };
   blocks: typeof blocksEn;
@@ -113,6 +126,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       keynotes: "Keynotes",
       sponsors: "Sponsors",
       scholarships: "Scholarships",
+      press: "Press",
       team: "Team",
       codeOfConduct: "Code of Conduct",
     },
@@ -136,6 +150,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       home: "Home",
       keynoteSpeakers: "Keynote Speakers",
       gallery: "Gallery",
+      press: "Press",
       team: "Team",
       descriptionLead:
         "PyCon Colombia is the annual Colombian conference that gathers professionals, enthusiasts and amateur users of the Python programming language.",
@@ -216,8 +231,22 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Official PyCon Colombia 2026 schedule—talks, keynotes, and workshops in Medellín, July 24–26 at Universidad EAFIT.",
       },
+      keynotes: {
+        title: "Keynotes",
+        description:
+          "Meet the keynote speakers at PyCon Colombia 2026—global Python leaders opening each conference day in Medellín, July 24–26.",
+      },
       sponsorDetail: {
         titleSuffix: "Sponsor",
+      },
+      press: {
+        title: "Press",
+        description:
+          "Press coverage, articles, and posters about PyCon Colombia 2026—Colombia's flagship Python conference, July 24–26 in Medellín at Universidad EAFIT. Read what media and partners are saying about our 10th anniversary edition.",
+        jsonLdName: "Press & Media Coverage — PyCon Colombia 2026",
+        ogImageAlt:
+          "Press and media coverage about PyCon Colombia 2026 in Medellín",
+        itemListName: "PyCon Colombia 2026 press coverage and articles",
       },
     },
     blocks: blocksEn,
@@ -232,6 +261,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       keynotes: "Oradores principales",
       sponsors: "Patrocinadores",
       scholarships: "Becas",
+      press: "Cobertura",
       team: "Equipo",
       codeOfConduct: "Código de conducta",
     },
@@ -255,6 +285,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       home: "Inicio",
       keynoteSpeakers: "Oradores principales",
       gallery: "Galería",
+      press: "Cobertura",
       team: "Equipo",
       descriptionLead:
         "PyCon Colombia es la conferencia anual que reúne a profesionales, entusiastas y usuarios del lenguaje de programación Python en Colombia.",
@@ -335,8 +366,23 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
         description:
           "Agenda oficial de PyCon Colombia 2026—charlas, keynotes y talleres en Medellín, del 24 al 26 de julio en la Universidad EAFIT.",
       },
+      keynotes: {
+        title: "Oradores principales",
+        description:
+          "Conoce a los oradores principales de PyCon Colombia 2026—líderes globales de Python que abren cada día del evento en Medellín, del 24 al 26 de julio.",
+      },
       sponsorDetail: {
         titleSuffix: "Patrocinador",
+      },
+      press: {
+        title: "Cobertura",
+        description:
+          "Cobertura mediática, artículos y pósters sobre PyCon Colombia 2026—la conferencia insignia de Python en Colombia, del 24 al 26 de julio en Medellín en la Universidad EAFIT. Lee lo que medios y aliados dicen de nuestra décima edición.",
+        jsonLdName: "Prensa y cobertura mediática — PyCon Colombia 2026",
+        ogImageAlt:
+          "Cobertura mediática y prensa sobre PyCon Colombia 2026 en Medellín",
+        itemListName:
+          "Cobertura mediática y artículos sobre PyCon Colombia 2026",
       },
     },
     blocks: blocksEs,

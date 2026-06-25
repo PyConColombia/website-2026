@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 
 import SpeakerTrackBadge from "@/components/blocks/speakers/speaker-track-badge";
+import TalkFormatBadge from "@/components/blocks/talks/talk-format-badge";
 import TalkLanguageBadge from "@/components/blocks/talks/talk-language-badge";
 import TalkLevelBadge from "@/components/blocks/talks/talk-level-badge";
 import TalkSpeakersList from "@/components/blocks/talks/talk-speakers-list";
@@ -69,6 +70,7 @@ const TalkDetail = ({ talkId }: TalkDetailProps) => {
                 {talk.talkTitle}
               </h1>
               <div className="flex flex-wrap gap-2">
+                <TalkFormatBadge format={talk.format} />
                 <TalkLevelBadge level={talk.level} asLink />
                 <TalkLanguageBadge language={talk.language} asLink />
               </div>
@@ -84,10 +86,21 @@ const TalkDetail = ({ talkId }: TalkDetailProps) => {
             fade
             blur
             slide={{ direction: "up", offset: 50 }}
-            delay={0.15}
+            delay={0.2}
             transition={{ duration: 0.5 }}
             className="space-y-4"
           >
+            {talk.workshopRequirements ? (
+              <>
+                <h2 className="text-2xl font-semibold">
+                  {t("blocks.talks.workshopRequirements")}
+                </h2>
+                <p className="text-muted-foreground whitespace-pre-line text-base leading-relaxed">
+                  {talk.workshopRequirements}
+                </p>
+                <Separator />
+              </>
+            ) : null}
             <h2 className="text-2xl font-semibold">{speakersHeading}</h2>
             <TalkSpeakersList talk={talk} variant="card" />
           </MotionPreset>
