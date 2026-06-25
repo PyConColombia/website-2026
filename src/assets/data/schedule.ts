@@ -895,7 +895,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: NLP en la práctica: de lingüística de corpus a RAG con Python",
     displayTitle:
       "NLP en la práctica: de lingüística de corpus a RAG con Python",
-    speaker: "Bibiana Suárez / Dora Alzáte",
+    speaker: "Biviana Suárez / Dora Alzáte",
     label: "EAFIT Sponsor",
     language: ["ES"],
   },

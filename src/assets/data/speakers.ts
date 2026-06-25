@@ -279,7 +279,7 @@ const speakerList: SpeakerInput[] = [
     github: "https://github.com/sergioFavio",
     linkedin:
       "https://www.linkedin.com/in/sergio-hern%C3%A1n-valenzuela-c%C3%A1mara-4b965733/",
-    country: "Bolivia",
+    country: "Chile",
     language: "Spanish / Español",
     level: "All / Para todos los niveles",
   },
@@ -374,6 +374,7 @@ const speakerList: SpeakerInput[] = [
     slug: "carlos-andres-osorio-alcalde",
     talkKey: "carlos-andres-osorio-alcalde",
     name: "Carlos Andrés Osorio Alcalde",
+    image: "/images/speakers/carlos-andres-osorio-alcalde.jpg",
     tracks: ["artificial-intelligence", "machine-learning", "data-science"],
     linkedin:
       "https://www.linkedin.com/in/carlos-andr%C3%A9s-osorio-alcalde-1a7ba9137/",
@@ -385,6 +386,7 @@ const speakerList: SpeakerInput[] = [
     slug: "sankalp-gilda",
     talkKey: "sankalp-gilda",
     name: "Sankalp Gilda",
+    image: "/images/speakers/sankalp-gilda.jpg",
     tracks: [
       "artificial-intelligence",
       "data-science",
@@ -401,6 +403,7 @@ const speakerList: SpeakerInput[] = [
     slug: "marcela-hoyos-cano",
     talkKey: "marcela-hoyos-cano",
     name: "Marcela Hoyos Cano",
+    image: "/images/speakers/marcela-hoyos-cano.jpg",
     tracks: ["artificial-intelligence", "data-science"],
     github: "https://github.com/MarcelaHoyos",
     linkedin: "https://www.linkedin.com/in/marcelahoyos1205/",
@@ -412,6 +415,7 @@ const speakerList: SpeakerInput[] = [
     slug: "sebastian-gomez-ahumada",
     talkKey: "llm-judges-dspy",
     name: "Sebastián Gómez Ahumada",
+    image: "/images/speakers/sebastian-gomez-ahumada.jpg",
     tracks: ["artificial-intelligence", "devops", "machine-learning"],
     github: "https://github.com/gomez2608",
     linkedin: "https://www.linkedin.com/in/sebastiangahumada/",
