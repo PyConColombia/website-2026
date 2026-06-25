@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { getAllKeynoteSlugs } from "@/lib/keynotes";
 import { getPosts } from "@/lib/posts";
 import { getSiteUrl } from "@/lib/site-seo";
 import { getAllSpeakerTrackSlugs } from "@/lib/speaker-tracks";
@@ -22,6 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/pricing",
     "/team",
     "/speakers",
+    "/keynotes",
+    ...getAllKeynoteSlugs().map((slug) => `/keynotes/${slug}`),
     "/talks",
     ...getAllSpeakerTrackSlugs().map((slug) => `/talks/${slug}`),
     ...getAllTalkLevelSlugs().map((level) => `/talks/level/${level}`),

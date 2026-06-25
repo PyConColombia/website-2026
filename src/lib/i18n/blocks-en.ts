@@ -4,6 +4,16 @@ export const blocksEn = {
     subtitle: "Meet the voices shaping PyCon Colombia 2026.",
     flagAltPrefix: "Flag of",
   },
+  keynotes: {
+    eyebrow: "Keynotes",
+    title: "Keynote Speakers",
+    subtitle: "Meet the voices shaping PyCon Colombia 2026.",
+    detail: {
+      back: "Back to keynotes",
+      about: "About",
+      schedule: "Schedule",
+    },
+  },
   sponsors: {
     badge: "Sponsors",
     title: "Trusted by industry leaders",
@@ -365,6 +375,7 @@ export const blocksEn = {
     other: "Event",
     viewSpeaker: "View speaker",
     viewWorkshop: "View workshop",
+    viewKeynote: "View keynote",
     footerNote: "Schedule subject to change. Medellín, Colombia.",
   },
   headerUi: {

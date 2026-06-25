@@ -10,6 +10,7 @@ export type ScheduleEvent = {
   displayTitle: string;
   speaker: string;
   talkKey?: string;
+  keynoteSlug?: string;
   label?: string;
   language?: string[];
 };
@@ -87,6 +88,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Irit Katriel",
     displayTitle: "Irit Katriel",
     speaker: "Irit Katriel",
+    keynoteSlug: "irit-katriel",
     label: "keynote",
   },
   {
@@ -342,6 +344,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Luciano Ramalho",
     displayTitle: "Luciano Ramalho",
     speaker: "Luciano Ramalho",
+    keynoteSlug: "luciano-ramalho",
     label: "keynote",
   },
   {
@@ -383,6 +386,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Anna Pristoupilova",
     displayTitle: "Anna Pristoupilova",
     speaker: "Anna Pristoupilova",
+    keynoteSlug: "anna-pristoupilova",
     label: "keynote",
   },
   {
@@ -643,6 +647,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Malvika Sharan",
     displayTitle: "Malvika Sharan",
     speaker: "Malvika Sharan",
+    keynoteSlug: "malvika-sharan",
     label: "keynote",
   },
   {
@@ -759,8 +764,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
     displayTitle:
       "Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
-    speaker:
-      "José Hernán Ortiz Ocampo / Daniel Sabogal / Isabel Mora",
+    speaker: "José Hernán Ortiz Ocampo / Daniel Sabogal / Isabel Mora",
     talkKey: "multi-agent-teams-ai-dev",
     label: "Artificial Intelligence",
     language: ["EN"],
@@ -962,6 +966,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Tereza Iofciu",
     displayTitle: "Tereza Iofciu",
     speaker: "Tereza Iofciu",
+    keynoteSlug: "tereza-iofciu",
     label: "keynote",
   },
   {
@@ -994,6 +999,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Keynote Speaker: Kari L. Jordan",
     displayTitle: "Kari L. Jordan",
     speaker: "Kari L. Jordan",
+    keynoteSlug: "kari-l-jordan",
     label: "keynote",
   },
   {

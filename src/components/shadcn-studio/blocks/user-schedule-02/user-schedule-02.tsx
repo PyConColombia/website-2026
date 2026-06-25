@@ -7,6 +7,7 @@ import {
   MicIcon,
   SearchIcon,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -42,6 +43,7 @@ import {
 } from "@/components/ui/input-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { getKeynoteHref, getLocalizedKeynote } from "@/lib/keynotes";
 import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
 import {
   getTalkByTalkKey,
@@ -49,7 +51,7 @@ import {
   getTalkHrefForSpeaker,
   getTalkSpeakers,
 } from "@/lib/talks";
-import { cn } from "@/lib/utils";
+import { assetPath, cn } from "@/lib/utils";
 
 type ScheduleCardProps = {
   scheduleData: Record<string, DaySchedule>;
@@ -141,11 +143,15 @@ type ScheduleEventCardProps = {
 
 function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
   const category = getScheduleEventCategory(event);
+  const keynote = event.keynoteSlug
+    ? getLocalizedKeynote(event.keynoteSlug, locale)
+    : undefined;
   const talk = event.talkKey
     ? getTalkByTalkKey(event.talkKey, locale)
     : undefined;
   const talkSpeakers = talk ? getTalkSpeakers(talk, locale) : [];
-  const fallbackSpeaker = talkSpeakers.length === 0 ? getSpeakerForEvent(event) : undefined;
+  const fallbackSpeaker =
+    talkSpeakers.length === 0 ? getSpeakerForEvent(event) : undefined;
   const speakerImage = resolveSpeakerImageUrl(
     talkSpeakers[0]?.image ?? fallbackSpeaker?.image,
   );
@@ -154,9 +160,12 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
     : fallbackSpeaker
       ? getTalkHrefForSpeaker(fallbackSpeaker.slug, locale)
       : undefined;
-  const showTalkLink = talkHref !== undefined && category !== "other";
-  const sessionLinkLabel =
-    talk?.format === "workshop"
+  const keynoteHref = keynote ? getKeynoteHref(keynote.slug) : undefined;
+  const sessionHref = keynoteHref ?? talkHref;
+  const showSessionLink = sessionHref !== undefined && category !== "other";
+  const sessionLinkLabel = keynote
+    ? t("blocks.scheduleUi.viewKeynote")
+    : talk?.format === "workshop"
       ? t("blocks.scheduleUi.viewWorkshop")
       : t("blocks.talks.viewTalk");
 
@@ -174,9 +183,9 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
               {getCategoryLabel(category, t)}
             </Badge>
             <h3 className="text-lg font-medium lg:text-xl">
-              {showTalkLink ? (
+              {showSessionLink ? (
                 <Link
-                  href={talkHref}
+                  href={sessionHref}
                   className="underline-offset-4 transition-colors hover:text-primary hover:underline"
                 >
                   {event.displayTitle}
@@ -236,9 +245,36 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
                 </Link>
               </div>
             ))}
-            {showTalkLink ? (
+            {showSessionLink ? (
               <Link
-                href={talkHref}
+                href={sessionHref}
+                className="text-primary w-fit text-sm font-medium underline-offset-4 hover:underline"
+              >
+                {sessionLinkLabel}
+              </Link>
+            ) : null}
+          </div>
+        ) : keynote ? (
+          <div className="flex flex-col gap-2">
+            <Link
+              href={getKeynoteHref(keynote.slug)}
+              className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
+            >
+              <Image
+                src={assetPath(keynote.image)}
+                alt={keynote.name}
+                width={40}
+                height={40}
+                sizes="40px"
+                className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
+              />
+              <p className="text-sm font-medium underline-offset-4 hover:underline">
+                {keynote.name}
+              </p>
+            </Link>
+            {showSessionLink ? (
+              <Link
+                href={sessionHref}
                 className="text-primary w-fit text-sm font-medium underline-offset-4 hover:underline"
               >
                 {sessionLinkLabel}
@@ -263,9 +299,9 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
                 {event.speaker}
               </p>
             </Link>
-            {showTalkLink ? (
+            {showSessionLink ? (
               <Link
-                href={talkHref}
+                href={sessionHref}
                 className="text-primary text-sm font-medium underline-offset-4 hover:underline"
               >
                 {sessionLinkLabel}

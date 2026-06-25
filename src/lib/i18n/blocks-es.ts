@@ -6,6 +6,16 @@ export const blocksEs: BlocksMessages = {
     subtitle: "Conoce las voces que dan forma a PyCon Colombia 2026.",
     flagAltPrefix: "Bandera de",
   },
+  keynotes: {
+    eyebrow: "Oradores principales",
+    title: "Oradores principales",
+    subtitle: "Conoce las voces que dan forma a PyCon Colombia 2026.",
+    detail: {
+      back: "Volver a oradores principales",
+      about: "Acerca de",
+      schedule: "Agenda",
+    },
+  },
   sponsors: {
     badge: "Patrocinadores",
     title: "Respaldados por líderes de la industria",
@@ -370,6 +380,7 @@ export const blocksEs: BlocksMessages = {
     other: "Evento",
     viewSpeaker: "Ver ponente",
     viewWorkshop: "Ver taller",
+    viewKeynote: "Ver keynote",
     footerNote: "Agenda sujeta a cambios. Medellín, Colombia.",
   },
   headerUi: {
