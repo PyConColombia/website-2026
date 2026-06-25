@@ -23,6 +23,8 @@ export const speakerTrackOrder: SpeakerTrack[] = [
   "scientific-computing",
 ];
 
+export type SpeakerFormat = "talk" | "workshop";
+
 export type Speaker = {
   id: number;
   slug: string;
@@ -35,9 +37,14 @@ export type Speaker = {
   country: string;
   language: string;
   level: string;
+  format: SpeakerFormat;
 };
 
-type SpeakerInput = Omit<Speaker, "id">;
+type SpeakerInput = Omit<Speaker, "id" | "format"> & {
+  format?: SpeakerFormat;
+};
+
+import { workshopSpeakerList } from "./workshop-speakers";
 
 const speakerList: SpeakerInput[] = [
   {
@@ -455,6 +462,7 @@ const speakerList: SpeakerInput[] = [
     language: "Spanish / Español",
     level: "All / Para todos los niveles",
   },
+  ...workshopSpeakerList,
 ];
 
 export const speakers: Speaker[] = speakerList
@@ -463,5 +471,6 @@ export const speakers: Speaker[] = speakerList
   )
   .map((speaker, index) => ({
     ...speaker,
+    format: speaker.format ?? "talk",
     id: index + 1,
   }));

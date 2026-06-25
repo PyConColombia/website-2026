@@ -4,6 +4,7 @@ import { ArrowRightIcon, MicIcon } from "lucide-react";
 import Link from "next/link";
 
 import SpeakerTrackBadge from "@/components/blocks/speakers/speaker-track-badge";
+import TalkFormatBadge from "@/components/blocks/talks/talk-format-badge";
 import TalkLanguageBadge from "@/components/blocks/talks/talk-language-badge";
 import TalkLevelBadge from "@/components/blocks/talks/talk-level-badge";
 import TalkSpeakersList from "@/components/blocks/talks/talk-speakers-list";
@@ -42,6 +43,7 @@ const TalkLinkCard = ({ talk }: TalkLinkCardProps) => {
                 {talk.talkTitle}
               </p>
               <div className="flex flex-wrap gap-2">
+                <TalkFormatBadge format={talk.format} />
                 <TalkLevelBadge level={talk.level} />
                 <TalkLanguageBadge language={talk.language} />
               </div>

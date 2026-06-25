@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import type { SpeakerTrack } from "@/assets/data/speakers";
 import SpeakerTrackBadge from "@/components/blocks/speakers/speaker-track-badge";
+import TalkFormatBadge from "@/components/blocks/talks/talk-format-badge";
 import TalkLanguageBadge from "@/components/blocks/talks/talk-language-badge";
 import TalkLevelBadge from "@/components/blocks/talks/talk-level-badge";
 import TalkSpeakersList from "@/components/blocks/talks/talk-speakers-list";
@@ -32,6 +33,11 @@ import {
   speakerTrackStyles,
 } from "@/lib/speaker-tracks";
 import {
+  type TalkFormat,
+  type TalkFormatFilter,
+  talkFormatOrder,
+} from "@/lib/talk-formats";
+import {
   type TalkLanguage,
   type TalkLanguageFilter,
   talkLanguageOrder,
@@ -43,6 +49,7 @@ import {
 } from "@/lib/talk-levels";
 import {
   getAllTalks,
+  getTalkCountsByFormat,
   getTalkCountsByLanguage,
   getTalkCountsByLevel,
   getTalkCountsByTrack,
@@ -81,6 +88,7 @@ const TalkCard = ({ talk }: TalkCardProps) => {
             {talk.talkTitle}
           </h3>
           <div className="pointer-events-auto flex flex-wrap gap-2">
+            <TalkFormatBadge format={talk.format} />
             <TalkLevelBadge level={talk.level} asLink />
             <TalkLanguageBadge language={talk.language} asLink />
           </div>
@@ -124,6 +132,7 @@ const matchesSearch = (
     getLevelLabel(talk.level),
     talk.languageLabel,
     getLanguageLabel(talk.language),
+    talk.format === "workshop" ? "taller workshop" : "charla talk",
     ...speakers.flatMap((speaker) => [speaker.name, speaker.title]),
     ...talk.tracks.map(getTrackLabel),
   ]
@@ -137,10 +146,12 @@ const Talks = ({
   activeTrack,
   activeLevel,
   activeLanguage,
+  activeFormat,
 }: {
   activeTrack?: SpeakerTrack;
   activeLevel?: TalkLevel;
   activeLanguage?: TalkLanguage;
+  activeFormat?: TalkFormat;
 }) => {
   const { locale } = useLanguage();
   const { t } = useTranslations();
@@ -152,6 +163,9 @@ const Talks = ({
   const [selectedLanguage, setSelectedLanguage] = useState<TalkLanguageFilter>(
     activeLanguage ?? "view-all",
   );
+  const [selectedFormat, setSelectedFormat] = useState<TalkFormatFilter>(
+    activeFormat ?? "view-all",
+  );
   const talks = getAllTalks(locale);
   const tracks = getActiveSpeakerTracks();
   const talkCounts = getTalkCountsByTrack(locale);
@@ -160,6 +174,7 @@ const Talks = ({
     activeTrack ?? "view-all",
     locale,
   );
+  const formatCounts = getTalkCountsByFormat(activeTrack ?? "view-all", locale);
   const selectedTrack: SpeakerTrackFilter = activeTrack ?? "view-all";
 
   useEffect(() => {
@@ -170,6 +185,10 @@ const Talks = ({
     setSelectedLanguage(activeLanguage ?? "view-all");
   }, [activeLanguage]);
 
+  useEffect(() => {
+    setSelectedFormat(activeFormat ?? "view-all");
+  }, [activeFormat]);
+
   const getTrackLabel = (track: SpeakerTrack) =>
     t(`blocks.speakers.tracks.${track}`);
 
@@ -178,6 +197,9 @@ const Talks = ({
 
   const formatLanguageLabel = (language: TalkLanguage) =>
     `${t("blocks.talks.languageLabel")} ${t(`blocks.talks.languages.${language}`)}`;
+
+  const formatFormatLabel = (format: TalkFormat) =>
+    `${t("blocks.talks.formatLabel")} ${t(`blocks.talks.formats.${format}`)}`;
 
   const handleTrackChange = (value: string) => {
     router.push(getSpeakerTrackHref(value as SpeakerTrackFilter));
@@ -198,11 +220,14 @@ const Talks = ({
         selectedLevel === "view-all" || talk.level === selectedLevel;
       const matchesLanguage =
         selectedLanguage === "view-all" || talk.language === selectedLanguage;
+      const matchesFormat =
+        selectedFormat === "view-all" || talk.format === selectedFormat;
 
       return (
         matchesTrack &&
         matchesLevel &&
         matchesLanguage &&
+        matchesFormat &&
         matchesSearch(
           talk,
           searchQuery,
@@ -217,6 +242,7 @@ const Talks = ({
     talks,
     searchQuery,
     selectedLanguage,
+    selectedFormat,
     selectedLevel,
     selectedTrack,
     locale,
@@ -289,6 +315,31 @@ const Talks = ({
               inView={false}
               className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap lg:ml-auto lg:max-w-3xl"
             >
+              <Select
+                value={selectedFormat}
+                onValueChange={(value) =>
+                  setSelectedFormat(value as TalkFormatFilter)
+                }
+              >
+                <SelectTrigger
+                  className="h-10 w-full sm:w-52"
+                  aria-label={t("blocks.talks.filterFormatSrOnly")}
+                >
+                  <SelectValue placeholder={t("blocks.talks.filterFormat")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="view-all">
+                    {t("blocks.talks.filterFormat")} ({formatCounts["view-all"]}
+                    )
+                  </SelectItem>
+                  {talkFormatOrder.map((format) => (
+                    <SelectItem key={format} value={format}>
+                      {formatFormatLabel(format)} ({formatCounts[format]})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
               <Select
                 value={selectedLevel}
                 onValueChange={(value) =>

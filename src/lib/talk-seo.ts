@@ -10,6 +10,7 @@ import {
   SITE_NAME,
 } from "@/lib/site-seo";
 import { getSpeakerProfileImageUrl } from "@/lib/speaker-seo";
+import type { TalkFormat } from "@/lib/talk-formats";
 import type { TalkLanguage } from "@/lib/talk-languages";
 import { getTalkLanguageCode } from "@/lib/talk-languages";
 import type { TalkLevel } from "@/lib/talk-levels";
@@ -175,6 +176,24 @@ export function buildTalkLanguagePageMetadata(
   const description = siteMessages[locale].pageMeta.talks.description;
   const canonical = `${getSiteUrl()}/talks/language/${language}`;
   const title = `${label} — PyCon Colombia 2026 Talks`;
+
+  return buildTalkFilterPageMetadata(
+    label,
+    description,
+    canonical,
+    title,
+    locale,
+  );
+}
+
+export function buildTalkFormatPageMetadata(
+  format: TalkFormat,
+  locale: SiteLocale,
+): Metadata {
+  const label = siteMessages[locale].blocks.talks.formats[format];
+  const description = siteMessages[locale].pageMeta.talks.description;
+  const canonical = `${getSiteUrl()}/talks/format/${format}`;
+  const title = `${label} — PyCon Colombia 2026`;
 
   return buildTalkFilterPageMetadata(
     label,

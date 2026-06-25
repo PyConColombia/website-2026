@@ -1,10 +1,12 @@
 import type { SiteLocale } from "@/lib/site-messages";
+import { workshopSpeakerContentByLocale } from "./workshop-speakers-content.locale";
 
 export type SpeakerContent = {
   title: string;
   description: string;
   talkTitle: string;
   talkDescription: string;
+  workshopRequirements?: string;
 };
 
 export type SpeakerContentBySlug = Record<string, SpeakerContent>;
@@ -40,6 +42,7 @@ const julianaJuanTalkEn = {
 export const speakerContentByLocale: Record<SiteLocale, SpeakerContentBySlug> =
   {
     en: {
+      ...workshopSpeakerContentByLocale.en,
       "cristhian-david-recalde-arevalo": {
         title: "Mobile Developer @ HomeTeam Network",
         description:
@@ -305,6 +308,7 @@ export const speakerContentByLocale: Record<SiteLocale, SpeakerContentBySlug> =
       },
     },
     es: {
+      ...workshopSpeakerContentByLocale.es,
       "cristhian-david-recalde-arevalo": {
         title: "Mobile Developer @ HomeTeam Network",
         description:

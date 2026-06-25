@@ -145,7 +145,9 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
               className="space-y-4"
             >
               <h2 className="text-2xl font-semibold">
-                {t("blocks.speakers.detail.talk")}
+                {talk?.format === "workshop"
+                  ? t("blocks.speakers.detail.workshop")
+                  : t("blocks.speakers.detail.talk")}
               </h2>
               {talk ? <TalkLinkCard talk={talk} /> : null}
             </MotionPreset>

@@ -5,6 +5,7 @@ import { getSiteUrl } from "@/lib/site-seo";
 import { getAllSpeakerTrackSlugs } from "@/lib/speaker-tracks";
 import { getAllSpeakerSlugs } from "@/lib/speakers";
 import { getAllSponsorSlugs } from "@/lib/sponsors";
+import { getAllTalkFormatSlugs } from "@/lib/talk-formats";
 import { getAllTalkLanguageSlugs } from "@/lib/talk-languages";
 import { getAllTalkLevelSlugs } from "@/lib/talk-levels";
 import { getAllTalkIds, getTalkHref } from "@/lib/talks";
@@ -24,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/talks",
     ...getAllSpeakerTrackSlugs().map((slug) => `/talks/${slug}`),
     ...getAllTalkLevelSlugs().map((level) => `/talks/level/${level}`),
+    ...getAllTalkFormatSlugs().map((format) => `/talks/format/${format}`),
     ...getAllTalkLanguageSlugs().map(
       (language) => `/talks/language/${language}`,
     ),

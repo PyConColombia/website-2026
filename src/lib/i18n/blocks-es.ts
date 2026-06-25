@@ -130,6 +130,7 @@ export const blocksEs: BlocksMessages = {
       back: "Volver a ponentes",
       about: "Acerca de",
       talk: "Charla",
+      workshop: "Taller",
       country: "País",
       language: "Idioma",
       level: "Nivel",
@@ -310,12 +311,20 @@ export const blocksEs: BlocksMessages = {
     emptyTitle: "No se encontraron charlas",
     filterLevel: "Todos los niveles",
     filterLevelSrOnly: "Filtrar por nivel",
+    filterFormat: "Todos los formatos",
+    filterFormatSrOnly: "Filtrar por formato",
     filterLanguage: "Todos los idiomas",
     filterLanguageSrOnly: "Filtrar por idioma",
     emptyDescription:
       "Prueba otro término de búsqueda, track, nivel o idioma para explorar más sesiones.",
     levelLabel: "NIVEL:",
+    formatLabel: "FORMATO:",
     languageLabel: "IDIOMA:",
+    formats: {
+      talk: "Charla",
+      workshop: "Taller",
+    },
+    workshopRequirements: "Requisitos del taller",
     languages: {
       spanish: "Español",
       english: "Inglés",

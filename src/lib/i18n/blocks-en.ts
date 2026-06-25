@@ -125,7 +125,8 @@ export const blocksEn = {
     detail: {
       back: "Back to speakers",
       about: "About",
-      talk: "Talk",
+      talk: "Session",
+      workshop: "Workshop",
       country: "Country",
       language: "Language",
       level: "Level",
@@ -305,12 +306,20 @@ export const blocksEn = {
     emptyTitle: "No talks found",
     filterLevel: "All levels",
     filterLevelSrOnly: "Filter by level",
+    filterFormat: "All formats",
+    filterFormatSrOnly: "Filter by format",
     filterLanguage: "All languages",
     filterLanguageSrOnly: "Filter by language",
     emptyDescription:
       "Try a different search term, track, level, or language filter to explore more sessions.",
     levelLabel: "LEVEL:",
+    formatLabel: "FORMAT:",
     languageLabel: "LANGUAGE:",
+    formats: {
+      talk: "Talk",
+      workshop: "Workshop",
+    },
+    workshopRequirements: "Workshop requirements",
     languages: {
       spanish: "Spanish",
       english: "English",
