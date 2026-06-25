@@ -150,6 +150,22 @@ export function getTalkById(
   return talksByLocale[locale].find((talk) => talk.id === talkId);
 }
 
+export function getTalkByTalkKey(
+  talkKey: string,
+  locale: SiteLocale = "en",
+): Talk | undefined {
+  return talksByLocale[locale].find((talk) => talk.talkKey === talkKey);
+}
+
+export function getTalkHrefByTalkKey(
+  talkKey: string,
+  locale: SiteLocale = "en",
+): string | undefined {
+  const talk = getTalkByTalkKey(talkKey, locale);
+
+  return talk ? getTalkHref(talk.id) : undefined;
+}
+
 export function getTalkBySpeakerSlug(
   slug: string,
   locale: SiteLocale = "en",

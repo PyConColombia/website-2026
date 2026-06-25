@@ -43,7 +43,12 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
-import { getTalkHrefForSpeaker } from "@/lib/talks";
+import {
+  getTalkByTalkKey,
+  getTalkHref,
+  getTalkHrefForSpeaker,
+  getTalkSpeakers,
+} from "@/lib/talks";
 import { cn } from "@/lib/utils";
 
 type ScheduleCardProps = {
@@ -131,14 +136,29 @@ type ScheduleDayDate = (typeof scheduleDays)[number]["date"];
 type ScheduleEventCardProps = {
   event: ScheduleEvent;
   t: (key: string) => string;
+  locale: "en" | "es";
 };
 
-function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
+function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
   const category = getScheduleEventCategory(event);
-  const speaker = getSpeakerForEvent(event);
-  const speakerImage = resolveSpeakerImageUrl(speaker?.image);
-  const talkHref = speaker ? getTalkHrefForSpeaker(speaker.slug) : undefined;
+  const talk = event.talkKey
+    ? getTalkByTalkKey(event.talkKey, locale)
+    : undefined;
+  const talkSpeakers = talk ? getTalkSpeakers(talk, locale) : [];
+  const fallbackSpeaker = talkSpeakers.length === 0 ? getSpeakerForEvent(event) : undefined;
+  const speakerImage = resolveSpeakerImageUrl(
+    talkSpeakers[0]?.image ?? fallbackSpeaker?.image,
+  );
+  const talkHref = talk
+    ? getTalkHref(talk.id)
+    : fallbackSpeaker
+      ? getTalkHrefForSpeaker(fallbackSpeaker.slug, locale)
+      : undefined;
   const showTalkLink = talkHref !== undefined && category !== "other";
+  const sessionLinkLabel =
+    talk?.format === "workshop"
+      ? t("blocks.scheduleUi.viewWorkshop")
+      : t("blocks.talks.viewTalk");
 
   return (
     <Card className="h-full transition-all">
@@ -191,14 +211,48 @@ function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
           <span>{event.room}</span>
         </div>
 
-        {speaker ? (
+        {talkSpeakers.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            {talkSpeakers.map((speaker) => (
+              <div
+                key={speaker.slug}
+                className="flex flex-wrap items-center gap-3"
+              >
+                <Link
+                  href={`/speakers/${speaker.slug}`}
+                  className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
+                >
+                  <SpeakerImage
+                    src={speaker.image}
+                    alt={speaker.name}
+                    width={40}
+                    height={40}
+                    sizes="40px"
+                    className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
+                  />
+                  <p className="text-sm font-medium underline-offset-4 hover:underline">
+                    {speaker.name}
+                  </p>
+                </Link>
+              </div>
+            ))}
+            {showTalkLink ? (
+              <Link
+                href={talkHref}
+                className="text-primary w-fit text-sm font-medium underline-offset-4 hover:underline"
+              >
+                {sessionLinkLabel}
+              </Link>
+            ) : null}
+          </div>
+        ) : fallbackSpeaker ? (
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href={`/speakers/${speaker.slug}`}
+              href={`/speakers/${fallbackSpeaker.slug}`}
               className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
             >
               <SpeakerImage
-                src={speaker.image}
+                src={fallbackSpeaker.image}
                 alt={event.speaker}
                 width={40}
                 height={40}
@@ -214,7 +268,7 @@ function ScheduleEventCard({ event, t }: ScheduleEventCardProps) {
                 href={talkHref}
                 className="text-primary text-sm font-medium underline-offset-4 hover:underline"
               >
-                {t("blocks.talks.viewTalk")}
+                {sessionLinkLabel}
               </Link>
             ) : null}
           </div>
@@ -465,7 +519,12 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
                     )}
                   >
                     {group.map((event) => (
-                      <ScheduleEventCard key={event.id} event={event} t={t} />
+                      <ScheduleEventCard
+                        key={event.id}
+                        event={event}
+                        t={t}
+                        locale={locale}
+                      />
                     ))}
                   </div>
                 ))

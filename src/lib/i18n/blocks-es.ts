@@ -369,6 +369,7 @@ export const blocksEs: BlocksMessages = {
     workshop: "Taller",
     other: "Evento",
     viewSpeaker: "Ver ponente",
+    viewWorkshop: "Ver taller",
     footerNote: "Agenda sujeta a cambios. Medellín, Colombia.",
   },
   headerUi: {

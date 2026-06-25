@@ -364,6 +364,7 @@ export const blocksEn = {
     workshop: "Workshop",
     other: "Event",
     viewSpeaker: "View speaker",
+    viewWorkshop: "View workshop",
     footerNote: "Schedule subject to change. Medellín, Colombia.",
   },
   headerUi: {
