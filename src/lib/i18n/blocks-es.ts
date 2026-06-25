@@ -105,6 +105,11 @@ export const blocksEs: BlocksMessages = {
       title: "Voluntarios",
       roles: {
         "valerie-arismendy": "Co-host de auditorio",
+        "jesus-mena": "Co-host de auditorio",
+        "yurley-sanchez-florez": "Co-host de auditorio",
+        "veruzka-borges": "Co-host de auditorio",
+        "juan-camilo-velasquez": "Padrino Keynotes",
+        "mateo-usme-valencia": "Padrino Keynotes",
       },
     },
   },

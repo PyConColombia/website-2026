@@ -101,6 +101,11 @@ export const blocksEn = {
       title: "Volunteers",
       roles: {
         "valerie-arismendy": "Auditorium Co-host",
+        "jesus-mena": "Auditorium Co-host",
+        "yurley-sanchez-florez": "Auditorium Co-host",
+        "veruzka-borges": "Auditorium Co-host",
+        "juan-camilo-velasquez": "Keynotes Patron",
+        "mateo-usme-valencia": "Keynotes Patron",
       },
     },
   },

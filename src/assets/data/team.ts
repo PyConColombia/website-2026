@@ -100,4 +100,39 @@ export const volunteerMembers: VolunteerMember[] = [
     image: "/images/avatar/valerie-arismendy.webp",
     linkedin: "https://www.linkedin.com/in/valerie-arismendy/",
   },
+  {
+    slug: "jesus-mena",
+    name: "Jesús Mena",
+    role: "Co-host de auditorio",
+    image: "/images/avatar/jesus-mena.jpg",
+    linkedin: "https://www.linkedin.com/in/yisuslinkon",
+  },
+  {
+    slug: "yurley-sanchez-florez",
+    name: "Yurley Katterine Sanchez Florez",
+    role: "Co-host de auditorio",
+    linkedin: "https://www.linkedin.com/in/yursksf1/",
+  },
+  {
+    slug: "veruzka-borges",
+    name: "Veruzka Borges",
+    role: "Co-host de auditorio",
+    image: "/images/avatar/veruzka-borges.png",
+    linkedin: "https://www.linkedin.com/in/veruzkab/",
+  },
+  {
+    slug: "juan-camilo-velasquez",
+    name: "Juan Camilo Velásquez Pérez",
+    role: "Padrino Keynotes",
+    image: "/images/avatar/juan-velasquez.png",
+    linkedin:
+      "https://www.linkedin.com/in/juan-camilo-vel%C3%A1squez-p%C3%A9rez/",
+  },
+  {
+    slug: "mateo-usme-valencia",
+    name: "Mateo Usme Valencia",
+    role: "Padrino Keynotes",
+    image: "/images/avatar/mateo-usme.png",
+    linkedin: "https://www.linkedin.com/in/mateousmevalencia/",
+  },
 ];
