@@ -361,4 +361,25 @@ export const blocksEs: BlocksMessages = {
     brandAlt: "PyCon Colombia",
     menuSrOnly: "Menú",
   },
+  pressCoverage: {
+    eyebrow: "Prensa y medios",
+    title: "Cobertura de la comunidad",
+    subtitle:
+      "Artículos, pósters y notas sobre PyCon Colombia 2026 publicados por medios, blogs y aliados.",
+    tabs: {
+      all: "Todos",
+      articles: "Artículos",
+      posters: "Pósters",
+    },
+    types: {
+      article: "Artículo",
+      poster: "Póster",
+    },
+    searchPlaceholder: "Buscar cobertura...",
+    searchSrOnly: "Buscar cobertura mediática",
+    readExternalSrOnly: "Leer artículo en sitio externo",
+    emptyTitle: "No se encontró cobertura",
+    emptyDescription:
+      "Prueba otro término de búsqueda o filtro para explorar más artículos y pósters.",
+  },
 };

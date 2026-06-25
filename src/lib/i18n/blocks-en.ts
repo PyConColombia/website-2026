@@ -356,6 +356,27 @@ export const blocksEn = {
     brandAlt: "PyCon Colombia",
     menuSrOnly: "Menu",
   },
+  pressCoverage: {
+    eyebrow: "Press & media",
+    title: "Coverage from the community",
+    subtitle:
+      "Articles, posters, and stories about PyCon Colombia 2026 published by media outlets, blogs, and partners.",
+    tabs: {
+      all: "All",
+      articles: "Articles",
+      posters: "Posters",
+    },
+    types: {
+      article: "Article",
+      poster: "Poster",
+    },
+    searchPlaceholder: "Search coverage...",
+    searchSrOnly: "Search press coverage",
+    readExternalSrOnly: "Read article on external site",
+    emptyTitle: "No coverage found",
+    emptyDescription:
+      "Try a different search term or filter to explore more articles and posters.",
+  },
 };
 
 export type BlocksMessages = typeof blocksEn;

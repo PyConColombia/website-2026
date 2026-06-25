@@ -12,6 +12,7 @@ export type NavTitleKey =
   | "keynotes"
   | "sponsors"
   | "scholarships"
+  | "press"
   | "team"
   | "codeOfConduct";
 
@@ -37,6 +38,7 @@ export type SiteMessagesShape = {
     home: string;
     keynoteSpeakers: string;
     gallery: string;
+    press: string;
     team: string;
     descriptionLead: string;
     descriptionJoin: string;
@@ -98,6 +100,11 @@ export type SiteMessagesShape = {
     sponsorDetail: {
       titleSuffix: string;
     };
+    press: {
+      title: string;
+      description: string;
+      jsonLdName: string;
+    };
   };
   blocks: typeof blocksEn;
 };
@@ -113,6 +120,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       keynotes: "Keynotes",
       sponsors: "Sponsors",
       scholarships: "Scholarships",
+      press: "Press",
       team: "Team",
       codeOfConduct: "Code of Conduct",
     },
@@ -136,6 +144,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       home: "Home",
       keynoteSpeakers: "Keynote Speakers",
       gallery: "Gallery",
+      press: "Press",
       team: "Team",
       descriptionLead:
         "PyCon Colombia is the annual Colombian conference that gathers professionals, enthusiasts and amateur users of the Python programming language.",
@@ -219,6 +228,12 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       sponsorDetail: {
         titleSuffix: "Sponsor",
       },
+      press: {
+        title: "Press",
+        description:
+          "Articles, posters, and media coverage about PyCon Colombia 2026 from outlets, blogs, and community partners.",
+        jsonLdName: "Press — PyCon Colombia 2026",
+      },
     },
     blocks: blocksEn,
   },
@@ -232,6 +247,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       keynotes: "Oradores principales",
       sponsors: "Patrocinadores",
       scholarships: "Becas",
+      press: "Cobertura",
       team: "Equipo",
       codeOfConduct: "Código de conducta",
     },
@@ -255,6 +271,7 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       home: "Inicio",
       keynoteSpeakers: "Oradores principales",
       gallery: "Galería",
+      press: "Cobertura",
       team: "Equipo",
       descriptionLead:
         "PyCon Colombia es la conferencia anual que reúne a profesionales, entusiastas y usuarios del lenguaje de programación Python en Colombia.",
@@ -337,6 +354,12 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
       },
       sponsorDetail: {
         titleSuffix: "Patrocinador",
+      },
+      press: {
+        title: "Cobertura",
+        description:
+          "Artículos, pósters y cobertura mediática sobre PyCon Colombia 2026 de medios, blogs y aliados de la comunidad.",
+        jsonLdName: "Cobertura — PyCon Colombia 2026",
       },
     },
     blocks: blocksEs,

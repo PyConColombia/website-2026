@@ -130,6 +130,10 @@ const Footer = () => {
       href: "/#gallery",
     },
     {
+      label: t("footer.press"),
+      href: "/press",
+    },
+    {
       label: t("footer.team"),
       href: "/team",
     },
