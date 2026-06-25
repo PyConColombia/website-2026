@@ -170,6 +170,12 @@ export const sponsorTiers: SponsorTier[] = [
         logo: "/images/sponsors/guapacho.svg",
         href: "https://guapacho.com/",
       },
+      {
+        name: "ENTER.CO",
+        slug: "enter-co",
+        logo: "/images/sponsors/enter-co.svg",
+        href: "https://www.enter.co/",
+      },
     ],
   },
 ];

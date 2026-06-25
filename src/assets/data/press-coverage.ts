@@ -15,6 +15,22 @@ export type PressCoverageItem = {
 
 export const pressCoverageItems: PressCoverageItem[] = [
   {
+    id: "enter-pycon-2026-referentes-mundiales",
+    type: "article",
+    outlet: "ENTER.CO",
+    url: "https://www.enter.co/especiales/dev/pycon-colombia-2026-reunira-a-referentes-mundiales-de-python-e-inteligencia-artificial/",
+    image: "/images/press/enter-pycon-2026.webp",
+    publishedAt: "2026-06-25",
+    title: {
+      en: "PyCon Colombia 2026 will bring together global leaders in Python and artificial intelligence",
+      es: "PyCon Colombia 2026 reunirá a referentes mundiales de Python e inteligencia artificial",
+    },
+    description: {
+      en: "For its tenth edition, PyCon Colombia 2026 gathers CPython core developers, bioinformatics researchers, and AI specialists in Medellín, July 24–26 at Universidad EAFIT, with nearly 600 attendees expected.",
+      es: "En su décima edición, PyCon Colombia 2026 reunirá en Medellín a desarrolladores del núcleo de CPython, investigadores en bioinformática y especialistas en IA, del 24 al 26 de julio en la Universidad EAFIT, con cerca de 600 asistentes esperados.",
+    },
+  },
+  {
     id: "guapacho-pycon-2026-decima-edicion",
     type: "article",
     outlet: "Guapacho.com",

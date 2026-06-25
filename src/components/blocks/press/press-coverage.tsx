@@ -42,7 +42,7 @@ const PressCoverageCard = ({ item }: { item: PressCoverageItem }) => {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-2.5 overflow-hidden rounded-lg"
+            className="overflow-hidden rounded-lg"
           >
             <Image
               src={assetPath(item.image)}
@@ -52,6 +52,15 @@ const PressCoverageCard = ({ item }: { item: PressCoverageItem }) => {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
+          </Link>
+
+          <Link
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-primary/80 text-xl font-bold tracking-tight transition-colors md:text-2xl"
+          >
+            {item.outlet}
           </Link>
 
           <div className="flex items-center justify-between gap-1.5">
@@ -70,10 +79,6 @@ const PressCoverageCard = ({ item }: { item: PressCoverageItem }) => {
               {t(`blocks.pressCoverage.types.${item.type}`)}
             </Badge>
           </div>
-
-          <p className="text-muted-foreground text-sm font-medium">
-            {item.outlet}
-          </p>
 
           <Link
             href={item.url}
