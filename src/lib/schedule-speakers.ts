@@ -2,7 +2,12 @@ import type { ScheduleEvent } from "@/assets/data/schedule";
 import { speakers } from "@/assets/data/speakers";
 import { getLocalizedKeynote } from "@/lib/keynotes";
 import type { SiteLocale } from "@/lib/site-messages";
-import { getTalkByTalkKey, getTalkSpeakers } from "@/lib/talks";
+import {
+  getTalkBySpeakerSlug,
+  getTalkByTalkKey,
+  getTalkSpeakers,
+  type Talk,
+} from "@/lib/talks";
 
 export type ScheduleEventSpeaker = {
   name: string;
@@ -40,6 +45,44 @@ function resolveSpeakerByName(name: string): ScheduleEventSpeaker {
   };
 }
 
+function getSpeakerNamesFromEvent(event: ScheduleEvent) {
+  return event.speaker
+    .split("/")
+    .map((name) => name.trim())
+    .filter(Boolean);
+}
+
+export function resolveTalkForScheduleEvent(
+  event: ScheduleEvent,
+  locale: SiteLocale,
+): Talk | undefined {
+  if (event.keynoteSlug) {
+    return undefined;
+  }
+
+  if (event.talkKey) {
+    return getTalkByTalkKey(event.talkKey, locale);
+  }
+
+  const expectedFormat = event.type === "workshop" ? "workshop" : "talk";
+
+  for (const name of getSpeakerNamesFromEvent(event)) {
+    const speaker = speakersByNormalizedName.get(normalizeSpeakerName(name));
+
+    if (!speaker) {
+      continue;
+    }
+
+    const talk = getTalkBySpeakerSlug(speaker.slug, locale);
+
+    if (talk?.format === expectedFormat) {
+      return talk;
+    }
+  }
+
+  return undefined;
+}
+
 export function resolveSpeakersForScheduleEvent(
   event: ScheduleEvent,
   locale: SiteLocale,
@@ -59,24 +102,20 @@ export function resolveSpeakersForScheduleEvent(
     }
   }
 
-  if (event.talkKey) {
-    const talk = getTalkByTalkKey(event.talkKey, locale);
+  const talk = resolveTalkForScheduleEvent(event, locale);
 
-    if (talk) {
-      return getTalkSpeakers(talk, locale).map((speaker) => ({
-        name: speaker.name,
-        slug: speaker.slug,
-        image: speaker.image,
-        href: `/speakers/${speaker.slug}`,
-      }));
-    }
+  if (talk) {
+    return getTalkSpeakers(talk, locale).map((speaker) => ({
+      name: speaker.name,
+      slug: speaker.slug,
+      image: speaker.image,
+      href: `/speakers/${speaker.slug}`,
+    }));
   }
 
-  return event.speaker
-    .split("/")
-    .map((name) => name.trim())
-    .filter(Boolean)
-    .map((name) => resolveSpeakerByName(name));
+  return getSpeakerNamesFromEvent(event).map((name) =>
+    resolveSpeakerByName(name),
+  );
 }
 
 export function shouldShowScheduleSpeakers(
