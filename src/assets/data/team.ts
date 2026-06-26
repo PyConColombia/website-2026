@@ -146,4 +146,16 @@ export const volunteerMembers: VolunteerMember[] = [
     image: "/images/avatar/mateo-usme.png",
     linkedin: "https://www.linkedin.com/in/mateousmevalencia/",
   },
+  {
+    slug: "alejandro-alvarez",
+    name: "Alejandro Alvarez",
+    role: "Redes Sociales",
+    image: "/images/avatar/alejandro-alvarez.jpg",
+  },
+  {
+    slug: "jenny-acuna",
+    name: "Jenny Acuña",
+    role: "Logística",
+    image: "/images/avatar/jenny-acuna.jpeg",
+  },
 ];

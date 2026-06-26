@@ -45,6 +45,7 @@ import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getKeynoteHref, getLocalizedKeynote } from "@/lib/keynotes";
 import {
   resolveSpeakersForScheduleEvent,
+  resolveTalkForScheduleEvent,
   shouldShowScheduleSpeakers,
 } from "@/lib/schedule-speakers";
 import {
@@ -54,7 +55,7 @@ import {
 } from "@/lib/schedule-sponsors";
 import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
 import type { SponsorWithTier } from "@/lib/sponsors";
-import { getTalkByTalkKey, getTalkHref } from "@/lib/talks";
+import { getTalkHref } from "@/lib/talks";
 import { assetPath, cn } from "@/lib/utils";
 
 type ScheduleCardProps = {
@@ -227,9 +228,7 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
   const keynote = event.keynoteSlug
     ? getLocalizedKeynote(event.keynoteSlug, locale)
     : undefined;
-  const talk = event.talkKey
-    ? getTalkByTalkKey(event.talkKey, locale)
-    : undefined;
+  const talk = resolveTalkForScheduleEvent(event, locale);
   const eventSpeakers = resolveSpeakersForScheduleEvent(event, locale);
   const showSpeakers =
     shouldShowScheduleSpeakers(event, eventSpeakers) &&

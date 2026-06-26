@@ -118,6 +118,8 @@ export const blocksEs: BlocksMessages = {
         "veruzka-borges": "Co-host de auditorio",
         "juan-camilo-velasquez": "Padrino Keynotes",
         "mateo-usme-valencia": "Padrino Keynotes",
+        "alejandro-alvarez": "Redes Sociales",
+        "jenny-acuna": "Logística",
       },
     },
   },
