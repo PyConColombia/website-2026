@@ -1,4 +1,8 @@
 export const blocksEn = {
+  common: {
+    share: "Share",
+    shareCopied: "Copied!",
+  },
   benefits: {
     title: "Keynote Speakers",
     subtitle: "Meet the voices shaping PyCon Colombia 2026.",
@@ -97,10 +101,19 @@ export const blocksEn = {
       "A community-driven team working to bring speakers, sponsors, volunteers, and attendees together.",
     cardDescription:
       "Part of the team bringing speakers, sponsors, volunteers, and attendees together for PyCon Colombia 2026.",
+    detail: {
+      back: "Back to team",
+      about: "About",
+    },
     volunteers: {
       title: "Volunteers",
       roles: {
         "valerie-arismendy": "Auditorium Co-host",
+        "jesus-mena": "Auditorium Co-host",
+        "yurley-sanchez-florez": "Auditorium Co-host",
+        "veruzka-borges": "Auditorium Co-host",
+        "juan-camilo-velasquez": "Keynotes Patron",
+        "mateo-usme-valencia": "Keynotes Patron",
       },
     },
   },

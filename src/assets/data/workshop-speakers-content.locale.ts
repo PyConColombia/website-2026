@@ -142,13 +142,6 @@ export const workshopSpeakerContentByLocale: Record<
       talkTitle: "",
       talkDescription: "",
     },
-    "isabel-mora-2": {
-      title: "Junior ML Engineer @ Loka",
-      description:
-        "Isabel is a Junior ML Engineer at Loka contributing to the development and evaluation of agentic AI systems. She brings fresh perspectives to agent design and implementation challenges, and is passionate about making complex AI frameworks understandable and accessible.",
-      talkTitle: "",
-      talkDescription: "",
-    },
     "jose-arturo-osorio-londono": {
       title: "Data Engineer @ Lovelytics",
       description:
@@ -424,13 +417,6 @@ export const workshopSpeakerContentByLocale: Record<
       title: "Pasante de Datos y ML @ Loka",
       description:
         "Daniel es Pasante de Datos y ML en Loka apasionado por explorar la intersección de los sistemas multi-agente y los flujos de trabajo de desarrollo de software. Aporta curiosidad e ideas frescas al futuro de la programación asistida por IA, y comparte sus aprendizajes construyendo con herramientas de IA de vanguardia.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "isabel-mora-2": {
-      title: "Ingeniera Junior de ML @ Loka",
-      description:
-        "Isabel es Ingeniera Junior de ML en Loka contribuyendo al desarrollo y evaluación de sistemas de IA agéntica. Aporta perspectivas frescas a los desafíos de diseño e implementación de agentes, y es apasionada por hacer que los frameworks complejos de IA sean comprensibles y accesibles.",
       talkTitle: "",
       talkDescription: "",
     },

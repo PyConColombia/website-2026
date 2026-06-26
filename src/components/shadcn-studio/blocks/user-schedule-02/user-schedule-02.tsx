@@ -17,9 +17,8 @@ import {
   type ScheduleEvent,
   scheduleDays,
 } from "@/assets/data/schedule";
-import { speakers } from "@/assets/data/speakers";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,13 +43,18 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getKeynoteHref, getLocalizedKeynote } from "@/lib/keynotes";
-import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
 import {
-  getTalkByTalkKey,
-  getTalkHref,
-  getTalkHrefForSpeaker,
-  getTalkSpeakers,
-} from "@/lib/talks";
+  resolveSpeakersForScheduleEvent,
+  shouldShowScheduleSpeakers,
+} from "@/lib/schedule-speakers";
+import {
+  getSponsorHref,
+  isSponsorSpaceEvent,
+  resolveSponsorForScheduleEvent,
+} from "@/lib/schedule-sponsors";
+import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
+import type { SponsorWithTier } from "@/lib/sponsors";
+import { getTalkByTalkKey, getTalkHref } from "@/lib/talks";
 import { assetPath, cn } from "@/lib/utils";
 
 type ScheduleCardProps = {
@@ -58,18 +62,6 @@ type ScheduleCardProps = {
 };
 
 type ScheduleTab = "all" | "talks" | "keynotes" | "workshops";
-
-const speakerByName = new Map(
-  speakers.map((speaker) => [speaker.name.toLowerCase(), speaker]),
-);
-
-function getSpeakerForEvent(event: ScheduleEvent) {
-  const direct = speakerByName.get(event.speaker.toLowerCase());
-  if (direct) return direct;
-
-  const firstSpeaker = event.speaker.split("/")[0]?.trim().toLowerCase();
-  return firstSpeaker ? speakerByName.get(firstSpeaker) : undefined;
-}
 
 function parseHourStart(hour: string) {
   const match = hour.match(/^(\d{1,2}):(\d{2})/);
@@ -141,26 +133,109 @@ type ScheduleEventCardProps = {
   locale: "en" | "es";
 };
 
+type ScheduleSpeakerRowProps = {
+  speaker: {
+    name: string;
+    slug?: string;
+    image?: string;
+    href?: string;
+  };
+  useKeynoteImage?: boolean;
+};
+
+function ScheduleSpeakerRow({
+  speaker,
+  useKeynoteImage = false,
+}: ScheduleSpeakerRowProps) {
+  const imageUrl = resolveSpeakerImageUrl(speaker.image);
+  const content = (
+    <>
+      {imageUrl ? (
+        useKeynoteImage ? (
+          <Image
+            src={imageUrl}
+            alt={speaker.name}
+            width={40}
+            height={40}
+            sizes="40px"
+            className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
+          />
+        ) : (
+          <SpeakerImage
+            src={speaker.image}
+            alt={speaker.name}
+            width={40}
+            height={40}
+            sizes="40px"
+            className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
+          />
+        )
+      ) : (
+        <Avatar className="ring-background size-10 ring-2">
+          <AvatarFallback className="text-xs">
+            <MicIcon className="size-4" />
+          </AvatarFallback>
+        </Avatar>
+      )}
+      <p className="text-sm font-medium underline-offset-4 group-hover:underline">
+        {speaker.name}
+      </p>
+    </>
+  );
+
+  if (speaker.href) {
+    return (
+      <Link
+        href={speaker.href}
+        className="group flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className="flex w-fit items-center gap-2.5">{content}</div>;
+}
+
+function ScheduleSponsorRow({ sponsor }: { sponsor: SponsorWithTier }) {
+  if (!sponsor.slug || !sponsor.logo) {
+    return null;
+  }
+
+  return (
+    <Link
+      href={getSponsorHref(sponsor.slug)}
+      className="group border-border/60 bg-muted/30 hover:bg-muted/50 flex w-fit max-w-full items-center rounded-md border px-3 py-2 transition-colors"
+      aria-label={sponsor.name}
+    >
+      <Image
+        src={assetPath(sponsor.logo)}
+        alt=""
+        aria-hidden
+        width={160}
+        height={48}
+        sizes="160px"
+        className="h-8 w-auto max-w-32 object-contain sm:max-w-36"
+      />
+    </Link>
+  );
+}
+
 function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
   const category = getScheduleEventCategory(event);
+  const sponsor = resolveSponsorForScheduleEvent(event);
   const keynote = event.keynoteSlug
     ? getLocalizedKeynote(event.keynoteSlug, locale)
     : undefined;
   const talk = event.talkKey
     ? getTalkByTalkKey(event.talkKey, locale)
     : undefined;
-  const talkSpeakers = talk ? getTalkSpeakers(talk, locale) : [];
-  const fallbackSpeaker =
-    talkSpeakers.length === 0 ? getSpeakerForEvent(event) : undefined;
-  const speakerImage = resolveSpeakerImageUrl(
-    talkSpeakers[0]?.image ?? fallbackSpeaker?.image,
-  );
-  const talkHref = talk
-    ? getTalkHref(talk.id)
-    : fallbackSpeaker
-      ? getTalkHrefForSpeaker(fallbackSpeaker.slug, locale)
-      : undefined;
+  const eventSpeakers = resolveSpeakersForScheduleEvent(event, locale);
+  const showSpeakers =
+    shouldShowScheduleSpeakers(event, eventSpeakers) &&
+    !(sponsor && isSponsorSpaceEvent(event));
   const keynoteHref = keynote ? getKeynoteHref(keynote.slug) : undefined;
+  const talkHref = talk ? getTalkHref(talk.id) : undefined;
   const sessionHref = keynoteHref ?? talkHref;
   const showSessionLink = sessionHref !== undefined && category !== "other";
   const sessionLinkLabel = keynote
@@ -220,30 +295,14 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
           <span>{event.room}</span>
         </div>
 
-        {talkSpeakers.length > 0 ? (
+        {showSpeakers ? (
           <div className="flex flex-col gap-2">
-            {talkSpeakers.map((speaker) => (
-              <div
-                key={speaker.slug}
-                className="flex flex-wrap items-center gap-3"
-              >
-                <Link
-                  href={`/speakers/${speaker.slug}`}
-                  className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
-                >
-                  <SpeakerImage
-                    src={speaker.image}
-                    alt={speaker.name}
-                    width={40}
-                    height={40}
-                    sizes="40px"
-                    className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
-                  />
-                  <p className="text-sm font-medium underline-offset-4 hover:underline">
-                    {speaker.name}
-                  </p>
-                </Link>
-              </div>
+            {eventSpeakers.map((speaker) => (
+              <ScheduleSpeakerRow
+                key={`${event.id}-${speaker.slug ?? speaker.name}`}
+                speaker={speaker}
+                useKeynoteImage={Boolean(event.keynoteSlug)}
+              />
             ))}
             {showSessionLink ? (
               <Link
@@ -254,73 +313,9 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
               </Link>
             ) : null}
           </div>
-        ) : keynote ? (
-          <div className="flex flex-col gap-2">
-            <Link
-              href={getKeynoteHref(keynote.slug)}
-              className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
-            >
-              <Image
-                src={assetPath(keynote.image)}
-                alt={keynote.name}
-                width={40}
-                height={40}
-                sizes="40px"
-                className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
-              />
-              <p className="text-sm font-medium underline-offset-4 hover:underline">
-                {keynote.name}
-              </p>
-            </Link>
-            {showSessionLink ? (
-              <Link
-                href={sessionHref}
-                className="text-primary w-fit text-sm font-medium underline-offset-4 hover:underline"
-              >
-                {sessionLinkLabel}
-              </Link>
-            ) : null}
-          </div>
-        ) : fallbackSpeaker ? (
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href={`/speakers/${fallbackSpeaker.slug}`}
-              className="flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
-            >
-              <SpeakerImage
-                src={fallbackSpeaker.image}
-                alt={event.speaker}
-                width={40}
-                height={40}
-                sizes="40px"
-                className="ring-background size-10 shrink-0 rounded-full object-cover object-top ring-2"
-              />
-              <p className="text-sm font-medium underline-offset-4 hover:underline">
-                {event.speaker}
-              </p>
-            </Link>
-            {showSessionLink ? (
-              <Link
-                href={sessionHref}
-                className="text-primary text-sm font-medium underline-offset-4 hover:underline"
-              >
-                {sessionLinkLabel}
-              </Link>
-            ) : null}
-          </div>
-        ) : (
-          <div className="flex items-center gap-2.5">
-            <Avatar className="ring-background size-10 ring-2">
-              {speakerImage ? (
-                <AvatarImage src={speakerImage} alt={event.speaker} />
-              ) : null}
-              <AvatarFallback className="text-xs">
-                <MicIcon className="size-4" />
-              </AvatarFallback>
-            </Avatar>
-            <p className="text-sm font-medium">{event.speaker}</p>
-          </div>
-        )}
+        ) : null}
+
+        {sponsor ? <ScheduleSponsorRow sponsor={sponsor} /> : null}
       </CardContent>
     </Card>
   );

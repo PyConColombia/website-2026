@@ -10,6 +10,7 @@ import { getAllTalkFormatSlugs } from "@/lib/talk-formats";
 import { getAllTalkLanguageSlugs } from "@/lib/talk-languages";
 import { getAllTalkLevelSlugs } from "@/lib/talk-levels";
 import { getAllTalkIds, getTalkHref } from "@/lib/talks";
+import { getAllTeamMemberSlugs } from "@/lib/team";
 
 export const dynamic = "force-static";
 
@@ -22,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/press",
     "/pricing",
     "/team",
+    ...getAllTeamMemberSlugs().map((slug) => `/team/${slug}`),
     "/speakers",
     "/keynotes",
     ...getAllKeynoteSlugs().map((slug) => `/keynotes/${slug}`),

@@ -21,7 +21,6 @@ const workshopSpeakerImages: Record<string, string> = {
   "jose-hernan-ortiz-ocampo-2":
     "/images/speakers/jose-hernan-ortiz-ocampo-2.jpg",
   "isabel-mora": "/images/speakers/isabel-mora.jpg",
-  "isabel-mora-2": "/images/speakers/isabel-mora-2.jpg",
   "daniel-sabogal": "/images/speakers/daniel-sabogal.jpg",
   "jose-arturo-osorio-londono":
     "/images/speakers/jose-arturo-osorio-londono.jpg",
@@ -224,16 +223,6 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "daniel-sabogal",
     talkKey: "multi-agent-teams-ai-dev",
     name: "Daniel Sabogal",
-    tracks: ["artificial-intelligence"] as SpeakerTrack[],
-    country: "Colombia",
-    language: "English / Inglés",
-    level: "All / Para todos los niveles",
-    format: "workshop",
-  },
-  {
-    slug: "isabel-mora-2",
-    talkKey: "multi-agent-teams-ai-dev",
-    name: "Isabel Mora",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "English / Inglés",

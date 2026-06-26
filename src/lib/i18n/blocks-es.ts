@@ -1,6 +1,10 @@
 import type { BlocksMessages } from "@/lib/i18n/blocks-en";
 
 export const blocksEs: BlocksMessages = {
+  common: {
+    share: "Compartir",
+    shareCopied: "¡Copiado!",
+  },
   benefits: {
     title: "Oradores principales",
     subtitle: "Conoce las voces que dan forma a PyCon Colombia 2026.",
@@ -101,10 +105,19 @@ export const blocksEs: BlocksMessages = {
       "Un equipo impulsado por la comunidad que une ponentes, patrocinadores, voluntarios y asistentes.",
     cardDescription:
       "Parte del equipo que acerca ponentes, patrocinadores, voluntarios y asistentes a PyCon Colombia 2026.",
+    detail: {
+      back: "Volver al equipo",
+      about: "Acerca de",
+    },
     volunteers: {
       title: "Voluntarios",
       roles: {
         "valerie-arismendy": "Co-host de auditorio",
+        "jesus-mena": "Co-host de auditorio",
+        "yurley-sanchez-florez": "Co-host de auditorio",
+        "veruzka-borges": "Co-host de auditorio",
+        "juan-camilo-velasquez": "Padrino Keynotes",
+        "mateo-usme-valencia": "Padrino Keynotes",
       },
     },
   },
