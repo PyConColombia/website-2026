@@ -121,6 +121,7 @@ export const volunteerMembers: VolunteerMember[] = [
     slug: "yurley-sanchez-florez",
     name: "Yurley Katterine Sanchez Florez",
     role: "Co-host de auditorio",
+    image: "/images/avatar/yurley-sanchez.jpg",
     linkedin: "https://www.linkedin.com/in/yursksf1/",
   },
   {
