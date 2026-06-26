@@ -6,6 +6,7 @@ import Link from "next/link";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { getSpeakerProfileHref } from "@/lib/speakers";
 import { getTalkSpeakers, type Talk } from "@/lib/talks";
 
 type TalkSpeakersListProps = {
@@ -74,7 +75,7 @@ const TalkSpeakersList = ({
               className="bg-card gap-0 overflow-hidden rounded-[14px] border border-border/60 py-0 shadow-xs"
             >
               <Link
-                href={`/speakers/${speaker.slug}`}
+                href={getSpeakerProfileHref(speaker.slug)}
                 className="group block"
                 aria-label={speaker.name}
               >
@@ -120,7 +121,7 @@ const TalkSpeakersList = ({
         return (
           <Link
             key={speaker.slug}
-            href={`/speakers/${speaker.slug}`}
+            href={getSpeakerProfileHref(speaker.slug)}
             className="pointer-events-auto flex min-w-0 items-center gap-3 transition-opacity hover:opacity-80"
             aria-label={speaker.name}
           >

@@ -2,6 +2,7 @@ import type { ScheduleEvent } from "@/assets/data/schedule";
 import { speakers } from "@/assets/data/speakers";
 import { getLocalizedKeynote } from "@/lib/keynotes";
 import type { SiteLocale } from "@/lib/site-messages";
+import { getSpeakerProfileHref } from "@/lib/speakers";
 import {
   getTalkBySpeakerSlug,
   getTalkByTalkKey,
@@ -41,7 +42,7 @@ function resolveSpeakerByName(name: string): ScheduleEventSpeaker {
     name: match.name,
     slug: match.slug,
     image: match.image,
-    href: `/speakers/${match.slug}`,
+    href: getSpeakerProfileHref(match.slug),
   };
 }
 
@@ -109,7 +110,7 @@ export function resolveSpeakersForScheduleEvent(
       name: speaker.name,
       slug: speaker.slug,
       image: speaker.image,
-      href: `/speakers/${speaker.slug}`,
+      href: getSpeakerProfileHref(speaker.slug),
     }));
   }
 

@@ -766,7 +766,7 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
     speaker: "José Hernán Ortiz Ocampo / Daniel Sabogal",
     talkKey: "multi-agent-teams-ai-dev",
-    label: "Artificial Intelligence",
+    label: "LOKA Sponsor",
     language: ["EN"],
   },
   {

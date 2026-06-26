@@ -10,10 +10,12 @@ import {
 } from "@/lib/site-seo";
 import { resolveSpeakerImageSource } from "@/lib/speaker-image.server";
 import {
+  getCanonicalSpeakerSlug,
   getLocalizedSpeaker,
   getSpeakerBySlug,
   type LocalizedSpeaker,
 } from "@/lib/speakers";
+import { getTalksBySpeakerSlug } from "@/lib/talks";
 
 const META_DESCRIPTION_MAX = 200;
 const DEFAULT_OG_IMAGE = "/images/cfp.jpg";
@@ -28,7 +30,20 @@ function truncateMetaDescription(text: string): string {
   return `${normalized.slice(0, META_DESCRIPTION_MAX - 1).trimEnd()}…`;
 }
 
-function buildSpeakerDescription(speaker: LocalizedSpeaker): string {
+function buildSpeakerDescription(
+  speaker: LocalizedSpeaker,
+  locale: SiteLocale,
+): string {
+  const talks = getTalksBySpeakerSlug(speaker.slug, locale);
+
+  if (talks.length > 1) {
+    const sessionTitles = talks.map((talk) => `"${talk.talkTitle}"`).join(", ");
+
+    return truncateMetaDescription(
+      `${speaker.name} presents ${sessionTitles} at PyCon Colombia 2026. ${speaker.description}`,
+    );
+  }
+
   return truncateMetaDescription(
     `${speaker.name} presents "${speaker.talkTitle}" at PyCon Colombia 2026. ${speaker.talkDescription}`,
   );
@@ -56,13 +71,14 @@ function buildSpeakerKeywords(
 
 /** Absolute URL for the speaker profile photo when one exists. */
 export function getSpeakerProfileImageUrl(slug: string): string | undefined {
-  const speaker = getSpeakerBySlug(slug);
+  const canonicalSlug = getCanonicalSpeakerSlug(slug);
+  const speaker = getSpeakerBySlug(canonicalSlug) ?? getSpeakerBySlug(slug);
 
   if (!speaker) {
     return undefined;
   }
 
-  const resolved = resolveSpeakerImageSource(speaker.image, slug);
+  const resolved = resolveSpeakerImageSource(speaker.image, speaker.slug);
 
   if (!resolved) {
     return undefined;
@@ -84,20 +100,26 @@ export function buildSpeakerPageMetadata(
   slug: string,
   locale: SiteLocale,
 ): Metadata {
-  const speaker = getLocalizedSpeaker(slug, locale);
+  const canonicalSlug = getCanonicalSpeakerSlug(slug);
+  const speaker = getLocalizedSpeaker(canonicalSlug, locale);
 
   if (!speaker) {
     return {};
   }
 
-  const description = buildSpeakerDescription(speaker);
-  const canonical = `${getSiteUrl()}/speakers/${slug}`;
-  const ogTitle = `${speaker.name} — ${speaker.talkTitle} | PyCon Colombia 2026`;
-  const imageUrl = getSpeakerShareImageUrl(slug);
+  const talks = getTalksBySpeakerSlug(canonicalSlug, locale);
+  const description = buildSpeakerDescription(speaker, locale);
+  const canonical = `${getSiteUrl()}/speakers/${canonicalSlug}`;
+  const primaryTalkTitle =
+    talks.length > 1
+      ? `${talks.length} sessions`
+      : (talks[0]?.talkTitle ?? speaker.talkTitle);
+  const ogTitle = `${speaker.name} — ${primaryTalkTitle} | PyCon Colombia 2026`;
+  const imageUrl = getSpeakerShareImageUrl(canonicalSlug);
   const imageAlt = `${speaker.name} — PyCon Colombia 2026 speaker`;
 
   return {
-    title: `${speaker.name} — ${speaker.talkTitle}`,
+    title: `${speaker.name} — ${primaryTalkTitle}`,
     description,
     keywords: buildSpeakerKeywords(speaker, locale),
     alternates: {

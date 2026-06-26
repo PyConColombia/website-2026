@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import CTASection from "@/components/blocks/cta/cta";
 import SpeakerDetail from "@/components/blocks/speakers/speaker-detail";
@@ -12,7 +12,11 @@ import {
   buildSpeakerPageMetadata,
   getSpeakerShareImageUrl,
 } from "@/lib/speaker-seo";
-import { getAllSpeakerSlugs, getLocalizedSpeaker } from "@/lib/speakers";
+import {
+  getAllSpeakerSlugs,
+  getCanonicalSpeakerSlug,
+  getLocalizedSpeaker,
+} from "@/lib/speakers";
 
 export async function generateStaticParams() {
   return getAllSpeakerSlugs().map((slug) => ({ slug }));
@@ -36,8 +40,13 @@ const SpeakerSlugPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
+  const canonicalSlug = getCanonicalSpeakerSlug(slug);
 
-  const speaker = getLocalizedSpeaker(slug, STATIC_PRERENDER_LOCALE);
+  if (slug !== canonicalSlug) {
+    redirect(`/speakers/${canonicalSlug}`);
+  }
+
+  const speaker = getLocalizedSpeaker(canonicalSlug, STATIC_PRERENDER_LOCALE);
 
   if (!speaker) {
     notFound();
@@ -87,7 +96,7 @@ const SpeakerSlugPage = async ({
 
   return (
     <>
-      <SpeakerDetail slug={slug} />
+      <SpeakerDetail slug={canonicalSlug} />
 
       <SectionSeparator />
 

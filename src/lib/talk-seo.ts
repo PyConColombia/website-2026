@@ -10,6 +10,7 @@ import {
   SITE_NAME,
 } from "@/lib/site-seo";
 import { getSpeakerProfileImageUrl } from "@/lib/speaker-seo";
+import { getSpeakerProfileHref } from "@/lib/speakers";
 import type { TalkFormat } from "@/lib/talk-formats";
 import type { TalkLanguage } from "@/lib/talk-languages";
 import { getTalkLanguageCode } from "@/lib/talk-languages";
@@ -269,7 +270,7 @@ export function buildTalkJsonLd(
       return {
         "@type": "Person",
         name: speaker.name,
-        url: `${getSiteUrl()}/speakers/${speaker.slug}`,
+        url: `${getSiteUrl()}${getSpeakerProfileHref(speaker.slug)}`,
         jobTitle: speaker.title,
         ...(imageUrl ? { image: imageUrl } : {}),
       };
