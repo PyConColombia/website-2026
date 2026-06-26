@@ -156,6 +156,7 @@ export const blocksEs: BlocksMessages = {
       about: "Acerca de",
       talk: "Charla",
       workshop: "Taller",
+      sessions: "Sesiones",
       country: "País",
       language: "Idioma",
       level: "Nivel",

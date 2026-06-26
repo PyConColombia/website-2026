@@ -152,6 +152,7 @@ export const blocksEn = {
       about: "About",
       talk: "Session",
       workshop: "Workshop",
+      sessions: "Sessions",
       country: "Country",
       language: "Language",
       level: "Level",

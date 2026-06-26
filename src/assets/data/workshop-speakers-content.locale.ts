@@ -95,9 +95,9 @@ export const workshopSpeakerContentByLocale: Record<
         "Go beyond vibe coding and learn how to use specifications and code graphs to guide AI-assisted development. In this workshop, you'll discover how structured specs and dependency graphs give AI coding tools the context they need to produce coherent, maintainable code. We'll work with real Python projects to define specs, generate code graphs, and wire them into your AI-assisted workflow—resulting in code that actually makes sense architecturally.",
     },
     "esneider-bravo-benitez": {
-      title: "Software Engineer @ Lendingfront",
+      title: "Software Engineer @ Muno Labs",
       description:
-        "Esneider is a Software Engineer at Lendingfront with a focus on code generation tools and developer experience. He explores how structured specifications can guide AI coding assistants to produce more reliable outputs, and contributes to open-source tooling for spec-driven AI development.",
+        "Esneider is a Software Engineer at Muno Labs with a focus on code generation tools and developer experience. He explores how structured specifications can guide AI coding assistants to produce more reliable outputs, and contributes to open-source tooling for spec-driven AI development.",
       talkTitle: "Beyond Vibe Coding: Spec Driven Development with Code Graphs",
       talkDescription:
         "Go beyond vibe coding and learn how to use specifications and code graphs to guide AI-assisted development. In this workshop, you'll discover how structured specs and dependency graphs give AI coding tools the context they need to produce coherent, maintainable code. We'll work with real Python projects to define specs, generate code graphs, and wire them into your AI-assisted workflow—resulting in code that actually makes sense architecturally.",
@@ -372,9 +372,9 @@ export const workshopSpeakerContentByLocale: Record<
         "Ve más allá del vibe coding y aprende a usar especificaciones y grafos de código para guiar el desarrollo asistido por IA. En este taller descubrirás cómo las especificaciones estructuradas y los grafos de dependencias dan a las herramientas de codificación de IA el contexto que necesitan para producir código coherente y mantenible. Trabajaremos con proyectos reales de Python para definir specs, generar grafos de código y conectarlos a tu flujo de trabajo asistido por IA, resultando en código que tiene sentido arquitectónicamente.",
     },
     "esneider-bravo-benitez": {
-      title: "Ingeniero de Software @ Lendingfront",
+      title: "Ingeniero de Software @ Muno Labs",
       description:
-        "Esneider es Ingeniero de Software en Lendingfront con enfoque en herramientas de generación de código y experiencia del desarrollador. Explora cómo las especificaciones estructuradas pueden guiar a los asistentes de codificación de IA para producir resultados más confiables, y contribuye a herramientas de código abierto para el desarrollo dirigido por especificaciones.",
+        "Esneider es Ingeniero de Software en Muno Labs con enfoque en herramientas de generación de código y experiencia del desarrollador. Explora cómo las especificaciones estructuradas pueden guiar a los asistentes de codificación de IA para producir resultados más confiables, y contribuye a herramientas de código abierto para el desarrollo dirigido por especificaciones.",
       talkTitle:
         "Más allá del Vibe Coding: Spec Driven Development con Code Graphs",
       talkDescription:

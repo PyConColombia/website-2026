@@ -14,7 +14,7 @@ import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getLocalizedSpeaker } from "@/lib/speakers";
-import { getTalkBySpeakerSlug } from "@/lib/talks";
+import { getTalksBySpeakerSlug } from "@/lib/talks";
 
 type SpeakerDetailProps = {
   slug: string;
@@ -27,8 +27,8 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
     () => getLocalizedSpeaker(slug, locale),
     [slug, locale],
   );
-  const talk = useMemo(
-    () => getTalkBySpeakerSlug(slug, locale),
+  const talks = useMemo(
+    () => getTalksBySpeakerSlug(slug, locale),
     [slug, locale],
   );
 
@@ -145,11 +145,19 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
               className="space-y-4"
             >
               <h2 className="text-2xl font-semibold">
-                {talk?.format === "workshop"
-                  ? t("blocks.speakers.detail.workshop")
-                  : t("blocks.speakers.detail.talk")}
+                {talks.length > 1
+                  ? t("blocks.speakers.detail.sessions")
+                  : talks[0]?.format === "workshop"
+                    ? t("blocks.speakers.detail.workshop")
+                    : t("blocks.speakers.detail.talk")}
               </h2>
-              {talk ? <TalkLinkCard talk={talk} /> : null}
+              {talks.length > 0 ? (
+                <div className="space-y-4">
+                  {talks.map((talk) => (
+                    <TalkLinkCard key={talk.id} talk={talk} />
+                  ))}
+                </div>
+              ) : null}
             </MotionPreset>
           </div>
         </div>

@@ -10,8 +10,9 @@ import {
   type SpeakerTrackFilter,
 } from "@/lib/speaker-tracks";
 import {
-  getSpeakerBySlug,
+  getLocalizedSpeaker,
   getSpeakerContent,
+  getSpeakerSlugAliases,
   type LocalizedSpeaker,
 } from "@/lib/speakers";
 import {
@@ -170,25 +171,37 @@ export function getTalkBySpeakerSlug(
   slug: string,
   locale: SiteLocale = "en",
 ): Talk | undefined {
-  return talksByLocale[locale].find((talk) => talk.speakerSlugs.includes(slug));
+  return getTalksBySpeakerSlug(slug, locale)[0];
+}
+
+export function getTalksBySpeakerSlug(
+  slug: string,
+  locale: SiteLocale = "en",
+): Talk[] {
+  const aliases = new Set(getSpeakerSlugAliases(slug));
+
+  return talksByLocale[locale].filter((talk) =>
+    talk.speakerSlugs.some((speakerSlug) => aliases.has(speakerSlug)),
+  );
 }
 
 export function getTalkSpeakers(
   talk: Talk,
   locale: SiteLocale = "en",
 ): LocalizedSpeaker[] {
-  return talk.speakerSlugs
-    .map((slug) => {
-      const speaker = getSpeakerBySlug(slug);
-      const content = getSpeakerContent(slug, locale);
+  const seen = new Set<string>();
 
-      if (!speaker || !content) {
-        return undefined;
+  return talk.speakerSlugs
+    .map((slug) => getLocalizedSpeaker(slug, locale))
+    .filter((speaker): speaker is LocalizedSpeaker => {
+      if (!speaker || seen.has(speaker.slug)) {
+        return false;
       }
 
-      return { ...speaker, ...content };
-    })
-    .filter((speaker): speaker is LocalizedSpeaker => speaker !== undefined);
+      seen.add(speaker.slug);
+
+      return true;
+    });
 }
 
 export function isTalkId(value: string, locale: SiteLocale = "en"): boolean {
@@ -203,9 +216,9 @@ export function getTalkHrefForSpeaker(
   slug: string,
   locale: SiteLocale = "en",
 ): string | undefined {
-  const talk = getTalkBySpeakerSlug(slug, locale);
+  const talks = getTalksBySpeakerSlug(slug, locale);
 
-  return talk ? getTalkHref(talk.id) : undefined;
+  return talks[0] ? getTalkHref(talks[0].id) : undefined;
 }
 
 export function getTalkCountsByLevel(
