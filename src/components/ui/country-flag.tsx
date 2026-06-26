@@ -18,9 +18,9 @@ type CountryFlagProps = {
 };
 
 const sizeClasses = {
-  sm: "size-7 text-xl",
-  md: "size-9 text-2xl",
-  lg: "size-11 text-3xl",
+  sm: "size-7",
+  md: "size-9",
+  lg: "size-11",
 } as const;
 
 const imageSizes = {
@@ -38,36 +38,21 @@ export function CountryFlag({
   const flag = getCountryFlag(country);
   const alt = `${t("blocks.benefits.flagAltPrefix")} ${country}`;
 
-  if (flag.image) {
-    return (
-      <span
-        className={cn(
-          "border-border/60 bg-background inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-xs",
-          sizeClasses[size],
-          className,
-        )}
-      >
-        <Image
-          src={assetPath(flag.image)}
-          alt={alt}
-          width={imageSizes[size]}
-          height={imageSizes[size]}
-          className="size-full object-cover"
-        />
-      </span>
-    );
-  }
-
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center leading-none",
+        "border-border/60 bg-background inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-xs",
         sizeClasses[size],
         className,
       )}
-      aria-hidden="true"
     >
-      {flag.emoji}
+      <Image
+        src={assetPath(flag.image)}
+        alt={alt}
+        width={imageSizes[size]}
+        height={imageSizes[size]}
+        className="size-full object-cover"
+      />
     </span>
   );
 }
