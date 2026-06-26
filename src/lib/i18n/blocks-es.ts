@@ -1,6 +1,10 @@
 import type { BlocksMessages } from "@/lib/i18n/blocks-en";
 
 export const blocksEs: BlocksMessages = {
+  common: {
+    share: "Compartir",
+    shareCopied: "¡Copiado!",
+  },
   benefits: {
     title: "Oradores principales",
     subtitle: "Conoce las voces que dan forma a PyCon Colombia 2026.",
@@ -101,8 +105,6 @@ export const blocksEs: BlocksMessages = {
       "Un equipo impulsado por la comunidad que une ponentes, patrocinadores, voluntarios y asistentes.",
     cardDescription:
       "Parte del equipo que acerca ponentes, patrocinadores, voluntarios y asistentes a PyCon Colombia 2026.",
-    share: "Compartir",
-    shareCopied: "¡Copiado!",
     detail: {
       back: "Volver al equipo",
       about: "Acerca de",

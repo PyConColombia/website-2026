@@ -10,6 +10,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CountryFlagTooltip } from "@/components/ui/country-flag";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { Separator } from "@/components/ui/separator";
+import ShareLinkButton from "@/components/ui/share-link-button";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { getAllLocalizedSpeakers, type LocalizedSpeaker } from "@/lib/speakers";
 import { cn } from "@/lib/utils";
@@ -122,6 +124,9 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => (
         </div>
       </div>
     </CardContent>
+    <div className="pointer-events-none absolute right-3 bottom-3 z-30">
+      <ShareLinkButton path={`/speakers/${speaker.slug}`} />
+    </div>
   </Card>
 );
 
@@ -131,79 +136,81 @@ const Speakers = () => {
   const speakerList = useMemo(() => getAllLocalizedSpeakers(locale), [locale]);
 
   return (
-    <section id="speakers" className="py-8 sm:py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl space-y-12 overflow-hidden px-4 sm:px-6 md:space-y-16 lg:space-y-24 lg:px-8">
-        <div className="space-y-4 text-center">
-          <MotionPreset
-            fade
-            blur
-            slide={{ direction: "up", offset: 50 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Badge
-              variant="outline"
-              className="bg-background text-sm font-normal"
+    <TooltipProvider>
+      <section id="speakers" className="py-8 sm:py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl space-y-12 overflow-hidden px-4 sm:px-6 md:space-y-16 lg:space-y-24 lg:px-8">
+          <div className="space-y-4 text-center">
+            <MotionPreset
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              transition={{ duration: 0.5 }}
             >
-              {t("blocks.speakers.eyebrow")}
-            </Badge>
-          </MotionPreset>
+              <Badge
+                variant="outline"
+                className="bg-background text-sm font-normal"
+              >
+                {t("blocks.speakers.eyebrow")}
+              </Badge>
+            </MotionPreset>
+
+            <MotionPreset
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              delay={0.2}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className="mx-auto max-w-3xl text-3xl font-semibold md:text-4xl lg:text-5xl">
+                {t("blocks.speakers.titlePrefix")}{" "}
+                <span className="relative z-10">
+                  <span>{t("blocks.speakers.titleHighlight")}</span>
+                  <span
+                    className="bg-primary absolute bottom-1 left-0 -z-10 h-px w-full"
+                    aria-hidden="true"
+                  />
+                </span>{" "}
+                {t("blocks.speakers.titleSuffix")}
+              </h1>
+            </MotionPreset>
+
+            <MotionPreset
+              fade
+              blur
+              slide={{ direction: "up", offset: 50 }}
+              delay={0.4}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
+                {t("blocks.speakers.subtitle")}
+              </p>
+            </MotionPreset>
+          </div>
 
           <MotionPreset
             fade
-            blur
-            slide={{ direction: "up", offset: 50 }}
-            delay={0.2}
+            slide={{ direction: "down", offset: 50 }}
+            delay={0.3}
+            inView={false}
             transition={{ duration: 0.5 }}
+            className={speakerGridClassName}
+            motionProps={{ id: "speakers-grid" }}
           >
-            <h1 className="mx-auto max-w-3xl text-3xl font-semibold md:text-4xl lg:text-5xl">
-              {t("blocks.speakers.titlePrefix")}{" "}
-              <span className="relative z-10">
-                <span>{t("blocks.speakers.titleHighlight")}</span>
-                <span
-                  className="bg-primary absolute bottom-1 left-0 -z-10 h-px w-full"
-                  aria-hidden="true"
-                />
-              </span>{" "}
-              {t("blocks.speakers.titleSuffix")}
-            </h1>
-          </MotionPreset>
-
-          <MotionPreset
-            fade
-            blur
-            slide={{ direction: "up", offset: 50 }}
-            delay={0.4}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-              {t("blocks.speakers.subtitle")}
-            </p>
+            {speakerList.map((speaker, index) => (
+              <div
+                key={speaker.slug}
+                className={cn(
+                  "h-full w-full",
+                  getCenteredRowClassName(index, speakerList.length),
+                )}
+              >
+                <SpeakerCard speaker={speaker} />
+              </div>
+            ))}
           </MotionPreset>
         </div>
-
-        <MotionPreset
-          fade
-          slide={{ direction: "down", offset: 50 }}
-          delay={0.3}
-          inView={false}
-          transition={{ duration: 0.5 }}
-          className={speakerGridClassName}
-          motionProps={{ id: "speakers-grid" }}
-        >
-          {speakerList.map((speaker, index) => (
-            <div
-              key={speaker.slug}
-              className={cn(
-                "h-full w-full",
-                getCenteredRowClassName(index, speakerList.length),
-              )}
-            >
-              <SpeakerCard speaker={speaker} />
-            </div>
-          ))}
-        </MotionPreset>
-      </div>
-    </section>
+      </section>
+    </TooltipProvider>
   );
 };
 

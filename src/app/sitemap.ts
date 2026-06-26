@@ -9,6 +9,7 @@ import { getAllSponsorSlugs } from "@/lib/sponsors";
 import { getAllTalkFormatSlugs } from "@/lib/talk-formats";
 import { getAllTalkLanguageSlugs } from "@/lib/talk-languages";
 import { getAllTalkLevelSlugs } from "@/lib/talk-levels";
+import { getAllTalkIds, getTalkHref } from "@/lib/talks";
 import { getAllTeamMemberSlugs } from "@/lib/team";
 
 export const dynamic = "force-static";

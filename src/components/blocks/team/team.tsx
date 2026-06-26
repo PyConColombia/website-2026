@@ -1,8 +1,7 @@
 "use client";
 
-import { GithubIcon, Link2Icon, LinkedinIcon } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 import {
   type TeamMember,
@@ -15,14 +14,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import PersonImage from "@/components/ui/person-image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import ShareLinkButton from "@/components/ui/share-link-button";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { useTranslations } from "@/contexts/language-context";
-import { getSiteUrl } from "@/lib/site-seo";
 import { getTeamMemberHref } from "@/lib/team";
 import { cn } from "@/lib/utils";
 
@@ -33,55 +27,6 @@ const formatRole = (role: string) => {
   const normalizedRole = role.toLocaleLowerCase();
 
   return normalizedRole.charAt(0).toLocaleUpperCase() + normalizedRole.slice(1);
-};
-
-const TeamMemberShareButton = ({ slug }: { slug: string }) => {
-  const { t } = useTranslations();
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!copied) {
-      return;
-    }
-
-    const timeoutId = window.setTimeout(() => setCopied(false), 2000);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [copied]);
-
-  const handleShare = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const url = `${getSiteUrl()}${getTeamMemberHref(slug)}`;
-
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-    } catch {
-      window.prompt(t("blocks.team.share"), url);
-    }
-  };
-
-  return (
-    <Tooltip open={copied ? true : undefined}>
-      <TooltipTrigger asChild>
-        <Button
-          type="button"
-          size="icon"
-          variant="secondary"
-          className="pointer-events-auto size-8 rounded-full shadow-sm"
-          onClick={handleShare}
-          aria-label={t("blocks.team.share")}
-        >
-          <Link2Icon className="size-4" />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent side="top">
-        {copied ? t("blocks.team.shareCopied") : t("blocks.team.share")}
-      </TooltipContent>
-    </Tooltip>
-  );
 };
 
 const TeamMemberSocialLinks = ({ member }: { member: TeamMember }) => (
@@ -153,7 +98,7 @@ const TeamMemberCard = ({
             className="mx-auto aspect-square h-76 w-full object-cover transition-transform duration-200 group-hover:scale-105"
           />
           <div className="pointer-events-none absolute right-3 bottom-3 z-20">
-            <TeamMemberShareButton slug={member.slug} />
+            <ShareLinkButton path={getTeamMemberHref(member.slug)} />
           </div>
         </div>
         <div className="flex items-center gap-1 p-5">
