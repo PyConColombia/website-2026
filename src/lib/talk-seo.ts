@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import type { SpeakerTrack } from "@/assets/data/speakers";
+import { buildTalkEventJsonLd } from "@/lib/event-jsonld";
 import type { SiteLocale } from "@/lib/site-messages";
 import { siteMessages } from "@/lib/site-messages";
 import {
@@ -10,7 +11,6 @@ import {
   SITE_NAME,
 } from "@/lib/site-seo";
 import { getSpeakerProfileImageUrl } from "@/lib/speaker-seo";
-import { getSpeakerProfileHref } from "@/lib/speakers";
 import type { TalkFormat } from "@/lib/talk-formats";
 import type { TalkLanguage } from "@/lib/talk-languages";
 import { getTalkLanguageCode } from "@/lib/talk-languages";
@@ -240,54 +240,24 @@ export function buildTalkJsonLd(
   locale: SiteLocale,
   talkUrl: string,
 ): Record<string, unknown> {
-  const speakers = getTalkSpeakers(talk, locale);
   const trackLabels = talk.tracks.map(
     (track) => siteMessages[locale].blocks.speakers.tracks[track],
   );
   const levelLabel = siteMessages[locale].blocks.talks.levels[talk.level];
-  const primaryImage = speakers[0]
-    ? getSpeakerProfileImageUrl(speakers[0].slug)
-    : undefined;
 
   return {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "@id": `${talkUrl}#talk`,
-    name: talk.talkTitle,
-    description: truncateMetaDescription(talk.talkDescription),
-    url: talkUrl,
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    ...(primaryImage ? { image: primaryImage } : {}),
+    ...buildTalkEventJsonLd({
+      talk,
+      talkUrl,
+      description: truncateMetaDescription(talk.talkDescription),
+      imageUrl: getTalkShareImageUrl(talk.id),
+      locale,
+    }),
     about: trackLabels,
     inLanguage: getTalkLanguageCode(talk.language),
     audience: {
       "@type": "Audience",
       audienceType: levelLabel,
-    },
-    performer: speakers.map((speaker) => {
-      const imageUrl = getSpeakerProfileImageUrl(speaker.slug);
-
-      return {
-        "@type": "Person",
-        name: speaker.name,
-        url: `${getSiteUrl()}${getSpeakerProfileHref(speaker.slug)}`,
-        jobTitle: speaker.title,
-        ...(imageUrl ? { image: imageUrl } : {}),
-      };
-    }),
-    location: {
-      "@type": "Place",
-      name: "Universidad EAFIT",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Medellín",
-        addressCountry: "CO",
-      },
-    },
-    isPartOf: {
-      "@type": "Event",
-      name: SITE_NAME,
-      url: `${getSiteUrl()}/`,
     },
   };
 }

@@ -26,7 +26,11 @@ const workshopSpeakerImages: Record<string, string> = {
     "/images/speakers/jose-arturo-osorio-londono.jpg",
   "biviana-marcela-suarez-sierra":
     "/images/speakers/biviana-marcela-suarez-sierra.png",
+  "andres-felipe-puerta-velez":
+    "/images/speakers/andres-felipe-puerta-velez.jpg",
   "dora-cecilia-alzate-gallo": "/images/speakers/dora-cecilia-alzate-gallo.jpg",
+  "karen-melissa-gomez-montoya":
+    "/images/speakers/karen-melissa-gomez-montoya.jpg",
   "jesus-alfredo-reyes-vargas":
     "/images/speakers/jesus-alfredo-reyes-vargas.jpg",
   "carlos-alberto-riveros-varela":
@@ -240,12 +244,25 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     level: "All / Para todos los niveles",
     format: "workshop",
   },
-  // 14. NLP Corpus RAG (primary + co-speaker)
+  // 14. NLP Corpus RAG (primary + co-speakers)
   {
     slug: "biviana-marcela-suarez-sierra",
     talkKey: "nlp-corpus-rag",
     name: "Biviana Marcela Suárez Sierra",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
+    github: "https://bimasusi.github.io/#about",
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "Intermediate / Intermedio",
+    format: "workshop",
+  },
+  {
+    slug: "andres-felipe-puerta-velez",
+    talkKey: "nlp-corpus-rag",
+    name: "Andrés Felipe Puerta Velez",
+    tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
+    github: "https://afpuertav.github.io/",
+    linkedin: "https://www.linkedin.com/in/afpuertav/",
     country: "Colombia",
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
@@ -256,6 +273,17 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     talkKey: "nlp-corpus-rag",
     name: "Dora Cecilia Alzate Gallo",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "Intermediate / Intermedio",
+    format: "workshop",
+  },
+  {
+    slug: "karen-melissa-gomez-montoya",
+    talkKey: "nlp-corpus-rag",
+    name: "Karen Melissa Gomez Montoya",
+    tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
+    linkedin: "https://www.linkedin.com/in/karen-melissa-gomez/",
     country: "Colombia",
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",

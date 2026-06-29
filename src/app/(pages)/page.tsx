@@ -12,13 +12,11 @@ import Sponsors from "@/components/blocks/sponsors/sponsors";
 import TrustedBrands from "@/components/blocks/trusted-brands/trusted-brands";
 
 import SectionSeparator from "@/components/section-separator";
+import { buildMainConferenceEventJsonLd } from "@/lib/event-jsonld";
 import {
-  absoluteAssetUrl,
   getSiteUrl,
   SITE_DESCRIPTION,
-  SITE_DESCRIPTION_LONG,
   SITE_NAME,
-  SITE_ORGANIZER,
   websiteJsonLd,
 } from "@/lib/site-seo";
 
@@ -46,41 +44,7 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@graph": [
-    websiteJsonLd(),
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      name: SITE_NAME,
-      description: SITE_DESCRIPTION_LONG,
-      url: `${getSiteUrl()}/`,
-      image: [absoluteAssetUrl("/images/cfp.jpg")],
-      startDate: "2026-07-24",
-      endDate: "2026-07-26",
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      eventStatus: "https://schema.org/EventScheduled",
-      location: {
-        "@type": "Place",
-        name: "Universidad EAFIT",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Medellín",
-          addressRegion: "Antioquia",
-          addressCountry: "CO",
-        },
-      },
-      organizer: {
-        "@type": "Organization",
-        name: SITE_ORGANIZER.name,
-        url: SITE_ORGANIZER.url,
-      },
-      offers: {
-        "@type": "Offer",
-        url: "https://www.eventbrite.co/e/pycon-colombia-2026-tickets-1986172567616",
-        availability: "https://schema.org/InStock",
-      },
-    },
-  ],
+  "@graph": [websiteJsonLd(), buildMainConferenceEventJsonLd()],
 };
 
 const Home = () => {
