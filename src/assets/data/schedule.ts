@@ -917,7 +917,8 @@ export const scheduleEvents: ScheduleEvent[] = [
       "Workshop: NLP en la práctica: de lingüística de corpus a RAG con Python",
     displayTitle:
       "NLP en la práctica: de lingüística de corpus a RAG con Python",
-    speaker: "Biviana Marcela Suárez Sierra / Dora Cecilia Alzate Gallo",
+    speaker:
+      "Biviana Marcela Suárez Sierra / Andrés Felipe Puerta Velez / Dora Cecilia Alzate Gallo / Karen Melissa Gomez Montoya",
     talkKey: "nlp-corpus-rag",
     label: "EAFIT Sponsor",
     language: ["ES"],

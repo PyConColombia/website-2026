@@ -152,20 +152,37 @@ export const workshopSpeakerContentByLocale: Record<
         "Traditional ETL pipelines are deterministic and rigid. Agentic workflows powered by generative AI can adapt, reason, and handle the unexpected. In this workshop, you'll learn how to evolve your data engineering practices from classic ETL to intelligent agentic workflows. We'll cover designing agents for data extraction, transformation decisions, and loading strategies—as well as how to combine traditional orchestration tools with AI agents for hybrid architectures.",
     },
     "biviana-marcela-suarez-sierra": {
-      title: "Researcher @ Universidad EAFIT",
+      title:
+        "Affiliated Professor, Computing and Analytics @ Universidad EAFIT",
       description:
-        "Biviana Marcela is a researcher at Universidad EAFIT bridging the gap between traditional corpus linguistics and modern NLP techniques. She applies Python-based tools to analyze large text collections and build intelligent retrieval systems, combining academic linguistic rigor with practical AI engineering.",
+        "Biviana Marcela Suárez Sierra is a statistician and data science researcher with experience in statistical modeling, machine learning, and computational analysis of complex data. She is currently a university professor and leads interdisciplinary research projects integrating statistics, programming, and data analysis to address problems in health, energy, environment, and digital humanities. Her recent work has focused on developing methodologies for analyzing large textual corpora using NLP, text mining, and statistical learning. She has led teams of students and researchers from diverse disciplines to study how discourses about science, culture, and society circulate in Colombian media. With more than a decade of experience in research and data analysis, her main interest is building bridges between computational tools and real-world problems.",
       talkTitle: "NLP in Practice: From Corpus Linguistics to RAG with Python",
       talkDescription:
-        "Bridge the gap between traditional corpus linguistics and modern Retrieval-Augmented Generation (RAG) systems. In this workshop, researchers and developers will learn how classical NLP techniques—corpus analysis, tokenization, and annotation—can inform and improve RAG implementations. We'll use Python to build a pipeline that takes a text corpus from raw collection through linguistic analysis to a queryable RAG system, demonstrating how academic NLP foundations enhance practical AI applications.",
+        "Natural language processing offers today a mature set of tools for analyzing textual corpora systematically and reproducibly, but the path from having documents to obtaining results is not always clear. This workshop walks through that path from start to finish. In two hours, participants will build an understanding of the NLP ecosystem: its history, logic, and methods. The session opens with a timeline from the first rule-based models to transformers, followed by a map of techniques organized by problem type (classification, entity extraction, semantic search, generation) so each participant can identify which method they need for a specific textual problem. The second part covers two Python implementations. First, topic modeling with BERTopic, reviewing the internal pipeline of embeddings, UMAP, and HDBSCAN. Second, a conversational assistant with RAG: corpus indexing, semantic retrieval, and connection to a language model to answer queries about the documents. At the end, each participant will have a functional notebook with both pipelines and a clear map of the ecosystem to guide their own textual analysis projects.",
+      workshopRequirements:
+        "Bring a laptop with a Google account to access Google Colab, where all notebooks will be available. Participants using Colab do not need to install anything beforehand. For those who prefer a local environment, Python 3.10 or higher is recommended. Basic familiarity with Python is assumed. No prior NLP experience is required. It is recommended to bring a set of texts for analysis.",
+    },
+    "andres-felipe-puerta-velez": {
+      title:
+        "Research Assistant & Master's Student in Applied Mathematics @ Universidad EAFIT",
+      description:
+        "Andrés Felipe Puerta Velez is a master's student in applied mathematics and research assistant with experience in natural language processing (NLP), integration of heterogeneous databases, and data analysis. He currently works on Bayesian g-formula for causal effect estimation and on machine learning models to estimate pollutant gas emissions and fuel consumption for low-displacement motorcycles in Colombia. As a research assistant on the project Comparative Analysis of Perceptions on Protective Behaviors against COVID-19 in Colombia, he has studied how public discourse circulates on social networks and how it behaved regarding care habits during the pandemic.",
+      talkTitle: "",
+      talkDescription: "",
     },
     "dora-cecilia-alzate-gallo": {
-      title: "Researcher @ Universidad EAFIT",
+      title: "Master's Student in Humanistic Studies @ EAFIT",
       description:
-        "Dora Cecilia is a researcher at Universidad EAFIT specializing in computational linguistics and natural language processing. Her work focuses on applying RAG architectures to linguistic research and knowledge extraction tasks, bringing a deep understanding of language structure to modern AI systems.",
-      talkTitle: "NLP in Practice: From Corpus Linguistics to RAG with Python",
-      talkDescription:
-        "Bridge the gap between traditional corpus linguistics and modern Retrieval-Augmented Generation (RAG) systems. In this workshop, researchers and developers will learn how classical NLP techniques—corpus analysis, tokenization, and annotation—can inform and improve RAG implementations. We'll use Python to build a pipeline that takes a text corpus from raw collection through linguistic analysis to a queryable RAG system, demonstrating how academic NLP foundations enhance practical AI applications.",
+        "Dora Cecilia Alzate Gallo is a student in the Master's in Humanistic Studies, linked to the language area and the School of Arts and Humanities at EAFIT. She will share the main linguistic challenges and decisions that allowed adapting NLP tools to Spanish and improving the quality of results obtained in text processing.",
+      talkTitle: "",
+      talkDescription: "",
+    },
+    "karen-melissa-gomez-montoya": {
+      title: "Mathematical Engineer & Research Assistant @ Universidad EAFIT",
+      description:
+        "Karen Melissa Gomez Montoya is a mathematical engineer and master's student in Data Science and Analytics at EAFIT, where she also works as a research assistant on digital humanities and public sphere projects. Her work sits at the intersection between computational methods and textual corpus analysis.",
+      talkTitle: "",
+      talkDescription: "",
     },
     "jesus-alfredo-reyes-vargas": {
       title: "Software Engineer @ EPAM Systems",
@@ -430,22 +447,39 @@ export const workshopSpeakerContentByLocale: Record<
         "Los pipelines ETL tradicionales son determinísticos y rígidos. Los flujos de trabajo agénticos impulsados por IA generativa pueden adaptarse, razonar y manejar lo inesperado. En este taller aprenderás cómo evolucionar tus prácticas de ingeniería de datos desde el ETL clásico hacia flujos de trabajo agénticos inteligentes. Cubriremos el diseño de agentes para extracción de datos, decisiones de transformación y estrategias de carga, así como cómo combinar herramientas de orquestación tradicionales con agentes de IA para arquitecturas híbridas.",
     },
     "biviana-marcela-suarez-sierra": {
-      title: "Investigadora @ Universidad EAFIT",
+      title:
+        "Profesora vinculada al área de Computación y analítica @ Universidad EAFIT",
       description:
-        "Biviana Marcela es investigadora en la Universidad EAFIT conectando la lingüística de corpus tradicional con las técnicas modernas de NLP. Aplica herramientas basadas en Python para analizar grandes colecciones de texto y construir sistemas de recuperación inteligentes, combinando el rigor lingüístico académico con la ingeniería práctica de IA.",
+        "Biviana Marcela Suárez Sierra es estadística e investigadora en ciencia de datos, con experiencia en modelación estadística, aprendizaje automático y análisis computacional de datos complejos. Actualmente es profesora universitaria y dirige proyectos de investigación interdisciplinarios que integran estadística, programación y análisis de datos para abordar problemas en salud, energía, medio ambiente y humanidades digitales. Su trabajo reciente se ha centrado en el desarrollo de metodologías para el análisis de grandes corpus textuales mediante técnicas de procesamiento de lenguaje natural (NLP), minería de textos y aprendizaje estadístico. Como investigadora vinculada al proyecto Arte, ciencia y tecnología en la esfera pública, ha liderado equipos conformados por estudiantes e investigadores de diversas disciplinas para estudiar cómo circulan los discursos sobre ciencia, cultura y sociedad en medios de comunicación colombianos. Cuenta con más de una década de experiencia en investigación y análisis de datos. Su interés principal es construir puentes entre las herramientas computacionales y los problemas reales.",
       talkTitle:
         "NLP en la práctica: de lingüística de corpus a RAG con Python",
       talkDescription:
-        "Une la brecha entre la lingüística de corpus tradicional y los sistemas modernos de Generación Aumentada por Recuperación (RAG). En este taller, investigadores y desarrolladores aprenderán cómo las técnicas clásicas de NLP—análisis de corpus, tokenización y anotación—pueden informar y mejorar las implementaciones de RAG. Usaremos Python para construir un pipeline que toma un corpus de texto desde la colección bruta a través del análisis lingüístico hasta un sistema RAG consultable, demostrando cómo los fundamentos académicos de NLP mejoran las aplicaciones prácticas de IA.",
+        "El procesamiento de lenguaje natural ofrece hoy un conjunto maduro de herramientas para analizar corpus textuales de forma sistemática y reproducible, pero el camino entre tener los documentos y obtener resultados no siempre es claro. Este workshop recorre ese camino de principio a fin. En dos horas, los participantes construirán una comprensión del ecosistema NLP: su historia, su lógica y sus métodos. La sesión abre con una línea de tiempo que va desde los primeros modelos basados en reglas hasta los transformers, seguida de un mapa de técnicas organizadas por tipo de problema (clasificación, extracción de entidades, búsqueda semántica, generación) para que cada participante pueda identificar qué método necesita ante un problema textual concreto. La segunda parte cubre dos implementaciones con Python. Primero, modelado de tópicos con BERTopic, revisando el pipeline interno de embeddings, UMAP y HDBSCAN. Segundo, un asistente conversacional con RAG: indexación del corpus, recuperación semántica y conexión con un modelo de lenguaje para responder consultas sobre los documentos. Al finalizar, cada participante tendrá un notebook funcional con los dos pipelines y un mapa claro del ecosistema para orientar sus propios proyectos de análisis textual.",
+      workshopRequirements:
+        "Se recomienda traer un computador portátil con una cuenta de Google para acceder a Google Colab, donde estarán disponibles todos los notebooks. Los participantes que utilicen Colab no necesitan instalar nada previamente. Para quienes prefieran trabajar en un entorno local, se recomienda tener instalado Python 3.10 o superior. Se asume familiaridad básica con Python. No se requiere experiencia previa en procesamiento de lenguaje natural. Se recomienda tener un grupo de textos para el análisis.",
+    },
+    "andres-felipe-puerta-velez": {
+      title:
+        "Asistente de investigación y estudiante de maestría en matemáticas aplicadas @ Universidad EAFIT",
+      description:
+        "Andrés Felipe Puerta Velez es estudiante de maestría en matemáticas aplicadas y asistente de investigación, con experiencia en procesamiento de lenguaje natural (NLP), integración de bases de datos heterogéneas y análisis de datos. Actualmente trabaja en el uso de la g-formula bayesiana como solución a la multiplicidad de estimadores de efecto causal y en el uso de modelos de machine learning para la estimación de emisiones de gases contaminantes y consumo de combustible para motos de bajo cilindraje en el contexto colombiano. Como asistente de investigación del proyecto Análisis Comparativo de Percepciones sobre Comportamientos Protectores frente al COVID-19 en Colombia, ha trabajado en equipos multidisciplinarios para estudiar cómo circula el discurso público en redes sociales y su comportamiento respecto a hábitos de cuidado durante la pandemia.",
+      talkTitle: "",
+      talkDescription: "",
     },
     "dora-cecilia-alzate-gallo": {
-      title: "Investigadora @ Universidad EAFIT",
+      title: "Estudiante de la Maestría en Estudios Humanísticos @ EAFIT",
       description:
-        "Dora Cecilia es investigadora en la Universidad EAFIT especializada en lingüística computacional y procesamiento del lenguaje natural. Su trabajo se centra en aplicar arquitecturas RAG a investigaciones lingüísticas y tareas de extracción de conocimiento, aportando una comprensión profunda de la estructura del lenguaje a los sistemas de IA modernos.",
-      talkTitle:
-        "NLP en la práctica: de lingüística de corpus a RAG con Python",
-      talkDescription:
-        "Une la brecha entre la lingüística de corpus tradicional y los sistemas modernos de Generación Aumentada por Recuperación (RAG). En este taller, investigadores y desarrolladores aprenderán cómo las técnicas clásicas de NLP—análisis de corpus, tokenización y anotación—pueden informar y mejorar las implementaciones de RAG. Usaremos Python para construir un pipeline que toma un corpus de texto desde la colección bruta a través del análisis lingüístico hasta un sistema RAG consultable, demostrando cómo los fundamentos académicos de NLP mejoran las aplicaciones prácticas de IA.",
+        "Dora Cecilia Alzate Gallo es estudiante de la Maestría en Estudios Humanísticos, vinculada al área de lenguaje y a la Escuela de Artes y Humanidades. Compartirá los principales desafíos y decisiones lingüísticas que permitieron adaptar estas herramientas al español y mejorar la calidad de los resultados obtenidos en el procesamiento de textos.",
+      talkTitle: "",
+      talkDescription: "",
+    },
+    "karen-melissa-gomez-montoya": {
+      title:
+        "Ingeniera matemática - Asistente en investigación @ Universidad EAFIT",
+      description:
+        "Karen Melissa Gomez Montoya es ingeniera matemática y estudiante de maestría en Ciencia de Datos y Analítica en EAFIT, donde también se desempeña como asistente de investigación en proyectos de humanidades digitales y esfera pública. Su trabajo se sitúa en la intersección entre métodos computacionales y análisis de corpus textuales.",
+      talkTitle: "",
+      talkDescription: "",
     },
     "jesus-alfredo-reyes-vargas": {
       title: "Ingeniero de Software @ EPAM Systems",
