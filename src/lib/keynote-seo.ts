@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { buildKeynoteEventJsonLd } from "@/lib/event-jsonld";
 import {
   getKeynoteBySlug,
   getLocalizedKeynote,
   type LocalizedKeynote,
 } from "@/lib/keynotes";
 import type { SiteLocale } from "@/lib/site-messages";
-import { siteMessages } from "@/lib/site-messages";
 import {
   absoluteAssetUrl,
   getSiteUrl,
@@ -91,7 +91,7 @@ export function buildKeynotePageMetadata(
 
 export function buildKeynoteJsonLd(
   keynote: LocalizedKeynote,
-  locale: SiteLocale,
+  _locale: SiteLocale,
   keynoteUrl: string,
 ): Record<string, unknown> {
   return {
@@ -111,19 +111,11 @@ export function buildKeynoteJsonLd(
       keynote.youtube,
       keynote.x,
     ].filter(Boolean),
-    performerIn: {
-      "@type": "Event",
-      name: siteMessages[locale].blocks.scheduleUi.keynote,
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      location: {
-        "@type": "Place",
-        name: "Universidad EAFIT",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Medellín",
-          addressCountry: "CO",
-        },
-      },
-    },
+    performerIn: buildKeynoteEventJsonLd({
+      keynote,
+      keynoteUrl,
+      description: truncateMetaDescription(keynote.description),
+      imageUrl: getKeynoteShareImageUrl(keynote.slug),
+    }),
   };
 }

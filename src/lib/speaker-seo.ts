@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { buildTalkEventJsonLd } from "@/lib/event-jsonld";
 import type { SiteLocale } from "@/lib/site-messages";
 import { siteMessages } from "@/lib/site-messages";
 import {
@@ -15,7 +15,11 @@ import {
   getSpeakerBySlug,
   type LocalizedSpeaker,
 } from "@/lib/speakers";
-import { getTalksBySpeakerSlug } from "@/lib/talks";
+import {
+  getTalkBySpeakerSlug,
+  getTalkHref,
+  getTalksBySpeakerSlug,
+} from "@/lib/talks";
 
 const META_DESCRIPTION_MAX = 200;
 const DEFAULT_OG_IMAGE = "/images/cfp.jpg";
@@ -166,6 +170,17 @@ export function buildSpeakerJsonLd(
     (track) => siteMessages[locale].blocks.speakers.tracks[track],
   );
 
+  const talk = getTalkBySpeakerSlug(speaker.slug, locale);
+  const performerIn = talk
+    ? buildTalkEventJsonLd({
+        talk,
+        talkUrl: `${getSiteUrl()}${getTalkHref(talk.id)}`,
+        description: truncateMetaDescription(talk.talkDescription),
+        imageUrl: getSpeakerShareImageUrl(speaker.slug),
+        locale,
+      })
+    : undefined;
+
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -177,20 +192,6 @@ export function buildSpeakerJsonLd(
     ...(profileImageUrl ? { image: profileImageUrl } : {}),
     ...(sameAs.length > 0 ? { sameAs } : {}),
     knowsAbout: trackLabels,
-    performerIn: {
-      "@type": "Event",
-      name: SITE_NAME,
-      url: `${getSiteUrl()}/`,
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      location: {
-        "@type": "Place",
-        name: "Universidad EAFIT",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Medellín",
-          addressCountry: "CO",
-        },
-      },
-    },
+    ...(performerIn ? { performerIn } : {}),
   };
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import type { PressCoverageItem } from "@/assets/data/press-coverage";
+import { getMainEventId } from "@/lib/event-jsonld";
 import type { SiteLocale } from "@/lib/site-messages";
 import { siteMessages } from "@/lib/site-messages";
 import {
@@ -8,7 +9,6 @@ import {
   getSiteUrl,
   SITE_KEYWORDS,
   SITE_NAME,
-  SITE_ORGANIZER,
   webPageJsonLd,
   websiteJsonLd,
 } from "@/lib/site-seo";
@@ -167,26 +167,7 @@ export function buildPressPageJsonLd(
         inLanguage: locale === "es" ? "es-CO" : "en-US",
         isPartOf: { "@id": `${getSiteUrl()}#website` },
         about: {
-          "@type": "Event",
-          name: SITE_NAME,
-          url: `${getSiteUrl()}/`,
-          startDate: "2026-07-24",
-          endDate: "2026-07-26",
-          location: {
-            "@type": "Place",
-            name: "Universidad EAFIT",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Medellín",
-              addressRegion: "Antioquia",
-              addressCountry: "CO",
-            },
-          },
-          organizer: {
-            "@type": "Organization",
-            name: SITE_ORGANIZER.name,
-            url: SITE_ORGANIZER.url,
-          },
+          "@id": getMainEventId(),
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
