@@ -80,6 +80,14 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
       highlights: [],
       faqTopics: [],
     },
+    factored: {
+      paragraphs: [
+        "Founded in Palo Alto by Dr. Andrew Ng and Israel Niezen, Factored helps U.S. companies build and scale world-class AI, ML, and Data teams, powered by the top 1% of LATAM talent, with a defining purpose: To empower brilliant humans, unleash their potential, and amplify their impact in the world.",
+        "At Factored, you'll be part of a community that values learning, ownership, and authenticity, where your growth is personal and your ideas matter. We're transparent, curious, and collaborative. We strive for excellence, celebrate diversity, encourage curiosity, and build an environment where you can truly thrive.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
     nequi: {
       paragraphs: [
         "Nequi is a Colombian neobank that is transforming the way people manage their money by building a digital financial ecosystem that goes far beyond a traditional account or digital wallet. Through a simple, customer-centric, and fully digital experience, Nequi offers solutions for saving, making payments, transferring funds, receiving remittances, accessing credit, managing personal finances, and connecting users with a wide range of services that simplify everyday life. With more than 28 million users, Nequi has established itself as a world of financial and non-financial possibilities, fostering inclusion, empowerment, and access to opportunities, enabling people to achieve their goals in an easier, safer, and more convenient way.",
@@ -194,6 +202,14 @@ export const sponsorDetailsByLocale: Record<SiteLocale, SponsorDetailBySlug> = {
         "EPAM Systems es una empresa global líder en ingeniería de software, transformación digital y soluciones basadas en inteligencia artificial. La compañía trabaja con organizaciones de la lista Forbes Global 2000, así como con empresas de alto crecimiento, para desarrollar productos, plataformas y experiencias digitales de alto impacto.",
         "Con más de treinta años de experiencia en ingeniería de software y desarrollo de plataformas personalizadas, EPAM ayuda a las organizaciones a evolucionar hacia modelos de negocio impulsados por la IA, generando valor tangible a partir de la innovación y la inversión digital.",
         "Reconocida por analistas líderes del sector y por diversos rankings de la industria, EPAM combina escala global con una sólida presencia local para impulsar el futuro de sus clientes, socios y equipos.",
+      ],
+      highlights: [],
+      faqTopics: [],
+    },
+    factored: {
+      paragraphs: [
+        "Fundada en Palo Alto por el Dr. Andrew Ng e Israel Niezen, Factored ayuda a empresas estadounidenses a construir y escalar equipos de IA, ML y Data de clase mundial, impulsados por el 1% superior del talento de LATAM, con un propósito definitorio: empoderar a humanos brillantes, liberar su potencial y amplificar su impacto en el mundo.",
+        "En Factored, serás parte de una comunidad que valora el aprendizaje, la propiedad y la autenticidad, donde tu crecimiento es personal y tus ideas importan. Somos transparentes, curiosos y colaborativos. Buscamos la excelencia, celebramos la diversidad, fomentamos la curiosidad y construimos un entorno donde puedas prosperar de verdad.",
       ],
       highlights: [],
       faqTopics: [],

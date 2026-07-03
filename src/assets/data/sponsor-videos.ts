@@ -1,5 +1,6 @@
 import { aimpointVideos } from "@/assets/data/sponsor-videos/aimpoint";
 import { epamVideos } from "@/assets/data/sponsor-videos/epam";
+import { factoredVideos } from "@/assets/data/sponsor-videos/factored";
 import { interledgerVideos } from "@/assets/data/sponsor-videos/interledger";
 import { lokaVideos } from "@/assets/data/sponsor-videos/loka";
 import { provectusVideos } from "@/assets/data/sponsor-videos/provectus";
@@ -13,6 +14,7 @@ export type SponsorVideo = {
 const sponsorVideosBySlug: Partial<Record<string, SponsorVideo[]>> = {
   aimpoint: aimpointVideos,
   epam: epamVideos,
+  factored: factoredVideos,
   interledger: interledgerVideos,
   loka: lokaVideos,
   provectus: provectusVideos,
