@@ -14,6 +14,8 @@ const defaultImageClassName =
 export type GalleryMarqueeCarouselProps = {
   images: GalleryImage[];
   duration?: number;
+  /** Constant scroll speed in px/s. Overrides duration when set. */
+  pixelsPerSecond?: number;
   gap?: number;
   showEdgeFade?: boolean;
   imageClassName?: string;
@@ -30,6 +32,7 @@ export type GalleryMarqueeCarouselProps = {
 const GalleryMarqueeCarousel = ({
   images,
   duration = 22,
+  pixelsPerSecond = 130,
   gap = 1.5,
   showEdgeFade = true,
   imageClassName = defaultImageClassName,
@@ -97,14 +100,25 @@ const GalleryMarqueeCarousel = ({
         ) : null}
 
         <div className="w-full overflow-hidden">
-          <Marquee pauseOnHover duration={duration} gap={gap}>
+          <Marquee
+            pauseOnHover
+            duration={duration}
+            pixelsPerSecond={pixelsPerSecond}
+            gap={gap}
+          >
             {galleryRows[0].map((image, index) => renderImage(image, index))}
           </Marquee>
         </div>
 
         {galleryRows[1].length > 0 ? (
           <div className="w-full overflow-hidden">
-            <Marquee pauseOnHover duration={duration} gap={gap} reverse>
+            <Marquee
+              pauseOnHover
+              duration={duration}
+              pixelsPerSecond={pixelsPerSecond}
+              gap={gap}
+              reverse
+            >
               {galleryRows[1].map((image, index) =>
                 renderImage(image, index + galleryRows[0].length),
               )}
