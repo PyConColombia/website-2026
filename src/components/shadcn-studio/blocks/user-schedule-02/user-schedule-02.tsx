@@ -13,6 +13,7 @@ import { useMemo, useState } from "react";
 
 import {
   type DaySchedule,
+  getLocalizedScheduleEventTitle,
   getScheduleEventCategory,
   type ScheduleEvent,
   scheduleDays,
@@ -242,6 +243,7 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
     : talk?.format === "workshop"
       ? t("blocks.scheduleUi.viewWorkshop")
       : t("blocks.talks.viewTalk");
+  const eventTitle = getLocalizedScheduleEventTitle(event, locale);
 
   return (
     <Card className="h-full transition-all">
@@ -262,10 +264,10 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
                   href={sessionHref}
                   className="underline-offset-4 transition-colors hover:text-primary hover:underline"
                 >
-                  {event.displayTitle}
+                  {eventTitle}
                 </Link>
               ) : (
-                event.displayTitle
+                eventTitle
               )}
             </h3>
           </div>
@@ -340,13 +342,16 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
 
     const query = searchQuery.trim().toLowerCase();
     if (query) {
-      items = items.filter(
-        (event) =>
-          event.displayTitle.toLowerCase().includes(query) ||
+      items = items.filter((event) => {
+        const title = getLocalizedScheduleEventTitle(event, locale);
+
+        return (
+          title.toLowerCase().includes(query) ||
           event.speaker.toLowerCase().includes(query) ||
           event.room.toLowerCase().includes(query) ||
-          event.label?.toLowerCase().includes(query),
-      );
+          event.label?.toLowerCase().includes(query)
+        );
+      });
     }
 
     if (sortBy === "time") {
@@ -355,12 +360,14 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
       );
     } else if (sortBy === "name") {
       items = [...items].sort((a, b) =>
-        a.displayTitle.localeCompare(b.displayTitle),
+        getLocalizedScheduleEventTitle(a, locale).localeCompare(
+          getLocalizedScheduleEventTitle(b, locale),
+        ),
       );
     }
 
     return items;
-  }, [activeTab, scheduleData, searchQuery, selectedDate, sortBy]);
+  }, [activeTab, locale, scheduleData, searchQuery, selectedDate, sortBy]);
 
   const groupedEvents = useMemo(
     () => groupEventsByHour(filteredEvents),

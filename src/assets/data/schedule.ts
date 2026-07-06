@@ -8,6 +8,7 @@ export type ScheduleEvent = {
   date: string;
   title: string;
   displayTitle: string;
+  displayTitleEs?: string;
   speaker: string;
   talkKey?: string;
   keynoteSlug?: string;
@@ -47,6 +48,17 @@ export const scheduleDays = [
   },
 ] as const;
 
+export function getLocalizedScheduleEventTitle(
+  event: ScheduleEvent,
+  locale: "en" | "es",
+): string {
+  if (locale === "es" && event.displayTitleEs) {
+    return event.displayTitleEs;
+  }
+
+  return event.displayTitle;
+}
+
 export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "1",
@@ -74,8 +86,9 @@ export const scheduleEvents: ScheduleEvent[] = [
     room: "Main Auditorium (Fundadores)",
     hour: "8:00 - 8:10",
     date: "2026-07-24",
-    title: "Moment: Charla Bienvenida EAFIT",
-    displayTitle: "Charla Bienvenida EAFIT",
+    title: "Moment: Institutional Welcome",
+    displayTitle: "Institutional Welcome",
+    displayTitleEs: "Bienvenida Institucional",
     speaker: "Ricardo Taborda",
     label: "EAFIT",
     language: ["ES"],

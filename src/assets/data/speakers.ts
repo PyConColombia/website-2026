@@ -337,7 +337,6 @@ const speakerList: SpeakerInput[] = [
     name: "Ricardo Taborda",
     image: "/images/speakers/ricardo-taborda.jpg",
     tracks: ["community", "scientific-computing"],
-    github: "https://github.com/ricardotaborda",
     linkedin: "https://www.linkedin.com/in/ricardotaborda/",
     country: "Colombia",
     language: "Spanish / Español",

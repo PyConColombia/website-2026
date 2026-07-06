@@ -4,52 +4,79 @@ type SpeakerInput = Omit<Speaker, "id" | "format"> & { format?: SpeakerFormat };
 
 const workshopSpeakerImages: Record<string, string> = {
   "david-felipe-vanegas-ramirez":
-    "/images/speakers/david-felipe-vanegas-ramirez.jpg",
-  "felix-mino": "/images/speakers/felix-mino.png",
-  "roberto-bedoya-garcia": "/images/speakers/roberto-bedoya-garcia.jpg",
-  "hazel-saenz": "/images/speakers/hazel-saenz.jpg",
-  "emanuel-zapata-querubin": "/images/speakers/emanuel-zapata-querubin.png",
-  "santiago-suarez-sampayo": "/images/speakers/santiago-suarez-sampayo.png",
-  "johnny-montoya": "/images/speakers/johnny-montoya.jpg",
-  "nicolas-roldan-fajardo": "/images/speakers/nicolas-roldan-fajardo.jpg",
+    "https://drive.google.com/open?id=1b9bfGWURAOpY2WbTI_scZy-2DYabdRrX",
+  "felix-mino":
+    "https://drive.google.com/open?id=1fxz9HDuDz-W6rvuK3rCwFA5fsJynDl-1",
+  "roberto-bedoya-garcia":
+    "https://drive.google.com/open?id=1Qqd58jgAlknQsLZ6Mz1pyQtIpMWTakDM",
+  "hazel-saenz":
+    "https://drive.google.com/open?id=1Te_ikbiDwTLuT2w34YaPwZTpKDFMjUer",
+  "emanuel-zapata-querubin":
+    "https://drive.google.com/open?id=1s22wX60ADCVEsdWDVs3ndk3Jh48vvqZu",
+  "santiago-suarez-sampayo":
+    "https://drive.google.com/open?id=1sQa6Virz2OmgcQBSgoCRDYFgAewD6yz3",
+  "johnny-montoya":
+    "https://drive.google.com/open?id=1ujbpOnGTO1e2iUATOha211KPHNAdECfg",
+  "nicolas-roldan-fajardo":
+    "https://drive.google.com/open?id=1QLMmGgRLyeJog9mavp1Y8S2st1E_1l3H",
   "maria-fernanda-rojas-castro":
-    "/images/speakers/maria-fernanda-rojas-castro.png",
-  "jonathan-vallejo-munoz": "/images/speakers/jonathan-vallejo-munoz.jpg",
-  "esneider-bravo-benitez": "/images/speakers/esneider-bravo-benitez.jpg",
-  "maris-botero": "/images/speakers/maris-botero.png",
-  "jose-hernan-ortiz-ocampo": "/images/speakers/jose-hernan-ortiz-ocampo.jpg",
+    "https://drive.google.com/open?id=1e6HMipgEz5KH8f1jxqdssrlsveBiQcPZ",
+  "jonathan-vallejo-munoz":
+    "https://drive.google.com/open?id=1s8FLMToZsYUsjaYm806DkCeH3F2uFipi",
+  "esneider-bravo-benitez":
+    "https://drive.google.com/open?id=1WBMOpcJFq7JUisr6xuBS30bbl8Nox4N3",
+  "maris-botero":
+    "https://drive.google.com/open?id=1xkxTMFFdW7I4Wj3QwxfdO8fW24gFjJ6T",
+  "jose-hernan-ortiz-ocampo":
+    "https://drive.google.com/open?id=1BvNPNV2-ySX_RPyueoDVe7mSHRAf962B",
   "jose-hernan-ortiz-ocampo-2":
-    "/images/speakers/jose-hernan-ortiz-ocampo-2.jpg",
-  "isabel-mora": "/images/speakers/isabel-mora.jpg",
-  "daniel-sabogal": "/images/speakers/daniel-sabogal.jpg",
+    "https://drive.google.com/open?id=1sLhZStG7F81_l1E0uzFJw3chp-jEMKex",
+  "isabel-mora":
+    "https://drive.google.com/open?id=1nU-Fs02N2n2o1_fc9x2D4zkWfusqYbbD",
+  "daniel-sabogal":
+    "https://drive.google.com/open?id=1yTsqlAU6IbSX_MEtG7N2VXMWiloNddyE",
   "jose-arturo-osorio-londono":
-    "/images/speakers/jose-arturo-osorio-londono.jpg",
+    "https://drive.google.com/open?id=1wlUyB2lk8H6y_JGMWaL_KX4mcGxbjlXv",
   "biviana-marcela-suarez-sierra":
-    "/images/speakers/biviana-marcela-suarez-sierra.png",
+    "https://drive.google.com/open?id=14ai04L9V-lu_YUkI35pWx-DLeNe7XnUv",
   "andres-felipe-puerta-velez":
-    "/images/speakers/andres-felipe-puerta-velez.jpg",
-  "dora-cecilia-alzate-gallo": "/images/speakers/dora-cecilia-alzate-gallo.jpg",
+    "https://drive.google.com/open?id=1IS3v7belJWaKuYpNoPmK-2SpMa2fymmU",
+  "dora-cecilia-alzate-gallo":
+    "https://drive.google.com/open?id=11AXMr3kYvvyeUlUOU3_oAryLw7E4LD6g",
   "karen-melissa-gomez-montoya":
-    "/images/speakers/karen-melissa-gomez-montoya.jpg",
+    "https://drive.google.com/open?id=17LVLNgLuF0bPlWuf-vg_oPxdC_lIr8W0",
   "jesus-alfredo-reyes-vargas":
-    "/images/speakers/jesus-alfredo-reyes-vargas.jpg",
+    "https://drive.google.com/open?id=1Xqy8wOTIGXG0BvO2-3u5BT8EECal-IcF",
   "carlos-alberto-riveros-varela":
-    "/images/speakers/carlos-alberto-riveros-varela.jpg",
-  "felipe-sanchez": "/images/speakers/felipe-sanchez.jpg",
-  "daniel-galvis": "/images/speakers/daniel-galvis.jpg",
+    "https://drive.google.com/open?id=1Ylw2XaQyoj51knAB_N10q-8iX_cPZApQ",
+  "felipe-sanchez":
+    "https://drive.google.com/open?id=1aWV1yGSsHmBYHp3-B3qRO4Ai77RkHVLE",
+  "daniel-galvis":
+    "https://drive.google.com/open?id=1qqImKlUVywLlkobX0DVoGZr-u8C0TVK4",
   "francisco-javier-moya-ortiz":
-    "/images/speakers/francisco-javier-moya-ortiz.jpg",
-  "andres-vasquez-restrepo": "/images/speakers/andres-vasquez-restrepo.jpg",
+    "https://drive.google.com/open?id=1csx5wyhuLmZJ2PHuuX4VrTnv2ouym3yk",
+  "andres-vasquez-restrepo":
+    "https://drive.google.com/open?id=1ZhqIVVbS_2Aav-PugOsSYGIMpMK2LMor",
   "cesar-mateo-gonzalez-rodriguez":
-    "/images/speakers/cesar-mateo-gonzalez-rodriguez.jpg",
-  "juan-guillermo-gomez": "/images/speakers/juan-guillermo-gomez.jpg",
-  "mauricio-repetto-ferrero": "/images/speakers/mauricio-repetto-ferrero.jpg",
-  "dario-jesus-guzman-duran": "/images/speakers/dario-jesus-guzman-duran.png",
+    "https://drive.google.com/open?id=1Da35UUnZ8YMo5kun0QLggpbYpCKcg5MI",
+  "juan-guillermo-gomez":
+    "https://drive.google.com/open?id=1WWEv7sL9pX4mnftU1wW5mrVoEp4wK5qb",
+  "mauricio-repetto-ferrero":
+    "https://drive.google.com/open?id=1q_SlUIy1c-eBEzMIR9buwYxwa_Kw_sIN",
+  "dario-jesus-guzman-duran":
+    "https://drive.google.com/open?id=1ssubbUjQ6qbjQzGl-LdVssss8MAZxJ0N",
   "juan-jose-barrientos-salazar":
-    "/images/speakers/juan-jose-barrientos-salazar.jpg",
-  "raul-rodriguez": "/images/speakers/raul-rodriguez.png",
-  "jeronimo-lopez-gomez": "/images/speakers/jeronimo-lopez-gomez.jpg",
-  "natalia-echeverri-duran": "/images/speakers/natalia-echeverri-duran.jpg",
+    "https://drive.google.com/open?id=1oCpnoace5gdVDC2HFVdbqAWTQNQaeJUc",
+  "raul-rodriguez":
+    "https://drive.google.com/open?id=1Z_aZ5UTegUYWnBe1TbdoOMzmcUYzBDB8",
+  "jeronimo-lopez-gomez":
+    "https://drive.google.com/open?id=1GS3RRsomxCBqf1Tu0MbwTNGR6aTGIqBg",
+  "natalia-echeverri-duran":
+    "https://drive.google.com/open?id=1WJWk9vaTsXqAfP3qjpFquXRoXg1FI11r",
+  "angie-katherine-reyes":
+    "https://drive.google.com/open?id=1_VnqQ_auY0NHtlSv5JluF3LBIfLnXzmc",
+  "elkin-javier-guerra-galeano":
+    "https://drive.google.com/open?id=1OflXShgH7ig1EDesVvdObqXc47GKGS9R",
 };
 
 const workshopSpeakerListBase: SpeakerInput[] = [
@@ -57,7 +84,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "david-felipe-vanegas-ramirez",
     talkKey: "from-s3-to-ai-agent",
-    name: "David Felipe Vanegas Ramírez",
+    name: "David Felipe Vanegas Ramirez",
     tracks: [
       "artificial-intelligence",
       "core-python",
@@ -74,7 +101,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "felix-mino",
     talkKey: "stop-mocking-containerizing",
-    name: "Félix Miño",
+    name: "Felix Miño",
     tracks: ["web", "core-python"] as SpeakerTrack[],
     github: "https://github.com/felixminom",
     linkedin: "https://www.linkedin.com/in/felixminom",
@@ -88,6 +115,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "roberto-bedoya-garcia",
     talkKey: "llm-observability",
     name: "Roberto Bedoya García",
+    github: "https://github.com/Rbedoyag",
+    linkedin: "https://www.linkedin.com/in/robertobedoyag",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -98,7 +127,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "hazel-saenz",
     talkKey: "dj-ia-agentes",
-    name: "Hazel Sáenz",
+    name: "Hazel Saenz",
+    github: "https://github.com/hsaenzG",
+    linkedin: "https://www.linkedin.com/in/hazelsaenz",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Guatemala",
     language: "Spanish / Español",
@@ -110,6 +141,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "emanuel-zapata-querubin",
     talkKey: "mlops-databricks",
     name: "Emanuel Zapata Querubín",
+    github: "https://github.com/Ezapataq07",
+    linkedin: "https://www.linkedin.com/in/emanuel-zapata-querub%C3%ADn",
     tracks: ["machine-learning", "devops"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -120,7 +153,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "santiago-suarez-sampayo",
     talkKey: "openclaw-whatsapp-assistant",
-    name: "Santiago Suárez Sampayo",
+    name: "Santiago Suarez Sampayo",
+    github: "https://github.com/santiagossz",
+    linkedin: "https://www.linkedin.com/in/santiago-suarez-sampayo-2b93b2168",
     tracks: ["artificial-intelligence", "web"] as SpeakerTrack[],
     country: "Colombia",
     language: "English / Inglés",
@@ -132,6 +167,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "johnny-montoya",
     talkKey: "company-brain-skills",
     name: "Johnny Montoya",
+    github: "https://github.com/eldelosdatos",
+    linkedin: "https://www.linkedin.com/in/johnnymontoya",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -142,7 +179,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "nicolas-roldan-fajardo",
     talkKey: "fellowship-agentic-evaluations",
-    name: "Nicolás Roldán Fajardo",
+    name: "Nicolas Roldan Fajardo",
+    github: "https://github.com/nroldanf",
+    linkedin: "https://www.linkedin.com/in/nicolas-roldan-fajardo",
     tracks: ["artificial-intelligence", "machine-learning"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -152,7 +191,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "maria-fernanda-rojas-castro",
     talkKey: "fellowship-agentic-evaluations",
-    name: "María Fernanda Rojas Castro",
+    name: "Maria Fernanda Rojas Castro",
+    github: "https://github.com/mariarojasc",
+    linkedin: "https://www.linkedin.com/in/mfernandarojasca",
     tracks: ["artificial-intelligence", "machine-learning"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -164,6 +205,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "jonathan-vallejo-munoz",
     talkKey: "spec-driven-code-graphs",
     name: "Jonathan Vallejo Muñoz",
+    github: "https://github.com/jonathanvm13",
+    linkedin: "https://www.linkedin.com/in/jonathanvm13",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -173,7 +216,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "esneider-bravo-benitez",
     talkKey: "spec-driven-code-graphs",
-    name: "Esneider Bravo Benítez",
+    name: "Esneider Bravo Benitez",
+    github: "https://github.com/esneiderbravo",
+    linkedin: "https://www.linkedin.com/in/esneider-bravo",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -185,6 +230,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "maris-botero",
     talkKey: "prompts-to-agents",
     name: "Maris Botero",
+    github: "https://github.com/marisbotero",
+    linkedin: "https://www.linkedin.com/in/marisbotero",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -195,7 +242,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "jose-hernan-ortiz-ocampo",
     talkKey: "langgraph-strands-agents",
-    name: "José Hernán Ortiz Ocampo",
+    name: "Jose Hernan Ortiz Ocampo",
+    github: "https://github.com/jhortizo",
+    linkedin: "https://www.linkedin.com/in/jhortizo",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -206,6 +255,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "isabel-mora",
     talkKey: "langgraph-strands-agents",
     name: "Isabel Mora",
+    github: "https://github.com/isabelmorar",
+    linkedin: "https://www.linkedin.com/in/isabel-mora-restrepo-a86031227",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -216,7 +267,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "jose-hernan-ortiz-ocampo-2",
     talkKey: "multi-agent-teams-ai-dev",
-    name: "José Hernán Ortiz Ocampo",
+    name: "Jose Hernan Ortiz Ocampo",
+    github: "https://github.com/jhortizo",
+    linkedin: "https://www.linkedin.com/in/jhortizo",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "English / Inglés",
@@ -227,6 +280,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "daniel-sabogal",
     talkKey: "multi-agent-teams-ai-dev",
     name: "Daniel Sabogal",
+    github: "https://github.com/daasabogalro",
+    linkedin: "https://www.linkedin.com/in/daasabogalro",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "English / Inglés",
@@ -237,7 +292,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "jose-arturo-osorio-londono",
     talkKey: "etl-agentic-workflows",
-    name: "José Arturo Osorio Londoño",
+    name: "Jose Arturo Osorio Londoño",
+    github: "https://github.com/arturo-osorio-ds",
+    linkedin: "https://www.linkedin.com/in/arturo-osorio-ds",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -262,7 +319,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     name: "Andrés Felipe Puerta Velez",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
     github: "https://afpuertav.github.io/",
-    linkedin: "https://www.linkedin.com/in/afpuertav/",
+    linkedin: "https://www.linkedin.com/in/afpuertav",
     country: "Colombia",
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
@@ -283,7 +340,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     talkKey: "nlp-corpus-rag",
     name: "Karen Melissa Gomez Montoya",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
-    linkedin: "https://www.linkedin.com/in/karen-melissa-gomez/",
+    linkedin: "https://www.linkedin.com/in/karen-melissa-gomez",
     country: "Colombia",
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
@@ -318,7 +375,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "felipe-sanchez",
     talkKey: "fastmcp-pokedex",
-    name: "Felipe Sánchez",
+    name: "Felipe Sanchez",
+    linkedin: "https://www.linkedin.com/in/felipe-sánchez-7765b8206",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -329,6 +387,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "daniel-galvis",
     talkKey: "fastmcp-pokedex",
     name: "Daniel Galvis",
+    linkedin: "https://www.linkedin.com/in/dangalvis1011",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -340,6 +399,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "francisco-javier-moya-ortiz",
     talkKey: "sigma-agentic-dashboards",
     name: "Francisco Javier Moya Ortiz",
+    github: "https://github.com/fjmoyao",
+    linkedin: "https://www.linkedin.com/in/francisco-javier-mortiz",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -350,7 +411,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "andres-vasquez-restrepo",
     talkKey: "pyblend-ai-food-scientist",
-    name: "Andrés Vásquez Restrepo",
+    name: "Andres Vasquez Restrepo",
+    github: "https://github.com/anvasquezre",
+    linkedin: "https://www.linkedin.com/in/anvasquezre",
     tracks: ["artificial-intelligence", "data-science"] as SpeakerTrack[],
     country: "Colombia",
     language: "English / Inglés",
@@ -361,7 +424,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "cesar-mateo-gonzalez-rodriguez",
     talkKey: "autoencoders-anomaly-detection",
-    name: "César Mateo González Rodríguez",
+    name: "Cesar Mateo Gonzalez Rodriguez",
+    github: "https://github.com/cmatteogr",
+    linkedin: "https://www.linkedin.com/in/cesar-gonzález-rodríguez",
     tracks: ["machine-learning", "data-science"] as SpeakerTrack[],
     country: "Colombia",
     language: "English / Inglés",
@@ -372,7 +437,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "juan-guillermo-gomez",
     talkKey: "multi-agent-patterns-protocols",
-    name: "Juan Guillermo Gómez",
+    name: "Juan Guillermo Gomez",
+    github: "https://github.com/jggomez",
+    linkedin: "https://www.linkedin.com/in/jggomezt",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -384,6 +451,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "mauricio-repetto-ferrero",
     talkKey: "toon-token-diet",
     name: "Mauricio Repetto Ferrero",
+    github: "https://github.com/a-mauricio-repetto",
+    linkedin: "https://www.linkedin.com/in/a-mauricio-repetto",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Uruguay",
     language: "Spanish / Español",
@@ -395,6 +464,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "dario-jesus-guzman-duran",
     talkKey: "async-video-ingestion",
     name: "Darío Jesús Guzmán Durán",
+    github: "https://github.com/GudarJs",
+    linkedin: "https://www.linkedin.com/in/gudarjs",
     tracks: ["core-python"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -406,6 +477,8 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "juan-jose-barrientos-salazar",
     talkKey: "llms-mathematics-pytorch",
     name: "Juan José Barrientos Salazar",
+    github: "https://github.com/juanjo-barrientos",
+    linkedin: "https://www.linkedin.com/in/juanjo-barrientos-860940259",
     tracks: ["artificial-intelligence", "machine-learning"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -416,7 +489,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "raul-rodriguez",
     talkKey: "north-claude-copilot",
-    name: "Raúl Rodríguez",
+    name: "Raul Rodriguez",
+    github: "https://github.com/raxos18",
+    linkedin: "https://www.linkedin.com/in/raul-rodriguez-lopez",
     tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -427,7 +502,9 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "jeronimo-lopez-gomez",
     talkKey: "hls4ml-hardware",
-    name: "Jerónimo López Gómez",
+    name: "Jeronimo Lopez Gomez",
+    github: "https://github.com/jerolg",
+    linkedin: "https://www.linkedin.com/in/jeronimo-lopez-714bba228",
     tracks: ["machine-learning", "scientific-computing"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
@@ -438,7 +515,35 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     slug: "natalia-echeverri-duran",
     talkKey: "hls4ml-hardware",
     name: "Natalia Echeverri Durán",
+    github: "https://gitlab.com/natalia.echeverrid",
+    linkedin: "https://www.linkedin.com/in/natalia-echeverri-duran-5297753ba",
     tracks: ["machine-learning", "scientific-computing"] as SpeakerTrack[],
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "Intermediate / Intermedio",
+    format: "workshop",
+  },
+  // 26. Fine-tuning Nequi (primary + co-speaker)
+  {
+    slug: "angie-katherine-reyes",
+    talkKey: "nequi-fine-tuning",
+    name: "Angie Katherine Reyes",
+    github: "https://github.com/angiereyesbet",
+    linkedin: "https://www.linkedin.com/in/angiereyesbet",
+    tracks: ["artificial-intelligence", "machine-learning"] as SpeakerTrack[],
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "Intermediate / Intermedio",
+    format: "workshop",
+  },
+  {
+    slug: "elkin-javier-guerra-galeano",
+    talkKey: "nequi-fine-tuning",
+    name: "Elkin Javier Guerra Galeano",
+    github: "https://github.com/Elkinmt19/Elkinmt19",
+    linkedin:
+      "https://www.linkedin.com/in/elkin-javier-guerra-galeano-60832b1b3",
+    tracks: ["artificial-intelligence", "machine-learning"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
