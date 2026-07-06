@@ -332,6 +332,18 @@ const speakerList: SpeakerInput[] = [
     level: "Beginner / Principiante",
   },
   {
+    slug: "ricardo-taborda",
+    talkKey: "ricardo-taborda",
+    name: "Ricardo Taborda",
+    image: "/images/speakers/ricardo-taborda.jpg",
+    tracks: ["community", "scientific-computing"],
+    github: "https://github.com/ricardotaborda",
+    linkedin: "https://www.linkedin.com/in/ricardotaborda/",
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "All / Para todos los niveles",
+  },
+  {
     slug: "robin-hafid-quintero-lopez",
     talkKey: "robin-hafid-quintero-lopez",
     name: "Robin Hafid Quintero Lopez",

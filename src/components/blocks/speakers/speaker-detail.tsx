@@ -134,31 +134,33 @@ const SpeakerDetail = ({ slug }: SpeakerDetailProps) => {
               </p>
             </MotionPreset>
 
-            <Separator />
+            {talks.length > 0 ? (
+              <>
+                <Separator />
 
-            <MotionPreset
-              fade
-              blur
-              slide={{ direction: "up", offset: 50 }}
-              delay={0.3}
-              transition={{ duration: 0.5 }}
-              className="space-y-4"
-            >
-              <h2 className="text-2xl font-semibold">
-                {talks.length > 1
-                  ? t("blocks.speakers.detail.sessions")
-                  : talks[0]?.format === "workshop"
-                    ? t("blocks.speakers.detail.workshop")
-                    : t("blocks.speakers.detail.talk")}
-              </h2>
-              {talks.length > 0 ? (
-                <div className="space-y-4">
-                  {talks.map((talk) => (
-                    <TalkLinkCard key={talk.id} talk={talk} />
-                  ))}
-                </div>
-              ) : null}
-            </MotionPreset>
+                <MotionPreset
+                  fade
+                  blur
+                  slide={{ direction: "up", offset: 50 }}
+                  delay={0.3}
+                  transition={{ duration: 0.5 }}
+                  className="space-y-4"
+                >
+                  <h2 className="text-2xl font-semibold">
+                    {talks.length > 1
+                      ? t("blocks.speakers.detail.sessions")
+                      : talks[0]?.format === "workshop"
+                        ? t("blocks.speakers.detail.workshop")
+                        : t("blocks.speakers.detail.talk")}
+                  </h2>
+                  <div className="space-y-4">
+                    {talks.map((talk) => (
+                      <TalkLinkCard key={talk.id} talk={talk} />
+                    ))}
+                  </div>
+                </MotionPreset>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

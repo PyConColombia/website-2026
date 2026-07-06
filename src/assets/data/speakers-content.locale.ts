@@ -231,6 +231,14 @@ export const speakerContentByLocale: Record<SiteLocale, SpeakerContentBySlug> =
         talkDescription:
           "DNA contains massive amounts of biological information, but how can artificial intelligence help us understand it? In this talk, we will explore how Python and Machine Learning can be used to analyze genetic sequences in a practical and beginner-friendly way. Using public biological datasets, we will demonstrate how DNA sequences can be transformed into data suitable for machine learning models, covering concepts such as feature extraction, sequence representation, and basic classification techniques. We will also review popular Python tools used in bioinformatics, including Biopython, pandas, and scikit-learn, while discussing real-world challenges when working with biological data, such as high dimensionality, noise, and interpretability limitations. By the end of the talk, attendees will have a clear understanding of how to start building genetic analysis projects using accessible tools from the Python ecosystem, even without prior bioinformatics experience.",
       },
+      "ricardo-taborda": {
+        title:
+          "Dean, School of Applied Sciences and Engineering @ Universidad EAFIT",
+        description:
+          "Ricardo Taborda is Dean of the School of Applied Sciences and Engineering at Universidad EAFIT, leading a school of 130 full-time faculty. His background combines academic administration with research in engineering seismology and earthquake engineering, including leadership roles in research organizations and international collaborations. He holds a Ph.D. in Civil Engineering from Carnegie Mellon University, a master's in Structural Mechanics from the University of Southern California, a master's in Structural Engineering from UNAM, and a bachelor's in Civil Engineering from Universidad EAFIT. He is skilled in scientific computing with a focus on computational seismology.",
+        talkTitle: "",
+        talkDescription: "",
+      },
       "robin-hafid-quintero-lopez": {
         title: "Software Engineer @ GenLogs",
         description:
@@ -500,6 +508,14 @@ export const speakerContentByLocale: Record<SiteLocale, SpeakerContentBySlug> =
         talkTitle: "Machine Learning aplicado a secuencias genéticas",
         talkDescription:
           "El ADN contiene cantidades masivas de información biológica, pero ¿cómo puede la inteligencia artificial ayudarnos a entenderla? En esta charla exploraremos cómo Python y Machine Learning pueden usarse para analizar secuencias genéticas de forma práctica y accesible para principiantes. Usando datasets biológicos públicos, demostraremos cómo las secuencias de ADN pueden transformarse en datos aptos para modelos de machine learning, cubriendo conceptos como extracción de features, representación de secuencias y técnicas básicas de clasificación. También revisaremos herramientas populares de Python usadas en bioinformática, incluyendo Biopython, pandas y scikit-learn, mientras discutimos desafíos reales al trabajar con datos biológicos, como alta dimensionalidad, ruido y limitaciones de interpretabilidad. Al final de la charla, los asistentes tendrán una comprensión clara de cómo empezar a construir proyectos de análisis genético usando herramientas accesibles del ecosistema Python, incluso sin experiencia previa en bioinformática.",
+      },
+      "ricardo-taborda": {
+        title:
+          "Decano de la Escuela de Ciencias Aplicadas e Ingeniería @ Universidad EAFIT",
+        description:
+          "Ricardo Taborda es Decano de la Escuela de Ciencias Aplicadas e Ingeniería de la Universidad EAFIT, donde lidera una escuela de 130 profesores de planta. Su trayectoria combina administración académica con investigación en sismología de ingeniería e ingeniería sísmica, incluyendo liderazgo en organizaciones de investigación y colaboraciones internacionales. Es doctor en Ingeniería Civil por Carnegie Mellon University, magíster en Mecánica Estructural por la University of Southern California, magíster en Ingeniería Estructural por la UNAM y graduado en Ingeniería Civil de la Universidad EAFIT. Tiene experiencia en computación científica con énfasis en sismología computacional.",
+        talkTitle: "",
+        talkDescription: "",
       },
       "robin-hafid-quintero-lopez": {
         title: "Software Engineer @ GenLogs",
