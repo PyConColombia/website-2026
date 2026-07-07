@@ -1,601 +1,638 @@
 import type { SiteLocale } from "@/lib/site-messages";
 import type { SpeakerContentBySlug } from "./speakers-content.locale";
+import { workshopRequirementsByLocale } from "./workshop-requirements";
 
+function applyWorkshopRequirements(
+  content: SpeakerContentBySlug,
+  locale: SiteLocale,
+): SpeakerContentBySlug {
+  const requirements = workshopRequirementsByLocale[locale];
+  return Object.fromEntries(
+    Object.entries(content).map(([slug, entry]) => [
+      slug,
+      requirements[slug]
+        ? {
+            ...entry,
+            workshopRequirements: requirements[slug],
+          }
+        : entry,
+    ]),
+  ) as SpeakerContentBySlug;
+}
+
+const workshopContentEn: SpeakerContentBySlug = {
+  "david-felipe-vanegas-ramirez": {
+    title: "Advanced Data Engineer @ Loka",
+    description:
+      "David is a data engineer at Loka, a technology consulting firm, where he designs and maintains data platforms on AWS for clients across multiple industries. With nearly five years of experience in the field, his day-to-day work revolves around Apache Iceberg, PySpark, Airflow, and production lakehouse architectures, not in tutorials, but in real systems with real incidents.\n\nI hold three AWS certifications, including Solutions Architect Associate and a Databricks certification, reflecting both my command of cloud infrastructure and my hands-on experience with distributed data processing. I have led projects ranging from ClickHouse replication pipelines to Iceberg table maintenance jobs running on Kubernetes, and have recently explored the intersection of data engineering and AI agents, building personal tooling on top of the Anthropic SDK.\n\nBased in Bogotá, I believe there is a shortage of practical Spanish-language technical content on modern data engineering, and that PyCon Colombia is exactly the right place to start closing that gap.",
+    talkTitle: "From S3 to AI Agent: Your First Queryable Lakehouse",
+    talkDescription:
+      "AI agents are only as good as the data they can query. The problem is that most agents built today are connected to outdated CSVs, unstructured databases, or simply nothing. What if your agent could query a real lakehouse — with versioning, schema evolution, and time travel — using natural language?\nIn this workshop we will build exactly that, from scratch, using only open source tools that run on your laptop.\nWhat we will build together:\nStarting from a fully local stack based on Docker Compose, we will set up a functional lakehouse architecture using MinIO as S3-compatible storage, Apache Iceberg as the table format, Project Nessie as a Git-like versioned catalog, and Trino as the SQL query engine. On top of that, we will build an MCP server in Python that exposes our Iceberg tables as tools queryable by an AI agent — and we will finish by connecting Claude so it can query our lakehouse in natural language.\nWhat you will learn:\n\nHow a modern lakehouse really works under the hood — without managed services hiding the magic\nHow Apache Iceberg enables schema evolution, time travel, and row-level deletes on object storage\nHow to build an MCP server in Python that turns SQL queries into tools for AI agents\nWhy this open source architecture mirrors exactly what companies like Netflix, Airbnb, and modern data teams use in production\n\nWhy open source?\nWe deliberately replace AWS S3 with MinIO, AWS Athena with Trino, and AWS Glue with Project Nessie — not because AWS is bad, but because understanding the real components makes you a better engineer, and because this workshop should be accessible to everyone, regardless of whether you have an AWS account or not.\nAt the end of the workshop you will have a functional lakehouse running on your machine, a working MCP server, and an architecture you can take directly to your next project.",
+  },
+  "felix-mino": {
+    title: "Senior software engineer @ Stack Builders",
+    description:
+      "I’m Felix Miño, a senior software developer with over 7 years of experience building robust, scalable systems. I’m particularly interested in functional programming principles and advanced testing techniques to improve software reliability.\nI’ve worked with Python, Haskell, and Kotlin, exploring how functional concepts and testing strategies, like property-based testing, can lead to safer, more maintainable code. I’m especially interested in making these ideas practical and accessible for Python developers.\nSince 2022, I’ve led the Quito Lambda Meetup in Ecuador, where I help grow a Spanish-speaking community around functional programming and modern software practices.",
+    talkTitle: "Stop mocking, start containerizing",
+    talkDescription:
+      "“Write tests. Not too many. Mostly integration.”  Kent C. Dods \n\nWhile unit tests have their place, integration tests validate how your systems behave under real-world conditions. Yet too often, developers fall back on mocks that simulate dependencies rather than testing with the actual services their code interacts with.\n\nIn this workshop, we’ll explore a better approach: Testcontainers is a powerful Python library that enables you to run real Docker containers as part of your test suite. Whether you're testing against PostgreSQL, Redis, or HTTP APIs, you’ll learn how to spin up disposable, isolated environments that bring realism and confidence to your testing practice.\n\nWhether you're testing microservices, monolithic backends, or data pipelines, this workshop will show you how to build tests that don’t just pass but prove your system works.\n\nBring your laptop and a running Docker engine, we’re going to get our hands dirty!\n\n",
+  },
+  "roberto-bedoya-garcia": {
+    title: "Ingeniero de Automatización @ NowBit",
+    description:
+      "PyCon Colombia has been part of my professional growth in a concrete way: I presented workshops at the 2024 and 2025 editions, and each time I confirmed that this community has a real appetite for learning things they can apply the very next day at work.\nMy path in technology did not start in AI or LLMs. It started providing technical support in the Colombian Air Force, teaching in classrooms, writing software tests, automating processes with RPA. That journey gave me something I value more than any framework: the ability to translate real problems into solutions that people understand and can operate. Today, as an Automation Engineer at Nowbit, that same principle guides the work we do building RAG systems, AI pipelines, and Python automations on AWS, Azure, and Elastic.\nThis year I want to present without the backing of a sponsor — on my own conviction and on behalf of Nowbit. The topic I propose comes directly from what we experience in production: teams that manage to get an LLM working but do not know how much it costs them, why it fails, or how to improve it. LLM system observability with Python, OpenTelemetry, and Elasticsearch is not an academic topic for me — it is something we have had to build and learn along the way.\nI believe PyCon Colombia deserves more voices speaking from real practice, from Colombian projects, from error and adjustment. That is what I want to contribute.",
+    talkTitle: "Your LLM Is Bleeding Money and Python Can Stop It",
+    talkDescription:
+      'You put your LLM in production. It responds, it works, users use it. But there are questions you cannot answer: how much did it cost you exactly last week? Which prompt consumes the most tokens? Why was that response terrible on Tuesday at 3pm? How do you show the business that the system is improving?\nMost teams working with LLMs today operate blind. They deploy, receive complaints, adjust prompts without data, and get API bills that no one can explain. That is not engineering — it is expensive intuition.\nIn this workshop you will build, line by line in Python, a complete observability system for LLM applications using OpenTelemetry, Langfuse, and Elasticsearch. No theory, no endless slides — real code you can take to your project the following Monday.\nWhat you will build:\nWe start from a document Q&A agent that appears functional but is completely blind. During the workshop we instrument it step by step: first with Langfuse @observe decorators to capture every prompt, response, and token count; then we export those traces via OpenTelemetry to Elasticsearch, where we build a live Kibana dashboard showing cost per user, p95 latency per model, and low-quality response rate. Finally we implement an automatic evaluation layer with LLM-as-a-judge so the system audits itself.\nAt the end of the workshop you have a functional, open source, self-hostable stack — without depending on closed SaaS platforms — that any team can adopt regardless of whether they use OpenAI, Anthropic, or local models via Ollama.\nWhat you take away:\nComplete GitHub repository with Docker Compose ready to spin up the environment, notebooks with each workshop step, and an exportable Kibana dashboard template. Everything in Spanish, documented so you can share it with your team.\nWho is this workshop for?\nFor Python developers who already have basic experience with LLMs and APIs, and who are ready to take the step from "my POC works" to "my production system is reliable, measurable, and defensible to the business." You do not need prior experience with OpenTelemetry or Elasticsearch — we explain them from scratch in the context of LLMs.\nWhy does this matter now?\nGlobal spending on LLM APIs doubled in less than six months. 47% of companies are running observability pilots for AI but only 7% have it in production. The gap between making an LLM work and operating it responsibly is the most urgent technical problem the industry has today — and Python has all the tools to close it.',
+  },
+  "hazel-saenz": {
+    title: "LATAM Developer Advocate @ Amazon Web Services",
+    description:
+      "Hazel Saenz is a LATAM Developer Advocate at Amazon Web Services (AWS) and Former AWS Serverless Hero, with more than 20 years of experience in application development and 6 years working with cloud technologies.\n\nShe specializes in serverless architectures, event-driven systems, and Generative AI on AWS, and actively participates as a speaker at AWS Summits, Community Days, and international conferences, sharing practical knowledge with the developer community in Latin America.",
+    talkTitle: "Build Your AI DJ: Agents in Python and Open Source",
+    talkDescription:
+      "What happens when a language model stops just talking about music and starts curating playlists with your real songs? In this workshop we build together, step by step, an AI agent that works as your personal DJ, using Python, 100% open source tools, and connected directly to Spotify. Layer by layer: from an agent that only converses, to one that searches songs, builds real playlists, and remembers your tastes. All local, all open source, all in Python. Each participant leaves with their own working agent.",
+  },
+  "emanuel-zapata-querubin": {
+    title: "Machine Learning Engineer @ Lovelytics",
+    description:
+      "Physics Engineer and Machine Learning Engineer passionate about the social impact of technology. My trajectory in the data world has been a comprehensive journey: from data analysis and engineering to data science and specialization in MLOps, which allows me to understand the lifecycle of a model from all its angles. I am currently finishing my Master's in Analytics, combining academic rigor with the implementation of scalable solutions in industry. I firmly believe that data and innovation are engines for sustainable development. When I am not optimizing pipelines in Databricks or exploring new AI/ML architectures, you will find me on a field tennis court or enjoying a good television series.",
+    talkTitle: "From Notebook to Production: End-to-End MLOps on Databricks",
+    talkDescription:
+      'Is your Machine Learning model trapped in a Notebook or does it actually generate value in production? Taking ML models into the real world requires more than just good training code; it demands a solid MLOps strategy. In this hands-on workshop, we will transform a use case from scratch into an industrial-grade solution using Databricks and MLflow.\n\nThrough a hands-on approach and using Databricks Free Edition, attendees will master the complete lifecycle (End-to-End) under professional standards.\n\nWorkshop Agenda:\n\n- Industrialization Fundamentals: Introduction to Lakehouse architecture, MLflow as an industry standard, and the role of the Feature Store in reproducibility.\n\n- Engineering and Governance: Creating a Feature Store and managing raw data with best practices.\n\n- Scalable Training: Developing models with exhaustive experiment tracking and a bonus on distributed training for large data volumes.\n\n- Deployment Strategies: Analysis of trade-offs between Batch Inferencing and Real-time Serving (Model Serving). We will implement "Deploy Code" and "Deploy Artifacts" patterns.\n\n- Modern Operationalization: Professional orchestration through Databricks Asset Bundles (DABs), the definitive tool for infrastructure as code on Databricks.\n\n- The finishing touch (CI/CD): How to integrate everything into a continuous deployment pipeline to guarantee quality across multiple environments.\n\nOutcome for attendees:\nUpon completion, each participant will have the source code, infrastructure configuration, and a productized, orchestrated ML model ready to be replicated in real environments.',
+  },
+  "santiago-suarez-sampayo": {
+    title: "Senior AI Engineer @ Aimpoint Digital",
+    description:
+      "Senior AI Engineer at Aimpoint Digital, building production AI agent systems for Fortune 500 companies in global retail and consumer electronics. My agents reach more than 10,000 users worldwide and turn tasks that took days into work that finishes in hours, spanning data analyst agents, coding assistants, and internal workflow automation. On the side, I build personal projects around AI and WhatsApp automation, which is what inspired this workshop. I led last year's PyCon Colombia workshop on AI agents with LangGraph and MCP.",
+    talkTitle:
+      "Build an OpenClaw-style Coding Assistant on WhatsApp with Claude Agent SDK",
+    talkDescription:
+      "In this hands-on 2-hour workshop, participants will build a personal coding assistant using Claude Agent SDK (powered by Claude Code) and turn it into a powerful OpenClaw-style agent they can talk to through WhatsApp.\nWe'll start by building the core agent in Python with Claude Agent SDK, then progressively add advanced capabilities: memory so it remembers context across conversations, subagents to handle specialized tasks, hooks to customize its behavior, and other advanced agent features that make it genuinely useful.\nOnce the agent is solid, we'll connect it to WhatsApp using Evolution API (Baileys-based, attendees just scan a QR code) so they can interact with it naturally from their phone, just like talking to a colleague.\nBy the end of the session, attendees will use their assistant to build a real web app, demonstrating how a well-designed agent can become a true coding copilot. They'll leave with a working OpenClaw-style assistant connected to their WhatsApp, a real web app they built with it, and a framework they can extend to other personal and professional use cases.",
+  },
+  "johnny-montoya": {
+    title: "Ingeniero de I+D en IA / AI R&D Engineer @ Unloquer",
+    description:
+      "Johnny Alexander Montoya Franco is an AI R&D Engineer at LaHaus, where he leads the GenAI and Voice AI strategy for Colombia's leading PropTech: an end-to-end real estate call platform with 2.5k+ conversations/month and sub-second latency, and LaHaus-Arena, a proprietary framework that evaluates 20+ LLM model families from 5 providers with over 98% completeness.\n\nBefore LaHaus, he was Senior Data Engineering Lead at Nequi (Bancolombia), where he built from scratch the data infrastructure of Colombia's first digital bank until scaling it to 20M+ users and peaks of 1.5M+ operations/hour, including the real-time fraud detection pipeline.\n\nHe has 14 years transforming industries with data and AI, has been a speaker at PyCon Colombia 2023 and 2024, was selected by Bancolombia for the Plug & Play Accelerator in Palo Alto (2018), regularly attends the AI Engineer World's Fair and The AI Conference in Silicon Valley, and is a long-time open source advocate at the Unloquer Hackerspace in Medellín (Airflow, dbt, Metabase, LangChain). He is currently building Centinela, a multi-tenant AI agent platform in production for clients in Colombia, and it is the technical foundation of this workshop.",
+    talkTitle: "Executable Skills: Teaching an Agent How Your Company Works",
+    talkDescription:
+      "The problem, in YC's words (February 2026): \"Every company has scattered know-how — in people's heads, in old emails, in Slack threads, in support tickets, and in databases. The company works because humans vaguely remember where that knowledge is. But AI agents do not operate that way.\" The solution is a Company Brain: a system that extracts knowledge from all those fragmented sources, structures it, keeps it up to date, and turns it into an executable skills archive for AI.\n\nThis workshop builds, in two hours, a minimal but real Company Brain with pure Python. It is not theory: the code comes from Centinela, a platform already in production serving agricultural operations in Colombia and beverage distributors in Bolivia, and combines the same pieces that at LaHaus have allowed me to bring voice agents to 2.5k+ calls/month with a real SLA.\n\nStack we will touch (all Python or accessible from Python):\n\n- Chainlit ≥ 2.9 as conversational interface and thread/step data layer\n- deepagents (0.4.x) as orchestrator for stateful agentic loops\n- langchain-anthropic + fallback to Gemini via langchain-google-genai\n- e2b-code-interpreter as a real sandbox (not mock) to run Python with auditable side effects\n- Supabase (Postgres + RLS) as multi-tenant control plane\n- asyncpg for a conversation persistence layer on PostgreSQL\n- MCP (Model Context Protocol) via langchain-mcp-adapters to plug in external tools",
+  },
+  "nicolas-roldan-fajardo": {
+    title: "Advanced Machine Learning Engineer @ Loka INC",
+    description:
+      "I’m a ML Engineer with a background in Biomedical Engineering. Back in my later years of college, I started focusing on Biomedical Signal and Image Processing and its different applications. This, in turn, led me to develop a strong interest in machine learning, whose roots have been entangled with my dear Signal Processing from the beginning. Nowadays I spend my days shipping  (or at least trying) ML models to production for diverse use cases, going from Computer Vision applications in traffic analysis, Drug Discovery using Deep learning based protein embeddings, and automating medical scribe applications using agentic AI",
+    talkTitle:
+      "The Fellowship of Agentic Evaluations: How to evaluate an agent?",
+    talkDescription:
+      "Autonomous agents are redefining what we can build with LLMs, allowing AI not only to respond but to reason and execute actions across complex flows. However, as we give them more autonomy with tools like LangGraph, a critical engineering problem arises: How do we know if the agent is truly reliable?\n\nIn this workshop, we will address the challenge of agent evaluation. We do not want to limit ourselves to checking whether the final response sounds good, but to implement different ways of evaluating these agents, ranging from deterministic validations to metrics based on other LLMs (LLM-as-a-judge).\n\nFor this exercise, we will apply these concepts to the universe of The Lord of the Rings mixed with real medical standards to validate mainly:\n\n- Data Integrity: Validate that the agent correctly extracts and formats structured medical codes.\n\n- Fidelity: evaluate that the agent does not hallucinate diagnoses.\n\n- Observability: Trace and cost monitoring with Langfuse.\n\nUpon completion, attendees will have a clear idea of how to answer the question: How to evaluate an agent?",
+  },
+  "maria-fernanda-rojas-castro": {
+    title: "Advanced Data Engineer @ Loka INC",
+    description:
+      "I'm a Data & ML Engineer with a background in Biomedical Engineering. I work in tech consulting, where I design and build data workflows and experiment with applying machine learning and GenAI in practical ways. I’m especially interested in LLMs, knowledge graphs, and making complex ideas easier to understand, sometimes with the help of pop culture.\n\nOutside of work, I love dancing, reading fiction, watching movies, and obsessing over Formula 1. I like finding creative ways to learn and teach, and I bring that spirit into every project or talk I’m part of.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jonathan-vallejo-munoz": {
+    title: "Senior Director of Software Engineering @ Lendingfront",
+    description:
+      'I am passionate about software development, leadership, and personal growth. I deeply believe that every person, if they truly decide to, has the ability to actively build their life and reach great personal and professional goals. For me, everything begins with the ability to take action, have initiative, autonomy, and take control of the decisions that define our path.\n\nOne of the principles that identifies me most is: "never stop learning." Learning constantly gives meaning to my life. I enjoy facing new challenges, stepping out of my comfort zone, and discovering new ways to grow both technically and as a person.\n\nI am also passionate about positively impacting the people around me. I like sharing my learnings, experiences, and mistakes, with the intention of contributing even a small grain of sand to others\' growth. This is part of my daily life from my leadership role at LendingFront, where I seek to empower teams, mentor people, and build a culture of continuous learning, but I also apply it in my personal life with those I have the opportunity to share and grow with.',
+    talkTitle: "Beyond Vibe Coding: Spec Driven Development with Code Graphs",
+    talkDescription:
+      "Artificial intelligence is changing the way we build software, but writing prompts and accepting code suggestions is not enough to work on real systems. In applications with multiple layers, dependencies, and business rules, the real challenge is not just generating code, but understanding where to change it, how it impacts the system, and how to validate it correctly.\n\nIn this workshop you will explore an evolution of Spec Driven Development using Code Graphs as a structured context source. Starting from a web application built with FastAPI, you will work on a specific feature following a guided flow: requirement, specification, graph context, planning, tasks, implementation, and validation.\n\nDuring the session you will learn the Spec Driven Development flow, from defining the requirement to creating the specification, planning, generating tasks, implementation, and validation. You will also see how a code graph can represent files, functions, classes, relationships, and dependencies, allowing AI not to depend solely on textual context or isolated prompts. This will help you reduce common errors such as duplicating logic, modifying incorrect layers, or ignoring affected tests.\n\nUpon completion, you will understand how to move from improvised use of AI in development to a more structured, traceable, and reliable process. You will learn to combine specifications, real code context, and AI assistance to build software with greater technical clarity, better impact validation, and logic applicable to real projects.",
+  },
+  "esneider-bravo-benitez": {
+    title: "Software Engineer @ Muno Labs",
+    description:
+      "Software Engineer with more than 8 years of experience building scalable, high-impact technology platforms, especially in the fintech sector. I am passionate about creating efficient solutions, leading technical teams, and promoting an innovation culture focused on real results.\n\nI currently have an AI-First focus, integrating Artificial Intelligence into products and processes to optimize operations and accelerate companies' technological evolution. Throughout my career I have worked on software architecture, platform scalability, process automation, and technical leadership of multidisciplinary teams.\n\nI want people to know me for my ability to transform complex ideas into scalable, efficient, future-oriented technology solutions. I am passionate about combining engineering, innovation, and artificial intelligence to build products that generate real impact and help companies grow sustainably.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "maris-botero": {
+    title: "Data Science Engineer @ Mercado libre",
+    description:
+      "I am Maris Botero, Data Science Engineer at Mercado Libre working at the intersection of data, intelligent systems, and creativity.\n\nMy work focuses on building machine learning solutions and designing intelligent agents that transform data into useful decisions. I am especially interested in making AI more understandable, practical, and accessible through applied learning experiences.\n\nIn addition to my technical work, I explore generative art as a way to unite code and creativity, creating visual experiences that connect technology with narrative. I also actively participate in technology communities, sharing knowledge through talks, workshops, and educational content.\n\nI believe technology should not only be powerful, but also transparent, creative, and people-centered. My goal is to help others not only use AI, but understand how to design and build it.",
+    talkTitle: "From Prompts to Agents: Intelligent Systems with Python",
+    talkDescription:
+      "Prompts are only the beginning. The real power of modern artificial intelligence lies in transforming those instructions into structured systems capable of reasoning, applying rules, and generating consistent decisions.\n\nIn this hands-on workshop, participants will go beyond basic prompt usage and learn to design and build intelligent agents using Python. Starting from a simple prompt, we will progressively evolve it into a functional agent that processes information, applies context, and generates structured responses.\n\nThrough a practical approach, we will learn to:\n\nDesign effective prompts with clear context, objectives, and constraints\nStructure responses in reliable formats (such as JSON)\nBuild a simple agent in Python that transforms questions into decisions\nIncorporate context and memory to improve results\nEvaluate the quality and consistency of responses\n\nAt the end of the workshop, each participant will have their own agent-style system, capable of converting inputs into useful recommendations, along with a reusable framework to apply to real problems.\n\nThis workshop is aimed at developers, data professionals, and curious people who want to move from using AI tools to designing intelligent systems. No prior AI experience is required, only basic Python knowledge and a desire to learn.\n\nMore than a technical session, this workshop proposes a new way of understanding AI: not only as a tool that responds, but as a system we can design.",
+  },
+  "jose-hernan-ortiz-ocampo": {
+    title: "Senior Machine Learning Engineer @ Loka",
+    description:
+      "Jose is a Senior ML Engineer with experience building machine learning systems across multiple industries, from security applications, logistics optimization and healthcare. He works with internationally distributed, multidisciplinary teams on complex, fast-moving problems. Curious by nature, he is particularly interested in where AI tooling intersects with how developers actually work — and what the next generation of AI-assisted development will look like in practice.",
+    talkTitle:
+      "LangGraph and Strands Agents: Core Concepts, Patterns, and Tradeoffs",
+    talkDescription:
+      "The agent framework landscape has consolidated fast. Among the options available today, two stand out for their architectural depth and production relevance: LangGraph, with its graph-based, developer-controlled orchestration model; and Strands Agents, with its model-driven, minimal-scaffolding approach. They are not interchangeable — they represent different answers to the same fundamental question of how much control a developer should retain over agent behavior.\nThis workshop is a structured, hands-on exploration of both. Participants will work through a shared codebase covering real scenarios: tool calling, state management, multi-turn reasoning, and multi-agent coordination. Each scenario is implemented in both frameworks side by side, making the architectural differences concrete and comparable rather than theoretical.\nThe session is organized around three axes: core concepts (how each framework models state, tools, memory, and control flow), practical patterns (what each one makes easy, what it makes hard), and honest tradeoffs (where each framework earns its complexity and where it doesn't). No polished demos — just real code, real outputs, and an open discussion of what each approach costs and buys you.\nBy the end, participants will have a working mental model for both frameworks, hands-on exposure to their key patterns, and enough grounded perspective to make an informed architectural decision on their next agentic project.\nSuitable for: Python developers with some familiarity with LLMs or agent concepts. Production experience is a plus but not required — the workshop is designed to reward depth of engagement, not prior framework knowledge.\n",
+  },
+  "isabel-mora": {
+    title: "Junior Machine Learning Engineer @ Loka",
+    description:
+      "Isabel is an ML Engineer at Loka, a machine learning consulting firm, where she has worked on projects spanning multiple industries and clients. She enjoys the full arc of ML work, from experimentation to building tools that make it into the hands of real users. Curious and hands-on, she is especially interested in AI agents and how they are changing the way developers build and think about software.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jose-hernan-ortiz-ocampo-2": {
+    title: "Senior Machine Learning Engineer @ Loka Inc",
+    description:
+      "Jose is a Senior ML Engineer with experience building machine learning systems across multiple industries, from security applications, logistics optimization and healthcare. He works with internationally distributed, multidisciplinary teams on complex, fast-moving problems. Curious by nature, he is particularly interested in where AI tooling intersects with how developers actually work — and what the next generation of AI-assisted development will look like in practice.",
+    talkTitle:
+      "Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
+    talkDescription:
+      "Programming has gone through a quiet but radical transformation in the last few years. We went from writing every line, to autocomplete, to AI proposing whole functions, to reviewing and steering AI-generated code. What comes next? Multi-agent systems, where you have a team of specialized agents working in parallel. This workshop is a hands-on, honest look at what that shift means today, and what it points to tomorrow.\nWe'll start by mapping the current landscape together: what tools exist, how they approach multi-agent orchestration, what each one gets right, and where the real tradeoffs are. The goal isn't to pick a winner — it's to build a shared vocabulary and a realistic picture of the state of the art.\nFrom there, we'll move into live demos. Rather than polished showcases, these are honest explorations: what these systems can actually do today, where they break down, and what those breakdowns tell us about the deeper challenges in multi-agent coordination. Token costs, context limits, agent miscommunication, and the question of how much to trust your agents — these are real problems worth examining together.\nThe talk closes with the bigger question: what does all of this mean for us as developers? What skills are becoming more important, which ones are becoming less so, and how do we stay relevant as the abstractions keep deepening? Not predictions, but a grounded reflection based on what's already visible in these early systems. The practical question isn’t whether this future is coming; it’s how to get ahead of it.\nAudience takeaways:\nA clear mental model for what multi-agent coding actually is (vs. single-agent tools and vs. orchestration frameworks)\nA working setup guide for multi agent works effectively\nPractical demos actually showcasing what to do with these tools\nA grounded perspective on what these experimental systems tell us about the next years of AI-assisted development and programming\nSuitable for: Python developers with some familiarity with AI tooling. No deep ML background required — this is a practical developer talk, not a research talk.",
+  },
+  "daniel-sabogal": {
+    title: "Data & ML Intern @ Loka",
+    description:
+      "Daniel is a biologist by training and works at the intersection of life sciences, data, and software. He builds ML systems alongside internationally distributed multidisciplinary teams, spanning cloud infrastructure and bioinformatics research. He is especially interested in how AI tools are transforming the way developers actually work and what it means to stay effective as those tools, and the abstractions behind them, continue to evolve.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jose-arturo-osorio-londono": {
+    title: "Senior Tech Lead  @ Lovelytics",
+    description:
+      "Hello, I am José Arturo Osorio, Senior Tech Lead at Lovelytics, where I lead the Data Science, MLOps, and Generative Artificial Intelligence team for Latin America. With more than 8 years of experience in the data science field, I have grown alongside the evolution of the industry, working across the full spectrum of machine learning and artificial intelligence technologies.\n\nMy experience ranges from classical machine learning models, including classification and regression with tree-based algorithms, to statistical modeling such as time series analysis and survival models. I have also developed deep learning solutions for computer vision, especially in semantic segmentation and named entity recognition (NER). I have applied these technologies across diverse sectors, including banking, services, and healthcare, always with a direct focus on business needs and value generation for clients.\n\nFrom a technical perspective, I have designed and implemented cloud-native machine learning solutions using mainly Azure, AWS, and Databricks. I specialize in developing AI and machine learning systems that generate tangible business impact, with measurable results aligned with strategic objectives. I also hold a master's degree in areas related to analytics and artificial intelligence, as well as professional certifications in AWS, Databricks, and Microsoft Azure.",
+    talkTitle:
+      "From ETL to Agentic Workflows: The Evolution of Data Engineering in the Generative AI Era",
+    talkDescription:
+      "This hands-on workshop will explore how data engineering is evolving from traditional ETL-based pipelines toward intelligent agent-driven systems capable of reasoning, planning, and executing tasks autonomously.\nThrough hands-on exercises, participants will learn the fundamental concepts behind agentic workflows, the new architectural patterns emerging in the industry, and the modern Python libraries that enable building these types of solutions. Tools for agent creation, task orchestration, integration with language models, and automation of complex processes will be covered.\nUpon completion, attendees will have built functional examples and will understand how to apply these new capabilities to transform traditional data processes into more dynamic, autonomous, and scalable systems.",
+  },
+  "biviana-marcela-suarez-sierra": {
+    title:
+      "Profesora vinculada al área de Computación y analística @ Universidad EAFIT",
+    description:
+      "Biviana Marcela Suárez Sierra is a statistician and data science researcher, with experience in statistical modeling, machine learning, and computational analysis of complex data. She is currently a university professor and leads interdisciplinary research projects that integrate statistics, programming, and data analysis to address problems in health, energy, the environment, and digital humanities.\n\nHer recent work has focused on developing methodologies for analyzing large textual corpora through natural language processing (NLP) techniques, text mining, and statistical learning. As a linked researcher on the project Art, science and technology in the public sphere: the contribution of Digital Humanities to the analysis of discourses in the public sphere in Colombia, she has led teams made up of students and researchers from diverse disciplines to study how discourses about science, culture, and society circulate in Colombian media.\n\nShe has more than a decade of experience in research and data analysis, both in the academic sector and in public and private entities. Her main interest is building bridges between computational tools and real problems, promoting collaboration spaces among data scientists, programmers, linguists, health professionals, and social science specialists.\n\nAt PyCon Colombia 2026 she will participate as director and moderator of a workshop on natural language processing for corpus analysis in Digital Humanities, sharing experiences on how Python can become a meeting tool between technology and the humanities.",
+    talkTitle: "NLP in Practice: From Corpus Linguistics to RAG with Python",
+    talkDescription:
+      "Natural language processing today offers a mature set of tools for analyzing textual corpora systematically and reproducibly, but the path between having the documents and obtaining results is not always clear. This workshop covers that path from start to finish. In two hours, participants will build an understanding of the NLP ecosystem: its history, logic, and methods. The session opens with a timeline from the earliest rule-based models to transformers, followed by a map of techniques organized by problem type (classification, entity extraction, semantic search, generation) so each participant can identify which method they need for a specific textual problem. The second part covers two implementations with Python. First, topic modeling with BERTopic, reviewing the internal pipeline of embeddings, UMAP, and HDBSCAN. Second, a conversational assistant with RAG: corpus indexing, semantic retrieval, and connection with a language model to answer queries about the documents. Upon completion, each participant will have a functional notebook with both pipelines and a clear map of the ecosystem to guide their own textual analysis projects.",
+  },
+  "andres-felipe-puerta-velez": {
+    title:
+      "Asistente de investigación y estudiante de maestría en matemáticas aplicadas. @ Universidad EAFIT",
+    description:
+      "He is a master's student in applied mathematics and a research assistant, with experience in natural language processing (NLP), integration of heterogeneous databases, and data analysis. He currently works on using the Bayesian g-formula as a solution to the multiplicity of causal effect estimators and on using machine learning models to estimate pollutant gas emissions and fuel consumption for low-displacement motorcycles in the Colombian context.\n\nAs a research assistant and scholarship holder on the Comparative Analysis of Perceptions on Protective Behaviors against COVID-19 in Colombia project, he has worked on teams made up of students and researchers from diverse disciplines to study how public discourse circulates on social networks and how it behaved regarding care habits during the pandemic.\n\nAt PyCon Colombia 2026 he will participate as moderator of a workshop on natural language processing for corpus analysis in Digital Humanities, sharing experiences on how Python can become a meeting tool between technology and the humanities.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "dora-cecilia-alzate-gallo": {
+    title: "Estudiante de la Maestría en Estudios Humanísticos @ EAFIT",
+    description:
+      "Dora Cecilia Alzate, a student in the Master's in Humanistic Studies, linked to the language area and the School of Arts and Humanities, would share the main challenges and linguistic decisions that made it possible to adapt these tools to Spanish and improve the quality of results obtained in text processing.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "karen-melissa-gomez-montoya": {
+    title:
+      "Ingeniera matemática - Asistente en investigación @ Universidad EAFIT",
+    description:
+      "Karen Melissa Gomez Montoya is a mathematical engineer and master's student in Data Science and Analytics at EAFIT, where she also works as a research assistant on digital humanities and public sphere projects. Her work sits at the intersection between computational methods and textual corpus analysis.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jesus-alfredo-reyes-vargas": {
+    title: "Lead Software Engineer @ EPAM Systems",
+    description:
+      "I am a Technical Lead and Computer Engineer graduated from UNET, and I have spent 9 years building resilient software and empowered teams.\nI am deeply passionate about technology education; I currently mentor engineers at EPAM and also founded PyDojo there, a community focused on promoting regional Python talent within the company.\nOutside the screen, I share my home and daily life with my wife and our four cats. I also practice karate, search for asteroids as a citizen scientist for IASC, and find my artistic balance painting, playing classical piano, and practicing operatic singing.",
+    talkTitle: "Future-proof Engineers with AI-DLC",
+    talkDescription:
+      'The Problem\nToday, many engineers have fallen into a trap: they are using Artificial Intelligence simply as a "glorified autocomplete" to write code faster, leaving architectural design aside. The real challenge arises in the real world: technical teams often do not know how to take an AI-based idea to production safely, scalably, and maintainably.\n\nThe Solution: Future-proof Engineers with AI-DLC\nThis is a practical, intensive workshop designed to break that stagnation. Our goal is for you to stop being a passive consumer of AI tools and become an architect capable of applying the AI Development Lifecycle (AI-DLC) as a structured work framework. We will teach you to take control and increase ownership in your projects.\n\nWho is it for?\nMid and Senior software engineers looking to evolve their skills, master modern system design, and lead AI integration in their work teams.',
+  },
+  "carlos-alberto-riveros-varela": {
+    title: "Senior Software Engineer @ EPAM Systems",
+    description:
+      "I am a Systems Engineer from Universidad Distrital and an Electronics Engineer from Universidad Nacional de Colombia. I currently work as a Senior Software Engineer at Epam, I have a master's degree in Software Engineering from Universidad de los Andes, and I tutor some courses there. I have worked for almost 10 years in the software development world for national and foreign companies in different verticals, in IC and TL roles with Python.\nI have two children. I love learning, traveling, and spending time with my family.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "felipe-sanchez": {
+    title: "Analytics Consultant @ Aimpoint Digital",
+    description:
+      "Felipe Sanchez is an Analytics Consultant and Claude Certified Architect with more than six years of experience designing data and analytics solutions for Fortune 100 organizations. His expertise spans analytics engineering, decision intelligence, agentic systems, and modern data platforms. Felipe specializes in translating complex business challenges into scalable technical solutions and is passionate about teaching practical AI engineering patterns that developers can apply in production. His work focuses on the intersection of Python, analytics, data systems, APIs, and agentic systems.",
+    talkTitle:
+      "Building Your First AI Tool Server: Creating a Pokédex with FastMCP and Python",
+    talkDescription:
+      "Do you want your AI applications to do more than answer questions? The Model Context Protocol (MCP) is becoming the standard for connecting language models with tools, APIs, and external systems.\n\nIn this workshop you will learn to build your first MCP server using FastMCP and Python. Through a completely hands-on experience, we will explore the fundamental concepts of the protocol, how to expose tools, and how to integrate them with compatible clients such as Claude.\n\nAs the main project, we will build an interactive Pokédex connected to the PokéAPI. Participants will develop real tools to query Pokémon information, expose them through an MCP server, and allow a language model to use them autonomously.\n\nUpon completion, you will have developed your own FastMCP server, understand the fundamentals of MCP, and have a solid foundation for creating AI-native applications connected to real data and services.\n\nSpots are limited... Gotta catch 'em all!\n",
+  },
+  "daniel-galvis": {
+    title: "Senior Analytics Engineer @ Aimpoint Digital",
+    description:
+      "Daniel brings over five years of experience in consulting, optimization, data visualization, and data pipelines. He is passionate about all data fields, and his experience allows him to understand needs across Data Science, Data Engineering, and Data Analysis.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "francisco-javier-moya-ortiz": {
+    title: "Lead Analytics Consultant @ Aimpoint Digital",
+    description:
+      "I am Francisco Moya, Lead Analytics Consultant at Aimpoint Digital, where I design and build data and artificial intelligence solutions for companies that want to turn their information into real decisions and actions. Over my 5 years in the data world I have worked across the full analytics cycle: from modeling and transforming data to building dashboards and AI applications that people actually use in their daily work.\n\nI hold a Master's in Data Science and Analytics, am a Claude Certified Architect, and have the Sigma AI Apps certification, credentials that reflect something I am obsessed with: always being on the frontier of what AI makes possible. I am passionate, above all, about how artificial intelligence transforms processes and reinvents workspaces, and I enjoy taking those concepts from marketing to the keyboard so anyone can apply them.\n\nThat vocation for teaching I also live in the classroom: I am a university instructor in AI and data processing topics. I firmly believe in learning by building, and that is exactly the experience I want to bring to this workshop.\n\nOutside the data world, I am a black belt in taekwondo and I love dancing.",
+    talkTitle: "Dashboards That Think: Build Agentic Analytics with Sigma",
+    talkDescription:
+      "Traditional dashboards only show data: you ask, they answer, and you start over. In this hands-on workshop we will take the next leap: we will build an agentic dashboard in Sigma that reasons about data, applies business logic, and executes actions, without writing code.\n\nWorking on live data in the warehouse, you will learn step by step to: design a dashboard on Sigma's canvas; incorporate Sigma Agents to answer questions in natural language, chain multiple reasoning steps, and trigger workflows; and connect the dashboard with external tools and systems via MCP, all governed and without taking data out of your platform.\n\nIn the end you will have an intelligent dashboard working end to end that you can replicate in your own work. It is an ideal session to understand, hands on keyboard, what \"agentic analytics\" really means in today's AI conversations, and how anyone can build it without being a data engineer or analyst",
+  },
+  "andres-vasquez-restrepo": {
+    title: "Machine Learning Engineering Manager @ Cuesta Partners",
+    description:
+      "Andrés is an applied AI engineer and researcher with a background in Artificial Intelligence, Bioinformatics, and Biotechnology. His early work in computational biology and machine learning grew into a broader focus on using AI to tackle complex, real-world problems across industries. As a startup co‑founder, he developed a strong, problem‑solving mindset, focused on shipping solutions that create tangible impact rather than just prototypes. Over the past years he has led the design and deployment of production-grade systems, including large-scale video and audio analysis pipelines, intelligent virtual assistants serving tens of thousands of users, and document automation platforms that reduced operational costs by more than 90%. His leadership in AI innovation has been recognized by the U.S. Department of State, which named him one of the Young Leaders of the Americas, and by the Royal Academy of Engineering in the United Kingdom for his contributions at the intersection of AI and innovation. Based in Medellín, Colombia, he divides his time between building AI products, mentoring others, and sharing his experience through talks and workshops on applied AI.",
+    talkTitle:
+      "PyBlend: Towards an AI Food Scientist for Nutritional Product Design",
+    talkDescription:
+      "Imagine having a “food scientist” built in Python who, instead of wearing a lab coat, uses DAGs, embeddings, and LLMs to help you design nutritious powder blends. In this talk I’ll present PyBlend, an AI agent that takes a nutritional brief in natural language (for example: “I want a vegan, high‑protein, low‑sugar blend that’s suitable for dehydration”) and turns it into a quantitative formulation ready for the lab: ingredients, raw and dehydrated proportions, nutritional profile, and estimated cost.\n\nWe’ll walk step by step through how to combine intelligent ingredient search (starting from one‑hot encodings and tabular features, all the way to text and nutrition embeddings), hybrid retrieval over food databases, and LLM agents orchestrated in a directed acyclic graph. Everything is implemented in Python, built on open-source libraries, and designed to be reproducible and extensible for anyone who wants to push language models beyond the classic “chatbot” use case.\n\nIf you’re interested in building Python agents that do real scientific/applied work, not just answer questions, if you work with tabular data, search, optimization, or simply want to see how an LLM can end up designing a functional food formulation, this talk is for you. You’ll leave with concrete ideas, architecture patterns, and code examples you can adapt to your own domains.",
+  },
+  "cesar-mateo-gonzalez-rodriguez": {
+    title: "Senior Machine Learning @ GoDaddy",
+    description:
+      "I'm a high-performance machine learning athlete. I practice speed skating, where Colombia is a world power. I apply the same mindset and effort to machine learning, striving to be the best and build incredible things along the way. I've been involved in technology development for 10 years, 5 of them in machine learning, and I still want to continue impacting the world with what I build.",
+    talkTitle:
+      "How to Find Pearls on the Bottom of the Sea - Autoencoders as Anomaly Detection Model",
+    talkDescription:
+      'In the AI/Machine Learning world, we often think of anomalies as errors that need to be fixed. But what if some of those anomalies are actually opportunities of immense value? Detecting these opportunities, these "pearls," is a huge challenge due to the vastness and complexity of the data ocean. There is a solution: anomaly detection models—positive ones in this case—and we will explore them in this session.',
+  },
+  "juan-guillermo-gomez": {
+    title: "AI & Software Advisor @ DevHack",
+    description:
+      "I  am an AI and Software Consultant dedicated to transforming businesses through intelligent and scalable solutions. As a Google Developer Expert (GDE) in Firebase, GCP, Kotlin, and AI, I am recognized by Google for my exemplary work and deep technical knowledge.\n\nMy professional focus lies at the intersection of Software Engineering and Artificial Intelligence. I provide expert consulting in Cloud Architecture and AI implementation, helping companies leverage Google technologies to solve real-world problems.\n\nCurrently, I am expanding my research capabilities by pursuing a Master's degree in Artificial Intelligence and Data Sciences at Universidad Autónoma de Occidente, building upon my previous Master's in Software Engineering from Universidad de San Buenaventura Cali. I am passionate about sharing this expertise, regularly speaking at local and global events to empower developer communities worldwide.",
+    talkTitle: "Patterns, Protocols and Tactics for Multi-Agent Systems",
+    talkDescription:
+      "As LLM applications evolve, Multi-Agent Systems (MAS) are becoming the new standard for complex automation. But how do agents effectively communicate and collaborate? This session breaks down the protocols and tactical patterns of MAS. From basic routing to advanced collaborative architectures, discover how to use Python to build systems where agents work in harmony.",
+  },
+  "mauricio-repetto-ferrero": {
+    title: "ML Engineer @ Nortal / Universidad ORT Uruguay",
+    description:
+      "I'm a System Engineer from Universidad ORT Uruguay with a Master's degree in BigData. In addition I've two post-degrees, one in BigData Analytics and another in Artificial Intelligence. \n\nI am currently working as a Machine Learning Engineer at Nortal (prev. UruIT and Nearsure) and I am a professor at Universidad ORT Uruguay. \n\nI have an extensive experience in the development of Business Intelligence solutions for various clients in South America and the United States and since 2018 I have worked in several projects based on Artificial Intelligence in areas such as Computer Vision (CV), Natural Language Processing (NLP) and Audio Processing (AP), among others.",
+    talkTitle:
+      "Use it or lose it! Token diet with TOON to fatten your wallet and help AI understand more",
+    talkDescription:
+      'What if we told you that every time you send JSON to an LLM you are paying an invisible "tax"? In the Generative AI era tokens are the new gold, and with standard JSON (with its redundant braces and repeated keys) you are burning them.\nIn this session we will review the history of data notation to understand why current tools are not optimized for LLMs and we will present TOON (Token-Oriented Object Notation), a notation that combines the best of two worlds: the readability of YAML and the density of CSV.\nBut we will not only talk theory, we will also work with real data and see how TOON manages to reduce token consumption compared to JSON. We will also demonstrate something important: spending less does not mean understanding less! Because just by using TOON many benchmarks show improvements in their metrics. It is time to put your data on a diet!',
+  },
+  "dario-jesus-guzman-duran": {
+    title: "CEO @ Gudar Devs",
+    description:
+      "CEO of Gudar Devs SAS and software engineer with more than 10 years of technical experience. I lead teams specialized in developing scalable web applications, where I prioritize robustness and operational efficiency. In addition to my work at Gudar Devs, I am a university instructor and the current leader of Python Barranquilla, a community I have belonged to since 2016.",
+    talkTitle: "High-Performance Video Ingestion with Async Python",
+    talkDescription:
+      "How do you process multiple video sources in real time without saturating the CPU or losing frames along the way? In this session, we will explore how to break the limitations of traditional workflows through asynchronous architectures.\nWe will analyze how to design an efficient pipeline in Python that achieves concurrent ingestion, processing through AI models, and persistent video storage, all in a decoupled and scalable way. We will share the technical challenges and architecture strategies to move from blocking systems to a robust, high-performance data flow. If you want to take your computer vision projects to the next level and master the power of asyncio, this session is for you.",
+  },
+  "juan-jose-barrientos-salazar": {
+    title: "AI Architect/Lead & Researcher @ The TRES Group",
+    description:
+      "Technical Lead and AI Architect with more than 3 years of experience designing and deploying artificial intelligence systems, software architectures, and production-ready automation ecosystems in enterprise environments. I specialize in connecting advanced Deep Learning and LLM theory with scalable real-world implementations, with a strong focus on reliability, maintainability, and measurable business impact.\n\nMy experience includes leading AI initiatives on Azure, designing multi-agent and RAG-based systems, and guiding technical teams through software design patterns, best practices, and production-grade engineering standards. I have delivered solutions capable of reducing days of manual work to minutes, maintaining high levels of accuracy and operational robustness.\n\nIn parallel, I lead research on Transformer optimization and LLM efficiency through mathematically rigorous, PhD-level work focused on improving the computational performance and internal mechanisms of these models. I am also passionate about AI outreach, technical mentoring, and translating complex systems into high-impact practical solutions.",
+    talkTitle:
+      "LLMs in Depth: How an LLM Works Mathematically (and Its Implementation with PyTorch)",
+    talkDescription:
+      'Imagine a 30-minute space where mathematics, code, thought experiments, and one of the most attractive topics of the present converge during powerful minutes — that is what this presentation seeks.\n\nThe goal of this talk is to review each of the components of a Large Language Model (LLM), from the embedding system and the BPE algorithm to the attention mechanism that is the core of modern AI, passing through normalization and the small "tricks" used in both training and inference to improve results and make LLMs more optimal. Each of these components will be addressed from three perspectives: 1) the pure mathematics that composes the solution, 2) the interpretation of this mathematics (why it is useful and how we can visualize it), and 3) the implementation in code, where small code snippets will show how these systems are implemented in Python. At the end, an open-source code repository will be provided with the full implementation and training pipeline for a "playground model" implementing a GPT-style model.\n\nThe intention with this talk is not only to shed light on one of the most interesting and complex topics in the modern world, but also to provide tools to question how these systems work and promote research in this field.',
+  },
+  "raul-rodriguez": {
+    title: "Technical Lead @ Mercado Libre",
+    description:
+      "I am Raul Rodriguez Lopez and I have spent more than 12 years getting my hands dirty with data. I did not arrive at Artificial Intelligence because it was trendy — I arrived because after a decade moving millions of records by hand, designing ETLs, migrating banking cores, and building highly complex pipelines, I understood there was a radically better way to do things.\nMy path started from the deepest level of data: I migrated the entire core of major products with DataStage, built data warehouses and dimensional models for the financial sector at companies like Banco Popular, Banco de Bogota, and Corredor Empresarial, automated ETL processes with Spark on AWS, and designed data architectures at Colfondos. Then I spent 3 and a half years at Banco de Bogotá, where I scaled from Data Engineer Lead to DataOps and MLOps Manager — leading teams, managing cloud budgets, implementing CI/CD, and taking data culture to another level.\nToday I am Technical Lead at Mercado Libre, one of the largest tech companies in Latin America. I design multi-cloud architectures, build multi-agent systems with Generative AI using LLMs, ADK, LiteLLM, and Model Context Protocols (MCPs), and lead research into new technological capabilities for the business. But what truly transformed me was not a promotion — it was a mindset shift.\nI adopted an AI-First philosophy: if a task can be enhanced, delegated, or automated with AI, there is no reason to do it the traditional way. That mindset led me to create NORTH, a methodology I have been iterating in real production, where Claude is not a chatbot I ask questions to — it is a copilot that maintains the context of my projects, proposes architectural decisions, manages backlog, and synchronizes the state of everything I build. I develop custom skills, automate flows with agents, and every day I find a new way to amplify what I can do as an engineer.\nThis is my first time as a speaker and I am not afraid to say it. I come with something no veteran speaker has: a real transformation story, from moving data with shell scripts in 2011 to orchestrating intelligent agents in 2026. I am not here to talk theory — I am here to show how a Colombian engineer, trained at SENA and Universidad Panamericana, came to lead AI at Mercado Libre by adopting a mindset anyone in this room can replicate.\nIf you think AI is only for Silicon Valley, I am proof that you are wrong.",
+    talkTitle: "NORTH: Claude as a Real Copilot",
+    talkDescription:
+      'We all use AI to program. Few use it well.\nMost developers interact with Claude or any LLM as if it were Google with superpowers: they ask a question, receive an answer, copy and paste, unstructured prompts. The next day, the AI has no idea who you are, what project you are working on, or why you chose PostgreSQL over MongoDB last week. Every session starts from zero. Every time you re-explain the same thing. And the result is brilliant answers that do not know your code.\nHow serious is this? I measured it. I asked Claude exactly the same thing — "give me the complete project context" — with and without methodology. Without structured context, Claude detected 3 of 5 team members, found 3 different versions of the project without knowing which was real, could not identify technical debt, and had no idea about the current sprint. With NORTH, the answer was precise: complete team with roles, correct canonical version, 3 technical debt items with severity, defined sprint with priorities, and pending PR to merge. Usefulness score: 7/7 with NORTH vs 2.5/7 without it. Same tokens. Same cost. The difference is not money — it is useful information vs noise.\nWhat if with a single command — /north — Claude knew exactly where you left off and what comes next? That is NORTH. A methodology that turns Claude into a real development copilot. Not a chatbot that answers questions — an agent with live memory of your project.',
+  },
+  "jeronimo-lopez-gomez": {
+    title:
+      "Estudiante, Joven Investigador @ Universidad de Antioquia, Grupo de Instrumentacion Cientifica y Microelectronica",
+    description:
+      "Currently completing my undergraduate degree in Physics at Universidad de Antioquia, I have experience in signal processing, high-performance data acquisition systems, and development of solutions for scientific instrumentation. I have worked on the design and implementation of solutions based on reconfigurable hardware, Xilinx System on Chip (SoC) architectures, with data analysis capabilities in Python, modeling, integrations with embedded systems, and computer vision. Passionate about technology, I consider physics a transversal training that strengthens analysis, modeling, and the ability to address complex problems in different technological contexts.",
+    talkTitle: "hls4ml: From Python Models to Hardware Acceleration",
+    talkDescription:
+      "This session presents a journey from developing machine learning models in Python to their implementation in hardware through the hls4ml tool. The goal is to show how models built in widely used frameworks such as TensorFlow, Keras, or PyTorch can be transformed into efficient hardware descriptions for deployment on reconfigurable devices.\nThe complete workflow will be covered, including model preparation, conversion to High Level Synthesis (HLS) code, and the main hardware optimization criteria such as quantization and precision reduction. The trade-offs between latency, energy consumption, and model accuracy will also be discussed.",
+  },
+  "angie-katherine-reyes": {
+    title: "AI Builder & Team Lead @ Nequi",
+    description:
+      'I have been in artificial intelligence for a good while — I started on the ML and data science side, and evolved until landing where excites me most today: GenAI and conversational agents. Now I lead a team where we build real things with language models, not just lab experiments.\nI move comfortably between theory and "okay, but how do we actually make this work?" I design agent architectures, work with LLMs, and think hard about how generative AI can solve concrete problems.\nIf you are here it is because you are curious too — so we are on the same wavelength.',
+    talkTitle:
+      "Fine-tuning at Nequi: Teaching a Small Model the Language of Our Transactions",
+    talkDescription:
+      "At Nequi, a transaction is not just an amount and a date — it is behavior, context, and sequence. Generalist models do not capture that semantics, and rigid rules do not scale with millions of users. In this workshop we explore hands-on how to fine-tune a small model so it learns the language of transactional events: their patterns, anomalies, and risk signals. Participants will work from dataset construction to model validation, understanding at each step which decisions matter and why",
+  },
+  "elkin-javier-guerra-galeano": {
+    title: "Machine Learning Engineer | MLOps @ Nequi",
+    description:
+      "Passionate about artificial intelligence, software development, and the ever-evolving world of emerging technologies, I have over three years of experience in the Data, Machine Learning, and MLOps industry. My curiosity drives me to continuously learn and explore the latest advancements in AI, cloud computing, and automation.\n\nCurrently, I am deepening my expertise in MLOps, researching and implementing best practices to streamline the deployment and scaling of machine learning models. I have hands-on experience working with AWS and GCP, leveraging cloud technologies to build scalable and efficient AI-driven solutions.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "natalia-echeverri-duran": {
+    title:
+      "Estudiante @ Universidad de Antioquia, Grupo de Instrumentacion Cientifica y Microelectronica",
+    description:
+      "Hello! I am Natalia, a final-year Physics student at Universidad de Antioquia (Colombia), and I am currently taking an AI bootcamp. I am passionate about applying machine learning and data science to real-world problems, from physical systems to behavioral data. I believe physics teaches you to see the world through patterns and equations, and AI gives you the tools to act on them.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+};
+
+const workshopContentEs: SpeakerContentBySlug = {
+  "david-felipe-vanegas-ramirez": {
+    title: "Advanced Data Engineer @ Loka",
+    description:
+      "David es ingeniero de datos en Loka, una firma de consultoría tecnológica, donde diseña y mantiene plataformas de datos en AWS para clientes de múltiples industrias. Con casi cinco años de experiencia en el campo, su trabajo diario gira en torno a Apache Iceberg, PySpark, Airflow y arquitecturas lakehouse en producción, no en tutoriales, sino en sistemas reales con incidentes reales.\n\nCuento con tres certificaciones AWS, incluyendo Solutions Architect Associate y una certificación de Databricks, lo que refleja tanto mi dominio de la infraestructura en la nube como mi experiencia práctica con procesamiento de datos distribuido. He liderado proyectos que van desde pipelines de replicación en ClickHouse hasta trabajos de mantenimiento de tablas Iceberg ejecutándose en Kubernetes, y recientemente he explorado la intersección entre ingeniería de datos y agentes de IA, construyendo herramientas personales sobre el SDK de Anthropic.\n\nCon base en Bogotá, creo que hay una escasez de contenido técnico práctico en español sobre ingeniería de datos moderna, y que PyCon Colombia es exactamente el lugar adecuado para empezar a cerrar esa brecha.",
+    talkTitle: "De S3 a Agente de IA: Tu Primer Lakehouse Consultable",
+    talkDescription:
+      "Los agentes de IA son tan buenos como los datos que pueden consultar. El problema es que la mayoría de los agentes que se construyen hoy en día están conectados a CSVs desactualizados, bases de datos sin estructura o simplemente a nada. ¿Y si tu agente pudiera consultar un lakehouse real — con versionado, evolución de esquemas y viajes en el tiempo — usando lenguaje natural?\nEn este taller construiremos exactamente eso, desde cero, usando únicamente herramientas open source que corren en tu laptop.\nLo que construiremos juntos:\nPartiendo de un stack completamente local basado en Docker Compose, levantaremos una arquitectura lakehouse funcional usando MinIO como almacenamiento compatible con S3, Apache Iceberg como formato de tabla, Project Nessie como catálogo con control de versiones tipo Git, y Trino como motor de consultas SQL. Sobre esa base, construiremos un servidor MCP en Python que expone nuestras tablas Iceberg como herramientas consultables por un agente de IA — y terminaremos conectando Claude para que consulte nuestro lakehouse en lenguaje natural.\nLo que aprenderás:\n\nCómo funciona realmente un lakehouse moderno por dentro — sin servicios administrados que escondan la magia\nCómo Apache Iceberg habilita evolución de esquemas, time travel y deletes a nivel de fila sobre almacenamiento de objetos\nCómo construir un servidor MCP en Python que convierte consultas SQL en herramientas para agentes de IA\nPor qué esta arquitectura open source refleja exactamente lo que empresas como Netflix, Airbnb y equipos de datos modernos usan en producción\n\n¿Por qué open source?\nDeliberadamente reemplazamos AWS S3 con MinIO, AWS Athena con Trino y AWS Glue con Project Nessie — no porque AWS sea malo, sino porque entender los componentes reales te hace mejor ingeniero, y porque este taller debe ser accesible para todos, independientemente de si tienes una cuenta de AWS o no.\nAl final del taller tendrás un lakehouse funcional corriendo en tu máquina, un servidor MCP operativo y una arquitectura que puedes llevar directamente a tu próximo proyecto.",
+  },
+  "felix-mino": {
+    title: "Senior software engineer @ Stack Builders",
+    description:
+      "Soy Felix Miño, desarrollador de software senior con más de 7 años de experiencia construyendo sistemas robustos y escalables. Me interesan particularmente los principios de programación funcional y las técnicas avanzadas de testing para mejorar la confiabilidad del software.\nHe trabajado con Python, Haskell y Kotlin, explorando cómo los conceptos funcionales y las estrategias de testing, como el property-based testing, pueden llevar a código más seguro y mantenible. Me interesa especialmente hacer estas ideas prácticas y accesibles para desarrolladores Python.\nDesde 2022, lidero el Quito Lambda Meetup en Ecuador, donde ayudo a hacer crecer una comunidad de habla hispana en torno a la programación funcional y las prácticas modernas de software.",
+    talkTitle: "Deja de hacer mocks, empieza a containerizar",
+    talkDescription:
+      '"Escribe tests. No demasiados. Principalmente de integración." Kent C. Dodds\n\nSi bien los tests unitarios tienen su lugar, los tests de integración validan cómo se comportan tus sistemas en condiciones del mundo real. Sin embargo, con demasiada frecuencia los desarrolladores recurren a mocks que simulan dependencias en lugar de probar con los servicios reales con los que interactúa su código.\n\nEn este workshop, exploraremos un enfoque mejor: Testcontainers es una potente librería de Python que te permite ejecutar contenedores Docker reales como parte de tu suite de tests. Ya sea que estés probando contra PostgreSQL, Redis o APIs HTTP, aprenderás a levantar entornos desechables y aislados que aportan realismo y confianza a tu práctica de testing.\n\nYa sea que estés probando microservicios, backends monolíticos o pipelines de datos, este workshop te mostrará cómo construir tests que no solo pasan, sino que demuestran que tu sistema funciona.\n\n¡Trae tu laptop y un motor Docker en ejecución, vamos a ensuciarnos las manos!\n\n',
+  },
+  "roberto-bedoya-garcia": {
+    title: "Ingeniero de Automatización @ NowBit",
+    description:
+      "PyCon Colombia ha sido parte de mi crecimiento profesional de una manera concreta: presenté workshops en las ediciones 2024 y 2025, y cada vez confirmé que esta comunidad tiene un apetito real por aprender cosas que pueda aplicar al día siguiente en su trabajo.\nMi camino en tecnología no empezó en IA ni en LLMs. Empezó dando soporte técnico en la Fuerza Aérea Colombiana, enseñando en aulas, escribiendo pruebas de software, automatizando procesos con RPA. Ese recorrido me dio algo que valoro más que cualquier framework: la capacidad de traducir problemas reales en soluciones que la gente entiende y puede operar. Hoy, como Ingeniero de Automatización en Nowbit, ese mismo principio guía el trabajo que hacemos construyendo sistemas RAG, pipelines de IA y automatizaciones en Python sobre AWS, Azure y Elastic.\nEste año quiero presentarme sin el respaldo de un patrocinador — por convicción propia y en nombre de Nowbit. El tema que propongo nace directamente de lo que vivimos en producción: equipos que logran hacer funcionar un LLM pero que no saben cuánto les cuesta, por qué falla ni cómo mejorarlo. La observabilidad de sistemas LLM con Python, OpenTelemetry y Elasticsearch no es un tema académico para mí — es algo que hemos tenido que construir y aprender en el camino.\nCreo que PyCon Colombia merece más voces que hablen desde la práctica real, desde proyectos colombianos, desde el error y el ajuste. Eso es lo que quiero aportar.",
+    talkTitle: "Tu LLM está sangrando dinero y Python puede pararlo",
+    talkDescription:
+      'Pusiste tu LLM en producción. Responde, funciona, los usuarios lo usan. Pero hay preguntas que no puedes responder: ¿cuánto te costó exactamente la semana pasada? ¿Qué prompt consume más tokens? ¿Por qué esa respuesta fue terrible el martes a las 3pm? ¿Cómo demuestras al negocio que el sistema está mejorando?\nLa mayoría de equipos que trabajan con LLMs hoy operan a ciegas. Hacen deploys, reciben quejas, ajustan prompts sin datos, y reciben facturas de API que nadie sabe explicar. Eso no es ingeniería — es intuición cara.\nEn este taller vas a construir, línea por línea en Python, un sistema completo de observabilidad para aplicaciones LLM usando OpenTelemetry, Langfuse y Elasticsearch. No teoría, no slides interminables — código real que puedes llevar a tu proyecto el lunes siguiente.\nLo que vas a construir:\nPartimos de un agente de Q&A sobre documentos, aparentemente funcional pero completamente ciego. Durante el taller lo instrumentamos paso a paso: primero con decoradores @observe de Langfuse para capturar cada prompt, respuesta y conteo de tokens; luego exportamos esas trazas vía OpenTelemetry a Elasticsearch, donde construimos en vivo un dashboard en Kibana que muestra costo por usuario, latencia p95 por modelo y tasa de respuestas de baja calidad. Finalmente implementamos una capa de evaluación automática con LLM-as-a-judge para que el sistema se audite solo.\nAl final del taller tienes un stack funcional, open source y self-hosteable — sin depender de plataformas SaaS cerradas — que cualquier equipo puede adoptar independientemente de si usa OpenAI, Anthropic, o modelos locales vía Ollama.\nLo que te llevas:\nRepositorio completo en GitHub con Docker Compose listo para levantar el entorno, notebooks con cada paso del taller, y una plantilla de dashboard Kibana exportable. Todo en español, documentado para que lo puedas compartir con tu equipo.\n¿Para quién es este taller?\nPara developers Python que ya tienen experiencia básica con LLMs y APIs, y que están listos para dar el paso de "mi POC funciona" a "mi sistema en producción es confiable, medible y defendible ante el negocio". No necesitas experiencia previa con OpenTelemetry ni Elasticsearch — los explicamos desde cero en el contexto de LLMs.\n¿Por qué importa esto ahora?\nEl gasto global en APIs de LLMs se duplicó en menos de seis meses. El 47% de las empresas está haciendo pilotos de observabilidad para IA pero solo el 7% lo tiene en producción. La brecha entre hacer funcionar un LLM y operarlo responsablemente es el problema técnico más urgente que tiene la industria hoy — y Python tiene todas las herramientas para cerrarlo.',
+  },
+  "hazel-saenz": {
+    title: "LATAM Developer Advocate @ Amazon Web Services",
+    description:
+      "Hazel Saenz es LATAM Developer Advocate en Amazon Web Services (AWS) y Former AWS Serverless Hero, con más de 20 años de experiencia en desarrollo de aplicaciones y 6 años trabajando con tecnologías cloud.\n\nSe especializa en arquitecturas serverless, sistemas orientados a eventos y Generative AI en AWS, y participa activamente como speaker en AWS Summits, Community Days y conferencias internacionales, compartiendo conocimiento práctico con la comunidad de desarrolladores en Latinoamérica.",
+    talkTitle: "Crea tu DJ con IA: Agentes en Python y Open Source",
+    talkDescription:
+      "¿Qué pasa cuando un modelo de lenguaje deja de solo hablar de música y empieza a curar playlists con tus canciones reales? En este workshop construimos juntos, paso a paso, un agente de IA que funciona como tu DJ personal, usando Python, herramientas 100% open source, y conectado directamente a Spotify. Capa por capa: desde un agente que solo conversa, hasta uno que busca canciones, arma playlists reales, y recuerda tus gustos. Todo local, todo open source, todo en Python. Cada participante sale con su propio agente funcionando.",
+  },
+  "emanuel-zapata-querubin": {
+    title: "Machine Learning Engineer @ Lovelytics",
+    description:
+      "Ingeniero Físico y Machine Learning Engineer apasionado por el impacto social de la tecnología. Mi trayectoria en el mundo de los datos ha sido un recorrido integral: desde el análisis y la ingeniería de datos hasta la ciencia de datos y la especialización en MLOps, lo que me permite entender el ciclo de vida de un modelo desde todas sus aristas. Actualmente finalizo mi Maestría en Analítica, combinando el rigor académico con la implementación de soluciones escalables en la industria. Creo firmemente que los datos y la innovación son motores para el desarrollo sostenible. Cuando no estoy optimizando pipelines en Databricks o explorando nuevas arquitecturas de IA/ML, me encontrarás en una cancha de tenis de campo o disfrutando de una buena serie de televisión.",
+    talkTitle: "De Notebook a Producción: MLOps End-to-End en Databricks",
+    talkDescription:
+      '¿Tu modelo de Machine Learning vive atrapado en un Notebook o realmente genera valor en producción? Llevar modelos de ML al mundo real requiere más que solo buen código de entrenamiento; exige una estrategia sólida de MLOps. En este workshop práctico, transformaremos un caso de uso desde cero hasta convertirlo en una solución de grado industrial utilizando Databricks y MLflow.\n\nA través de un enfoque hands-on y utilizando la Databricks Free Edition, los asistentes dominarán el ciclo de vida completo (End-to-End) bajo estándares profesionales.\n\nAgenda del Workshop:\n\n- Fundamentos de Industrialización: Introducción a la arquitectura Lakehouse, MLflow como estándar de industria y el rol del Feature Store en la reproducibilidad.\n\n- Ingeniería y Gobernanza: Creación de una Feature Store y gestión de datos crudos con mejores prácticas.\n\n- Entrenamiento Escalable: Desarrollo de modelos con tracking exhaustivo de experimentos y un bonus sobre entrenamiento distribuido para grandes volúmenes de datos.\n\n- Estrategias de Despliegue: Análisis de trade-offs entre Batch Inferencing y Real-time Serving (Model Serving). Implementaremos patrones de "Deploy Code" y "Deploy Artifacts".\n\n- Operacionalización Moderna: Orquestación profesional mediante Databricks Asset Bundles (DABs), la herramienta definitiva para infraestructura como código en Databricks.\n\n- El toque final (CI/CD): Cómo integrar todo en un pipeline de despliegue continuo para garantizar calidad en múltiples ambientes.\n\nResultado para el asistente:\nAl finalizar, cada participante tendrá en sus manos el código fuente, la configuración de infraestructura y un modelo de ML productivizado y orquestado, listo para ser replicado en entornos reales.',
+  },
+  "santiago-suarez-sampayo": {
+    title: "Senior AI Engineer @ Aimpoint Digital",
+    description:
+      "Senior AI Engineer en Aimpoint Digital, construyendo sistemas de agentes de IA en producción para empresas Fortune 500 en retail global y electrónica de consumo. Mis agentes llegan a más de 10,000 usuarios en todo el mundo y convierten tareas que tomaban días en trabajo que termina en horas, abarcando agentes analistas de datos, asistentes de codificación y automatización de flujos internos. Por mi cuenta, construyo proyectos personales en torno a IA y automatización de WhatsApp, que es lo que inspiró este workshop. Lideré el workshop de PyCon Colombia del año pasado sobre agentes de IA con LangGraph y MCP.",
+    talkTitle:
+      "Construye un asistente de codificación estilo OpenClaw en WhatsApp con Claude Agent SDK",
+    talkDescription:
+      "En este workshop práctico de 2 horas, los participantes construirán un asistente de codificación personal usando Claude Agent SDK (impulsado por Claude Code) y lo convertirán en un potente agente estilo OpenClaw con el que pueden hablar a través de WhatsApp.\nEmpezaremos construyendo el agente central en Python con Claude Agent SDK, luego agregaremos progresivamente capacidades avanzadas: memoria para recordar contexto entre conversaciones, subagentes para manejar tareas especializadas, hooks para personalizar su comportamiento, y otras funciones avanzadas de agentes que lo hacen genuinamente útil.\nUna vez que el agente esté sólido, lo conectaremos a WhatsApp usando Evolution API (basado en Baileys, los asistentes solo escanean un código QR) para que puedan interactuar con él naturalmente desde su teléfono, como hablando con un colega.\nAl final de la sesión, los asistentes usarán su asistente para construir una aplicación web real, demostrando cómo un agente bien diseñado puede convertirse en un verdadero copiloto de codificación. Se irán con un asistente estilo OpenClaw funcionando conectado a su WhatsApp, una aplicación web real que construyeron con él, y un framework que pueden extender a otros casos de uso personales y profesionales.",
+  },
+  "johnny-montoya": {
+    title: "Ingeniero de I+D en IA / AI R&D Engineer @ Unloquer",
+    description:
+      "Johnny Alexander Montoya Franco es Ingeniero de I+D en IA en LaHaus, donde lidera la estrategia de GenAI y Voice AI del PropTech líder de Colombia: una plataforma end-to-end de llamadas inmobiliarias con 2.5k+ conversaciones/mes y latencia sub-segundo, y LaHaus-Arena, un framework propio que evalúa 20+ familias de modelos LLM de 5 proveedores con más del 98% de completitud.\n\nAntes de LaHaus, fue Líder Senior de Ingeniería de Datos en Nequi (Bancolombia), donde construyó desde cero la infraestructura de datos del primer banco digital de Colombia hasta llevarla a 20M+ usuarios y picos de 1.5M+ operaciones/hora, incluyendo el pipeline de detección de fraude en tiempo real.\n\nLleva 14 años transformando industrias con datos e IA, ha sido speaker en PyCon Colombia 2023 y 2024, fue seleccionado por Bancolombia para el Plug & Play Accelerator en Palo Alto (2018), asiste regularmente al AI Engineer World's Fair y The AI Conference en Silicon Valley, y es advocate de larga data del open source en el Unloquer Hackerspace de Medellín (Airflow, dbt, Metabase, LangChain). Actualmente construye Centinela, una plataforma multi-tenant de agentes IA en producción para clientes en Colombia, y es la base técnica de este taller.",
+    talkTitle:
+      "Skills ejecutables: cómo enseñarle a un agente cómo funciona tu empresa",
+    talkDescription:
+      'El problema, en palabras de YC (febrero 2026): "Cada empresa tiene know-how disperso — en cabezas, en correos viejos, en hilos de Slack, en tickets de soporte y en bases de datos. La empresa funciona porque los humanos recuerdan vagamente dónde está ese conocimiento. Pero los agentes de IA no operan así." La solución es un Company Brain: un sistema que extrae el conocimiento de todas esas fuentes fragmentadas, lo estructura, lo mantiene vigente, y lo convierte en un archivo de skills ejecutable para la IA.\n\nEste taller construye, en dos horas, un Company Brain mínimo pero real con Python puro. No es teoría: el código viene de Centinela, una plataforma que ya está en producción atendiendo a operaciones agrícolas en Colombia y distribuidoras de bebidas en Bolivia, y combina las mismas piezas que en LaHaus me han permitido llevar agentes de voz a 2.5k+ llamadas/mes con SLA real.\n\nStack que vamos a tocar (todo Python o accesible desde Python):\n\n- Chainlit ≥ 2.9 como interfaz conversacional y data layer de hilos/pasos\n- deepagents (0.4.x) como orquestador de loops agénticos con estado\n- langchain-anthropic + fallback a Gemini vía langchain-google-genai\n- e2b-code-interpreter como sandbox real (no mock) para ejecutar Python con efectos laterales auditables\n- Supabase (Postgres + RLS) como control plane multi-tenant\n- asyncpg para una capa de persistencia de conversaciones sobre PostgreSQL\n- MCP (Model Context Protocol) vía langchain-mcp-adapters para enchufar herramientas externas',
+  },
+  "nicolas-roldan-fajardo": {
+    title: "Advanced Machine Learning Engineer @ Loka INC",
+    description:
+      "Soy un Ingeniero de ML con formación en Ingeniería Biomédica. En mis últimos años de universidad, empecé a enfocarme en Procesamiento de Señales e Imágenes Biomédicas y sus diferentes aplicaciones. Esto, a su vez, me llevó a desarrollar un fuerte interés en machine learning, cuyas raíces han estado entrelazadas con mi querido Procesamiento de Señales desde el principio. Hoy en día paso mis días llevando (o al menos intentando) modelos de ML a producción para diversos casos de uso, desde aplicaciones de Computer Vision en análisis de tráfico, Drug Discovery usando embeddings de proteínas basados en Deep Learning, y automatizando aplicaciones de scribe médico usando IA agéntica",
+    talkTitle:
+      "La Comunidad de las Evaluaciones Agénticas: ¿Cómo evaluar un agente?",
+    talkDescription:
+      "Los agentes autónomos están redefiniendo lo que podemos construir con LLMs, permitiendo que la IA no solo responda, sino que razone y ejecute acciones a través de flujos complejos. Sin embargo, a medida que les damos más autonomía con herramientas como LangGraph, surge un problema crítico en la ingeniería: ¿Cómo sabemos si el agente es realmente confiable? \n\nEn este workshop, abordaremos el reto de la evaluación de agentes. No queremos limitarnos a ver si la respuesta final suena bien sino a implementar distintas formas de evaluar dichos agentes, que van desde validaciones determinísticas hasta métricas basadas en otros LLMs (LLM-as-a-judge)\n\nPara este ejercicio, aplicaremos estos conceptos al universo de El Señor de los Anillos mezclado con estándares médicos reales para validar principalmente:\n\n- Integridad de Datos: Validar que el agente extraiga y formatee correctamente códigos médicos estructurados.\n\n- Fidelidad: evaluar que el agente no alucine los diagnósticos. \n\n- Observabilidad: Monitoreo de trazas y de costos con Langfuse.\n\nAl finalizar, los asistentes tendrán una idea clara de cómo responder a la pregunta: ¿Cómo evaluar un agente?",
+  },
+  "maria-fernanda-rojas-castro": {
+    title: "Advanced Data Engineer @ Loka INC",
+    description:
+      "Soy una Ingeniera de Datos y ML con formación en Ingeniería Biomédica. Trabajo en consultoría tecnológica, donde diseño y construyo flujos de datos y experimento aplicando machine learning y GenAI de formas prácticas. Me interesan especialmente los LLMs, los grafos de conocimiento y hacer que las ideas complejas sean más fáciles de entender, a veces con la ayuda de la cultura pop.\n\nFuera del trabajo, me encanta bailar, leer ficción, ver películas y obsesionarme con la Fórmula 1. Me gusta encontrar formas creativas de aprender y enseñar, y llevo ese espíritu a cada proyecto o charla de la que formo parte.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jonathan-vallejo-munoz": {
+    title: "Senior Director of Software Engineering @ Lendingfront",
+    description:
+      "Soy un apasionado por el desarrollo de software, el liderazgo y el crecimiento personal. Creo profundamente que cada persona, si realmente lo decide, tiene la capacidad de construir activamente su vida y alcanzar grandes metas personales y profesionales. Para mí, todo comienza con la capacidad de tomar acción, tener iniciativa, autonomía y asumir el control de las decisiones que definen nuestro camino.\n\nUno de los principios que más me identifica es: “nunca pares de aprender”. Aprender constantemente le da sentido a mi vida. Disfruto enfrentar nuevos retos, salir de mi zona de confort y descubrir nuevas formas de crecer tanto a nivel técnico como humano.\n\nTambién me apasiona impactar positivamente a las personas que me rodean. Me gusta compartir mis aprendizajes, experiencias y errores, con la intención de aportar aunque sea un pequeño grano de arena en el crecimiento de otros. Esto hace parte de mi día a día desde mi rol de liderazgo en LendingFront, donde busco impulsar equipos, mentorizar personas y construir una cultura de aprendizaje continuo, pero también lo aplico en mi vida personal con quienes tengo la oportunidad de compartir y crecer.",
+    talkTitle:
+      "Más allá del Vibe Coding: Spec Driven Development con Code Graphs",
+    talkDescription:
+      "La inteligencia artificial está cambiando la forma en que construimos software, pero escribir prompts y aceptar sugerencias de código no es suficiente para trabajar sobre sistemas reales. En aplicaciones con múltiples capas, dependencias y reglas de negocio, el verdadero reto no es solo generar código, sino entender dónde cambiarlo, cómo impacta al sistema y cómo validarlo correctamente.\n\nEn este workshop explorarás una evolución del Spec Driven Development usando Code Graphs como fuente de contexto estructurado. A partir de una aplicación web construida con FastAPI, trabajarás sobre una funcionalidad concreta siguiendo un flujo guiado: requerimiento, especificación, contexto del grafo, planificación, tareas, implementación y validación.\n\nDurante la sesión aprenderás el flujo de Spec Driven Development, desde la definición del requerimiento hasta la creación de la especificación, planificación, generación de tareas, implementación y validación. Además, verás cómo un grafo del código puede representar archivos, funciones, clases, relaciones y dependencias, permitiendo que la IA no dependa únicamente de contexto textual o prompts aislados. Esto te ayudará a reducir errores comunes como duplicar lógica, modificar capas incorrectas o ignorar pruebas afectadas.\n\nAl finalizar, entenderás cómo pasar de un uso improvisado de IA en desarrollo a un proceso más estructurado, trazable y confiable. Aprenderás a combinar especificaciones, contexto real del código y asistencia de IA para construir software con mayor claridad técnica, mejor validación del impacto y una lógica aplicable a proyectos reales.",
+  },
+  "esneider-bravo-benitez": {
+    title: "Senior Software Engineer @ Muno Labs",
+    description:
+      "Ingeniero de Software con más de 8 años de experiencia construyendo plataformas tecnológicas escalables y de alto impacto, especialmente en el sector fintech. Me apasiona crear soluciones eficientes, liderar equipos técnicos y promover una cultura de innovación enfocada en resultados reales.\n\nActualmente tengo un enfoque AI-First, integrando Inteligencia Artificial en productos y procesos para optimizar operaciones y acelerar la evolución tecnológica de las empresas. A lo largo de mi carrera he trabajado en arquitectura de software, escalabilidad de plataformas, automatización de procesos y liderazgo técnico de equipos multidisciplinarios.\n\nQuiero que la gente me conozca por mi capacidad de transformar ideas complejas en soluciones tecnológicas escalables, eficientes y orientadas al futuro. Me apasiona combinar ingeniería, innovación e inteligencia artificial para construir productos que generen impacto real y ayuden a las empresas a crecer de manera sostenible.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "maris-botero": {
+    title: "Data Science Engineer @ Mercado libre",
+    description:
+      "Soy Maris Botero, Data Science Engineer en Mercado Libre trabajando en la intersección entre datos, sistemas inteligentes y creatividad.\n\nMi trabajo se enfoca en construir soluciones de machine learning y diseñar agentes inteligentes que transforman datos en decisiones útiles. Me interesa especialmente hacer la IA más comprensible, práctica y accesible a través de experiencias de aprendizaje aplicadas.\n\nAdemás de mi trabajo técnico, exploro el arte generativo como una forma de unir código y creatividad, creando experiencias visuales que conectan la tecnología con la narrativa. También participo activamente en comunidades tecnológicas, compartiendo conocimiento a través de charlas, talleres y contenido educativo.\n\nCreo que la tecnología no solo debe ser poderosa, sino también transparente, creativa y centrada en las personas. Mi objetivo es ayudar a otros no solo a usar IA, sino a entender cómo diseñarla y construirla.",
+    talkTitle: "De Prompts a Agentes: sistemas inteligentes con Python",
+    talkDescription:
+      "Los prompts son solo el inicio. El verdadero poder de la inteligencia artificial moderna está en transformar esas instrucciones en sistemas estructurados capaces de razonar, aplicar reglas y generar decisiones consistentes.\n\nEn este taller práctico, los participantes irán más allá del uso básico de prompts y aprenderán a diseñar y construir agentes inteligentes utilizando Python. Partiendo de un prompt simple, lo evolucionaremos progresivamente hasta convertirlo en un agente funcional que procesa información, aplica contexto y genera respuestas estructuradas.\n\nA través de un enfoque práctico, aprenderemos a:\n\nDiseñar prompts efectivos con contexto, objetivos y restricciones claras\nEstructurar respuestas en formatos confiables (como JSON)\nConstruir un agente simple en Python que transforme preguntas en decisiones\nIncorporar contexto y memoria para mejorar resultados\nEvaluar la calidad y consistencia de las respuestas\n\nAl final del taller, cada participante tendrá su propio sistema tipo “agente”, capaz de convertir entradas en recomendaciones útiles, junto con un framework reutilizable para aplicar en problemas reales.\n\nEste taller está dirigido a desarrolladores, profesionales de datos y personas curiosas que quieran pasar de usar herramientas de IA a diseñar sistemas inteligentes. No se requiere experiencia previa en IA, solo conocimientos básicos de Python y ganas de aprender.\n\nMás que una sesión técnica, este taller propone una nueva forma de entender la IA: no solo como una herramienta que responde, sino como un sistema que podemos diseñar.",
+  },
+  "jose-hernan-ortiz-ocampo": {
+    title: "Senior Machine Learning Engineer @ Loka",
+    description:
+      "Jose es un Ingeniero Senior de ML con experiencia construyendo sistemas de machine learning en múltiples industrias, desde aplicaciones de seguridad, optimización logística y salud. Trabaja con equipos multidisciplinarios distribuidos internacionalmente en problemas complejos y de rápido movimiento. Curioso por naturaleza, le interesa especialmente dónde se intersectan las herramientas de IA con la forma en que los desarrolladores realmente trabajan — y cómo será en la práctica la próxima generación de desarrollo asistido por IA.",
+    talkTitle:
+      "LangGraph y Strands Agents: Conceptos centrales, patrones y trade-offs",
+    talkDescription:
+      "El panorama de frameworks de agentes se ha consolidado rápidamente. Entre las opciones disponibles hoy, dos destacan por su profundidad arquitectónica y relevancia en producción: LangGraph, con su modelo de orquestación basado en grafos controlado por el desarrollador; y Strands Agents, con su enfoque impulsado por el modelo y andamiaje mínimo. No son intercambiables — representan respuestas diferentes a la misma pregunta fundamental de cuánto control debe retener un desarrollador sobre el comportamiento del agente.\nEste workshop es una exploración estructurada y práctica de ambos. Los participantes trabajarán con una base de código compartida cubriendo escenarios reales: tool calling, gestión de estado, razonamiento multi-turno y coordinación multi-agente. Cada escenario se implementa en ambos frameworks lado a lado, haciendo las diferencias arquitectónicas concretas y comparables en lugar de teóricas.\nLa sesión está organizada en torno a tres ejes: conceptos centrales (cómo cada framework modela estado, herramientas, memoria y flujo de control), patrones prácticos (qué hace fácil cada uno, qué hace difícil) y trade-offs honestos (dónde cada framework justifica su complejidad y dónde no). Sin demos pulidas — solo código real, salidas reales y una discusión abierta de lo que cuesta y lo que compra cada enfoque.\nAl final, los participantes tendrán un modelo mental funcional para ambos frameworks, exposición práctica a sus patrones clave y suficiente perspectiva fundamentada para tomar una decisión arquitectónica informada en su próximo proyecto agéntico.\nAdecuado para: desarrolladores Python con cierta familiaridad con LLMs o conceptos de agentes. La experiencia en producción es un plus pero no es requerida — el workshop está diseñado para recompensar la profundidad de participación, no el conocimiento previo del framework.\n",
+  },
+  "isabel-mora": {
+    title: "Junior Machine Learning Engineer @ Loka",
+    description:
+      "Isabel es una Ingeniera de ML en Loka, una firma de consultoría en machine learning, donde ha trabajado en proyectos que abarcan múltiples industrias y clientes. Disfruta el arco completo del trabajo de ML, desde la experimentación hasta construir herramientas que llegan a manos de usuarios reales. Curiosa y práctica, le interesan especialmente los agentes de IA y cómo están cambiando la forma en que los desarrolladores construyen y piensan sobre el software.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jose-hernan-ortiz-ocampo-2": {
+    title: "Senior Machine Learning Engineer @ Loka Inc",
+    description:
+      "Jose es un Ingeniero Senior de ML con experiencia construyendo sistemas de machine learning en múltiples industrias, desde aplicaciones de seguridad, optimización logística y salud. Trabaja con equipos multidisciplinarios distribuidos internacionalmente en problemas complejos y de rápido movimiento. Curioso por naturaleza, le interesa especialmente dónde se intersectan las herramientas de IA con la forma en que los desarrolladores realmente trabajan — y cómo será en la práctica la próxima generación de desarrollo asistido por IA.",
+    talkTitle:
+      "Equipos multi-agente en desarrollo asistido por IA: una mirada al futuro de la programación",
+    talkDescription:
+      "La programación ha pasado por una transformación silenciosa pero radical en los últimos años. Pasamos de escribir cada línea, al autocompletado, a la IA proponiendo funciones completas, a revisar y dirigir código generado por IA. ¿Qué sigue? Sistemas multi-agente, donde tienes un equipo de agentes especializados trabajando en paralelo. Este workshop es una mirada práctica y honesta a lo que ese cambio significa hoy, y hacia dónde apunta mañana.\nEmpezaremos mapeando juntos el panorama actual: qué herramientas existen, cómo abordan la orquestación multi-agente, qué hace bien cada una y dónde están los trade-offs reales. El objetivo no es elegir un ganador — es construir un vocabulario compartido y una imagen realista del estado del arte.\nDesde ahí, pasaremos a demos en vivo. En lugar de showcases pulidos, son exploraciones honestas: qué pueden hacer realmente estos sistemas hoy, dónde fallan, y qué nos dicen esas fallas sobre los desafíos más profundos en coordinación multi-agente. Costos de tokens, límites de contexto, mala comunicación entre agentes, y la pregunta de cuánto confiar en tus agentes — son problemas reales que vale la pena examinar juntos.\nLa charla cierra con la pregunta más grande: ¿qué significa todo esto para nosotros como desarrolladores? ¿Qué habilidades se vuelven más importantes, cuáles menos, y cómo nos mantenemos relevantes a medida que las abstracciones siguen profundizándose? No predicciones, sino una reflexión fundamentada basada en lo que ya es visible en estos sistemas tempranos. La pregunta práctica no es si este futuro viene; es cómo adelantarse a él.\nLo que se llevan los asistentes:\nUn modelo mental claro de qué es realmente la codificación multi-agente (vs. herramientas de agente único y vs. frameworks de orquestación)\nUna guía de configuración funcional para que el trabajo multi-agente sea efectivo\nDemos prácticas que muestran realmente qué hacer con estas herramientas\nUna perspectiva fundamentada sobre lo que estos sistemas experimentales nos dicen sobre los próximos años de desarrollo y programación asistidos por IA\nAdecuado para: desarrolladores Python con cierta familiaridad con herramientas de IA. No se requiere profundo background en ML — es una charla práctica para desarrolladores, no una charla de investigación.",
+  },
+  "daniel-sabogal": {
+    title: "Data & ML Intern @ Loka",
+    description:
+      "Daniel es biólogo de formación y trabaja en la intersección entre ciencias de la vida, datos y software. Construye sistemas de ML junto a equipos multidisciplinarios distribuidos internacionalmente, abarcando infraestructura en la nube e investigación en bioinformática. Le interesa especialmente cómo las herramientas de IA están transformando la manera en que los desarrolladores trabajan realmente y qué significa mantenerse efectivo a medida que esas herramientas, y las abstracciones detrás de ellas, siguen evolucionando.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jose-arturo-osorio-londono": {
+    title: "Senior Tech Lead  @ Lovelytics",
+    description:
+      "Hola, soy José Arturo Osorio, Senior Tech Lead en Lovelytics, donde lidero el equipo de Ciencia de Datos, MLOps e Inteligencia Artificial Generativa para Latinoamérica. Con más de 8 años de experiencia en el campo de la ciencia de datos, he crecido junto con la evolución de la industria, trabajando a lo largo de todo el espectro de tecnologías de machine learning e inteligencia artificial.\n\nMi experiencia abarca desde modelos clásicos de aprendizaje automático, incluyendo clasificación y regresión con algoritmos basados en árboles, hasta modelado estadístico como análisis de series de tiempo y modelos de supervivencia. También he desarrollado soluciones de deep learning para visión por computador, especialmente en segmentación semántica y reconocimiento de entidades nombradas (NER). He aplicado estas tecnologías en diversos sectores, incluyendo banca, servicios y salud, siempre con un enfoque directo en las necesidades del negocio y la generación de valor para los clientes.\n\nDesde una perspectiva técnica, he diseñado e implementado soluciones de machine learning nativas en la nube utilizando principalmente Azure, AWS y Databricks. Me especializo en desarrollar sistemas de IA y aprendizaje automático que generan impacto tangible en el negocio, con resultados medibles y alineados con objetivos estratégicos. Además, cuento con una maestría en áreas relacionadas con analítica e inteligencia artificial, así como certificaciones profesionales en AWS, Databricks y Microsoft Azure.",
+    talkTitle:
+      "De ETL a Agentic Workflows: la evolución de la ingeniería de datos en la era de la IA generativa",
+    talkDescription:
+      "Este workshop práctico explorará cómo la ingeniería de datos está evolucionando desde pipelines tradicionales basados en ETL hacia sistemas impulsados por agentes inteligentes capaces de razonar, planificar y ejecutar tareas de forma autónoma.\nA través de ejercicios hands-on, los participantes aprenderán los conceptos fundamentales detrás de los workflows agénticos, los nuevos patrones arquitectónicos que están emergiendo en la industria y las librerías modernas de Python que permiten construir este tipo de soluciones. Se abordarán herramientas para la creación de agentes, orquestación de tareas, integración con modelos de lenguaje y automatización de procesos complejos.\nAl finalizar, los asistentes habrán construido ejemplos funcionales y comprenderán cómo aplicar estas nuevas capacidades para transformar procesos de datos tradicionales en sistemas más dinámicos, autónomos y escalables.",
+  },
+  "biviana-marcela-suarez-sierra": {
+    title:
+      "Profesora vinculada al área de Computación y analística @ Universidad EAFIT",
+    description:
+      "Biviana Marcela Suárez Sierra es estadística e investigadora en ciencia de datos, con experiencia en modelación estadística, aprendizaje automático y análisis computacional de datos complejos. Actualmente es profesora universitaria y dirige proyectos de investigación interdisciplinarios que integran estadística, programación y análisis de datos para abordar problemas en salud, energía, medio ambiente y humanidades digitales.\n\nSu trabajo reciente se ha centrado en el desarrollo de metodologías para el análisis de grandes corpus textuales mediante técnicas de procesamiento de lenguaje natural (NLP), minería de textos y aprendizaje estadístico. Como investigadora vinculada en el proyecto Arte, ciencia y tecnología en la esfera pública: el aporte de las Humanidades Digitales al análisis de los discursos en la esfera pública en Colombia, ha liderado equipos conformados por estudiantes e investigadores de diversas disciplinas para estudiar cómo circulan los discursos sobre ciencia, cultura y sociedad en medios de comunicación colombianos.\n\nCuenta con más de una década de experiencia en investigación y análisis de datos, tanto en el sector académico como en entidades públicas y privadas. Su interés principal es construir puentes entre las herramientas computacionales y los problemas reales, promoviendo espacios de colaboración entre científicos de datos, programadores, lingüistas, profesionales de la salud y especialistas en ciencias sociales.\n\nEn PyCon Colombia 2026 participará como directora y moderadora de un workshop sobre procesamiento de lenguaje natural para análisis de corpus en Humanidades Digitales, compartiendo experiencias sobre cómo Python puede convertirse en una herramienta de encuentro entre la tecnología y las ciencias humanas.",
+    talkTitle: "NLP en la práctica: de lingüística de corpus a RAG con Python",
+    talkDescription:
+      "El procesamiento de lenguaje natural ofrece hoy un conjunto maduro de herramientas para analizar corpus textuales de forma sistemática y reproducible, pero el camino entre tener los documentos y obtener resultados no siempre es claro. Este workshop recorre ese camino de principio a fin. En dos horas, los participantes construirán una comprensión del ecosistema NLP: su historia, su lógica y sus métodos. La sesión abre con una línea de tiempo que va desde los primeros modelos basados en reglas hasta los transformers, seguida de un mapa de técnicas organizadas por tipo de problema (clasificación, extracción de entidades, búsqueda semántica, generación) para que cada participante pueda identificar qué método necesita ante un problema textual concreto. La segunda parte cubre dos implementaciones con Python. Primero, modelado de tópicos con BERTopic, revisando el pipeline interno de embeddings, UMAP y HDBSCAN. Segundo, un asistente conversacional con RAG: indexación del corpus, recuperación semántica y conexión con un modelo de lenguaje para responder consultas sobre los documentos. Al finalizar, cada participante tendrá un notebook funcional con los dos pipelines y un mapa claro del ecosistema para orientar sus propios proyectos de análisis textual.",
+  },
+  "andres-felipe-puerta-velez": {
+    title:
+      "Asistente de investigación y estudiante de maestría en matemáticas aplicadas. @ Universidad EAFIT",
+    description:
+      "Es un estudiante de maestría en matemáticas aplicadas y asistente de investigación, con experiencia en procesamiento de lenguaje natural (NLP), integración de bases de datos heterogéneas y análisis de datos. Actualmente trabaja en el uso de la g-formula bayesiana como solución a la multiplicidad de estimadores de efecto causal y en el uso de modelos de machine learning para la estimación de emisiones de gases contaminantes y consumo de combustible para motos de bajo cilindraje en el contexto colombiano. \n\nCómo asistente de investigación y becario del proyecto Análisis Comparativo de Percepciones sobre Comportamientos Protectores frente al COVID-19 en Colombia, ha trabajado en equipos conformados por estudiantes e investigadores de diversas disciplinas para estudiar cómo circula el discurso público en redes sociales y como fue su comportamiento respecto a hábitos de cuidado durante la pandemia.\n\nEn PyCon Colombia 2026 participará como moderador de un workshop sobre procesamiento de lenguaje natural para análisis de corpus en Humanidades Digitales, compartiendo experiencias sobre cómo Python puede convertirse en una herramienta de encuentro entre la tecnología y las ciencias humanas.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "dora-cecilia-alzate-gallo": {
+    title: "Estudiante de la Maestría en Estudios Humanísticos @ EAFIT",
+    description:
+      "Dora Cecilia Alzate, estudiante de la Maestría en Estudios Humanísticos, vinculada al área de lenguaje y a la Escuela de Artes y Humanidades, compartiría los principales desafíos y decisiones lingüísticas que permitieron adaptar estas herramientas al español y mejorar la calidad de los resultados obtenidos en el procesamiento de textos.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "karen-melissa-gomez-montoya": {
+    title:
+      "Ingeniera matemática - Asistente en investigación @ Universidad EAFIT",
+    description:
+      "Karen Melissa Gomez Montoya es ingeniera matemática y estudiante de maestría en Ciencia de Datos y Analítica en EAFIT, donde también se desempeña como asistente de investigación en proyectos de humanidades digitales y esfera pública. Su trabajo se sitúa en la intersección entre métodos computacionales y análisis de corpus textuales.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "jesus-alfredo-reyes-vargas": {
+    title: "Lead Software Engineer @ EPAM Systems",
+    description:
+      "Soy Technical Lead e Ingeniero en Informática egresado de la UNET, y me dedico desde hace 9 años a construir software resiliente y equipos empoderados. \nMe apasiona profundamente la educación tecnológica; actualmente soy mentor de ingenieros en EPAM y también fundé PyDojo allí, una comunidad enfocada en impulsar el talento regional en Python dentro de la empresa. \nFuera de la pantalla, comparto mi hogar y mi día a día con mi esposa y nuestros cuatro gatos. También practico karate, busco asteroides como citizen scientist para IASC, y encuentro mi equilibrio artístico pintando, tocando el piano académico y practicando canto lírico.",
+    talkTitle: "Ingenieros a prueba de futuro con AI-DLC",
+    talkDescription:
+      'El Problema\nHoy en día, muchos ingenieros han caído en una trampa: están utilizando la Inteligencia Artificial simplemente como un "autocompletado glorificado" para escribir código más rápido, dejando de lado el diseño arquitectónico. El verdadero desafío surge en el mundo real: los equipos técnicos a menudo no saben cómo llevar una idea basada en IA a producción de manera segura, escalable y mantenible.\n\nLa Solución: Future-proof Engineers with AI-DLC\nEste es un taller práctico e intensivo diseñado para romper ese estancamiento. Nuestro objetivo es que dejes de ser un consumidor pasivo de herramientas de IA y te conviertas en un arquitecto capaz de aplicar el Ciclo de Vida del Desarrollo de IA (AI-DLC) como un framework de trabajo estructurado. Te enseñaremos a tomar control y aumentar el ownership en tus proyectos.\n\n¿A quién va dirigido?\nIngenieros de software de nivel Mid y Senior que buscan evolucionar sus habilidades, dominar el diseño de sistemas modernos y liderar la integración de IA en sus equipos de trabajo.',
+  },
+  "carlos-alberto-riveros-varela": {
+    title: "Senior Software Engineer @ EPAM Systems",
+    description:
+      "Soy Ingeniero de Sistemas de la Universidad Distrital e Ingeniero Electrónico de la Universidad Nacional de Colombia. Actualmente me desempeño como Senior Software Engineer en Epam, tengo una maestría en Ingeniería de Software de la Universidad de los Andes y soy tutor de algunas asignaturas de la misma. Me he desempeñado por casi 10 años en el mundo del desarrollo de software trabajando para empresas nacionales y extranjeras de diferentes verticales, en roles de IC y TL con Python. \nTengo dos hijos. Me encanta aprender, viajar, y pasar tiempo con mi familia.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "felipe-sanchez": {
+    title: "Analytics Consultant @ Aimpoint Digital",
+    description:
+      "Felipe Sanchez es Consultor de Analytics y Claude Certified Architect con más de seis años de experiencia diseñando soluciones de datos y analytics para organizaciones Fortune 100. Su experiencia abarca analytics engineering, inteligencia de decisiones, sistemas agénticos y plataformas de datos modernas. Felipe se especializa en traducir desafíos de negocio complejos en soluciones técnicas escalables y es apasionado por enseñar patrones prácticos de ingeniería de IA que los desarrolladores pueden aplicar en producción. Su trabajo se enfoca en la intersección de Python, analytics, sistemas de datos, APIs y sistemas agénticos.",
+    talkTitle:
+      "Construye tu primer servidor de herramientas de IA: creando una Pokédex con FastMCP y Python",
+    talkDescription:
+      "¿Quieres que tus aplicaciones de IA hagan más que responder preguntas? El Model Context Protocol (MCP) se está convirtiendo en el estándar para conectar modelos de lenguaje con herramientas, APIs y sistemas externos.\n\nEn este workshop aprenderás a construir tu primer servidor MCP utilizando FastMCP y Python. A través de una experiencia completamente práctica, exploraremos los conceptos fundamentales del protocolo, cómo exponer herramientas y cómo integrarlas con clientes compatibles como Claude.\n\nComo proyecto principal, construiremos una Pokédex interactiva conectada a la PokéAPI. Los participantes desarrollarán herramientas reales para consultar información de Pokémon, exponerlas mediante un servidor MCP y permitir que un modelo de lenguaje las utilice de forma autónoma.\n\nAl finalizar, habrás desarrollado tu propio servidor FastMCP, comprenderás los fundamentos de MCP y contarás con una base sólida para crear aplicaciones AI-native conectadas a datos y servicios reales.\n\nLos cupos son limitados... ¡Atrápalos ya!\n",
+  },
+  "daniel-galvis": {
+    title: "Senior Analytics Engineer @ Aimpoint Digital",
+    description:
+      "Daniel aporta más de cinco años de experiencia en consultoría, optimización, visualización de datos y pipelines de datos. Es apasionado por todos los campos de datos, y su experiencia le permite entender necesidades en Ciencia de Datos, Ingeniería de Datos y Análisis de Datos.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "francisco-javier-moya-ortiz": {
+    title: "Lead Analytics Consultant @ Aimpoint Digital",
+    description:
+      "Soy Francisco Moya, Lead Analytics Consultant en Aimpoint Digital, donde diseño y construyo soluciones de datos e inteligencia artificial para empresas que quieren convertir su información en decisiones y acciones reales. A lo largo de mis 5 años en el mundo de los datos he trabajado en todo el ciclo de la analítica: desde modelar y transformar datos hasta construir dashboards y aplicaciones de IA que la gente realmente usa en su día a día.\n\nSoy Máster en Ciencia de Datos y Analítica, Claude Certified Architect y cuento con la certificación Sigma AI Apps, credenciales que reflejan algo que me obsesiona: estar siempre en la frontera de lo que la IA hace posible. Me apasiona, sobre todo, cómo la inteligencia artificial transforma procesos y reinventa los espacios de trabajo, y disfruto llevando esos conceptos del marketing al teclado para que cualquiera  pueda aplicarlos.\n\nEsa vocación por enseñar también la vivo en las aulas: soy docente universitario en temas de IA y procesamiento de datos. Creo firmemente en aprender construyendo, y esa es justo la experiencia que quiero traer a este workshop.\n\nFuera del mundo de los datos, soy cinta negra en taekwondo y me encanta bailar.",
+    talkTitle: "Dashboards que piensan: construye analítica agéntica con Sigma",
+    talkDescription:
+      'Los dashboards tradicionales solo muestran datos: tú preguntas, ellos responden, y vuelves a empezar. En este workshop práctico daremos el siguiente salto: construiremos un dashboard agéntico en Sigma que razona sobre los datos, aplica lógica de negocio y ejecuta acciones, sin escribir código.\n\nTrabajando sobre datos en vivo en el warehouse, aprenderás paso a paso a: diseñar un dashboard en el lienzo de Sigma; incorporar Sigma Agents para responder preguntas en lenguaje natural, encadenar varios pasos de razonamiento y disparar flujos de trabajo; y conectar el dashboard con herramientas y sistemas externos mediante MCP, todo gobernado y sin sacar los datos de tu plataforma.\n\nAl final tendrás un dashboard inteligente funcionando de principio a fin que podrás replicar en tu propio trabajo. Es una sesión ideal para entender, con las manos en el teclado, qué significa de verdad la "analítica agéntica" que hoy domina las conversaciones de IA, y cómo cualquiera puede construirla sin ser ingeniero de datos ni analista',
+  },
+  "andres-vasquez-restrepo": {
+    title: "Machine Learning Engineering Manager @ Cuesta Partners",
+    description:
+      "Andrés es un ingeniero de IA aplicada e investigador con formación en Inteligencia Artificial, Bioinformática y Biotecnología. Su trabajo temprano en biología computacional y machine learning creció hacia un enfoque más amplio en usar IA para abordar problemas complejos del mundo real en diversas industrias. Como cofundador de una startup, desarrolló una mentalidad fuerte de resolución de problemas, enfocada en entregar soluciones que crean impacto tangible en lugar de solo prototipos. En los últimos años ha liderado el diseño y despliegue de sistemas de grado productivo, incluyendo pipelines de análisis de video y audio a gran escala, asistentes virtuales inteligentes que atienden decenas de miles de usuarios, y plataformas de automatización documental que redujeron costos operativos en más del 90%. Su liderazgo en innovación de IA ha sido reconocido por el Departamento de Estado de EE.UU., que lo nombró uno de los Jóvenes Líderes de las Américas, y por la Real Academia de Ingeniería del Reino Unido por sus contribuciones en la intersección de IA e innovación. Con base en Medellín, Colombia, divide su tiempo entre construir productos de IA, mentorizar a otros y compartir su experiencia a través de charlas y workshops sobre IA aplicada.",
+    talkTitle:
+      "PyBlend: Hacia un científico de alimentos con IA para diseño de productos nutricionales",
+    talkDescription:
+      'Imagina tener un "científico de alimentos" construido en Python que, en lugar de usar bata de laboratorio, usa DAGs, embeddings y LLMs para ayudarte a diseñar mezclas en polvo nutritivas. En esta charla presentaré PyBlend, un agente de IA que toma un brief nutricional en lenguaje natural (por ejemplo: "quiero una mezcla vegana, alta en proteína, baja en azúcar, apta para deshidratación") y lo convierte en una formulación cuantitativa lista para el laboratorio: ingredientes, proporciones crudas y deshidratadas, perfil nutricional y costo estimado.\n\nRecorreremos paso a paso cómo combinar búsqueda inteligente de ingredientes (desde one-hot encodings y features tabulares, hasta embeddings de texto y nutrición), recuperación híbrida sobre bases de datos de alimentos, y agentes LLM orquestados en un grafo acíclico dirigido. Todo está implementado en Python, construido sobre librerías open source, y diseñado para ser reproducible y extensible para cualquiera que quiera llevar los modelos de lenguaje más allá del caso de uso clásico de "chatbot".\n\nSi te interesa construir agentes en Python que hagan trabajo científico/aplicado real, no solo responder preguntas, si trabajas con datos tabulares, búsqueda, optimización, o simplemente quieres ver cómo un LLM puede terminar diseñando una formulación alimentaria funcional, esta charla es para ti. Te irás con ideas concretas, patrones de arquitectura y ejemplos de código que puedes adaptar a tus propios dominios.',
+  },
+  "cesar-mateo-gonzalez-rodriguez": {
+    title: "Senior Machine Learning @ GoDaddy",
+    description:
+      "Soy un atleta de alto rendimiento en machine learning. Practico patinaje de velocidad, donde Colombia es una potencia mundial. Aplico la misma mentalidad y esfuerzo al machine learning, esforzándome por ser el mejor y construir cosas increíbles en el camino. Llevo 10 años involucrado en el desarrollo tecnológico, 5 de ellos en machine learning, y aún quiero seguir impactando el mundo con lo que construyo.",
+    talkTitle:
+      "Cómo encontrar perlas en el fondo del mar - Autoencoders como modelo de detección de anomalías",
+    talkDescription:
+      'En el mundo de IA/Machine Learning, a menudo pensamos en las anomalías como errores que hay que corregir. Pero ¿y si algunas de esas anomalías son en realidad oportunidades de inmenso valor? Detectar estas oportunidades, estas "perlas", es un enorme desafío debido a la vastedad y complejidad del océano de datos. Hay una solución: modelos de detección de anomalías — positivos en este caso — y los exploraremos en esta sesión.',
+  },
+  "juan-guillermo-gomez": {
+    title: "AI & Software Advisor @ DevHack",
+    description:
+      "Soy un Consultor de IA y Software dedicado a transformar negocios a través de soluciones inteligentes y escalables. Como Google Developer Expert (GDE) en Firebase, GCP, Kotlin e IA, soy reconocido por Google por mi trabajo ejemplar y profundo conocimiento técnico.\n\nMi enfoque profesional está en la intersección de Ingeniería de Software e Inteligencia Artificial. Brindo consultoría experta en Arquitectura Cloud e implementación de IA, ayudando a empresas a aprovechar las tecnologías de Google para resolver problemas del mundo real.\n\nActualmente, estoy expandiendo mis capacidades de investigación cursando una Maestría en Inteligencia Artificial y Ciencias de Datos en la Universidad Autónoma de Occidente, construyendo sobre mi Maestría previa en Ingeniería de Software de la Universidad de San Buenaventura Cali. Me apasiona compartir esta experiencia, hablando regularmente en eventos locales y globales para empoderar comunidades de desarrolladores en todo el mundo.",
+    talkTitle: "Patrones, protocolos y tácticas para sistemas multi-agente",
+    talkDescription:
+      "A medida que las aplicaciones de LLM evolucionan, los Sistemas Multi-Agente (MAS) se están convirtiendo en el nuevo estándar para automatización compleja. Pero ¿cómo se comunican y colaboran efectivamente los agentes? Esta sesión desglosa los protocolos y patrones tácticos de MAS. Desde enrutamiento básico hasta arquitecturas colaborativas avanzadas, descubre cómo usar Python para construir sistemas donde los agentes trabajan en armonía.",
+  },
+  "mauricio-repetto-ferrero": {
+    title: "ML Engineer @ Nortal / Universidad ORT Uruguay",
+    description:
+      "Soy Ingeniero en Sistemas de la Universidad ORT Uruguay con una Maestría en BigData. Además tengo dos posgrados, uno en BigData Analytics y otro en Inteligencia Artificial.\n\nActualmente trabajo como Machine Learning Engineer en Nortal (antes UruIT y Nearsure) y soy profesor en la Universidad ORT Uruguay.\n\nTengo amplia experiencia en el desarrollo de soluciones de Business Intelligence para diversos clientes en Sudamérica y Estados Unidos y desde 2018 he trabajado en varios proyectos basados en Inteligencia Artificial en áreas como Computer Vision (CV), Natural Language Processing (NLP) y Audio Processing (AP), entre otras.",
+    talkTitle:
+      "¡Es ahorra o nunca! Dieta de tokens con TOON para agrandar tu bolsillo y que la IA entienda más",
+    talkDescription:
+      '¿Qué te diríamos si te contamos que cada vez que envías un JSON a un LLM estás pagando un "impuesto" invisible? En la era de la IA Generativa los tokens son el nuevo oro, y con el JSON estándar (con sus llaves redundantes y claves repetitivas) los estás quemando.\nEn esta sesión haremos un repaso de historia en la notación de datos para entender por qué las herramientas actuales no están optimizadas para los LLMs y te presentaremos TOON (Token-Oriented Object Notation), una notación que combina lo mejor de dos mundos: la legibilidad de YAML y la densidad de CSV.\nPero no solo hablaremos de teoría, también trabajaremos con datos reales y veremos cómo TOON logra reducir el consumo de tokens en comparación con JSON. Además, demostraremos algo importante: ¡gastar menos no significa entender menos! Ya que solo por utilizar TOON muchos benchmarks demuestran mejoras en sus métricas. ¡Es hora de poner tus datos a dieta!',
+  },
+  "dario-jesus-guzman-duran": {
+    title: "CEO @ Gudar Devs",
+    description:
+      "CEO de Gudar Devs SAS e ingeniero de software con más de 10 años de experiencia técnica. Lidero equipos especializados en el desarrollo de aplicaciones web escalables, donde priorizo la robustez y la eficiencia operativa. Además de mi labor en Gudar Devs, soy docente universitario y el actual líder de Python Barranquilla, comunidad a la que pertenezco desde 2016.",
+    talkTitle: "Ingestión de video de alto rendimiento con Python asíncrono",
+    talkDescription:
+      "¿Cómo procesar múltiples fuentes de video en tiempo real sin saturar la CPU ni perder cuadros en el camino? En esta sesión, exploraremos cómo romper las limitaciones de los flujos de trabajo tradicionales mediante arquitecturas asíncronas.\nAnalizaremos cómo diseñar un pipeline eficiente en Python que logre la ingestión concurrente, el procesamiento mediante modelos de IA y el almacenamiento persistente de video, todo de forma desacoplada y escalable. Compartiremos los retos técnicos y las estrategias de arquitectura para pasar de sistemas bloqueantes a un flujo de datos robusto y de alto rendimiento. Si buscas llevar tus proyectos de visión artificial al siguiente nivel y dominar el poder de asyncio, esta sesión es para ti.",
+  },
+  "juan-jose-barrientos-salazar": {
+    title: "AI Architect/Lead & Researcher @ The TRES Group",
+    description:
+      "Líder Técnico y Arquitecto de IA con más de 3 años de experiencia diseñando y desplegando sistemas de inteligencia artificial, arquitecturas de software y ecosistemas de automatización listos para producción en entornos empresariales. Me especializo en conectar teoría avanzada de Deep Learning y LLMs con implementaciones escalables en el mundo real, con un fuerte enfoque en confiabilidad, mantenibilidad e impacto\nde negocio medible.\n\nMi experiencia incluye liderar iniciativas de IA sobre Azure, diseñar sistemas multiagente y basados en RAG, y guiar equipos técnicos a través de patrones de diseño de software, buenas prácticas y estándares de ingeniería de nivel productivo. He entregado soluciones capaces de reducir días de trabajo manual a minutos, manteniendo altos niveles de precisión y robustez operativa.\n\nEn paralelo, lidero investigación sobre optimización de Transformers y eficiencia de LLMs mediante trabajo matemáticamente riguroso, de nivel PhD, enfocado en mejorar el desempeño computacional y los mecanismos internos de estos modelos. Además, me apasiona la divulgación de IA, la mentoría técnica y la traducción de sistemas complejos en soluciones prácticas de alto impacto.",
+    talkTitle:
+      "LLMs a profundidad: Como funciona matematicamente un LLM (y su implementacion con Pytorch)",
+    talkDescription:
+      'Imagina un espacio de 30 minutos donde la matemática, el código, los experimentos mentales y uno de los temas mas atractivos de la actualidad convergiesen durante potentes minutos, eso es lo que busca esta presentación. \n\nEl objetivo de esta charla es hacer un repaso por cada uno de los componentes de un Large Language Model (LLM), desde el sistema de embeddings y el algoritmo de BPE, hasta el mecanismo de atención que es el core de la IA moderna, pasando por la normalización y los pequeños "truquitos" que se usan tanto en entrenamiento como en inferencia para mejorar los resultados y hacer los LLMs mas optimos, cada uno de estos componentes será abordado desde tres perspectivas: 1) la matemática pura que compone la solución, 2) La interpretación de esta matemática (por que es útil y como lo podemos visualizar) y 3) La implementación en código, donde se mostrarán pequeñas píldoras de código que muestren como se implementan estos sistemas en Python. Al final se entregará un repositorio de código abierto con toda la implementación y el pipeline de entrenamiento para un "playground model" implementando un modelo tipo GPT.\n\nLa intención con esta charla no es solo brindar luz sobre uno de los temas mas interesantes y complejos en el mundo moderno, es también brindar herramientas para cuestionarse el funcionamiento de estos sistemas y promover la investigación en este campo.',
+  },
+  "raul-rodriguez": {
+    title: "Technical Lead @ Mercado Libre",
+    description:
+      "Soy Raul Rodriguez Lopez y llevo más de 12 años ensuciándome las manos con datos. No llegué a la Inteligencia Artificial por moda — llegué porque después de una década moviendo millones de registros a mano, diseñando ETLs, migrando cores bancarios y construyendo pipelines de alta complejidad, entendí que había una forma radicalmente mejor de hacer las cosas.\nMi camino empezó desde lo más profundo del dato: migré todo el core de grandes productos  con DataStage, construí bodegas de datos y modelos dimensionales para el sector financiero en empresas como Banco Popular , Banco de Bogota, y Corredor Empresarial, automaticé procesos ETL con Spark en AWS , y diseñé arquitecturas de datos en Colfondos. Después pasé 3 años y medio en el Banco de Bogotá, donde escalé de Data Engineer Lead a Gerente de DataOps y MLOps — liderando equipos, administrando presupuestos cloud, implementando CI/CD y llevando la cultura de datos a otro nivel.\nHoy soy Technical Lead en Mercado Libre, una de las empresas tech más grandes de Latinoamérica. Diseño arquitecturas multi-cloud, construyo sistemas multiagente con IA Generativa usando LLMs, ADK, LiteLLM y Model Context Protocols (MCPs), y lidero la investigación de nuevas capacidades tecnológicas para el negocio. Pero lo que realmente me transformó no fue un ascenso — fue un cambio de mentalidad.\nAdopté una filosofía AI-First: si una tarea puede ser potenciada, delegada o automatizada con IA, no hay razón para hacerla de la forma tradicional. Esa mentalidad me llevó a crear NORTH, una metodología que llevo iterando en producción real, donde Claude no es un chatbot al que le hago preguntas — es un copiloto que mantiene el contexto de mis proyectos, propone decisiones arquitectónicas, gestiona backlog y sincroniza el estado de todo lo que construyo. Desarrollo skills personalizados, automatizo flujos con agentes, y cada día encuentro una nueva forma de amplificar lo que puedo hacer como ingeniero.\nEsta es mi primera vez como ponente y no me da miedo decirlo. Vengo con algo que ningún speaker veterano tiene: una historia real de transformación, desde mover datos con shell scripts en 2011 hasta orquestar agentes inteligentes en 2026. No vengo a hablar de teoría — vengo a mostrar cómo un ingeniero colombiano, formado en el SENA y la Panamericana, llegó a liderar IA en Mercado Libre adoptando una mentalidad que cualquiera en esta sala puede replicar.\nSi crees que la IA es solo para Silicon Valley, yo soy la prueba de que estás equivocado.",
+    talkTitle: "NORTH: Claude como copiloto real",
+    talkDescription:
+      'Todos usamos IA para programar. Pocos la usan bien.\nLa mayoría de desarrolladores interactúa con Claude o cualquier LLM como si fuera Google con superpoderes: le hacen una pregunta, reciben una respuesta, copian y pegan, prompts poco estructurados. Al día siguiente, la IA no tiene idea de quién eres, en qué proyecto trabajas ni por qué elegiste PostgreSQL sobre MongoDB la semana pasada. Cada sesión empieza desde cero. Cada vez reexplicas lo mismo. Y el resultado son respuestas geniales que no conocen tu código.\n¿Qué tan grave es esto? Lo medí. Le pedí a Claude exactamente lo mismo — "dame el contexto completo del proyecto" — con y sin metodología. Sin contexto estructurado, Claude detectó 3 de 5 miembros del equipo, encontró 3 versiones distintas del proyecto sin saber cuál era la real, no pudo identificar deuda técnica y no tenía idea del sprint actual. Con NORTH, la respuesta fue precisa: equipo completo con roles, versión canónica correcta, 3 ítems de deuda técnica con severidad, sprint definido con prioridades y PR pendiente de merge. Score de utilidad: 7/7 con NORTH vs 2.5/7 sin él. Mismos tokens. Mismo costo. La diferencia no es plata — es información útil vs ruido.\n¿Qué pasaría si con un solo comando — /north — Claude supiera exactamente dónde quedaste y qué sigue? Eso es NORTH. Una metodología que convierte a Claude en un copiloto real de desarrollo. No un chatbot que responde preguntas — un agente con memoria viva de tu proyecto.',
+  },
+  "jeronimo-lopez-gomez": {
+    title:
+      "Estudiante, Joven Investigador @ Universidad de Antioquia, Grupo de Instrumentacion Cientifica y Microelectronica",
+    description:
+      "Actualmente culminando mi pregrado en Física en la Universidad de Antioquia, cuento con experiencia en procesamiento de señales, sistemas de adquisición de datos de alto rendimiento y desarrollo de soluciones para instrumentación científica. He trabajado en el diseño e implementación de soluciones basadas en hardware reconfigurable, arquitecturas System on Chip Xilinx (SoC), con capacidades de análisis de datos en Python, modelado, integraciones con sistemas embebidos y visión artificial por computador. Apasionado por la tecnología y considero la física como una formación transversal que fortalece el análisis, la modelación y la capacidad de abordar problemas complejos en distintos contextos tecnológicos.",
+    talkTitle: "hls4ml: De modelos Python a aceleración en hardware",
+    talkDescription:
+      "Esta sesión presenta un recorrido desde el desarrollo de modelos de machine learning en Python hasta su implementación en hardware mediante la herramienta hls4ml. El objetivo es mostrar cómo los modelos construidos en frameworks ampliamente utilizados, como TensorFlow, Keras o PyTorch, pueden ser transformados en descripciones de hardware eficientes para su despliegue en dispositivos reconfigurables.\nSe abordará el flujo de trabajo completo, incluyendo la preparación del modelo, su conversión a código de High Level Synthesis (HLS) y los principales criterios de optimización para hardware, como la cuantización y la reducción de precisión. Asimismo, se discutirán los compromisos entre latencia, consumo energético y exactitud del modelo.",
+  },
+  "angie-katherine-reyes": {
+    title: "AI Builder & Team Lead @ Nequi",
+    description:
+      'Llevo un buen rato en esto de la inteligencia artificial — empecé por el lado de ML y ciencia de datos, y fui evolucionando hasta aterrizar donde más me emociona hoy: GenAI y agentes conversacionales. Ahora lidero un equipo donde construimos cosas reales con modelos de lenguaje, no solo experimentos de laboratorio.\nMe muevo cómodo entre la teoría y el "bueno, ¿y esto cómo lo ponemos a funcionar?". Diseño arquitecturas de agentes, trabajo con LLMs y le meto cabeza a cómo la IA generativa puede resolver problemas concretos.\nSi estás acá es porque también te pica la curiosidad — así que estamos en el mismo canal.',
+    talkTitle:
+      "Fine-tuning en Nequi: enseñarle a un modelo pequeño el lenguaje de nuestras transacciones",
+    talkDescription:
+      "En Nequi, una transacción no es solo un monto y una fecha — es comportamiento, contexto y secuencia. Los modelos generalistas no capturan esa semántica, y las reglas rígidas no escalan con millones de usuarios. En este workshop exploramos hands-on cómo hacer fine-tuning de un modelo pequeño para que aprenda el lenguaje propio de eventos transaccionales: sus patrones, sus anomalías, sus señales de riesgo. Los participantes trabajarán desde la construcción del dataset hasta la validación del modelo, entendiendo en cada paso qué decisiones importan y por qué",
+  },
+  "elkin-javier-guerra-galeano": {
+    title: "Machine Learning Engineer | MLOps @ Nequi",
+    description:
+      "Apasionado por la inteligencia artificial, el desarrollo de software y el mundo en constante evolución de las tecnologías emergentes, tengo más de tres años de experiencia en la industria de Datos, Machine Learning y MLOps. Mi curiosidad me impulsa a aprender continuamente y explorar los últimos avances en IA, computación en la nube y automatización.\n\nActualmente, estoy profundizando mi experiencia en MLOps, investigando e implementando mejores prácticas para optimizar el despliegue y escalamiento de modelos de machine learning. Tengo experiencia práctica trabajando con AWS y GCP, aprovechando tecnologías cloud para construir soluciones escalables y eficientes impulsadas por IA.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+  "natalia-echeverri-duran": {
+    title:
+      "Estudiante @ Universidad de Antioquia, Grupo de Instrumentacion Cientifica y Microelectronica",
+    description:
+      "¡Hola! Soy Natalia, estudiante de último año de Física en la Universidad de Antioquia (Colombia), y actualmente estoy cursando un bootcamp de IA. Me apasiona aplicar el aprendizaje automático y la ciencia de datos a problemas del mundo real, desde sistemas físicos hasta datos de comportamiento. Creo que la física te enseña a ver el mundo a través de patrones y ecuaciones, y la IA te brinda las herramientas para actuar en función de ellos.",
+    talkTitle: "",
+    talkDescription: "",
+  },
+};
 export const workshopSpeakerContentByLocale: Record<
   SiteLocale,
   SpeakerContentBySlug
 > = {
-  en: {
-    "david-felipe-vanegas-ramirez": {
-      title: "Advanced Data Engineer @ Loka",
-      description:
-        "David is a data engineer at Loka, where he designs and maintains data platforms on AWS for clients across multiple industries. With nearly five years of experience, his day-to-day work revolves around Apache Iceberg, PySpark, Airflow, and production lakehouse architectures. He holds AWS and Databricks certifications and has recently explored the intersection of data engineering and AI agents, building personal tooling on top of the Anthropic SDK. Based in Bogotá, he believes there is a shortage of practical Spanish-language technical content on modern data engineering.",
-      talkTitle: "From S3 to AI Agent: Your First Queryable Lakehouse",
-      talkDescription:
-        "AI agents are only as good as the data they can query. Most agents built today connect to outdated CSVs, unstructured databases, or nothing at all. What if your agent could query a real lakehouse—with versioning, schema evolution, and time travel—using natural language? In this workshop we build exactly that from scratch using only open-source tools that run on your laptop. Starting from a local Docker Compose stack, we stand up a functional lakehouse with MinIO as S3-compatible storage, Apache Iceberg as the table format, Project Nessie as a Git-like versioned catalog, and Trino as the SQL query engine. On top of that, we build a Python MCP server that exposes Iceberg tables as tools for an AI agent, and connect Claude so it can query the lakehouse in natural language.",
-      workshopRequirements:
-        "Minimum hardware: laptop with at least 8 GB RAM (16 GB recommended) and 10 GB free disk space.\n\nRequired software (install before the event):\n• Docker Desktop: https://www.docker.com/products/docker-desktop\n• Python 3.11+: https://www.python.org/downloads\n• Git: https://git-scm.com\n• Claude Desktop (free): https://claude.ai/download\n• VS Code (recommended): https://code.visualstudio.com",
-    },
-    "felix-mino": {
-      title: "Software Engineer @ Stack Builders",
-      description:
-        "Félix is a Software Engineer at Stack Builders with a focus on testing practices and developer tooling. He advocates for practical approaches to software quality and believes that real integration tests—backed by actual running services—are far more valuable than elaborate mock setups.",
-      talkTitle: "Stop Mocking, Start Containerizing",
-      talkDescription:
-        "Tired of maintaining brittle mock objects that don't reflect production behavior? In this workshop, you'll learn how to replace mocks with real containerized services using Testcontainers for Python. Bring your laptop and a running Docker engine—we're going to get our hands dirty!",
-      workshopRequirements:
-        "Laptop with Docker Desktop installed and a running Docker engine.",
-    },
-    "roberto-bedoya-garcia": {
-      title: "AI Engineer @ NowBit",
-      description:
-        "Roberto is an AI Engineer at NowBit focused on LLM observability and cost optimization. He helps teams monitor, debug, and reduce the operational costs of production AI systems—turning token spend from an unpredictable liability into a manageable engineering concern.",
-      talkTitle: "Your LLM Is Bleeding Money and Python Can Stop It",
-      talkDescription:
-        "Every token your LLM processes costs money, and without proper observability, costs can spiral out of control. In this workshop, you'll learn how to instrument your Python LLM applications to track token usage, latency, and cost per request. We'll build a complete observability stack using open-source tools, set up alerts for cost anomalies, and implement strategies to cut your LLM bill without sacrificing quality.",
-    },
-    "hazel-saenz": {
-      title: "Developer Advocate @ AWS",
-      description:
-        "Hazel is a Developer Advocate at AWS passionate about making AI accessible through open-source tools. She builds demos and workshops that help developers get started with AI agents and Python, with a special focus on creative and beginner-friendly applications.",
-      talkTitle: "Create Your AI DJ: Agents in Python and Open Source",
-      talkDescription:
-        "Create your own AI DJ using Python agents and open-source tools! In this beginner-friendly workshop, you'll learn the fundamentals of AI agents, build a music recommendation system powered by Python, and connect it to real music APIs. No prior AI experience required—just curiosity and a love for music. By the end, you'll have a working AI DJ that curates playlists based on mood, genre, and personal preferences.",
-    },
-    "emanuel-zapata-querubin": {
-      title: "Data Engineer @ Lovelytics",
-      description:
-        "Emanuel is a Data Engineer at Lovelytics specializing in MLOps and data platform architecture. He has hands-on experience taking ML projects from exploratory notebooks to fully automated production pipelines on Databricks, and is passionate about bridging the gap between data science and engineering.",
-      talkTitle: "From Notebook to Production: End-to-End MLOps on Databricks",
-      talkDescription:
-        "Move beyond Jupyter notebooks and deploy machine learning models to production using MLOps best practices on Databricks. In this intermediate workshop, you'll learn to structure ML projects for production, implement CI/CD pipelines for models, manage experiments with MLflow, deploy models as REST APIs, and monitor them in production. We'll walk through a complete end-to-end example from data preparation to automated retraining.",
-    },
-    "santiago-suarez-sampayo": {
-      title: "Data Engineer @ Aimpoint Digital",
-      description:
-        "Santiago is a Data Engineer at Aimpoint Digital with expertise in building AI-powered applications and integrations. He enjoys creating practical developer tools that combine cutting-edge AI APIs with everyday communication platforms, making advanced AI capabilities accessible to any user.",
-      talkTitle:
-        "Build an OpenClaw-style Coding Assistant on WhatsApp with Claude Agent SDK",
-      talkDescription:
-        "Build a fully functional AI coding assistant that lives in WhatsApp, inspired by OpenClaw, using Claude's Agent SDK and Python. In this hands-on workshop, you'll learn to integrate the Claude Agent SDK with the WhatsApp Business API, design conversational flows for code assistance, handle multi-turn conversations with memory, and deploy your assistant to the cloud. Walk away with a working AI coding companion accessible from any device.",
-    },
-    "johnny-montoya": {
-      title: "AI Engineer @ Unloquer",
-      description:
-        "Johnny is an AI Engineer at Unloquer and creator of content about data and AI under the handle @eldelosdatos_. He specializes in building agentic systems that encode organizational knowledge, helping companies turn their internal processes and expertise into callable agent skills.",
-      talkTitle:
-        "Executable Skills: How to Teach an Agent How Your Company Works",
-      talkDescription:
-        "How do you make an AI agent that truly understands how your company works? In this workshop, you'll learn to design and implement executable skills—reusable, structured pieces of organizational knowledge that agents can invoke. We'll cover skill architecture, knowledge representation in Python, integrating skills with popular agent frameworks, and testing skill reliability. By the end, you'll have a blueprint for building a company brain that your agents can tap into.",
-    },
-    "nicolas-roldan-fajardo": {
-      title: "ML Engineer @ Loka",
-      description:
-        "Nicolás is an ML Engineer at Loka focused on evaluation frameworks for agentic AI systems. He works on designing robust test suites that validate agent behavior across complex multi-step workflows, bringing engineering rigor to the often-overlooked challenge of AI evaluation.",
-      talkTitle:
-        "The Fellowship of Agentic Evaluations: How to Evaluate an Agent?",
-      talkDescription:
-        "How do you know if your AI agent is actually doing the right thing? In this workshop, we'll explore practical evaluation frameworks for agentic systems. Forming a fellowship of evaluation techniques—from simple unit tests to complex behavioral evaluations—we'll apply them to real agent scenarios. You'll learn to define evaluation criteria, implement automated test suites, measure agent performance quantitatively, and track improvement over time.",
-    },
-    "maria-fernanda-rojas-castro": {
-      title: "ML Engineer @ Loka",
-      description:
-        "María Fernanda is an ML Engineer at Loka with expertise in building and evaluating intelligent systems. She focuses on practical methodologies for ensuring AI agent reliability and safety, and collaborates on research into scalable evaluation techniques for production agentic workflows.",
-      talkTitle:
-        "The Fellowship of Agentic Evaluations: How to Evaluate an Agent?",
-      talkDescription:
-        "How do you know if your AI agent is actually doing the right thing? In this workshop, we'll explore practical evaluation frameworks for agentic systems. Forming a fellowship of evaluation techniques—from simple unit tests to complex behavioral evaluations—we'll apply them to real agent scenarios. You'll learn to define evaluation criteria, implement automated test suites, measure agent performance quantitatively, and track improvement over time.",
-    },
-    "jonathan-vallejo-munoz": {
-      title: "Software Engineer @ Lendingfront",
-      description:
-        "Jonathan is a Software Engineer at Lendingfront working at the intersection of AI-assisted development and software architecture. He advocates for disciplined development practices that go beyond prompt-driven coding, and explores how structured specifications can make AI-generated code more coherent and maintainable.",
-      talkTitle: "Beyond Vibe Coding: Spec Driven Development with Code Graphs",
-      talkDescription:
-        "Go beyond vibe coding and learn how to use specifications and code graphs to guide AI-assisted development. In this workshop, you'll discover how structured specs and dependency graphs give AI coding tools the context they need to produce coherent, maintainable code. We'll work with real Python projects to define specs, generate code graphs, and wire them into your AI-assisted workflow—resulting in code that actually makes sense architecturally.",
-    },
-    "esneider-bravo-benitez": {
-      title: "Software Engineer @ Muno Labs",
-      description:
-        "Esneider is a Software Engineer at Muno Labs with a focus on code generation tools and developer experience. He explores how structured specifications can guide AI coding assistants to produce more reliable outputs, and contributes to open-source tooling for spec-driven AI development.",
-      talkTitle: "Beyond Vibe Coding: Spec Driven Development with Code Graphs",
-      talkDescription:
-        "Go beyond vibe coding and learn how to use specifications and code graphs to guide AI-assisted development. In this workshop, you'll discover how structured specs and dependency graphs give AI coding tools the context they need to produce coherent, maintainable code. We'll work with real Python projects to define specs, generate code graphs, and wire them into your AI-assisted workflow—resulting in code that actually makes sense architecturally.",
-    },
-    "maris-botero": {
-      title: "ML Engineer @ Mercado Libre",
-      description:
-        "Maris is an ML Engineer at Mercado Libre passionate about making AI accessible to developers at all levels. She specializes in building multi-agent systems with Python and loves demystifying complex AI concepts through practical, beginner-friendly workshops.",
-      talkTitle: "From Prompts to Agents: Intelligent Systems with Python",
-      talkDescription:
-        "Take your first steps from writing simple prompts to building intelligent multi-agent systems with Python. In this beginner-friendly workshop, you'll learn the foundations of AI agents, how they differ from simple LLM calls, how to chain agents together for complex tasks, and how to give them tools and memory. Using popular Python frameworks, you'll build a working multi-agent system by the end of the session—no prior AI experience needed.",
-    },
-    "jose-hernan-ortiz-ocampo": {
-      title: "Senior ML Engineer @ Loka",
-      description:
-        "José Hernán is a Senior ML Engineer at Loka with deep expertise in agentic AI frameworks. He has designed and built production multi-agent systems using a variety of orchestration tools, and brings a pragmatic, engineering-first perspective to AI development—focused on what works in production rather than what looks impressive in demos.",
-      talkTitle:
-        "LangGraph and Strands Agents: Core Concepts, Patterns, and Tradeoffs",
-      talkDescription:
-        "Dive deep into two powerful agentic frameworks—LangGraph and Strands Agents—and learn when to use each. This advanced workshop covers the core concepts behind both frameworks: state machines, graph-based orchestration, tool use, and memory management. We'll build the same agentic application in both frameworks, compare their strengths and limitations, and discuss the architectural trade-offs to help you choose the right tool for your production AI systems.",
-    },
-    "isabel-mora": {
-      title: "Junior ML Engineer @ Loka",
-      description:
-        "Isabel is a Junior ML Engineer at Loka contributing to the development and evaluation of agentic AI systems. She brings fresh perspectives to agent design and implementation challenges, and is passionate about making complex AI frameworks understandable and accessible.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "jose-hernan-ortiz-ocampo-2": {
-      title: "Senior ML Engineer @ Loka",
-      description:
-        "José Hernán is a Senior ML Engineer at Loka with deep expertise in agentic AI frameworks. He has designed and built production multi-agent systems using a variety of orchestration tools, and brings a pragmatic, engineering-first perspective to AI development—focused on what works in production rather than what looks impressive in demos.",
-      talkTitle:
-        "Multi-Agent Teams in AI-Assisted Development: A Glimpse Into the Future of Programming",
-      talkDescription:
-        "Get a glimpse into the future of programming, where teams of AI agents collaborate with human developers. In this workshop, you'll explore cutting-edge patterns for multi-agent collaboration in AI-assisted development: code generation agents, review agents, testing agents, and orchestration strategies. We'll build a mini multi-agent development team using Python and the Claude SDK, and discuss where this technology is heading and how developers can prepare.",
-    },
-    "daniel-sabogal": {
-      title: "Data & ML Intern @ Loka",
-      description:
-        "Daniel is a Data & ML Intern at Loka passionate about exploring the intersection of multi-agent systems and software development workflows. He brings curiosity and fresh ideas to the future of AI-assisted programming, and is eager to share what he's learned building with cutting-edge AI tools.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "jose-arturo-osorio-londono": {
-      title: "Data Engineer @ Lovelytics",
-      description:
-        "José Arturo is a Data Engineer at Lovelytics specializing in the modernization of data pipelines and workflows. He explores how generative AI is transforming traditional data engineering practices into adaptive, intelligent systems—and helps teams navigate the evolution from rigid ETL to dynamic agentic architectures.",
-      talkTitle:
-        "From ETL to Agentic Workflows: The Evolution of Data Engineering in the Generative AI Era",
-      talkDescription:
-        "Traditional ETL pipelines are deterministic and rigid. Agentic workflows powered by generative AI can adapt, reason, and handle the unexpected. In this workshop, you'll learn how to evolve your data engineering practices from classic ETL to intelligent agentic workflows. We'll cover designing agents for data extraction, transformation decisions, and loading strategies—as well as how to combine traditional orchestration tools with AI agents for hybrid architectures.",
-    },
-    "biviana-marcela-suarez-sierra": {
-      title:
-        "Affiliated Professor, Computing and Analytics @ Universidad EAFIT",
-      description:
-        "Biviana Marcela Suárez Sierra is a statistician and data science researcher with experience in statistical modeling, machine learning, and computational analysis of complex data. She is currently a university professor and leads interdisciplinary research projects integrating statistics, programming, and data analysis to address problems in health, energy, environment, and digital humanities. Her recent work has focused on developing methodologies for analyzing large textual corpora using NLP, text mining, and statistical learning. She has led teams of students and researchers from diverse disciplines to study how discourses about science, culture, and society circulate in Colombian media. With more than a decade of experience in research and data analysis, her main interest is building bridges between computational tools and real-world problems.",
-      talkTitle: "NLP in Practice: From Corpus Linguistics to RAG with Python",
-      talkDescription:
-        "Natural language processing offers today a mature set of tools for analyzing textual corpora systematically and reproducibly, but the path from having documents to obtaining results is not always clear. This workshop walks through that path from start to finish. In two hours, participants will build an understanding of the NLP ecosystem: its history, logic, and methods. The session opens with a timeline from the first rule-based models to transformers, followed by a map of techniques organized by problem type (classification, entity extraction, semantic search, generation) so each participant can identify which method they need for a specific textual problem. The second part covers two Python implementations. First, topic modeling with BERTopic, reviewing the internal pipeline of embeddings, UMAP, and HDBSCAN. Second, a conversational assistant with RAG: corpus indexing, semantic retrieval, and connection to a language model to answer queries about the documents. At the end, each participant will have a functional notebook with both pipelines and a clear map of the ecosystem to guide their own textual analysis projects.",
-      workshopRequirements:
-        "Bring a laptop with a Google account to access Google Colab, where all notebooks will be available. Participants using Colab do not need to install anything beforehand. For those who prefer a local environment, Python 3.10 or higher is recommended. Basic familiarity with Python is assumed. No prior NLP experience is required. It is recommended to bring a set of texts for analysis.",
-    },
-    "andres-felipe-puerta-velez": {
-      title:
-        "Research Assistant & Master's Student in Applied Mathematics @ Universidad EAFIT",
-      description:
-        "Andrés Felipe Puerta Velez is a master's student in applied mathematics and research assistant with experience in natural language processing (NLP), integration of heterogeneous databases, and data analysis. He currently works on Bayesian g-formula for causal effect estimation and on machine learning models to estimate pollutant gas emissions and fuel consumption for low-displacement motorcycles in Colombia. As a research assistant on the project Comparative Analysis of Perceptions on Protective Behaviors against COVID-19 in Colombia, he has studied how public discourse circulates on social networks and how it behaved regarding care habits during the pandemic.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "dora-cecilia-alzate-gallo": {
-      title: "Master's Student in Humanistic Studies @ EAFIT",
-      description:
-        "Dora Cecilia Alzate Gallo is a student in the Master's in Humanistic Studies, linked to the language area and the School of Arts and Humanities at EAFIT. She will share the main linguistic challenges and decisions that allowed adapting NLP tools to Spanish and improving the quality of results obtained in text processing.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "karen-melissa-gomez-montoya": {
-      title: "Mathematical Engineer & Research Assistant @ Universidad EAFIT",
-      description:
-        "Karen Melissa Gomez Montoya is a mathematical engineer and master's student in Data Science and Analytics at EAFIT, where she also works as a research assistant on digital humanities and public sphere projects. Her work sits at the intersection between computational methods and textual corpus analysis.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "jesus-alfredo-reyes-vargas": {
-      title: "Software Engineer @ EPAM Systems",
-      description:
-        "Jesús Alfredo is a Software Engineer at EPAM Systems passionate about continuous learning and AI-powered developer education. He explores how AI tools can accelerate skill development and help engineers stay relevant in a fast-changing landscape, and is a strong advocate for structured, adaptive learning curricula.",
-      talkTitle: "Future-proof Engineers with AI-DLC",
-      talkDescription:
-        "AI is transforming not just what engineers build, but how they learn and grow. In this workshop, you'll discover AI-DLC (AI-Driven Learning Curriculum), a framework for creating personalized, adaptive learning paths for software engineers using AI tools. We'll explore how to design learning curricula that incorporate AI assistance, build skills that complement rather than compete with AI, and create development plans that keep engineers relevant and valuable for years to come.",
-    },
-    "carlos-alberto-riveros-varela": {
-      title: "Software Engineer @ EPAM Systems",
-      description:
-        "Carlos Alberto is a Software Engineer at EPAM Systems focused on developer growth and modern learning methodologies. He is passionate about combining AI with structured learning paths to help engineers future-proof their careers and adapt to the rapidly evolving demands of the industry.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "felipe-sanchez": {
-      title: "Data Engineer @ Aimpoint Digital",
-      description:
-        "Felipe is a Data Engineer at Aimpoint Digital with expertise in building AI tool servers and integrations. He enjoys creating hands-on tutorials that make complex AI development concepts approachable and fun, and is a strong believer in learning by building real, playful projects.",
-      talkTitle:
-        "Building Your First AI Tool Server: Creating a Pokédex with FastMCP and Python",
-      talkDescription:
-        "Build your first AI tool server from scratch using FastMCP and Python, with the Pokédex as your guide! In this hands-on workshop, you'll learn the Model Context Protocol (MCP), set up a FastMCP server, implement custom tools that AI agents can call, and connect everything into a working Pokédex AI assistant. No prior MCP experience needed—just Python knowledge and a love for Pokémon.",
-    },
-    "daniel-galvis": {
-      title: "Data Engineer @ Aimpoint Digital",
-      description:
-        "Daniel is a Data Engineer at Aimpoint Digital focused on AI tooling and developer experience. He brings practical expertise in building Python-based AI services and tool integrations, and enjoys collaborating on workshops that make cutting-edge AI development accessible to a broad audience.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "francisco-javier-moya-ortiz": {
-      title: "Data Analyst @ Aimpoint Digital",
-      description:
-        "Francisco Javier is a Data Analyst at Aimpoint Digital specializing in business intelligence and agentic analytics. He explores how AI agents can be integrated with modern BI tools like Sigma to create self-explanatory, autonomous dashboards that go far beyond static charts.",
-      talkTitle: "Dashboards That Think: Build Agentic Analytics with Sigma",
-      talkDescription:
-        "Learn how to build dashboards that don't just display data—they think. In this workshop, you'll combine Sigma's business intelligence capabilities with Python-based AI agents to create agentic analytics dashboards. We'll cover integrating LLMs with Sigma, building agent-driven data narratives, automating insight discovery, and creating dashboards that can answer follow-up questions and adapt dynamically to user context.",
-    },
-    "andres-vasquez-restrepo": {
-      title: "Data Scientist @ Cuesta Partners",
-      description:
-        "Andrés is a Data Scientist at Cuesta Partners applying machine learning and AI to food science and nutritional product design. His interdisciplinary work bridges Python-based AI with domain expertise in nutrition and formulation, demonstrating the power of AI in non-traditional domains.",
-      talkTitle:
-        "PyBlend: Towards an AI Food Scientist for Nutritional Product Design",
-      talkDescription:
-        "Discover how Python and AI are transforming nutritional product design. In this workshop, you'll be introduced to PyBlend, a framework that models the complex optimization problem of designing nutritional formulations. We'll explore how machine learning algorithms can navigate vast ingredient spaces, balance nutritional constraints, and generate novel product formulations. Attendees will gain hands-on experience with AI-driven product design and learn how Python makes interdisciplinary AI applications possible.",
-    },
-    "cesar-mateo-gonzalez-rodriguez": {
-      title: "Data Scientist @ GoDaddy",
-      description:
-        "César Mateo is a Data Scientist at GoDaddy specializing in anomaly detection and unsupervised learning. He applies deep learning techniques, including autoencoders, to find rare but critical patterns in large-scale datasets—combining theoretical rigor with practical engineering to deliver production-ready solutions.",
-      talkTitle:
-        "How to Find Pearls on the Bottom of the Sea – Autoencoders as Anomaly Detection Models",
-      talkDescription:
-        "Like finding pearls on the ocean floor, detecting rare anomalies in large datasets requires sophisticated techniques. In this workshop, you'll learn the theory and practice of autoencoder architectures, how to train them for anomaly detection, how to set decision boundaries, and how to evaluate their performance. We'll work with real-world datasets and build complete anomaly detection pipelines in Python.",
-    },
-    "juan-guillermo-gomez": {
-      title: "Founder @ DevHack",
-      description:
-        "Juan Guillermo is the founder of DevHack and a renowned speaker on Python, AI, and software architecture throughout Latin America. He has years of experience teaching developers about practical AI implementation patterns and multi-agent system design, and is a passionate advocate for the Python community.",
-      talkTitle: "Patterns, Protocols and Tactics for Multi-Agent Systems",
-      talkDescription:
-        "Master the essential patterns, protocols, and tactics for building robust multi-agent systems in Python. In this workshop, you'll learn proven architectural patterns for multi-agent collaboration, communication protocols between agents, error handling and recovery strategies, and practical implementation tactics. Drawing from real-world experience, we'll build multiple agent architectures and analyze their trade-offs—giving you a reusable toolkit for designing multi-agent systems.",
-    },
-    "mauricio-repetto-ferrero": {
-      title: "AI Engineer @ Nortal",
-      description:
-        "Mauricio is an AI Engineer at Nortal with a passion for optimizing LLM token consumption. He developed TOON, a tool for creating compact, semantically rich data representations that reduce token usage while improving AI comprehension—helping teams cut costs without losing model performance.",
-      talkTitle:
-        "Now or Never! Token Diet with TOON to Save Money and Help AI Understand More",
-      talkDescription:
-        "Tokens cost money, and every unnecessary token you send to an LLM is money wasted. In this workshop, you'll learn how to put your AI applications on a token diet using TOON, a Python tool for creating compact, semantically rich data representations. We'll cover TOON's architecture, how to serialize complex data structures efficiently, measure token reduction, and integrate TOON into existing AI pipelines—without losing the information your models need.",
-    },
-    "dario-jesus-guzman-duran": {
-      title: "Software Engineer @ Gudar Devs",
-      description:
-        "Darío Jesús is a Software Engineer at Gudar Devs specializing in high-performance data processing and async Python. He builds scalable video processing pipelines that leverage Python's async capabilities for maximum throughput, and is passionate about squeezing every bit of performance out of Python I/O workloads.",
-      talkTitle: "High-Performance Video Ingestion with Async Python",
-      talkDescription:
-        "Video is one of the most demanding data types to process. In this workshop, you'll learn how to build high-performance video ingestion pipelines using Python's async capabilities. We'll cover asyncio fundamentals for I/O-bound video processing, concurrent frame extraction and processing, async queue patterns for data pipelines, performance profiling and optimization, and real-world deployment considerations. Build a production-grade async video ingestion system from scratch.",
-    },
-    "juan-jose-barrientos-salazar": {
-      title: "AI Engineer @ The TRES Group",
-      description:
-        "Juan José is an AI Engineer at The TRES Group with a strong foundation in the mathematics of deep learning. He specializes in understanding and implementing transformer architectures from first principles using PyTorch, making the inner workings of LLMs accessible to engineers who want to go beyond API calls.",
-      talkTitle:
-        "LLMs in Depth: How an LLM Works Mathematically (and Its Implementation with PyTorch)",
-      talkDescription:
-        "Demystify the mathematics behind Large Language Models and implement them from scratch in PyTorch. This advanced workshop takes you through the complete mathematical foundations: attention mechanisms, transformer architecture, positional encodings, layer normalization, and training dynamics. For each mathematical concept, we'll write the corresponding PyTorch implementation—giving you a deep, hands-on understanding of how LLMs actually work under the hood.",
-    },
-    "raul-rodriguez": {
-      title: "AI Engineer @ Mercado Libre",
-      description:
-        "Raúl is an AI Engineer at Mercado Libre working on innovative AI copilot applications. He built NORTH, a system that uses Claude as a true coding and decision-making copilot for real-world engineering workflows—demonstrating what it looks like when AI goes beyond autocomplete and becomes a genuine engineering partner.",
-      talkTitle: "NORTH: Claude as a Real Copilot",
-      talkDescription:
-        "Learn how NORTH uses Claude as a genuine coding copilot—not just a code completer, but a true engineering partner. In this workshop, you'll explore the architecture of NORTH and learn how to build similar AI copilot integrations using Claude's API and Python. We'll cover prompt engineering for coding assistance, maintaining context across long sessions, integrating with development workflows, and building the feedback loops that make AI copilots genuinely useful.",
-    },
-    "jeronimo-lopez-gomez": {
-      title: "Researcher @ Universidad de Antioquia",
-      description:
-        "Jerónimo is a researcher at Universidad de Antioquia specializing in hardware-software co-design and machine learning acceleration. He works on deploying ML models to FPGAs and other hardware platforms using hls4ml and Python, bridging the gap between high-level Python ML development and low-level hardware implementation.",
-      talkTitle: "hls4ml: From Python Models to Hardware Acceleration",
-      talkDescription:
-        "Bridge the gap between Python machine learning and hardware implementation using hls4ml. In this workshop, you'll learn how to take ML models trained in Python (TensorFlow, PyTorch, scikit-learn) and deploy them to FPGAs using the hls4ml library. We'll cover model quantization, hardware-aware training, the HLS synthesis workflow, performance profiling, and practical considerations for deploying ML at the edge. No prior FPGA experience required.",
-    },
-    "natalia-echeverri-duran": {
-      title: "Researcher @ Universidad de Antioquia",
-      description:
-        "Natalia is a researcher at Universidad de Antioquia focused on machine learning hardware acceleration. She explores techniques for efficiently mapping Python ML models to FPGA implementations for edge computing applications, contributing to research at the frontier of AI hardware co-design.",
-      talkTitle: "hls4ml: From Python Models to Hardware Acceleration",
-      talkDescription:
-        "Bridge the gap between Python machine learning and hardware implementation using hls4ml. In this workshop, you'll learn how to take ML models trained in Python (TensorFlow, PyTorch, scikit-learn) and deploy them to FPGAs using the hls4ml library. We'll cover model quantization, hardware-aware training, the HLS synthesis workflow, performance profiling, and practical considerations for deploying ML at the edge. No prior FPGA experience required.",
-    },
-  },
-  es: {
-    "david-felipe-vanegas-ramirez": {
-      title: "Advanced Data Engineer @ Loka",
-      description:
-        "David es ingeniero de datos en Loka, donde diseña y mantiene plataformas de datos en AWS para clientes de múltiples industrias. Con casi cinco años de experiencia, su trabajo diario gira en torno a Apache Iceberg, PySpark, Airflow y arquitecturas lakehouse en producción. Tiene certificaciones de AWS y Databricks y ha explorado recientemente la intersección entre ingeniería de datos y agentes de IA. Con base en Bogotá, cree que hay escasez de contenido técnico práctico en español sobre ingeniería de datos moderna.",
-      talkTitle: "From S3 to AI Agent: Your First Queryable Lakehouse",
-      talkDescription:
-        "Los agentes de IA son tan buenos como los datos que pueden consultar. El problema es que la mayoría de los agentes que se construyen hoy están conectados a CSVs desactualizados, bases de datos sin estructura o simplemente a nada. ¿Y si tu agente pudiera consultar un lakehouse real — con versionado, evolución de esquemas y viajes en el tiempo — usando lenguaje natural? En este taller construiremos exactamente eso, desde cero, usando únicamente herramientas open source que corren en tu laptop. Partiendo de un stack local con Docker Compose, levantaremos MinIO, Apache Iceberg, Project Nessie y Trino; sobre esa base construiremos un servidor MCP en Python y conectaremos Claude para consultar el lakehouse en lenguaje natural.",
-      workshopRequirements:
-        "Hardware mínimo: laptop con al menos 8 GB de RAM (16 GB recomendado) y 10 GB de espacio libre en disco.\n\nSoftware requerido — instalar antes del evento:\n• Docker Desktop: https://www.docker.com/products/docker-desktop\n• Python 3.11+: https://www.python.org/downloads\n• Git: https://git-scm.com\n• Claude Desktop (gratuito): https://claude.ai/download\n• VS Code (recomendado): https://code.visualstudio.com",
-    },
-    "felix-mino": {
-      title: "Ingeniero de Software @ Stack Builders",
-      description:
-        "Félix es Ingeniero de Software en Stack Builders con enfoque en prácticas de testing y herramientas para desarrolladores. Defiende enfoques prácticos para la calidad del software y cree que las pruebas de integración reales—respaldadas por servicios verdaderamente en ejecución—son mucho más valiosas que elaborados setups de mocks.",
-      talkTitle: "Deja de hacer mocks, empieza a contenerizar",
-      talkDescription:
-        "¿Cansado de mantener objetos mock frágiles que no reflejan el comportamiento en producción? En este taller aprenderás cómo reemplazar mocks con servicios reales contenerizados usando Docker y Testcontainers para Python. Configuraremos PostgreSQL, Redis y APIs externas como contenedores en tu suite de pruebas, escribiremos pruebas de integración que realmente validen el comportamiento de tu sistema y optimizaremos tu flujo de trabajo de testing para pipelines CI/CD más rápidos y confiables.",
-    },
-    "roberto-bedoya-garcia": {
-      title: "Ingeniero de IA @ NowBit",
-      description:
-        "Roberto es Ingeniero de IA en NowBit enfocado en observabilidad y optimización de costos para LLMs. Ayuda a equipos a monitorear, depurar y reducir los costos operacionales de sistemas de IA en producción, convirtiendo el gasto en tokens de una responsabilidad impredecible en una preocupación de ingeniería manejable.",
-      talkTitle: "Tu LLM está sangrando dinero y Python puede pararlo",
-      talkDescription:
-        "Cada token que procesa tu LLM cuesta dinero, y sin una observabilidad adecuada, los costos pueden descontrolarse. En este taller aprenderás cómo instrumentar tus aplicaciones Python con LLM para rastrear el uso de tokens, la latencia y el costo por solicitud. Construiremos una pila de observabilidad completa usando herramientas de código abierto, configuraremos alertas para anomalías de costo e implementaremos estrategias para reducir tu factura de LLM sin sacrificar la calidad.",
-    },
-    "hazel-saenz": {
-      title: "Developer Advocate @ AWS",
-      description:
-        "Hazel es Developer Advocate en AWS apasionada por hacer la IA accesible a través de herramientas de código abierto. Crea demos y talleres que ayudan a los desarrolladores a comenzar con agentes de IA y Python, con especial enfoque en aplicaciones creativas y amigables para principiantes.",
-      talkTitle: "Crea tu DJ con IA: Agentes en Python y Open Source",
-      talkDescription:
-        "¡Crea tu propio DJ con IA usando agentes Python y herramientas de código abierto! En este taller para principiantes aprenderás los fundamentos de los agentes de IA, construirás un sistema de recomendación de música impulsado por Python y lo conectarás a APIs de música reales. No se requiere experiencia previa en IA, solo curiosidad y amor por la música. Al final tendrás un DJ de IA funcional que crea playlists basadas en el estado de ánimo, género y preferencias personales.",
-    },
-    "emanuel-zapata-querubin": {
-      title: "Ingeniero de Datos @ Lovelytics",
-      description:
-        "Emanuel es Ingeniero de Datos en Lovelytics especializado en MLOps y arquitectura de plataformas de datos. Tiene experiencia práctica llevando proyectos de ML desde notebooks exploratorios hasta pipelines de producción completamente automatizados en Databricks, y es apasionado por cerrar la brecha entre la ciencia de datos y la ingeniería.",
-      talkTitle: "De Notebook a Producción: MLOps End-to-End en Databricks",
-      talkDescription:
-        "Supera los Jupyter notebooks y despliega modelos de machine learning en producción usando las mejores prácticas de MLOps en Databricks. En este taller intermedio aprenderás a estructurar proyectos de ML para producción, implementar pipelines CI/CD para modelos, gestionar experimentos con MLflow, desplegar modelos como APIs REST y monitorearlos en producción. Recorreremos un ejemplo completo de extremo a extremo desde la preparación de datos hasta el reentrenamiento automatizado.",
-    },
-    "santiago-suarez-sampayo": {
-      title: "Ingeniero de Datos @ Aimpoint Digital",
-      description:
-        "Santiago es Ingeniero de Datos en Aimpoint Digital con experiencia construyendo aplicaciones e integraciones impulsadas por IA. Le gusta crear herramientas prácticas para desarrolladores que combinan APIs de IA de vanguardia con plataformas de comunicación cotidianas, haciendo que capacidades avanzadas de IA sean accesibles para cualquier usuario.",
-      talkTitle:
-        "Construye un Asistente de Código estilo OpenClaw en WhatsApp con el SDK de Agentes de Claude",
-      talkDescription:
-        "Construye un asistente de codificación de IA completamente funcional que vive en WhatsApp, inspirado en OpenClaw, usando el SDK de Agentes de Claude y Python. En este taller práctico aprenderás a integrar el SDK de Agentes de Claude con la API de WhatsApp Business, diseñar flujos conversacionales para asistencia de código, manejar conversaciones de múltiples turnos con memoria y desplegar tu asistente en la nube. Terminarás con un compañero de codificación de IA accesible desde cualquier dispositivo.",
-    },
-    "johnny-montoya": {
-      title: "Ingeniero de IA @ Unloquer",
-      description:
-        "Johnny es Ingeniero de IA en Unloquer y creador de contenido sobre datos e IA bajo el nombre @eldelosdatos_. Se especializa en construir sistemas agénticos que codifican el conocimiento organizacional, ayudando a las empresas a convertir sus procesos internos y experiencia en skills ejecutables para agentes.",
-      talkTitle:
-        "Skills ejecutables: cómo enseñarle a un agente cómo funciona tu empresa",
-      talkDescription:
-        "¿Cómo crear un agente de IA que realmente entienda cómo funciona tu empresa? En este taller aprenderás a diseñar e implementar skills ejecutables: piezas reutilizables y estructuradas de conocimiento organizacional que los agentes pueden invocar. Cubriremos arquitectura de skills, representación del conocimiento en Python, integración de skills con frameworks de agentes populares y prueba de la confiabilidad de los skills. Al final tendrás un blueprint para construir un cerebro empresarial que tus agentes puedan usar.",
-    },
-    "nicolas-roldan-fajardo": {
-      title: "Ingeniero de ML @ Loka",
-      description:
-        "Nicolás es Ingeniero de ML en Loka enfocado en marcos de evaluación para sistemas de IA agéntica. Trabaja en el diseño de suites de pruebas robustas que validan el comportamiento de agentes en flujos de trabajo complejos de múltiples pasos, aportando rigor de ingeniería al reto frecuentemente subestimado de la evaluación de IA.",
-      talkTitle:
-        "La Comunidad de las Evaluaciones Agénticas: ¿Cómo evaluar un agente?",
-      talkDescription:
-        "¿Cómo sabes si tu agente de IA realmente está haciendo lo correcto? En este taller exploraremos marcos de evaluación prácticos para sistemas agénticos. Formaremos una comunidad de técnicas de evaluación—desde pruebas unitarias simples hasta evaluaciones de comportamiento complejas—y las aplicaremos a escenarios reales de agentes. Aprenderás a definir criterios de evaluación, implementar suites de pruebas automatizadas, medir el rendimiento de los agentes cuantitativamente y rastrear la mejora a lo largo del tiempo.",
-    },
-    "maria-fernanda-rojas-castro": {
-      title: "Ingeniera de ML @ Loka",
-      description:
-        "María Fernanda es Ingeniera de ML en Loka con experiencia en la construcción y evaluación de sistemas inteligentes. Se enfoca en metodologías prácticas para garantizar la confiabilidad y seguridad de los agentes de IA, y colabora en investigación sobre técnicas de evaluación escalables para flujos de trabajo agénticos en producción.",
-      talkTitle:
-        "La Comunidad de las Evaluaciones Agénticas: ¿Cómo evaluar un agente?",
-      talkDescription:
-        "¿Cómo sabes si tu agente de IA realmente está haciendo lo correcto? En este taller exploraremos marcos de evaluación prácticos para sistemas agénticos. Formaremos una comunidad de técnicas de evaluación—desde pruebas unitarias simples hasta evaluaciones de comportamiento complejas—y las aplicaremos a escenarios reales de agentes. Aprenderás a definir criterios de evaluación, implementar suites de pruebas automatizadas, medir el rendimiento de los agentes cuantitativamente y rastrear la mejora a lo largo del tiempo.",
-    },
-    "jonathan-vallejo-munoz": {
-      title: "Ingeniero de Software @ Lendingfront",
-      description:
-        "Jonathan es Ingeniero de Software en Lendingfront trabajando en la intersección del desarrollo asistido por IA y la arquitectura de software. Defiende prácticas de desarrollo disciplinadas que van más allá de la programación basada en prompts, y explora cómo las especificaciones estructuradas pueden hacer que el código generado por IA sea más coherente y mantenible.",
-      talkTitle:
-        "Más allá del Vibe Coding: Spec Driven Development con Code Graphs",
-      talkDescription:
-        "Ve más allá del vibe coding y aprende a usar especificaciones y grafos de código para guiar el desarrollo asistido por IA. En este taller descubrirás cómo las especificaciones estructuradas y los grafos de dependencias dan a las herramientas de codificación de IA el contexto que necesitan para producir código coherente y mantenible. Trabajaremos con proyectos reales de Python para definir specs, generar grafos de código y conectarlos a tu flujo de trabajo asistido por IA, resultando en código que tiene sentido arquitectónicamente.",
-    },
-    "esneider-bravo-benitez": {
-      title: "Ingeniero de Software @ Muno Labs",
-      description:
-        "Esneider es Ingeniero de Software en Muno Labs con enfoque en herramientas de generación de código y experiencia del desarrollador. Explora cómo las especificaciones estructuradas pueden guiar a los asistentes de codificación de IA para producir resultados más confiables, y contribuye a herramientas de código abierto para el desarrollo dirigido por especificaciones.",
-      talkTitle:
-        "Más allá del Vibe Coding: Spec Driven Development con Code Graphs",
-      talkDescription:
-        "Ve más allá del vibe coding y aprende a usar especificaciones y grafos de código para guiar el desarrollo asistido por IA. En este taller descubrirás cómo las especificaciones estructuradas y los grafos de dependencias dan a las herramientas de codificación de IA el contexto que necesitan para producir código coherente y mantenible. Trabajaremos con proyectos reales de Python para definir specs, generar grafos de código y conectarlos a tu flujo de trabajo asistido por IA, resultando en código que tiene sentido arquitectónicamente.",
-    },
-    "maris-botero": {
-      title: "Ingeniera de ML @ Mercado Libre",
-      description:
-        "Maris es Ingeniera de ML en Mercado Libre apasionada por hacer la IA accesible para desarrolladores de todos los niveles. Se especializa en construir sistemas multi-agente con Python y le encanta desmitificar conceptos complejos de IA a través de talleres prácticos y amigables para principiantes.",
-      talkTitle: "De Prompts a Agentes: sistemas inteligentes con Python",
-      talkDescription:
-        "Da tus primeros pasos desde escribir prompts simples hasta construir sistemas multi-agente inteligentes con Python. En este taller para principiantes aprenderás los fundamentos de los agentes de IA, cómo se diferencian de las simples llamadas a LLM, cómo encadenar agentes para tareas complejas y cómo darles herramientas y memoria. Usando frameworks populares de Python, construirás un sistema multi-agente funcional al final de la sesión, sin experiencia previa en IA.",
-    },
-    "jose-hernan-ortiz-ocampo": {
-      title: "Ingeniero Senior de ML @ Loka",
-      description:
-        "José Hernán es Ingeniero Senior de ML en Loka con profunda experiencia en frameworks de IA agéntica. Ha diseñado y construido sistemas multi-agente en producción usando diversas herramientas de orquestación, y aporta una perspectiva pragmática y orientada a la ingeniería al desarrollo de IA, enfocada en lo que funciona en producción más que en lo que impresiona en demos.",
-      talkTitle:
-        "LangGraph y Strands Agents: Conceptos Clave, Patrones y Trade-offs",
-      talkDescription:
-        "Sumérgete en dos poderosos frameworks agénticos—LangGraph y Strands Agents—y aprende cuándo usar cada uno. Este taller avanzado cubre los conceptos fundamentales detrás de ambos frameworks: máquinas de estados, orquestación basada en grafos, uso de herramientas y gestión de memoria. Construiremos la misma aplicación agéntica en ambos frameworks, compararemos sus fortalezas y limitaciones, y discutiremos los trade-offs arquitectónicos para ayudarte a elegir la herramienta correcta para tus sistemas de IA en producción.",
-    },
-    "isabel-mora": {
-      title: "Ingeniera Junior de ML @ Loka",
-      description:
-        "Isabel es Ingeniera Junior de ML en Loka contribuyendo al desarrollo y evaluación de sistemas de IA agéntica. Aporta perspectivas frescas a los desafíos de diseño e implementación de agentes, y es apasionada por hacer que los frameworks complejos de IA sean comprensibles y accesibles.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "jose-hernan-ortiz-ocampo-2": {
-      title: "Ingeniero Senior de ML @ Loka",
-      description:
-        "José Hernán es Ingeniero Senior de ML en Loka con profunda experiencia en frameworks de IA agéntica. Ha diseñado y construido sistemas multi-agente en producción usando diversas herramientas de orquestación, y aporta una perspectiva pragmática y orientada a la ingeniería al desarrollo de IA, enfocada en lo que funciona en producción más que en lo que impresiona en demos.",
-      talkTitle:
-        "Equipos Multi-Agente en el Desarrollo Asistido por IA: Un Vistazo al Futuro de la Programación",
-      talkDescription:
-        "Obtén una visión del futuro de la programación, donde equipos de agentes de IA colaboran con desarrolladores humanos. En este taller explorarás patrones de vanguardia para la colaboración multi-agente en el desarrollo asistido por IA: agentes de generación de código, agentes de revisión, agentes de pruebas y estrategias de orquestación. Construiremos un mini equipo de desarrollo multi-agente usando Python y el SDK de Claude, y discutiremos hacia dónde va esta tecnología y cómo los desarrolladores pueden prepararse.",
-    },
-    "daniel-sabogal": {
-      title: "Pasante de Datos y ML @ Loka",
-      description:
-        "Daniel es Pasante de Datos y ML en Loka apasionado por explorar la intersección de los sistemas multi-agente y los flujos de trabajo de desarrollo de software. Aporta curiosidad e ideas frescas al futuro de la programación asistida por IA, y comparte sus aprendizajes construyendo con herramientas de IA de vanguardia.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "jose-arturo-osorio-londono": {
-      title: "Ingeniero de Datos @ Lovelytics",
-      description:
-        "José Arturo es Ingeniero de Datos en Lovelytics especializado en la modernización de pipelines y flujos de trabajo de datos. Explora cómo la IA generativa está transformando las prácticas tradicionales de ingeniería de datos en sistemas adaptativos e inteligentes, y ayuda a los equipos a navegar la evolución del ETL rígido a arquitecturas agénticas dinámicas.",
-      talkTitle:
-        "De ETL a Agentic Workflows: la evolución de la ingeniería de datos en la era de la IA generativa",
-      talkDescription:
-        "Los pipelines ETL tradicionales son determinísticos y rígidos. Los flujos de trabajo agénticos impulsados por IA generativa pueden adaptarse, razonar y manejar lo inesperado. En este taller aprenderás cómo evolucionar tus prácticas de ingeniería de datos desde el ETL clásico hacia flujos de trabajo agénticos inteligentes. Cubriremos el diseño de agentes para extracción de datos, decisiones de transformación y estrategias de carga, así como cómo combinar herramientas de orquestación tradicionales con agentes de IA para arquitecturas híbridas.",
-    },
-    "biviana-marcela-suarez-sierra": {
-      title:
-        "Profesora vinculada al área de Computación y analítica @ Universidad EAFIT",
-      description:
-        "Biviana Marcela Suárez Sierra es estadística e investigadora en ciencia de datos, con experiencia en modelación estadística, aprendizaje automático y análisis computacional de datos complejos. Actualmente es profesora universitaria y dirige proyectos de investigación interdisciplinarios que integran estadística, programación y análisis de datos para abordar problemas en salud, energía, medio ambiente y humanidades digitales. Su trabajo reciente se ha centrado en el desarrollo de metodologías para el análisis de grandes corpus textuales mediante técnicas de procesamiento de lenguaje natural (NLP), minería de textos y aprendizaje estadístico. Como investigadora vinculada al proyecto Arte, ciencia y tecnología en la esfera pública, ha liderado equipos conformados por estudiantes e investigadores de diversas disciplinas para estudiar cómo circulan los discursos sobre ciencia, cultura y sociedad en medios de comunicación colombianos. Cuenta con más de una década de experiencia en investigación y análisis de datos. Su interés principal es construir puentes entre las herramientas computacionales y los problemas reales.",
-      talkTitle:
-        "NLP en la práctica: de lingüística de corpus a RAG con Python",
-      talkDescription:
-        "El procesamiento de lenguaje natural ofrece hoy un conjunto maduro de herramientas para analizar corpus textuales de forma sistemática y reproducible, pero el camino entre tener los documentos y obtener resultados no siempre es claro. Este workshop recorre ese camino de principio a fin. En dos horas, los participantes construirán una comprensión del ecosistema NLP: su historia, su lógica y sus métodos. La sesión abre con una línea de tiempo que va desde los primeros modelos basados en reglas hasta los transformers, seguida de un mapa de técnicas organizadas por tipo de problema (clasificación, extracción de entidades, búsqueda semántica, generación) para que cada participante pueda identificar qué método necesita ante un problema textual concreto. La segunda parte cubre dos implementaciones con Python. Primero, modelado de tópicos con BERTopic, revisando el pipeline interno de embeddings, UMAP y HDBSCAN. Segundo, un asistente conversacional con RAG: indexación del corpus, recuperación semántica y conexión con un modelo de lenguaje para responder consultas sobre los documentos. Al finalizar, cada participante tendrá un notebook funcional con los dos pipelines y un mapa claro del ecosistema para orientar sus propios proyectos de análisis textual.",
-      workshopRequirements:
-        "Se recomienda traer un computador portátil con una cuenta de Google para acceder a Google Colab, donde estarán disponibles todos los notebooks. Los participantes que utilicen Colab no necesitan instalar nada previamente. Para quienes prefieran trabajar en un entorno local, se recomienda tener instalado Python 3.10 o superior. Se asume familiaridad básica con Python. No se requiere experiencia previa en procesamiento de lenguaje natural. Se recomienda tener un grupo de textos para el análisis.",
-    },
-    "andres-felipe-puerta-velez": {
-      title:
-        "Asistente de investigación y estudiante de maestría en matemáticas aplicadas @ Universidad EAFIT",
-      description:
-        "Andrés Felipe Puerta Velez es estudiante de maestría en matemáticas aplicadas y asistente de investigación, con experiencia en procesamiento de lenguaje natural (NLP), integración de bases de datos heterogéneas y análisis de datos. Actualmente trabaja en el uso de la g-formula bayesiana como solución a la multiplicidad de estimadores de efecto causal y en el uso de modelos de machine learning para la estimación de emisiones de gases contaminantes y consumo de combustible para motos de bajo cilindraje en el contexto colombiano. Como asistente de investigación del proyecto Análisis Comparativo de Percepciones sobre Comportamientos Protectores frente al COVID-19 en Colombia, ha trabajado en equipos multidisciplinarios para estudiar cómo circula el discurso público en redes sociales y su comportamiento respecto a hábitos de cuidado durante la pandemia.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "dora-cecilia-alzate-gallo": {
-      title: "Estudiante de la Maestría en Estudios Humanísticos @ EAFIT",
-      description:
-        "Dora Cecilia Alzate Gallo es estudiante de la Maestría en Estudios Humanísticos, vinculada al área de lenguaje y a la Escuela de Artes y Humanidades. Compartirá los principales desafíos y decisiones lingüísticas que permitieron adaptar estas herramientas al español y mejorar la calidad de los resultados obtenidos en el procesamiento de textos.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "karen-melissa-gomez-montoya": {
-      title:
-        "Ingeniera matemática - Asistente en investigación @ Universidad EAFIT",
-      description:
-        "Karen Melissa Gomez Montoya es ingeniera matemática y estudiante de maestría en Ciencia de Datos y Analítica en EAFIT, donde también se desempeña como asistente de investigación en proyectos de humanidades digitales y esfera pública. Su trabajo se sitúa en la intersección entre métodos computacionales y análisis de corpus textuales.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "jesus-alfredo-reyes-vargas": {
-      title: "Ingeniero de Software @ EPAM Systems",
-      description:
-        "Jesús Alfredo es Ingeniero de Software en EPAM Systems apasionado por el aprendizaje continuo y la educación para desarrolladores impulsada por IA. Explora cómo las herramientas de IA pueden acelerar el desarrollo de habilidades y ayudar a los ingenieros a mantenerse relevantes en un panorama que cambia rápidamente.",
-      talkTitle: "Ingenieros a prueba del futuro con AI-DLC",
-      talkDescription:
-        "La IA está transformando no solo lo que construyen los ingenieros, sino cómo aprenden y crecen. En este taller descubrirás AI-DLC (Currículo de Aprendizaje Impulsado por IA), un marco para crear rutas de aprendizaje personalizadas y adaptativas para ingenieros de software usando herramientas de IA. Exploraremos cómo diseñar currículos de aprendizaje que incorporen asistencia de IA, desarrollar habilidades que complementen en lugar de competir con la IA, y crear planes de desarrollo que mantendrán a los ingenieros relevantes y valiosos por años.",
-    },
-    "carlos-alberto-riveros-varela": {
-      title: "Ingeniero de Software @ EPAM Systems",
-      description:
-        "Carlos Alberto es Ingeniero de Software en EPAM Systems enfocado en el crecimiento de los desarrolladores y metodologías de aprendizaje modernas. Le apasiona combinar la IA con rutas de aprendizaje estructuradas para ayudar a los ingenieros a preparar sus carreras para el futuro y adaptarse a las demandas del sector en rápida evolución.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "felipe-sanchez": {
-      title: "Ingeniero de Datos @ Aimpoint Digital",
-      description:
-        "Felipe es Ingeniero de Datos en Aimpoint Digital con experiencia construyendo servidores de herramientas de IA e integraciones. Le gusta crear tutoriales prácticos que hacen accesibles y divertidos los conceptos complejos de desarrollo de IA, y cree firmemente en aprender construyendo proyectos reales y divertidos.",
-      talkTitle:
-        "Construye tu Primer Servidor de Herramientas de IA: Una Pokédex con FastMCP y Python",
-      talkDescription:
-        "¡Construye tu primer servidor de herramientas de IA desde cero usando FastMCP y Python, con la Pokédex como guía! En este taller práctico aprenderás el Protocolo de Contexto de Modelo (MCP), configurarás un servidor FastMCP, implementarás herramientas personalizadas que los agentes de IA pueden llamar y conectarás todo en un asistente de IA Pokédex funcional. No se necesita experiencia previa con MCP, solo conocimiento de Python y amor por Pokémon.",
-    },
-    "daniel-galvis": {
-      title: "Ingeniero de Datos @ Aimpoint Digital",
-      description:
-        "Daniel es Ingeniero de Datos en Aimpoint Digital enfocado en herramientas de IA y experiencia del desarrollador. Aporta experiencia práctica en la construcción de servicios de IA basados en Python e integraciones de herramientas, y disfruta colaborar en talleres que hacen el desarrollo de IA de vanguardia accesible para una audiencia amplia.",
-      talkTitle: "",
-      talkDescription: "",
-    },
-    "francisco-javier-moya-ortiz": {
-      title: "Analista de Datos @ Aimpoint Digital",
-      description:
-        "Francisco Javier es Analista de Datos en Aimpoint Digital especializado en inteligencia de negocios y analítica agéntica. Explora cómo los agentes de IA pueden integrarse con herramientas modernas de BI como Sigma para crear dashboards autónomos y auto-explicativos que van mucho más allá de los gráficos estáticos.",
-      talkTitle:
-        "Dashboards que piensan: construye analítica agéntica con Sigma",
-      talkDescription:
-        "Aprende a construir dashboards que no solo muestran datos, ¡sino que piensan! En este taller combinarás las capacidades de inteligencia de negocios de Sigma con agentes de IA basados en Python para crear dashboards de analítica agéntica. Cubriremos la integración de LLMs con Sigma, la construcción de narrativas de datos impulsadas por agentes, la automatización del descubrimiento de insights y la creación de dashboards que pueden responder preguntas de seguimiento y adaptarse dinámicamente al contexto del usuario.",
-    },
-    "andres-vasquez-restrepo": {
-      title: "Científico de Datos @ Cuesta Partners",
-      description:
-        "Andrés es Científico de Datos en Cuesta Partners aplicando machine learning e IA a la ciencia alimentaria y el diseño de productos nutricionales. Su trabajo interdisciplinario conecta la IA basada en Python con la experiencia en nutrición y formulación, demostrando el poder de la IA en dominios no tradicionales.",
-      talkTitle:
-        "PyBlend: Hacia un Científico Alimentario de IA para el Diseño de Productos Nutricionales",
-      talkDescription:
-        "Descubre cómo Python y la IA están transformando el diseño de productos nutricionales. En este taller serás introducido a PyBlend, un framework que modela el complejo problema de optimización del diseño de formulaciones nutricionales. Exploraremos cómo los algoritmos de machine learning pueden navegar vastos espacios de ingredientes, equilibrar restricciones nutricionales y generar formulaciones de productos novedosas. Los asistentes obtendrán experiencia práctica con el diseño de productos impulsado por IA y aprenderán cómo Python hace posibles las aplicaciones de IA interdisciplinarias.",
-    },
-    "cesar-mateo-gonzalez-rodriguez": {
-      title: "Científico de Datos @ GoDaddy",
-      description:
-        "César Mateo es Científico de Datos en GoDaddy especializado en detección de anomalías y aprendizaje no supervisado. Aplica técnicas de aprendizaje profundo, incluyendo autoencoders, para encontrar patrones raros pero críticos en conjuntos de datos a gran escala, combinando rigor teórico con ingeniería práctica para entregar soluciones listas para producción.",
-      talkTitle:
-        "Cómo encontrar perlas en el fondo del mar – Autoencoders como modelos de detección de anomalías",
-      talkDescription:
-        "Como encontrar perlas en el fondo del océano, detectar anomalías raras en grandes conjuntos de datos requiere técnicas sofisticadas. En este taller aprenderás la teoría y práctica de las arquitecturas de autoencoders, cómo entrenarlos para la detección de anomalías, cómo establecer límites de decisión y cómo evaluar su rendimiento. Trabajaremos con conjuntos de datos del mundo real y construiremos pipelines completos de detección de anomalías en Python.",
-    },
-    "juan-guillermo-gomez": {
-      title: "Fundador @ DevHack",
-      description:
-        "Juan Guillermo es el fundador de DevHack y reconocido speaker sobre Python, IA y arquitectura de software en toda América Latina. Tiene años de experiencia enseñando a desarrolladores sobre patrones prácticos de implementación de IA y diseño de sistemas multi-agente, y es un apasionado defensor de la comunidad Python.",
-      talkTitle: "Patrones, Protocolos y Tácticas para Sistemas Multi-Agente",
-      talkDescription:
-        "Domina los patrones esenciales, protocolos y tácticas para construir sistemas multi-agente robustos en Python. En este taller aprenderás patrones arquitectónicos probados para la colaboración multi-agente, protocolos de comunicación entre agentes, estrategias de manejo de errores y recuperación, y tácticas de implementación prácticas. Basándonos en experiencia del mundo real, construiremos múltiples arquitecturas de agentes y analizaremos sus trade-offs, dándote un conjunto de herramientas reutilizable para diseñar sistemas multi-agente.",
-    },
-    "mauricio-repetto-ferrero": {
-      title: "Ingeniero de IA @ Nortal",
-      description:
-        "Mauricio es Ingeniero de IA en Nortal con pasión por optimizar el consumo de tokens en LLMs. Desarrolló TOON, una herramienta para crear representaciones de datos compactas y semánticamente ricas que reducen el uso de tokens mientras mejoran la comprensión de la IA, ayudando a los equipos a recortar costos sin perder rendimiento del modelo.",
-      talkTitle:
-        "¡Es ahorra o nunca! Dieta de tokens con TOON para agrandar tu bolsillo y que la IA entienda más",
-      talkDescription:
-        "Los tokens cuestan dinero, y cada token innecesario que envías a un LLM es dinero desperdiciado. En este taller aprenderás cómo poner tus aplicaciones de IA a dieta de tokens usando TOON, una herramienta Python para crear representaciones de datos compactas y semánticamente ricas. Cubriremos la arquitectura de TOON, cómo serializar estructuras de datos complejas eficientemente, medir la reducción de tokens e integrar TOON en pipelines de IA existentes, sin perder la información que tus modelos necesitan.",
-    },
-    "dario-jesus-guzman-duran": {
-      title: "Ingeniero de Software @ Gudar Devs",
-      description:
-        "Darío Jesús es Ingeniero de Software en Gudar Devs especializado en procesamiento de datos de alto rendimiento y Python asíncrono. Construye pipelines escalables de procesamiento de video que aprovechan las capacidades asíncronas de Python para máximo rendimiento, y es apasionado por exprimir cada bit de rendimiento de las cargas de trabajo de I/O en Python.",
-      talkTitle: "Ingestión de video de alto rendimiento con Python asíncrono",
-      talkDescription:
-        "El video es uno de los tipos de datos más exigentes para procesar. En este taller aprenderás cómo construir pipelines de ingesta de video de alto rendimiento usando las capacidades asíncronas de Python. Cubriremos los fundamentos de asyncio para el procesamiento de video ligado a I/O, extracción y procesamiento concurrente de fotogramas, patrones de cola asíncrona para pipelines de datos, perfilado y optimización de rendimiento, y consideraciones de despliegue en el mundo real. Construye un sistema de ingesta de video asíncrono de nivel producción desde cero.",
-    },
-    "juan-jose-barrientos-salazar": {
-      title: "Ingeniero de IA @ The TRES Group",
-      description:
-        "Juan José es Ingeniero de IA en The TRES Group con sólidas bases en las matemáticas del aprendizaje profundo. Se especializa en entender e implementar arquitecturas transformer desde primeros principios usando PyTorch, haciendo que el funcionamiento interno de los LLMs sea accesible para ingenieros que quieren ir más allá de las llamadas a API.",
-      talkTitle:
-        "LLMs a profundidad: Cómo funciona matemáticamente un LLM (y su implementación con PyTorch)",
-      talkDescription:
-        "Desmitifica las matemáticas detrás de los Modelos de Lenguaje de Gran Escala e impleméntalas desde cero en PyTorch. Este taller avanzado te lleva a través de las bases matemáticas completas: mecanismos de atención, arquitectura transformer, codificaciones posicionales, normalización de capas y dinámica de entrenamiento. Para cada concepto matemático escribiremos la implementación correspondiente en PyTorch, dándote una comprensión profunda y práctica de cómo funcionan realmente los LLMs bajo el capó.",
-    },
-    "raul-rodriguez": {
-      title: "Ingeniero de IA @ Mercado Libre",
-      description:
-        "Raúl es Ingeniero de IA en Mercado Libre trabajando en aplicaciones innovadoras de copiloto con IA. Construyó NORTH, un sistema que usa Claude como verdadero copiloto de codificación y toma de decisiones para flujos de trabajo de ingeniería del mundo real, demostrando qué significa cuando la IA va más allá del autocompletado y se convierte en un auténtico socio de ingeniería.",
-      talkTitle: "NORTH: Claude como copiloto real",
-      talkDescription:
-        "Aprende cómo NORTH usa Claude como un verdadero copiloto de codificación, no solo un completador de código, sino un auténtico socio de ingeniería. En este taller explorarás la arquitectura de NORTH y aprenderás cómo construir integraciones de copiloto de IA similares usando la API de Claude y Python. Cubriremos la ingeniería de prompts para asistencia de codificación, el mantenimiento del contexto a lo largo de sesiones largas, la integración con flujos de trabajo de desarrollo y la construcción de los bucles de retroalimentación que hacen a los copilotos de IA genuinamente útiles.",
-    },
-    "jeronimo-lopez-gomez": {
-      title: "Investigador @ Universidad de Antioquia",
-      description:
-        "Jerónimo es investigador en la Universidad de Antioquia especializado en co-diseño hardware-software y aceleración de machine learning. Trabaja en el despliegue de modelos de ML en FPGAs y otras plataformas de hardware usando hls4ml y Python, uniendo la brecha entre el desarrollo de ML de alto nivel en Python y la implementación en hardware de bajo nivel.",
-      talkTitle: "hls4ml: De Modelos Python a Aceleración en Hardware",
-      talkDescription:
-        "Une la brecha entre el machine learning en Python y la implementación en hardware usando hls4ml. En este taller aprenderás cómo tomar modelos de ML entrenados en Python (TensorFlow, PyTorch, scikit-learn) y desplegarlos en FPGAs usando la librería hls4ml. Cubriremos la cuantización de modelos, el entrenamiento consciente del hardware, el flujo de síntesis HLS, el perfilado de rendimiento y las consideraciones prácticas para desplegar ML en el edge. No se requiere experiencia previa con FPGAs.",
-    },
-    "natalia-echeverri-duran": {
-      title: "Investigadora @ Universidad de Antioquia",
-      description:
-        "Natalia es investigadora en la Universidad de Antioquia enfocada en la aceleración hardware del machine learning. Explora técnicas para mapear eficientemente modelos de ML de Python a implementaciones FPGA para aplicaciones de computación en el borde, contribuyendo a la investigación en la frontera del co-diseño de hardware para IA.",
-      talkTitle: "hls4ml: De Modelos Python a Aceleración en Hardware",
-      talkDescription:
-        "Une la brecha entre el machine learning en Python y la implementación en hardware usando hls4ml. En este taller aprenderás cómo tomar modelos de ML entrenados en Python (TensorFlow, PyTorch, scikit-learn) y desplegarlos en FPGAs usando la librería hls4ml. Cubriremos la cuantización de modelos, el entrenamiento consciente del hardware, el flujo de síntesis HLS, el perfilado de rendimiento y las consideraciones prácticas para desplegar ML en el edge. No se requiere experiencia previa con FPGAs.",
-    },
-  },
-} satisfies Record<SiteLocale, SpeakerContentBySlug>;
+  en: applyWorkshopRequirements(workshopContentEn, "en"),
+  es: applyWorkshopRequirements(workshopContentEs, "es"),
+};
