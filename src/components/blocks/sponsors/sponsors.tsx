@@ -101,21 +101,26 @@ const sizeStyles = {
 
 type TierStyle = (typeof sizeStyles)[SponsorTier["size"]];
 
+const platinumSponsorContainer =
+  "mx-auto w-full min-w-0 shrink-0 max-w-[min(100%,calc((48rem-1.25rem)/2))]";
+
+const platinumStyles: TierStyle = {
+  container: "mx-auto w-full min-w-0 shrink-0",
+  gridMaxWidth: "max-w-3xl",
+  card: "min-h-44 px-7 py-9 sm:min-h-52 sm:px-9 sm:py-11",
+  logo: "max-h-24 max-w-[min(100%,18rem)] sm:max-h-28 sm:max-w-[20rem]",
+  imageWidth: 288,
+  imageHeight: 96,
+  layoutWidth: 320,
+  layoutWidthSm: 360,
+  minLayoutWidth: 280,
+  minLayoutWidthSm: 320,
+};
+
 /** Gold+ uses M-tier logos; Platinum sits between Venue (XL) and Gold+ (M). */
 function getTierStyles(tier: SponsorTier): TierStyle {
   if (tier.tierKey === "platinum") {
-    return {
-      container: "mx-auto w-full min-w-0 shrink-0",
-      gridMaxWidth: "max-w-3xl",
-      card: "min-h-44 px-7 py-9 sm:min-h-52 sm:px-9 sm:py-11",
-      logo: "max-h-24 max-w-[min(100%,18rem)] sm:max-h-28 sm:max-w-[20rem]",
-      imageWidth: 288,
-      imageHeight: 96,
-      layoutWidth: 320,
-      layoutWidthSm: 360,
-      minLayoutWidth: 280,
-      minLayoutWidthSm: 320,
-    };
+    return platinumStyles;
   }
 
   const base = sizeStyles[tier.size];
@@ -131,6 +136,20 @@ function getTierStyles(tier: SponsorTier): TierStyle {
     minLayoutWidth: 240,
     minLayoutWidthSm: 260,
   };
+}
+
+function getSponsorStyles(
+  sponsor: SponsorTier["sponsors"][number],
+  tier: SponsorTier,
+): TierStyle {
+  if (tier.tierKey === "goldPlus" && sponsor.slug === "interledger") {
+    return {
+      ...platinumStyles,
+      container: platinumSponsorContainer,
+    };
+  }
+
+  return getTierStyles(tier);
 }
 
 function shouldFitContainerToContent(tier: SponsorTier, isMulti: boolean) {
@@ -201,7 +220,7 @@ const SponsorCard = ({
   tier,
   sponsorDisplayName,
 }: SponsorCardProps & { sponsorDisplayName: string }) => {
-  const styles = getTierStyles(tier);
+  const styles = getSponsorStyles(sponsor, tier);
   const isPlaceholder = !sponsor.logo;
 
   const inner = (
@@ -258,7 +277,7 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
   );
   const sponsorRows = useMemo(() => {
     if (tier.tierKey === "goldPlus" && isMulti) {
-      return [sponsors];
+      return [[sponsors[0]], sponsors.slice(1)];
     }
 
     return chunkIntoRows(sponsors, columns);
@@ -316,19 +335,23 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
         >
           {sponsorRows.map((row, rowIndex) => {
             const isFullRow = row.length === columns;
-            const isGoldPlusRow = tier.tierKey === "goldPlus" && isMulti;
+            const isGoldPlusFeaturedRow =
+              tier.tierKey === "goldPlus" && isMulti && rowIndex === 0;
+            const isGoldPlusBottomRow =
+              tier.tierKey === "goldPlus" && isMulti && rowIndex > 0;
 
             const rowContent = row.map((sponsor) => {
               const sponsorDisplayName =
                 sponsor.name === OPEN_SLOT_NAME
                   ? t("blocks.sponsors.openSlot")
                   : sponsor.name;
+              const sponsorStyles = getSponsorStyles(sponsor, tier);
 
               return (
                 <div
                   key={`${tier.tierKey}-${sponsor.name}-${sponsor.href ?? ""}`}
                   className={cn(
-                    styles.container,
+                    sponsorStyles.container,
                     shouldFitContainerToContent(tier, isMulti) &&
                       tier.tierKey !== "goldPlus" &&
                       "sm:w-fit",
@@ -343,7 +366,21 @@ const TierRow = ({ tier, index }: { tier: SponsorTier; index: number }) => {
               );
             });
 
-            if (isGoldPlusRow) {
+            if (isGoldPlusFeaturedRow) {
+              return (
+                <div
+                  key={`${tier.tierKey}-row-${rowIndex}`}
+                  className={cn(
+                    "mx-auto flex w-full justify-center gap-4 sm:gap-5",
+                    platinumStyles.gridMaxWidth,
+                  )}
+                >
+                  {rowContent}
+                </div>
+              );
+            }
+
+            if (isGoldPlusBottomRow) {
               return (
                 <div
                   key={`${tier.tierKey}-row-${rowIndex}`}

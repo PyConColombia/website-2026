@@ -77,6 +77,12 @@ export const sponsorTiers: SponsorTier[] = [
       "Enhanced gold partners with expanded visibility and community impact.",
     sponsors: [
       {
+        name: "Interledger Foundation",
+        slug: "interledger",
+        logo: "/images/sponsors/interledger.svg",
+        href: "https://interledger.org/",
+      },
+      {
         name: "EPAM",
         slug: "epam",
         logo: "/images/sponsors/epam.svg",
@@ -87,12 +93,6 @@ export const sponsorTiers: SponsorTier[] = [
         slug: "nequi",
         logo: "/images/sponsors/nequi.svg",
         href: "https://www.nequi.com.co/",
-      },
-      {
-        name: "Interledger Foundation",
-        slug: "interledger",
-        logo: "/images/sponsors/interledger.svg",
-        href: "https://interledger.org/",
       },
     ],
   },
