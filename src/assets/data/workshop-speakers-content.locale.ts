@@ -322,6 +322,30 @@ const workshopContentEn: SpeakerContentBySlug = {
     talkTitle: "",
     talkDescription: "",
   },
+  "sebastian-rodriguez-colina": {
+    title: "Staff Machine Learning Engineer @ Factored",
+    description:
+      "Machine Learning Engineer with 10+ years of experience building scalable solutions and delivering high business value through generative AI, computer vision, and MLOps techniques for AI startups, technology companies, and the manufacturing industry. Moreover, I have been a mentor and a teacher of AI related subjects at Universidad EAFIT and Universidad de Antioquia.",
+    talkTitle: "Building AI Agents to Play Catan",
+    talkDescription:
+      "Designing AI for environments with chance and imperfect information is a fascinating challenge. In this workshop, we will develop a Python agent capable of playing Settlers of Catan and compare different approaches live. Beyond the board, attendees will discover how the principles used here apply to any LLM-based agent system. You will learn to equip your agents with tools, connect services via MCP (Model Context Protocol), and structure robust architectures to optimize complex decision-making.",
+  },
+  "douglas-ardila-garces": {
+    title: "Engineering Manager & Data engineer @ Factored",
+    description:
+      "Engineering Manager & Data engineer with strong experience in architecting, developing, and maintaining highly reliable analytical data infrastructure and data pipelines that move data in and out to enable better decision-making and create business value primarily within the Fintech sector. Proficient in AWS, Google Cloud, Snowflake’s data ecosystem, Airflow, dbt, and other tools. Cares about other team members and is invested in empowering them to grow personally and professionally. Works cross-functionally with stakeholders (software engineers, data scientists, business analysts, etc), to ensure that the data infrastructure meets their evolving needs.\n\nCurrently, working as a Data Engineering Manager at Factored (one of the fastest-growing data science companies in the Americas, we build very high-caliber teams of rigorously vetted data scientists for top US companies).",
+    talkTitle: "PDF Data Extraction at Scale: When to Trust an LLM",
+    talkDescription:
+      'LLMs read chaotic documents like no one else, but when money or legal liability is on the line, the question is not "can it?" but "when should I trust it, and how do I catch it when it is wrong?". In this hands-on workshop we build, step by step, a real extraction pipeline for legal PDFs with variable formats, orchestrated with Airflow, using a hybrid extractor (deterministic + LLM) and deterministic guardrails in Python. You will leave with a framework for deciding which tool to use and a reliable pattern for production environments.',
+  },
+  "david-stiven-jurado-chavarria": {
+    title: "Lead Systems Engineer @ EPAM",
+    description:
+      "I am a DevOps/Cloud Engineer with more than 8 years of experience in Tech. I currently participate in AI projects where I have been able to go deeper into GenAI without limiting my scope only to infrastructure or DevOps. I have been a speaker at multiple events and I lead 2 communities: CloudCrafters and AI AWS UG Colombia.",
+    talkTitle: "Forging Agents on AWS: Spells with Strands, MCP, and A2A",
+    talkDescription:
+      "Artificial intelligence is no longer just a tool that developers use: it is a teammate they can build. In this workshop, you will discover how to forge autonomous AI agents on AWS using Strands, a framework that simplifies creating agents able to think and act on their own. We will explore how to connect these agents with external tools and services via MCP (Model Context Protocol), how to orchestrate communication among multiple agents with A2A (Agent-to-Agent), and how to design systems where several agents collaborate to solve complex problems in a coordinated way.",
+  },
 };
 
 const workshopContentEs: SpeakerContentBySlug = {
@@ -627,6 +651,30 @@ const workshopContentEs: SpeakerContentBySlug = {
       "¡Hola! Soy Natalia, estudiante de último año de Física en la Universidad de Antioquia (Colombia), y actualmente estoy cursando un bootcamp de IA. Me apasiona aplicar el aprendizaje automático y la ciencia de datos a problemas del mundo real, desde sistemas físicos hasta datos de comportamiento. Creo que la física te enseña a ver el mundo a través de patrones y ecuaciones, y la IA te brinda las herramientas para actuar en función de ellos.",
     talkTitle: "",
     talkDescription: "",
+  },
+  "sebastian-rodriguez-colina": {
+    title: "Staff Machine Learning Engineer @ Factored",
+    description:
+      "Ingeniero de Machine Learning con más de 10 años de experiencia construyendo soluciones escalables y generando alto valor de negocio mediante técnicas de IA generativa, visión por computador y MLOps para startups de IA, empresas de tecnología y la industria manufacturera. Además, he sido mentor y docente de temas relacionados con IA en la Universidad EAFIT y la Universidad de Antioquia.",
+    talkTitle: "Construyendo Agentes de IA para jugar Catan",
+    talkDescription:
+      "Diseñar IA para entornos con azar e información imperfecta es un reto fascinante. En este taller, desarrollaremos un agente de Python capaz de jugar Settlers of Catan y enfrentaremos diferentes enfoques en vivo. Más allá del tablero, los asistentes descubrirán cómo los principios utilizados aquí se aplican a cualquier sistema de agentes basados en LLMs. Aprenderás a equipar a tus agentes con herramientas, conectar servicios mediante MCP (Model Context Protocol) y estructurar arquitecturas robustas para optimizar la toma de decisiones complejas.",
+  },
+  "douglas-ardila-garces": {
+    title: "Engineering Manager & Data engineer @ Factored",
+    description:
+      "Engineering Manager & Data engineer con sólida experiencia diseñando, desarrollando y manteniendo infraestructura analítica y pipelines de datos altamente confiables que mueven datos de un lado a otro para habilitar mejores decisiones y crear valor de negocio, principalmente en el sector Fintech. Dominio de AWS, Google Cloud, el ecosistema de datos de Snowflake, Airflow, dbt y otras herramientas. Se preocupa por las personas de su equipo y se invierte en empoderarlas para crecer personal y profesionalmente. Trabaja de forma transversal con stakeholders (ingenieros de software, científicos de datos, analistas de negocio, etc.) para asegurar que la infraestructura de datos responda a sus necesidades en evolución.\n\nActualmente trabaja como Data Engineering Manager en Factored (una de las empresas de ciencia de datos de más rápido crecimiento en las Américas; construimos equipos de alto calibre de científicos de datos rigurosamente evaluados para empresas top de EE. UU.).",
+    talkTitle: "Extracción de datos de PDFs a escala: cuándo confiar en un LLM",
+    talkDescription:
+      'Los LLMs leen documentos caóticos como nadie, pero cuando te juegas dinero o responsabilidad legal, la pregunta no es "¿puede?" sino "¿cuándo debo confiar y cómo lo atrapo cuando se equivoca?". En este taller práctico construimos, paso a paso, un pipeline real de extracción de datos de PDFs legales de formato variable orquestado con Airflow, con un extractor híbrido (determinista + LLM) y guardrails deterministas en Python. Saldrás con un framework para decidir qué herramienta usar y un patrón confiable para ambientes productivos.',
+  },
+  "david-stiven-jurado-chavarria": {
+    title: "Lead Systems Engineer @ EPAM",
+    description:
+      "Soy DevOps/Cloud Engineer con más de 8 años de experiencia en Tech. Actualmente me encuentro participando en proyectos de IA donde he podido tener la experiencia de adentrarme un poco más en el mundo del GenAI sin limitar mi alcance netamente a infraestructura o DevOps. He sido speaker en múltiples eventos y soy líder de 2 comunidades: CloudCrafters y AI AWS UG Colombia.",
+    talkTitle: "Forjando Agentes en AWS: Hechizos con Strands, MCP y A2A",
+    talkDescription:
+      "La inteligencia artificial ya no es solo una herramienta que los desarrolladores usan: es un compañero de equipo que pueden construir. En este workshop, descubrirás cómo forjar agentes de IA autónomos en AWS usando Strands, un framework que simplifica la creación de agentes capaces de pensar y actuar por sí mismos. Exploraremos cómo conectar estos agentes con herramientas y servicios externos mediante MCP (Model Context Protocol), cómo orquestar la comunicación entre múltiples agentes con A2A (Agent-to-Agent), y cómo diseñar sistemas donde varios agentes colaboran para resolver problemas complejos de forma coordinada.",
   },
 };
 export const workshopSpeakerContentByLocale: Record<

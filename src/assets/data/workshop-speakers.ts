@@ -77,6 +77,12 @@ const workshopSpeakerImages: Record<string, string> = {
     "https://drive.google.com/open?id=1_VnqQ_auY0NHtlSv5JluF3LBIfLnXzmc",
   "elkin-javier-guerra-galeano":
     "https://drive.google.com/open?id=1OflXShgH7ig1EDesVvdObqXc47GKGS9R",
+  "sebastian-rodriguez-colina":
+    "https://drive.google.com/open?id=1HDPMXTg3uGp28m4rsNK2lNjxlPOM31RH",
+  "douglas-ardila-garces":
+    "https://drive.google.com/open?id=1AdTgHque9-0dFaw-6RYpK2aXIe7YJiK9",
+  "david-stiven-jurado-chavarria":
+    "https://drive.google.com/open?id=1F7dgfO-ta8QPYpbyof2m6mlNLk-VYILH",
 };
 
 const workshopSpeakerListBase: SpeakerInput[] = [
@@ -544,6 +550,53 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     linkedin:
       "https://www.linkedin.com/in/elkin-javier-guerra-galeano-60832b1b3",
     tracks: ["artificial-intelligence", "machine-learning"] as SpeakerTrack[],
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "Intermediate / Intermedio",
+    format: "workshop",
+  },
+  // 27. Building AI Agents to Play Catan (FACTORED Sponsor)
+  {
+    slug: "sebastian-rodriguez-colina",
+    talkKey: "ai-agents-catan",
+    name: "Sebastián Rodríguez Colina",
+    github: "https://github.com/srcolinas",
+    linkedin: "https://www.linkedin.com/in/srcolinas/",
+    tracks: [
+      "artificial-intelligence",
+      "data-science",
+      "machine-learning",
+    ] as SpeakerTrack[],
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "Intermediate / Intermedio",
+    format: "workshop",
+  },
+  // 28. PDF Extraction at Scale (FACTORED Sponsor)
+  {
+    slug: "douglas-ardila-garces",
+    talkKey: "pdf-extraction-llm",
+    name: "Douglas Ardila Garcés",
+    github: "https://github.com/douglasag17",
+    linkedin: "https://www.linkedin.com/in/douglasag17",
+    tracks: [
+      "artificial-intelligence",
+      "core-python",
+      "machine-learning",
+      "data-science",
+    ] as SpeakerTrack[],
+    country: "Colombia",
+    language: "Spanish / Español",
+    level: "All / Para todos los niveles",
+    format: "workshop",
+  },
+  // 29. Forjando Agentes en AWS (EPAM Sponsor)
+  {
+    slug: "david-stiven-jurado-chavarria",
+    talkKey: "forjando-agentes-aws",
+    name: "David Stiven Jurado Chavarria",
+    linkedin: "https://www.linkedin.com/in/d-jurado/",
+    tracks: ["artificial-intelligence"] as SpeakerTrack[],
     country: "Colombia",
     language: "Spanish / Español",
     level: "Intermediate / Intermedio",
