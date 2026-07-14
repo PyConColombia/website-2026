@@ -233,7 +233,11 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
   const eventSpeakers = resolveSpeakersForScheduleEvent(event, locale);
   const showSpeakers =
     shouldShowScheduleSpeakers(event, eventSpeakers) &&
-    !(sponsor && isSponsorSpaceEvent(event));
+    !(
+      sponsor &&
+      isSponsorSpaceEvent(event) &&
+      !eventSpeakers.some((speaker) => speaker.slug)
+    );
   const keynoteHref = keynote ? getKeynoteHref(keynote.slug) : undefined;
   const talkHref = talk ? getTalkHref(talk.id) : undefined;
   const sessionHref = keynoteHref ?? talkHref;

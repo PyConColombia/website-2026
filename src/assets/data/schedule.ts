@@ -649,7 +649,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-25",
     title: "Sponsor Space: EPAM",
     displayTitle: "Sponsor Space: EPAM",
-    speaker: "EPAM",
+    speaker: "Carlos Alberto Riveros Varela",
     label: "Sponsor Space",
   },
   {
