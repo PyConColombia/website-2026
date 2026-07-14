@@ -77,6 +77,12 @@ A free or paid account for an AI assistant such as Cursor, GitHub Copilot, Claud
     "You need a Sigma Public account; just create an account with your email: https://public.sigmacomputing.com/",
   "elkin-javier-guerra-galeano":
     "Python +3.10, Ollama installed, Docker installed.",
+  "sebastian-rodriguez-colina":
+    "uv (https://docs.astral.sh/uv/), Docker, and Git",
+  "douglas-ardila-garces":
+    "https://github.com/factoredai/factored-pycon-workshop-2026-data-engineering",
+  "david-stiven-jurado-chavarria":
+    "Only a laptop is required; AWS accounts will be provided for the workshop.",
 };
 
 export const workshopRequirementsEs: Record<string, string> = {
@@ -156,6 +162,11 @@ Una cuenta gratuita o versión paga de un asistente de inteligencia artificial c
     "Se necesita una cuenta de Sigma Public, solo deben crear una cuenta con su correo: https://public.sigmacomputing.com/",
   "elkin-javier-guerra-galeano":
     "Python +3.10, Ollama instalado, Docker instalado.",
+  "sebastian-rodriguez-colina": "uv (https://docs.astral.sh/uv/), docker y git",
+  "douglas-ardila-garces":
+    "https://github.com/factoredai/factored-pycon-workshop-2026-data-engineering",
+  "david-stiven-jurado-chavarria":
+    "Solo laptop es requerida, cuentas de AWS serán proporcionadas para la ejecución del workshop",
 };
 
 export const workshopRequirementsByLocale: Record<

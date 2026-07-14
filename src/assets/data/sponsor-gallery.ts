@@ -3,6 +3,7 @@ import { aimpointGalleryImages } from "@/assets/data/sponsor-gallery/aimpoint";
 import { epamGalleryImages } from "@/assets/data/sponsor-gallery/epam";
 import { factoredGalleryImages } from "@/assets/data/sponsor-gallery/factored";
 import { genlogsGalleryImages } from "@/assets/data/sponsor-gallery/genlogs";
+import { interledgerGalleryImages } from "@/assets/data/sponsor-gallery/interledger";
 import { lokaGalleryImages } from "@/assets/data/sponsor-gallery/loka";
 import { provectusGalleryImages } from "@/assets/data/sponsor-gallery/provectus";
 import { slalomGalleryImages } from "@/assets/data/sponsor-gallery/slalom";
@@ -12,6 +13,7 @@ const sponsorGalleryBySlug: Partial<Record<string, GalleryImage[]>> = {
   epam: epamGalleryImages,
   factored: factoredGalleryImages,
   genlogs: genlogsGalleryImages,
+  interledger: interledgerGalleryImages,
   loka: lokaGalleryImages,
   provectus: provectusGalleryImages,
   slalom: slalomGalleryImages,
