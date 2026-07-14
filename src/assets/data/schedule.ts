@@ -879,17 +879,6 @@ export const scheduleEvents: ScheduleEvent[] = [
     label: "FACTORED Sponsor",
   },
   {
-    id: "83",
-    type: "workshop",
-    room: "Room 15 - Workshops",
-    hour: "8:00 - 10:00",
-    date: "2026-07-26",
-    title: "Workshop: EPAM Sponsor",
-    displayTitle: "EPAM Sponsor",
-    speaker: "EPAM",
-    label: "EPAM Sponsor",
-  },
-  {
     id: "63",
     type: "moment",
     room: "Main Auditorium (Fundadores)",
@@ -1096,6 +1085,20 @@ export const scheduleEvents: ScheduleEvent[] = [
     displayTitle: "FACTORED Sponsor",
     speaker: "Factored",
     label: "FACTORED Sponsor",
+  },
+  {
+    id: "83",
+    type: "workshop",
+    room: "Room 15 - Workshops",
+    hour: "10:30 - 12:30",
+    date: "2026-07-26",
+    title:
+      "Workshop: Forjando Agentes en AWS: Hechizos con Strands, MCP y A2A",
+    displayTitle:
+      "Forjando Agentes en AWS: Hechizos con Strands, MCP y A2A",
+    speaker: "David Jurado Chavarria",
+    label: "EPAM Sponsor",
+    language: ["ES"],
   },
   {
     id: "72",
