@@ -346,7 +346,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-24",
     title: "Sponsor Space: EAFIT",
     displayTitle: "Sponsor Space: EAFIT",
-    speaker: "EAFIT",
+    speaker: "Stiven Arteaga",
     label: "Sponsor Space",
   },
   {
@@ -889,21 +889,6 @@ export const scheduleEvents: ScheduleEvent[] = [
     title: "Moment: Morning Snacks",
     displayTitle: "Morning Snacks",
     speaker: "Morning Snacks",
-  },
-  {
-    id: "84",
-    type: "workshop",
-    room: "Room 1 - Workshops",
-    hour: "10:30 - 12:30",
-    date: "2026-07-26",
-    title:
-      "Workshop: Build an OpenClaw-style Coding Assistant on WhatsApp with Claude Agent SDK",
-    displayTitle:
-      "Build an OpenClaw-style Coding Assistant on WhatsApp with Claude Agent SDK",
-    speaker: "Santiago Suarez Sampayo",
-    talkKey: "openclaw-whatsapp-assistant",
-    label: "Artificial Intelligence",
-    language: ["ES"],
   },
   {
     id: "64",
