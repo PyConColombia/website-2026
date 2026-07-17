@@ -231,13 +231,37 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
     : undefined;
   const talk = resolveTalkForScheduleEvent(event, locale);
   const eventSpeakers = resolveSpeakersForScheduleEvent(event, locale);
+  const speakersAreOnlySponsorBrand = (() => {
+    if (!sponsor || !isSponsorSpaceEvent(event) || eventSpeakers.length === 0) {
+      return false;
+    }
+
+    const sponsorName = sponsor.name
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .toLowerCase();
+    const sponsorSlug = (sponsor.slug ?? "").toLowerCase();
+
+    return eventSpeakers.every((speaker) => {
+      if (speaker.slug) return false;
+
+      const name = speaker.name
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .toLowerCase()
+        .trim();
+
+      return (
+        name === sponsorName ||
+        name === sponsorSlug ||
+        sponsorName.includes(name) ||
+        (sponsorSlug !== "" && name.includes(sponsorSlug))
+      );
+    });
+  })();
   const showSpeakers =
     shouldShowScheduleSpeakers(event, eventSpeakers) &&
-    !(
-      sponsor &&
-      isSponsorSpaceEvent(event) &&
-      !eventSpeakers.some((speaker) => speaker.slug)
-    );
+    !speakersAreOnlySponsorBrand;
   const keynoteHref = keynote ? getKeynoteHref(keynote.slug) : undefined;
   const talkHref = talk ? getTalkHref(talk.id) : undefined;
   const sessionHref = keynoteHref ?? talkHref;

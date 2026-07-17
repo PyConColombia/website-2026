@@ -13,8 +13,6 @@ const workshopSpeakerImages: Record<string, string> = {
     "https://drive.google.com/open?id=1Te_ikbiDwTLuT2w34YaPwZTpKDFMjUer",
   "emanuel-zapata-querubin":
     "https://drive.google.com/open?id=1s22wX60ADCVEsdWDVs3ndk3Jh48vvqZu",
-  "santiago-suarez-sampayo":
-    "https://drive.google.com/open?id=1sQa6Virz2OmgcQBSgoCRDYFgAewD6yz3",
   "johnny-montoya":
     "https://drive.google.com/open?id=1ujbpOnGTO1e2iUATOha211KPHNAdECfg",
   "nicolas-roldan-fajardo":
@@ -155,20 +153,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
     level: "Intermediate / Intermedio",
     format: "workshop",
   },
-  // 6. OpenClaw WhatsApp Assistant
-  {
-    slug: "santiago-suarez-sampayo",
-    talkKey: "openclaw-whatsapp-assistant",
-    name: "Santiago Suarez Sampayo",
-    github: "https://github.com/santiagossz",
-    linkedin: "https://www.linkedin.com/in/santiago-suarez-sampayo-2b93b2168",
-    tracks: ["artificial-intelligence", "web"] as SpeakerTrack[],
-    country: "Colombia",
-    language: "English / Inglés",
-    level: "Intermediate / Intermedio",
-    format: "workshop",
-  },
-  // 7. Company Brain Skills
+  // 6. Company Brain Skills
   {
     slug: "johnny-montoya",
     talkKey: "company-brain-skills",
