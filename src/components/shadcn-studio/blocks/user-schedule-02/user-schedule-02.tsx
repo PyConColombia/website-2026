@@ -579,8 +579,9 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
                     key={group.map((event) => event.id).join("-")}
                     className={cn(
                       "gap-4",
-                      group.length > 1 &&
-                        "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3",
+                      group.length === 1
+                        ? "grid sm:grid-cols-2"
+                        : "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3",
                     )}
                   >
                     {group.map((event) => (
