@@ -1118,7 +1118,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     date: "2026-07-26",
     title: "Sponsor Space: Aimpoint",
     displayTitle: "Sponsor Space: Aimpoint",
-    speaker: "Aimpoint",
+    speaker: "Felipe Sánchez",
     label: "Sponsor Space",
   },
   {

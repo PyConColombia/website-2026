@@ -366,7 +366,7 @@ const workshopSpeakerListBase: SpeakerInput[] = [
   {
     slug: "felipe-sanchez",
     talkKey: "fastmcp-pokedex",
-    name: "Felipe Sanchez",
+    name: "Felipe Sánchez",
     linkedin: "https://www.linkedin.com/in/felipe-sánchez-7765b8206",
     tracks: ["artificial-intelligence", "core-python"] as SpeakerTrack[],
     country: "Colombia",
