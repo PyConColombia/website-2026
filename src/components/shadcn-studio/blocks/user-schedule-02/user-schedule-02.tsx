@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   type DaySchedule,
@@ -54,6 +54,11 @@ import {
   isSponsorSpaceEvent,
   resolveSponsorForScheduleEvent,
 } from "@/lib/schedule-sponsors";
+import {
+  getScheduleDateTime,
+  isScheduleEventNow,
+  parseScheduleNowOverride,
+} from "@/lib/schedule-time";
 import { resolveSpeakerImageUrl } from "@/lib/speaker-image-url";
 import type { SponsorWithTier } from "@/lib/sponsors";
 import { getTalkHref } from "@/lib/talks";
@@ -133,6 +138,7 @@ type ScheduleEventCardProps = {
   event: ScheduleEvent;
   t: (key: string) => string;
   locale: "en" | "es";
+  isNow: boolean;
 };
 
 type ScheduleSpeakerRowProps = {
@@ -223,7 +229,12 @@ function ScheduleSponsorRow({ sponsor }: { sponsor: SponsorWithTier }) {
   );
 }
 
-function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
+function ScheduleEventCard({
+  event,
+  t,
+  locale,
+  isNow,
+}: ScheduleEventCardProps) {
   const category = getScheduleEventCategory(event);
   const sponsor = resolveSponsorForScheduleEvent(event);
   const keynote = event.keynoteSlug
@@ -274,7 +285,18 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
   const eventTitle = getLocalizedScheduleEventTitle(event, locale);
 
   return (
-    <Card className="h-full transition-all">
+    <Card
+      className={cn(
+        "relative h-full overflow-hidden transition-all",
+        isNow &&
+          "border-primary/70 bg-primary/10 ring-primary/20 shadow-md ring-2 dark:bg-primary/15",
+      )}
+    >
+      {isNow ? (
+        <div className="bg-primary text-primary-foreground absolute top-4 -right-8 z-20 w-28 rotate-45 py-1 text-center text-xs font-semibold tracking-wide uppercase shadow-sm">
+          {t("blocks.scheduleUi.now")}
+        </div>
+      ) : null}
       <CardContent className="space-y-2.5">
         <div className="mb-1 flex items-start justify-between gap-2.5 max-sm:flex-col">
           <div>
@@ -353,12 +375,51 @@ function ScheduleEventCard({ event, t, locale }: ScheduleEventCardProps) {
 const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
   const { locale } = useLanguage();
   const { t } = useTranslations();
+  const [scheduleNow, setScheduleNow] = useState<Date>();
   const [selectedDate, setSelectedDate] = useState<ScheduleDayDate>(
     scheduleDays[0].date,
   );
   const [activeTab, setActiveTab] = useState<ScheduleTab>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"time" | "name" | "default">("default");
+  const currentScheduleDate = scheduleNow
+    ? getScheduleDateTime(scheduleNow).date
+    : undefined;
+
+  useEffect(() => {
+    const queryOverride = new URLSearchParams(window.location.search).get(
+      "scheduleNow",
+    );
+    const override = parseScheduleNowOverride(
+      queryOverride ?? process.env.NEXT_PUBLIC_SCHEDULE_NOW,
+    );
+
+    if (override) {
+      setScheduleNow(override);
+      return;
+    }
+
+    const updateNow = () => setScheduleNow(new Date());
+    updateNow();
+
+    const interval = window.setInterval(updateNow, 30_000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!currentScheduleDate) {
+      return;
+    }
+
+    const matchingDay = scheduleDays.find(
+      (day) => day.date === currentScheduleDate,
+    );
+
+    if (matchingDay) {
+      setSelectedDate(matchingDay.date);
+    }
+  }, [currentScheduleDate]);
 
   const selectedDay = scheduleDays.find((day) => day.date === selectedDate);
 
@@ -590,6 +651,11 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
                         event={event}
                         t={t}
                         locale={locale}
+                        isNow={
+                          scheduleNow
+                            ? isScheduleEventNow(event, scheduleNow)
+                            : false
+                        }
                       />
                     ))}
                   </div>

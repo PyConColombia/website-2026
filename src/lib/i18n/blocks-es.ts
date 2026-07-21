@@ -400,6 +400,7 @@ export const blocksEs: BlocksMessages = {
     keynote: "Keynote",
     workshop: "Taller",
     other: "Evento",
+    now: "Ahora",
     viewSpeaker: "Ver ponente",
     viewWorkshop: "Ver taller",
     viewKeynote: "Ver keynote",

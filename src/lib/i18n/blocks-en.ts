@@ -395,6 +395,7 @@ export const blocksEn = {
     keynote: "Keynote",
     workshop: "Workshop",
     other: "Event",
+    now: "Now",
     viewSpeaker: "View speaker",
     viewWorkshop: "View workshop",
     viewKeynote: "View keynote",
