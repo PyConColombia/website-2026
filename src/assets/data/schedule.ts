@@ -926,7 +926,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     displayTitle: "De Notebook a Producción: MLOps End-to-End en Databricks",
     speaker: "Emanuel Zapata Querubín",
     talkKey: "mlops-databricks",
-    label: "MLOps",
+    label: "Lovelytics Sponsor",
     language: ["ES"],
   },
   {
