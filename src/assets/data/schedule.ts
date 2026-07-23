@@ -926,7 +926,7 @@ export const scheduleEvents: ScheduleEvent[] = [
     displayTitle: "De Notebook a Producción: MLOps End-to-End en Databricks",
     speaker: "Emanuel Zapata Querubín",
     talkKey: "mlops-databricks",
-    label: "MLOps",
+    label: "Lovelytics Sponsor",
     language: ["ES"],
   },
   {
@@ -1150,8 +1150,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     hour: "16:30 - 17:00",
     date: "2026-07-26",
     title: "Sponsor Space: Factored",
-    displayTitle: "Sponsor Space: Factored",
-    speaker: "Factored",
+    displayTitle: "How Factored brings AI & Data from ambition to production",
+    speaker: "Miguel Morales",
     label: "Sponsor Space",
   },
   {
