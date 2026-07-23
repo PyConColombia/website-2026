@@ -1150,8 +1150,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     hour: "16:30 - 17:00",
     date: "2026-07-26",
     title: "Sponsor Space: Factored",
-    displayTitle: "Sponsor Space: Factored",
-    speaker: "Factored",
+    displayTitle: "How Factored brings AI & Data from ambition to production",
+    speaker: "Miguel Morales",
     label: "Sponsor Space",
   },
   {
