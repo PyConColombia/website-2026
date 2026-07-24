@@ -405,6 +405,20 @@ export const blocksEs: BlocksMessages = {
     viewWorkshop: "Ver taller",
     viewKeynote: "Ver keynote",
     footerNote: "Agenda sujeta a cambios. Medellín, Colombia.",
+    roomMap: {
+      description:
+        "Mira esta sala en el mapa y obtén la ruta a pie o en vehículo desde tu ubicación actual.",
+      locating: "Obteniendo tu ubicación actual…",
+      located: "Ubicación encontrada. La ruta partirá desde donde estás.",
+      geoDenied:
+        "Permiso de ubicación denegado. Aún puedes abrir Google Maps y definir el punto de partida allí.",
+      geoUnavailable:
+        "No se pudo leer tu ubicación. Aún puedes abrir Google Maps para obtener la ruta.",
+      mapTitle: "Mapa de la sala",
+      hint: "Google Maps usará tu posición si está disponible, o te pedirá un punto de partida.",
+      openDirections: "Abrir ruta en Google Maps",
+      openRoom: "Ver sala en el mapa",
+    },
   },
   headerUi: {
     brandAlt: "PyCon Colombia",

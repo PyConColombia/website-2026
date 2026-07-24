@@ -400,6 +400,20 @@ export const blocksEn = {
     viewWorkshop: "View workshop",
     viewKeynote: "View keynote",
     footerNote: "Schedule subject to change. Medellín, Colombia.",
+    roomMap: {
+      description:
+        "See this room on the map and get walking or driving directions from your current location.",
+      locating: "Getting your current location…",
+      located: "Location found. Directions will start from where you are.",
+      geoDenied:
+        "Location permission denied. You can still open Google Maps and set your starting point there.",
+      geoUnavailable:
+        "Could not read your location. You can still open Google Maps to get directions.",
+      mapTitle: "Room map",
+      hint: "Google Maps will use your position when available, or ask you for a starting point.",
+      openDirections: "Open route in Google Maps",
+      openRoom: "Show room on map",
+    },
   },
   headerUi: {
     brandAlt: "PyCon Colombia",

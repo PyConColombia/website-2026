@@ -18,6 +18,7 @@ import {
   type ScheduleEvent,
   scheduleDays,
 } from "@/assets/data/schedule";
+import ScheduleRoomDirectionsDialog from "@/components/blocks/schedule/schedule-room-directions-dialog";
 import SpeakerImage from "@/components/blocks/speakers/speaker-image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -139,6 +140,7 @@ type ScheduleEventCardProps = {
   t: (key: string) => string;
   locale: "en" | "es";
   isNow: boolean;
+  onRoomClick: (room: string) => void;
 };
 
 type ScheduleSpeakerRowProps = {
@@ -238,6 +240,7 @@ function ScheduleEventCard({
   t,
   locale,
   isNow,
+  onRoomClick,
 }: ScheduleEventCardProps) {
   const category = getScheduleEventCategory(event);
   const sponsor = resolveSponsorForScheduleEvent(event);
@@ -345,10 +348,15 @@ function ScheduleEventCard({
           ))}
         </div>
 
-        <div className="text-muted-foreground flex items-center justify-center gap-2 text-sm">
+        <button
+          type="button"
+          onClick={() => onRoomClick(event.room)}
+          className="text-muted-foreground hover:text-primary mx-auto flex items-center justify-center gap-2 text-sm underline-offset-4 transition-colors hover:underline"
+          aria-label={`${t("blocks.scheduleUi.roomMap.openRoom")}: ${event.room}`}
+        >
           <MapPinIcon className="size-4 shrink-0" />
           <span>{event.room}</span>
-        </div>
+        </button>
 
         {showSpeakers ? (
           <div className="flex flex-col items-center gap-2">
@@ -386,6 +394,8 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
   const [activeTab, setActiveTab] = useState<ScheduleTab>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"time" | "name" | "default">("default");
+  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+  const [roomDialogOpen, setRoomDialogOpen] = useState(false);
   const currentScheduleDate = scheduleNow
     ? getScheduleDateTime(scheduleNow).date
     : undefined;
@@ -659,6 +669,10 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
                             ? isScheduleEventNow(event, scheduleNow)
                             : false
                         }
+                        onRoomClick={(room) => {
+                          setSelectedRoom(room);
+                          setRoomDialogOpen(true);
+                        }}
                       />
                     ))}
                   </div>
@@ -667,6 +681,17 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
             </div>
           </TabsContent>
         </Tabs>
+
+        <ScheduleRoomDirectionsDialog
+          room={selectedRoom}
+          open={roomDialogOpen}
+          onOpenChange={(open) => {
+            setRoomDialogOpen(open);
+            if (!open) {
+              setSelectedRoom(null);
+            }
+          }}
+        />
       </CardContent>
     </Card>
   );
