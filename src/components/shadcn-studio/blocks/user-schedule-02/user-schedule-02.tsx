@@ -443,15 +443,15 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
       });
     }
 
-    if (sortBy === "time") {
-      items = [...items].sort(
-        (a, b) => parseHourStart(a.hour) - parseHourStart(b.hour),
-      );
-    } else if (sortBy === "name") {
+    if (sortBy === "name") {
       items = [...items].sort((a, b) =>
         getLocalizedScheduleEventTitle(a, locale).localeCompare(
           getLocalizedScheduleEventTitle(b, locale),
         ),
+      );
+    } else {
+      items = [...items].sort(
+        (a, b) => parseHourStart(a.hour) - parseHourStart(b.hour),
       );
     }
 
