@@ -273,17 +273,17 @@ export const scheduleEvents: ScheduleEvent[] = [
     language: ["EN"],
   },
   {
-    id: "18",
+    id: "42",
     type: "talk",
     room: "Auxiliar Room (101 - Bloque 38)",
-    hour: "14:20 - 15:00",
-    date: "2026-07-25",
+    hour: "14:30 - 15:10",
+    date: "2026-07-24",
     title:
-      "Talk: Vision-Language-Action Models: de los chatbots a la interacción con el mundo físico",
+      "Talk: No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
     displayTitle:
-      "Vision-Language-Action Models: de los chatbots a la interacción con el mundo físico",
-    speaker: "Gerardo Vilcamiza Espinoza",
-    label: "Computer Vision",
+      "No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
+    speaker: "Brayan Echenique Ardila",
+    label: "Artificial Intelligence",
     language: ["ES"],
   },
   {
@@ -556,17 +556,17 @@ export const scheduleEvents: ScheduleEvent[] = [
     language: ["ES"],
   },
   {
-    id: "42",
+    id: "18",
     type: "talk",
     room: "Auxiliar Room (101 - Bloque 38)",
-    hour: "14:30 - 15:10",
-    date: "2026-07-24",
+    hour: "14:20 - 15:00",
+    date: "2026-07-25",
     title:
-      "Talk: No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
+      "Talk: Vision-Language-Action Models: de los chatbots a la interacción con el mundo físico",
     displayTitle:
-      "No todo clavo necesita un martillo de IA: Arquitecturas que piensan antes de generar",
-    speaker: "Brayan Echenique Ardila",
-    label: "Artificial Intelligence",
+      "Vision-Language-Action Models: de los chatbots a la interacción con el mundo físico",
+    speaker: "Gerardo Vilcamiza Espinoza",
+    label: "Computer Vision",
     language: ["ES"],
   },
   {
