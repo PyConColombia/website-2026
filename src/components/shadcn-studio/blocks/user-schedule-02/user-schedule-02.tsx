@@ -195,14 +195,18 @@ function ScheduleSpeakerRow({
     return (
       <Link
         href={speaker.href}
-        className="group flex w-fit items-center gap-2.5 rounded-md transition-colors hover:opacity-80"
+        className="group mx-auto flex w-fit items-center justify-center gap-2.5 rounded-md transition-colors hover:opacity-80"
       >
         {content}
       </Link>
     );
   }
 
-  return <div className="flex w-fit items-center gap-2.5">{content}</div>;
+  return (
+    <div className="mx-auto flex w-fit items-center justify-center gap-2.5">
+      {content}
+    </div>
+  );
 }
 
 function ScheduleSponsorRow({ sponsor }: { sponsor: SponsorWithTier }) {
@@ -213,7 +217,7 @@ function ScheduleSponsorRow({ sponsor }: { sponsor: SponsorWithTier }) {
   return (
     <Link
       href={getSponsorHref(sponsor.slug)}
-      className="group border-border/60 bg-muted/30 hover:bg-muted/50 flex w-fit max-w-full items-center rounded-md border px-3 py-2 transition-colors"
+      className="group border-border/60 bg-muted/30 hover:bg-muted/50 mx-auto flex w-fit max-w-full items-center justify-center rounded-md border px-3 py-2 transition-colors"
       aria-label={sponsor.name}
     >
       <Image
@@ -297,9 +301,9 @@ function ScheduleEventCard({
           {t("blocks.scheduleUi.now")}
         </div>
       ) : null}
-      <CardContent className="space-y-2.5">
-        <div className="mb-1 flex items-start justify-between gap-2.5 max-sm:flex-col">
-          <div>
+      <CardContent className="space-y-2.5 text-center">
+        <div className="mb-1 flex flex-col items-center gap-2.5">
+          <div className="flex w-full flex-col items-center">
             <Badge
               className={cn(
                 "bg-card! mb-0.5 rounded-none px-0 py-px text-xs font-medium capitalize",
@@ -323,7 +327,7 @@ function ScheduleEventCard({
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
           <p className="text-muted-foreground text-sm text-nowrap">
             {event.hour}
           </p>
@@ -341,13 +345,13 @@ function ScheduleEventCard({
           ))}
         </div>
 
-        <div className="text-muted-foreground flex items-start gap-2 text-sm">
-          <MapPinIcon className="mt-0.5 size-4 shrink-0" />
+        <div className="text-muted-foreground flex items-center justify-center gap-2 text-sm">
+          <MapPinIcon className="size-4 shrink-0" />
           <span>{event.room}</span>
         </div>
 
         {showSpeakers ? (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col items-center gap-2">
             {eventSpeakers.map((speaker) => (
               <ScheduleSpeakerRow
                 key={`${event.id}-${speaker.slug ?? speaker.name}`}
@@ -640,9 +644,8 @@ const ScheduleCard = ({ scheduleData }: ScheduleCardProps) => {
                     key={group.map((event) => event.id).join("-")}
                     className={cn(
                       "gap-4",
-                      group.length === 1
-                        ? "grid sm:grid-cols-2"
-                        : "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3",
+                      group.length > 1 &&
+                        "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3",
                     )}
                   >
                     {group.map((event) => (
