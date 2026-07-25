@@ -440,6 +440,24 @@ export const blocksEn = {
     emptyDescription:
       "Try a different search term or filter to explore more articles and posters.",
   },
+  certificates: {
+    eyebrow: "Attendance certificate",
+    title: "Certificate of participation",
+    subtitle:
+      "This unique page confirms that {name} attended PyCon Colombia 2026.",
+    downloadPdf: "Download PDF",
+    downloading: "Preparing PDF…",
+    downloadError: "Could not generate the PDF. Please try again.",
+    openLink: "Open verification link",
+    verificationHint:
+      "Scan the QR code on the certificate to open this verification page. Share the link only with people who should verify attendance.",
+    roles: {
+      attendee: "Attendee",
+      volunteer: "Volunteer",
+      speaker: "Speaker",
+      organizer: "Organizer",
+    },
+  },
 };
 
 export type BlocksMessages = typeof blocksEn;

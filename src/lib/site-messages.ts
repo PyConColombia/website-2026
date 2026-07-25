@@ -111,6 +111,12 @@ export type SiteMessagesShape = {
       ogImageAlt: string;
       itemListName: string;
     };
+    certificates: {
+      title: string;
+      description: string;
+      detailTitle: string;
+      detailDescription: string;
+    };
   };
   blocks: typeof blocksEn;
 };
@@ -248,6 +254,14 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
           "Press and media coverage about PyCon Colombia 2026 in Medellín",
         itemListName: "PyCon Colombia 2026 press coverage and articles",
       },
+      certificates: {
+        title: "Certificate of Attendance",
+        description:
+          "Verify attendance certificates for PyCon Colombia 2026 in Medellín, July 24–26 at Universidad EAFIT.",
+        detailTitle: "Certificate for {name}",
+        detailDescription:
+          "Official attendance certificate for {name} at PyCon Colombia 2026.",
+      },
     },
     blocks: blocksEn,
   },
@@ -383,6 +397,14 @@ export const siteMessages: Record<SiteLocale, SiteMessagesShape> = {
           "Cobertura mediática y prensa sobre PyCon Colombia 2026 en Medellín",
         itemListName:
           "Cobertura mediática y artículos sobre PyCon Colombia 2026",
+      },
+      certificates: {
+        title: "Certificado de asistencia",
+        description:
+          "Verifica certificados de asistencia a PyCon Colombia 2026 en Medellín, del 24 al 26 de julio en la Universidad EAFIT.",
+        detailTitle: "Certificado de {name}",
+        detailDescription:
+          "Certificado oficial de asistencia de {name} a PyCon Colombia 2026.",
       },
     },
     blocks: blocksEs,

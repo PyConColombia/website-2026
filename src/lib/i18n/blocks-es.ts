@@ -445,4 +445,22 @@ export const blocksEs: BlocksMessages = {
     emptyDescription:
       "Prueba otro término de búsqueda o filtro para explorar más artículos y pósters.",
   },
+  certificates: {
+    eyebrow: "Certificado de asistencia",
+    title: "Certificado de participación",
+    subtitle:
+      "Esta página única confirma que {name} asistió a PyCon Colombia 2026.",
+    downloadPdf: "Descargar PDF",
+    downloading: "Preparando PDF…",
+    downloadError: "No se pudo generar el PDF. Inténtalo de nuevo.",
+    openLink: "Abrir enlace de verificación",
+    verificationHint:
+      "Escanea el código QR del certificado para abrir esta página de verificación. Comparte el enlace solo con quienes deban comprobar la asistencia.",
+    roles: {
+      attendee: "Asistente",
+      volunteer: "Voluntario",
+      speaker: "Ponente",
+      organizer: "Organizador",
+    },
+  },
 };
