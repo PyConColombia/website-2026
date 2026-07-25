@@ -110,6 +110,12 @@ export const volunteerMembers: VolunteerMember[] = [
     image: "/images/avatar/alejandro-alvarez.jpg",
   },
   {
+    slug: "alex-correa",
+    name: "Alex Correa",
+    role: "Logistics",
+    image: "/images/avatar/alex-correa.jpeg",
+  },
+  {
     slug: "blanca-arcilia-florez-urrutia",
     name: "Blanca Arcilia Flórez Urrutia",
     role: "Logistics",
@@ -122,6 +128,18 @@ export const volunteerMembers: VolunteerMember[] = [
     image: "/images/avatar/carolina-monsalve-delgado.jpeg",
   },
   {
+    slug: "carolina-patino",
+    name: "Carolina Patiño",
+    role: "Logistics",
+    image: "/images/avatar/carolina-patino.jpeg",
+  },
+  {
+    slug: "federico-cardozo",
+    name: "Federico Cardozo",
+    role: "Logistics",
+    image: "/images/avatar/federico-cardozo.jpg",
+  },
+  {
     slug: "gladys-agudelo-patino",
     name: "Gladys Agudelo Patiño",
     role: "Logistics",
@@ -132,6 +150,18 @@ export const volunteerMembers: VolunteerMember[] = [
     name: "Gustavo Diaz Jaimes",
     role: "Auditorium",
     image: "/images/avatar/gustavo-diaz-jaimes.jpg",
+  },
+  {
+    slug: "isabela-mejia-arena",
+    name: "Isabela Mejía Arena",
+    role: "Logistics",
+    image: "/images/avatar/isabela-mejia-arena.jpg",
+  },
+  {
+    slug: "isabella-pardo-tabares",
+    name: "Isabella Pardo Tabares",
+    role: "Logistics",
+    image: "/images/avatar/isabella-pardo-tabares.jpeg",
   },
   {
     slug: "jenny-acuna",
@@ -161,11 +191,65 @@ export const volunteerMembers: VolunteerMember[] = [
       "https://www.linkedin.com/in/juan-camilo-vel%C3%A1squez-p%C3%A9rez/",
   },
   {
+    slug: "julian-agudelo",
+    name: "Julian Agudelo",
+    role: "Logistics",
+    image: "/images/avatar/julian-agudelo.jpg",
+  },
+  {
+    slug: "kevin-rueda",
+    name: "Kevin Rueda",
+    role: "Logistics",
+    image: "/images/avatar/kevin-rueda.jpeg",
+  },
+  {
+    slug: "maria-alejandra-ocampo",
+    name: "María Alejandra Ocampo",
+    role: "Logistics",
+    image: "/images/avatar/maria-alejandra-ocampo.jpeg",
+  },
+  {
+    slug: "mariana-gutierrez",
+    name: "Mariana Gutiérrez",
+    role: "Logistics",
+    image: "/images/avatar/mariana-gutierrez.jpeg",
+  },
+  {
+    slug: "mateo-amaya",
+    name: "Mateo Amaya",
+    role: "Logistics",
+    image: "/images/avatar/mateo-amaya.jpeg",
+  },
+  {
     slug: "mateo-usme-valencia",
     name: "Mateo Usme Valencia",
     role: "Padrino Keynotes",
     image: "/images/avatar/mateo-usme.png",
     linkedin: "https://www.linkedin.com/in/mateousmevalencia/",
+  },
+  {
+    slug: "oscar-jaime",
+    name: "Oscar Jaime",
+    role: "Logistics",
+    image: "/images/avatar/oscar-jaime.jpeg",
+  },
+  {
+    slug: "santiago-gomez",
+    name: "Santiago Gómez",
+    role: "Logistics",
+    image: "/images/avatar/santiago-gomez.jpeg",
+  },
+  {
+    slug: "santiago-molano",
+    name: "Santiago Molano",
+    role: "Logistics",
+    image: "/images/avatar/santiago-molano.jpeg",
+  },
+  {
+    slug: "sebastian-fernandez",
+    name: "Sebastián Fernández",
+    role: "Logistics",
+    image: "/images/avatar/sebastian-fernandez.jpeg",
   },
   {
     slug: "simon-joel-torres-castaneda",
@@ -186,6 +270,12 @@ export const volunteerMembers: VolunteerMember[] = [
     role: "Co-host de auditorio",
     image: "/images/avatar/veruzka-borges.png",
     linkedin: "https://www.linkedin.com/in/veruzkab/",
+  },
+  {
+    slug: "yeimy-bedoya",
+    name: "Yeimy Bedoya",
+    role: "Logistics",
+    image: "/images/avatar/yeimy-bedoya.jpeg",
   },
   {
     slug: "yurley-sanchez-florez",
