@@ -687,7 +687,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "53",
     type: "workshop",
-    room: "Room 1 - Workshops",
+    room: "Salón 102 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -702,7 +702,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "54",
     type: "workshop",
-    room: "Room 2 - Workshops",
+    room: "Salón 303 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: From S3 to AI Agent: Your First Queryable Lakehouse",
@@ -715,7 +715,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "55",
     type: "workshop",
-    room: "Room 3 - Workshops",
+    room: "Salón 102 (Bloque 34)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: Tu LLM está sangrando dinero y Python puede pararlo",
@@ -728,7 +728,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "56",
     type: "workshop",
-    room: "Room 4 - Workshops",
+    room: "Salón 202 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -743,7 +743,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "57",
     type: "workshop",
-    room: "Room 5 - Workshops",
+    room: "Salón 201 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -758,7 +758,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "58",
     type: "workshop",
-    room: "Room 6 - Workshops",
+    room: "Salón 302 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: Patterns, Protocols and Tactics for Multi-Agent Systems",
@@ -771,7 +771,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "59",
     type: "workshop",
-    room: "Room 7 - Workshops",
+    room: "Salón 101 (Bloque 34)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -786,7 +786,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "79",
     type: "workshop",
-    room: "Room 8 - Workshops",
+    room: "Salón 203 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: hls4ml: From Python Models to Hardware Acceleration",
@@ -799,7 +799,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "60",
     type: "workshop",
-    room: "Room 9 - Workshops",
+    room: "Salón 101 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -814,7 +814,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "61",
     type: "workshop",
-    room: "Room 10 - Workshops",
+    room: "Salón 402 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: Future-proof Engineers with AI-DLC",
@@ -827,7 +827,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "62",
     type: "workshop",
-    room: "Room 11 - Workshops",
+    room: "Salón 301 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -842,7 +842,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "80",
     type: "workshop",
-    room: "Room 12 - Workshops",
+    room: "Salón 401 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title:
@@ -857,7 +857,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "81",
     type: "workshop",
-    room: "Room 13 - Workshops",
+    room: "Salón 403 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: NORTH: Claude como copiloto real",
@@ -870,7 +870,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "82",
     type: "workshop",
-    room: "Room 14 - Workshops",
+    room: "Salón 501 (Bloque 35)",
     hour: "8:00 - 10:00",
     date: "2026-07-26",
     title: "Workshop: Construyendo Agentes de IA para jugar Catan",
@@ -893,7 +893,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "64",
     type: "workshop",
-    room: "Room 2 - Workshops",
+    room: "Salón 102 (Bloque 34)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title: "Workshop: Stop mocking, start containerizing",
@@ -906,7 +906,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "85",
     type: "workshop",
-    room: "Room 3 - Workshops",
+    room: "Salón 501 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title: "Workshop: Crea tu DJ con IA: Agentes en Python y Open Source",
@@ -919,7 +919,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "65",
     type: "workshop",
-    room: "Room 4 - Workshops",
+    room: "Salón 102 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title: "Workshop: De Notebook a Producción: MLOps End-to-End en Databricks",
@@ -932,7 +932,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "66",
     type: "workshop",
-    room: "Room 5 - Workshops",
+    room: "Salón 401 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -947,7 +947,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "67",
     type: "workshop",
-    room: "Room 6 - Workshops",
+    room: "Salón 402 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -962,7 +962,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "68",
     type: "workshop",
-    room: "Room 7 - Workshops",
+    room: "Salón 302 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -976,7 +976,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "69",
     type: "workshop",
-    room: "Room 8 - Workshops",
+    room: "Salón 101 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -991,7 +991,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "70",
     type: "workshop",
-    room: "Room 9 - Workshops",
+    room: "Salón 101 (Bloque 34)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -1007,7 +1007,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "71",
     type: "workshop",
-    room: "Room 10 - Workshops",
+    room: "Salón 301 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -1022,7 +1022,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "86",
     type: "workshop",
-    room: "Room 11 - Workshops",
+    room: "Salón 201 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -1037,7 +1037,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "87",
     type: "workshop",
-    room: "Room 12 - Workshops",
+    room: "Salón 203 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title: "Workshop: De Prompts a Agentes: sistemas inteligentes con Python",
@@ -1050,7 +1050,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "88",
     type: "workshop",
-    room: "Room 13 - Workshops",
+    room: "Salón 202 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -1065,7 +1065,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "89",
     type: "workshop",
-    room: "Room 14 - Workshops",
+    room: "Salón 303 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title:
@@ -1080,7 +1080,7 @@ export const scheduleEvents: ScheduleEvent[] = [
   {
     id: "83",
     type: "workshop",
-    room: "Room 15 - Workshops",
+    room: "Salón 403 (Bloque 35)",
     hour: "10:30 - 12:30",
     date: "2026-07-26",
     title: "Workshop: Forjando Agentes en AWS: Hechizos con Strands, MCP y A2A",
