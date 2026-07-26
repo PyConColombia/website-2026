@@ -25,6 +25,13 @@ const BLOQUE_35: ScheduleRoomLocation = {
   lng: -75.5788686,
 };
 
+/** Adjacent academic block to Bloque 35 on the EAFIT campus. */
+const BLOQUE_34: ScheduleRoomLocation = {
+  name: "Bloque 34",
+  lat: 6.20105,
+  lng: -75.57905,
+};
+
 const scheduleRoomLocations: Record<string, ScheduleRoomLocation> = {
   "Main Auditorium (Fundadores)": FUNDADORES,
   "Auxiliar Room (101 - Bloque 38)": {
@@ -37,9 +44,31 @@ const scheduleRoomLocations: Record<string, ScheduleRoomLocation> = {
   },
 };
 
-for (let room = 1; room <= 15; room += 1) {
-  const name = `Room ${room} - Workshops`;
+const workshopRoomsBloque35 = [
+  "101",
+  "102",
+  "201",
+  "202",
+  "203",
+  "301",
+  "302",
+  "303",
+  "401",
+  "402",
+  "403",
+  "501",
+] as const;
+
+const workshopRoomsBloque34 = ["101", "102"] as const;
+
+for (const salon of workshopRoomsBloque35) {
+  const name = `Salón ${salon} (Bloque 35)`;
   scheduleRoomLocations[name] = { ...BLOQUE_35, name };
+}
+
+for (const salon of workshopRoomsBloque34) {
+  const name = `Salón ${salon} (Bloque 34)`;
+  scheduleRoomLocations[name] = { ...BLOQUE_34, name };
 }
 
 export function getScheduleRoomLocation(
