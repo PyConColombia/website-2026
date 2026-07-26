@@ -1117,7 +1117,8 @@ export const scheduleEvents: ScheduleEvent[] = [
     hour: "14:30 - 15:00",
     date: "2026-07-26",
     title: "Sponsor Space: Aimpoint",
-    displayTitle: "Sponsor Space: Aimpoint",
+    displayTitle:
+      "Navegando la competitividad de la industria y cómo Aimpoint Digital nos lleva de la visión al impacto",
     speaker: "Felipe Sánchez",
     label: "Sponsor Space",
   },
