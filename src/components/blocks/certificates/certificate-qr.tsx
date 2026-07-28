@@ -12,7 +12,12 @@ type CertificateQrProps = {
   size?: number;
 };
 
-const CertificateQr = ({ url, className, size = 140 }: CertificateQrProps) => {
+/** Matches certificate-pycon design: lavender tile, purple modules, soft border. */
+const QR_DARK = "#6155f5";
+const QR_LIGHT = "#d3d4f6";
+const QR_BORDER = "rgb(97 85 245 / 0.3)";
+
+const CertificateQr = ({ url, className, size = 56 }: CertificateQrProps) => {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,11 +29,11 @@ const CertificateQr = ({ url, className, size = 140 }: CertificateQrProps) => {
     }
 
     QRCode.toDataURL(url, {
-      width: 512,
-      margin: 2,
+      width: Math.max(size * 4, 256),
+      margin: 1,
       color: {
-        dark: "#000000",
-        light: "#ffffff",
+        dark: QR_DARK,
+        light: QR_LIGHT,
       },
       errorCorrectionLevel: "H",
     })
@@ -46,13 +51,21 @@ const CertificateQr = ({ url, className, size = 140 }: CertificateQrProps) => {
     return () => {
       cancelled = true;
     };
-  }, [url]);
+  }, [url, size]);
+
+  const box = size;
 
   if (!dataUrl) {
     return (
       <div
-        className={cn("animate-pulse rounded-sm bg-white p-2", className)}
-        style={{ width: size + 16, height: size + 16 }}
+        className={cn(className)}
+        style={{
+          width: box,
+          height: box,
+          backgroundColor: QR_LIGHT,
+          borderRadius: 8,
+          border: `1px solid ${QR_BORDER}`,
+        }}
         aria-hidden="true"
       />
     );
@@ -60,11 +73,17 @@ const CertificateQr = ({ url, className, size = 140 }: CertificateQrProps) => {
 
   return (
     <div
-      className={cn(
-        "rounded-sm bg-white p-2 shadow-[0_0_0_3px_rgba(255,255,255,0.95)]",
-        className,
-      )}
-      style={{ width: size + 16, height: size + 16 }}
+      className={cn(className)}
+      style={{
+        width: box,
+        height: box,
+        backgroundColor: QR_LIGHT,
+        borderRadius: 8,
+        border: `1px solid ${QR_BORDER}`,
+        overflow: "hidden",
+        padding: 4,
+        boxSizing: "border-box",
+      }}
     >
       {/* biome-ignore lint/performance/noImgElement: QR is a generated data URL */}
       <img
@@ -73,9 +92,10 @@ const CertificateQr = ({ url, className, size = 140 }: CertificateQrProps) => {
         width={size}
         height={size}
         style={{
-          width: size,
-          height: size,
+          width: "100%",
+          height: "100%",
           display: "block",
+          borderRadius: 4,
           imageRendering: "pixelated",
         }}
       />
