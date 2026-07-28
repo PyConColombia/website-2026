@@ -1,7 +1,7 @@
 "use client";
 
-import { DownloadIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { DownloadIcon, Link2Icon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import CertificateCard from "@/components/blocks/certificates/certificate-card";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +14,7 @@ import {
   getCertificateUrl,
 } from "@/lib/certificates";
 import { downloadCertificatePdf } from "@/lib/download-certificate-pdf";
+import { getTeamMemberHref } from "@/lib/team";
 
 type CertificateDetailProps = {
   certificate: CertificateWithUser;
@@ -25,8 +26,12 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
   const printRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const verificationUrl = getCertificateUrl(certificate.id);
+  const profileHref = certificate.user.teamSlug
+    ? getTeamMemberHref(certificate.user.teamSlug)
+    : undefined;
   const roleLabel = t(`blocks.certificates.roles.${certificate.role}`);
   const fileSlug = certificate.user.name
     .toLowerCase()
@@ -34,6 +39,15 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+
+  useEffect(() => {
+    if (!linkCopied) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => setLinkCopied(false), 2000);
+    return () => window.clearTimeout(timeoutId);
+  }, [linkCopied]);
 
   const handleDownloadPdf = async () => {
     const element = printRef.current?.querySelector<HTMLElement>(
@@ -56,6 +70,15 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
       setDownloadError(t("blocks.certificates.downloadError"));
     } finally {
       setIsDownloading(false);
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(verificationUrl);
+      setLinkCopied(true);
+    } catch {
+      window.prompt(t("blocks.certificates.copyLink"), verificationUrl);
     }
   };
 
@@ -138,13 +161,15 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
               </PrimaryFlowButton>
               <Button
                 size="lg"
+                type="button"
                 variant="outline"
                 className="rounded-lg text-base shadow-none"
-                asChild
+                onClick={handleCopyLink}
               >
-                <a href={verificationUrl} target="_blank" rel="noreferrer">
-                  {t("blocks.certificates.openLink")}
-                </a>
+                <Link2Icon />
+                {linkCopied
+                  ? t("blocks.certificates.linkCopied")
+                  : t("blocks.certificates.copyLink")}
               </Button>
             </div>
             {downloadError ? (
@@ -168,6 +193,7 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
               role={certificate.role}
               verificationUrl={verificationUrl}
               certificateId={certificate.id}
+              profileHref={profileHref}
             />
           </div>
         </MotionPreset>

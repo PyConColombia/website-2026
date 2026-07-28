@@ -463,7 +463,8 @@ export const blocksEn = {
     downloadPdf: "Download PDF",
     downloading: "Preparing PDF…",
     downloadError: "Could not generate the PDF. Please try again.",
-    openLink: "Open verification link",
+    copyLink: "Copy verification link",
+    linkCopied: "Link copied!",
     verificationHint:
       "Scan the QR code on the certificate to open this verification page. Share the link only with people who should verify attendance.",
     roles: {

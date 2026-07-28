@@ -1,6 +1,8 @@
 import { jsPDF } from "jspdf";
 import { domToPng, waitUntilLoad } from "modern-screenshot";
 
+import { PRODUCTION_SITE_URL } from "@/lib/site-seo";
+
 async function waitForImages(element: HTMLElement) {
   const images = Array.from(element.querySelectorAll("img"));
 
@@ -21,9 +23,48 @@ async function waitForImages(element: HTMLElement) {
   );
 }
 
+function toAbsoluteUrl(href: string): string {
+  if (/^https?:\/\//i.test(href)) {
+    return href;
+  }
+
+  return `${PRODUCTION_SITE_URL}${href.startsWith("/") ? href : `/${href}`}`;
+}
+
+/**
+ * Map a DOM node's box (relative to the certificate root) onto PDF content coords.
+ */
+function getPdfLinkBounds(args: {
+  root: HTMLElement;
+  target: HTMLElement;
+  margin: number;
+  contentWidth: number;
+  contentHeight: number;
+}): { x: number; y: number; w: number; h: number } | null {
+  const { root, target, margin, contentWidth, contentHeight } = args;
+  const rootRect = root.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+
+  if (rootRect.width <= 0 || rootRect.height <= 0) {
+    return null;
+  }
+
+  const scaleX = contentWidth / rootRect.width;
+  const scaleY = contentHeight / rootRect.height;
+  const pad = 2;
+
+  return {
+    x: margin + (targetRect.left - rootRect.left) * scaleX - pad,
+    y: margin + (targetRect.top - rootRect.top) * scaleY - pad,
+    w: targetRect.width * scaleX + pad * 2,
+    h: targetRect.height * scaleY + pad * 2,
+  };
+}
+
 /**
  * Rasterize the live certificate DOM exactly as shown (fonts, colors, QR),
  * then embed that bitmap into a PDF page matching the certificate aspect ratio.
+ * If the recipient name links to a profile, add a matching PDF link annotation.
  */
 export async function downloadCertificatePdf(args: {
   element: HTMLElement;
@@ -87,5 +128,25 @@ export async function downloadCertificatePdf(args: {
     undefined,
     "FAST",
   );
+
+  const nameLink = element.querySelector<HTMLAnchorElement>(".pcert-name a");
+  const profilePath = nameLink?.getAttribute("href");
+
+  if (nameLink && profilePath) {
+    const bounds = getPdfLinkBounds({
+      root: element,
+      target: nameLink,
+      margin,
+      contentWidth,
+      contentHeight,
+    });
+
+    if (bounds) {
+      pdf.link(bounds.x, bounds.y, bounds.w, bounds.h, {
+        url: toAbsoluteUrl(profilePath),
+      });
+    }
+  }
+
   pdf.save(`pycon-colombia-2026-certificate-${fileSlug}.pdf`);
 }

@@ -468,7 +468,8 @@ export const blocksEs: BlocksMessages = {
     downloadPdf: "Descargar PDF",
     downloading: "Preparando PDF…",
     downloadError: "No se pudo generar el PDF. Inténtalo de nuevo.",
-    openLink: "Abrir enlace de verificación",
+    copyLink: "Copiar enlace de verificación",
+    linkCopied: "¡Enlace copiado!",
     verificationHint:
       "Escanea el código QR del certificado para abrir esta página de verificación. Comparte el enlace solo con quienes deban comprobar la asistencia.",
     roles: {
