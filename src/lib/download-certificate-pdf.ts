@@ -1,202 +1,152 @@
 import { jsPDF } from "jspdf";
-import QRCode from "qrcode";
+import { domToPng, waitUntilLoad } from "modern-screenshot";
 
-export type CertificatePdfCopy = {
-  certifies: string;
-  participatedAs: string;
-  eventLine: string;
-  signatoryName: string;
-  signatoryTitle: string;
-  verify: string;
-};
+import { PRODUCTION_SITE_URL } from "@/lib/site-seo";
 
+async function waitForImages(element: HTMLElement) {
+  const images = Array.from(element.querySelectorAll("img"));
+
+  await Promise.all(
+    images.map(
+      (image) =>
+        new Promise<void>((resolve) => {
+          if (image.complete && image.naturalWidth > 0) {
+            resolve();
+            return;
+          }
+
+          const done = () => resolve();
+          image.addEventListener("load", done, { once: true });
+          image.addEventListener("error", done, { once: true });
+        }),
+    ),
+  );
+}
+
+function toAbsoluteUrl(href: string): string {
+  if (/^https?:\/\//i.test(href)) {
+    return href;
+  }
+
+  return `${PRODUCTION_SITE_URL}${href.startsWith("/") ? href : `/${href}`}`;
+}
+
+/**
+ * Map a DOM node's box (relative to the certificate root) onto PDF content coords.
+ */
+function getPdfLinkBounds(args: {
+  root: HTMLElement;
+  target: HTMLElement;
+  margin: number;
+  contentWidth: number;
+  contentHeight: number;
+}): { x: number; y: number; w: number; h: number } | null {
+  const { root, target, margin, contentWidth, contentHeight } = args;
+  const rootRect = root.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+
+  if (rootRect.width <= 0 || rootRect.height <= 0) {
+    return null;
+  }
+
+  const scaleX = contentWidth / rootRect.width;
+  const scaleY = contentHeight / rootRect.height;
+  const pad = 2;
+
+  return {
+    x: margin + (targetRect.left - rootRect.left) * scaleX - pad,
+    y: margin + (targetRect.top - rootRect.top) * scaleY - pad,
+    w: targetRect.width * scaleX + pad * 2,
+    h: targetRect.height * scaleY + pad * 2,
+  };
+}
+
+/**
+ * Rasterize the live certificate DOM exactly as shown (fonts, colors, QR),
+ * then embed that bitmap into a PDF page matching the certificate aspect ratio.
+ * If the recipient name links to a profile, add a matching PDF link annotation.
+ */
 export async function downloadCertificatePdf(args: {
-  recipientName: string;
-  roleLabel: string;
-  verificationUrl: string;
+  element: HTMLElement;
   fileSlug: string;
-  copy: CertificatePdfCopy;
 }): Promise<void> {
-  const { recipientName, roleLabel, verificationUrl, fileSlug, copy } = args;
+  const { element, fileSlug } = args;
 
-  const qrDataUrl = await QRCode.toDataURL(verificationUrl, {
-    width: 320,
-    margin: 2,
-    errorCorrectionLevel: "H",
-    color: {
-      dark: "#000000",
-      light: "#ffffff",
+  await document.fonts.ready;
+  await waitForImages(element);
+  await waitUntilLoad(element, { timeout: 12_000 });
+
+  // Brief pause so webfonts / QR paint settle before capture.
+  await new Promise((resolve) => window.setTimeout(resolve, 80));
+
+  const scale = Math.min(3, Math.max(2, window.devicePixelRatio || 2));
+
+  const dataUrl = await domToPng(element, {
+    scale,
+    backgroundColor: "#ffffff",
+    quality: 1,
+    timeout: 30_000,
+    // Capture the node as fully painted (ignore parent motion transforms).
+    style: {
+      transform: "none",
+      opacity: "1",
+      filter: "none",
+    },
+    fetch: {
+      requestInit: {
+        mode: "cors",
+        credentials: "omit",
+      },
     },
   });
 
+  // Page follows certificate aspect ratio (22:17), with a white margin around it.
+  const rect = element.getBoundingClientRect();
+  const aspect = rect.height > 0 ? rect.width / rect.height : 22 / 17;
+  const margin = 28; // pt on each side
+  const contentWidth = 842; // ~A4 landscape width for the certificate itself
+  const contentHeight = contentWidth / aspect;
+  const pageWidth = contentWidth + margin * 2;
+  const pageHeight = contentHeight + margin * 2;
+
   const pdf = new jsPDF({
-    orientation: "landscape",
+    orientation: pageWidth >= pageHeight ? "landscape" : "portrait",
     unit: "pt",
-    format: "a4",
+    format: [pageWidth, pageHeight],
+    compress: true,
   });
 
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-  const footerHeight = 42;
+  pdf.setFillColor(241, 242, 252); // brand background (#f1f2fc)
+  pdf.rect(0, 0, pageWidth, pageHeight, "F");
+  pdf.addImage(
+    dataUrl,
+    "PNG",
+    margin,
+    margin,
+    contentWidth,
+    contentHeight,
+    undefined,
+    "FAST",
+  );
 
-  const bands = [
-    { color: [232, 58, 140] as const, y0: 0, y1: 0.3 },
-    { color: [240, 106, 61] as const, y0: 0.3, y1: 0.55 },
-    { color: [245, 180, 41] as const, y0: 0.55, y1: 0.8 },
-    { color: [247, 200, 74] as const, y0: 0.8, y1: 1 },
-  ];
+  const nameLink = element.querySelector<HTMLAnchorElement>(".pcert-name a");
+  const profilePath = nameLink?.getAttribute("href");
 
-  for (const band of bands) {
-    pdf.setFillColor(band.color[0], band.color[1], band.color[2]);
-    pdf.rect(
-      0,
-      pageHeight * band.y0,
-      pageWidth,
-      pageHeight * (band.y1 - band.y0),
-      "F",
-    );
+  if (nameLink && profilePath) {
+    const bounds = getPdfLinkBounds({
+      root: element,
+      target: nameLink,
+      margin,
+      contentWidth,
+      contentHeight,
+    });
+
+    if (bounds) {
+      pdf.link(bounds.x, bounds.y, bounds.w, bounds.h, {
+        url: toAbsoluteUrl(profilePath),
+      });
+    }
   }
-
-  // Back mountains
-  pdf.setFillColor(122, 42, 110);
-  pdf.triangle(
-    0,
-    pageHeight,
-    pageWidth * 0.18,
-    pageHeight * 0.58,
-    pageWidth * 0.36,
-    pageHeight,
-    "F",
-  );
-  pdf.triangle(
-    pageWidth * 0.28,
-    pageHeight,
-    pageWidth * 0.5,
-    pageHeight * 0.52,
-    pageWidth * 0.72,
-    pageHeight,
-    "F",
-  );
-  pdf.triangle(
-    pageWidth * 0.64,
-    pageHeight,
-    pageWidth * 0.84,
-    pageHeight * 0.56,
-    pageWidth,
-    pageHeight,
-    "F",
-  );
-
-  // Front mountains
-  pdf.setFillColor(92, 31, 92);
-  pdf.triangle(
-    0,
-    pageHeight,
-    pageWidth * 0.14,
-    pageHeight * 0.68,
-    pageWidth * 0.3,
-    pageHeight,
-    "F",
-  );
-  pdf.triangle(
-    pageWidth * 0.24,
-    pageHeight,
-    pageWidth * 0.46,
-    pageHeight * 0.64,
-    pageWidth * 0.68,
-    pageHeight,
-    "F",
-  );
-  pdf.triangle(
-    pageWidth * 0.6,
-    pageHeight,
-    pageWidth * 0.8,
-    pageHeight * 0.7,
-    pageWidth,
-    pageHeight,
-    "F",
-  );
-
-  // Footer
-  pdf.setFillColor(59, 20, 96);
-  pdf.rect(0, pageHeight - footerHeight, pageWidth, footerHeight, "F");
-  pdf.setTextColor(255, 255, 255);
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(14);
-  pdf.text("WWW.PYCON.CO", pageWidth / 2, pageHeight - footerHeight / 2 + 4, {
-    align: "center",
-  });
-
-  // Header
-  pdf.setTextColor(59, 20, 96);
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(36);
-  pdf.text("PYCON 2026", pageWidth / 2, 64, { align: "center" });
-  pdf.setFontSize(12);
-  pdf.text("COLOMBIA", pageWidth / 2, 84, { align: "center" });
-
-  // Body
-  pdf.setTextColor(255, 255, 255);
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(14);
-  pdf.text(copy.certifies, pageWidth / 2, 140, { align: "center" });
-
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(34);
-  pdf.text(recipientName, pageWidth / 2, 188, { align: "center" });
-
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(14);
-  pdf.text(copy.participatedAs, pageWidth / 2, 230, { align: "center" });
-
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(28);
-  pdf.text(roleLabel, pageWidth / 2, 268, { align: "center" });
-
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(12);
-  const eventLines = pdf.splitTextToSize(copy.eventLine, pageWidth * 0.7);
-  pdf.text(eventLines, pageWidth / 2, 310, { align: "center" });
-
-  // QR with quiet zone
-  const qrSize = 96;
-  const qrX = 40;
-  const qrY = pageHeight - footerHeight - qrSize - 36;
-  pdf.setFillColor(255, 255, 255);
-  pdf.roundedRect(qrX - 8, qrY - 8, qrSize + 16, qrSize + 16, 4, 4, "F");
-  pdf.addImage(qrDataUrl, "PNG", qrX, qrY, qrSize, qrSize);
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(8);
-  pdf.setTextColor(255, 255, 255);
-  pdf.text(copy.verify.toUpperCase(), qrX + qrSize / 2, qrY + qrSize + 18, {
-    align: "center",
-  });
-
-  // Signature
-  pdf.setFont("times", "italic");
-  pdf.setFontSize(28);
-  pdf.setTextColor(255, 255, 255);
-  pdf.text("John Roa", pageWidth / 2, pageHeight - footerHeight - 78, {
-    align: "center",
-  });
-  pdf.setDrawColor(255, 255, 255);
-  pdf.setLineWidth(1);
-  pdf.line(
-    pageWidth / 2 - 90,
-    pageHeight - footerHeight - 66,
-    pageWidth / 2 + 90,
-    pageHeight - footerHeight - 66,
-  );
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(11);
-  pdf.text(copy.signatoryName, pageWidth / 2, pageHeight - footerHeight - 48, {
-    align: "center",
-  });
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(10);
-  pdf.text(copy.signatoryTitle, pageWidth / 2, pageHeight - footerHeight - 34, {
-    align: "center",
-  });
 
   pdf.save(`pycon-colombia-2026-certificate-${fileSlug}.pdf`);
 }

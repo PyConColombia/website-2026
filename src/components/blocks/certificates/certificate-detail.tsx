@@ -1,7 +1,7 @@
 "use client";
 
-import { DownloadIcon } from "lucide-react";
-import { useState } from "react";
+import { DownloadIcon, Link2Icon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import CertificateCard from "@/components/blocks/certificates/certificate-card";
 import { Badge } from "@/components/ui/badge";
@@ -14,39 +14,24 @@ import {
   getCertificateUrl,
 } from "@/lib/certificates";
 import { downloadCertificatePdf } from "@/lib/download-certificate-pdf";
+import { getTeamMemberHref } from "@/lib/team";
 
 type CertificateDetailProps = {
   certificate: CertificateWithUser;
 };
 
-const certificateCopy = {
-  en: {
-    certifies: "PyCon Colombia certifies that",
-    participatedAs: "Has participated as",
-    eventLine:
-      "in the 10th edition of PyCon Colombia, held from July 24 to 26 in Medellín, Colombia.",
-    signatoryName: "John Jairo Roa Acuña",
-    signatoryTitle: "Chief Organizer",
-    verify: "Verify",
-  },
-  es: {
-    certifies: "PyCon Colombia certifica que",
-    participatedAs: "Ha participado como",
-    eventLine:
-      "en la 10.ª edición de PyCon Colombia, realizada del 24 al 26 de julio en Medellín, Colombia.",
-    signatoryName: "John Jairo Roa Acuña",
-    signatoryTitle: "Organizador principal",
-    verify: "Verificar",
-  },
-} as const;
-
 const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
   const { t } = useTranslations();
   const { locale } = useLanguage();
+  const printRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const verificationUrl = getCertificateUrl(certificate.id);
+  const profileHref = certificate.user.teamSlug
+    ? getTeamMemberHref(certificate.user.teamSlug)
+    : undefined;
   const roleLabel = t(`blocks.certificates.roles.${certificate.role}`);
   const fileSlug = certificate.user.name
     .toLowerCase()
@@ -55,8 +40,21 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
+  useEffect(() => {
+    if (!linkCopied) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => setLinkCopied(false), 2000);
+    return () => window.clearTimeout(timeoutId);
+  }, [linkCopied]);
+
   const handleDownloadPdf = async () => {
-    if (isDownloading) {
+    const element = printRef.current?.querySelector<HTMLElement>(
+      "[data-certificate-root]",
+    );
+
+    if (!element || isDownloading) {
       return;
     }
 
@@ -65,16 +63,22 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
 
     try {
       await downloadCertificatePdf({
-        recipientName: certificate.user.name,
-        roleLabel,
-        verificationUrl,
+        element,
         fileSlug,
-        copy: certificateCopy[locale],
       });
     } catch {
       setDownloadError(t("blocks.certificates.downloadError"));
     } finally {
       setIsDownloading(false);
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(verificationUrl);
+      setLinkCopied(true);
+    } catch {
+      window.prompt(t("blocks.certificates.copyLink"), verificationUrl);
     }
   };
 
@@ -157,13 +161,15 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
               </PrimaryFlowButton>
               <Button
                 size="lg"
+                type="button"
                 variant="outline"
                 className="rounded-lg text-base shadow-none"
-                asChild
+                onClick={handleCopyLink}
               >
-                <a href={verificationUrl} target="_blank" rel="noreferrer">
-                  {t("blocks.certificates.openLink")}
-                </a>
+                <Link2Icon />
+                {linkCopied
+                  ? t("blocks.certificates.linkCopied")
+                  : t("blocks.certificates.copyLink")}
               </Button>
             </div>
             {downloadError ? (
@@ -181,11 +187,13 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
           delay={0.55}
           transition={{ duration: 0.55 }}
         >
-          <div className="mx-auto w-full max-w-5xl">
+          <div ref={printRef} className="mx-auto w-full max-w-5xl">
             <CertificateCard
               recipientName={certificate.user.name}
               role={certificate.role}
               verificationUrl={verificationUrl}
+              certificateId={certificate.id}
+              profileHref={profileHref}
             />
           </div>
         </MotionPreset>
