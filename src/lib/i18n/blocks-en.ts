@@ -465,6 +465,8 @@ export const blocksEn = {
     downloadError: "Could not generate the PDF. Please try again.",
     copyLink: "Copy verification link",
     linkCopied: "Link copied!",
+    viewFull: "View full certificate",
+    tapToExpand: "Tap the certificate to view it full size.",
     verificationHint:
       "Scan the QR code on the certificate to open this verification page. Share the link only with people who should verify attendance.",
     roles: {

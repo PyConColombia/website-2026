@@ -170,32 +170,32 @@ const CertificateCard = ({
           flex-shrink: 0;
         }
         .pcert-brand { display: flex; align-items: center; gap: 0.75rem; }
-        .pcert-logo-img { width: clamp(36px, 6%, 54px); height: auto; object-fit: contain; }
+        .pcert-logo-img { width: 52px; height: auto; object-fit: contain; }
         .pcert-brand-name {
           font-family: var(--font-display), var(--font-button), sans-serif;
-          font-size: clamp(16px, 2.9vw, 26px);
+          font-size: 26px;
           letter-spacing: 0.06em; line-height: 1; color: var(--pcert-fg);
         }
         .pcert-brand-name span { color: var(--pcert-primary); }
         .pcert-brand-sub {
           font-family: var(--font-button), sans-serif;
-          font-size: clamp(9px, 1.25vw, 12px);
+          font-size: 12px;
           color: var(--pcert-muted); letter-spacing: 0.14em;
         }
         .pcert-edition-num {
           font-family: var(--font-display), var(--font-button), sans-serif;
-          font-size: clamp(28px, 5.4vw, 48px);
+          font-size: 48px;
           color: var(--pcert-primary); line-height: 1; letter-spacing: 0.04em; text-align: right;
         }
         .pcert-edition-label {
           font-family: var(--font-button), sans-serif;
-          font-size: clamp(9px, 1.25vw, 12px);
+          font-size: 12px;
           color: var(--pcert-muted); letter-spacing: 0.14em; text-align: right;
         }
         .pcert-hero { position: relative; text-align: center; flex-shrink: 0; line-height: 1; }
         .pcert-pycon {
           font-family: var(--font-display), var(--font-button), sans-serif;
-          font-size: clamp(44px, 9vw, 82px);
+          font-size: 82px;
           letter-spacing: 0.06em; line-height: 0.88;
           background: linear-gradient(to bottom, #BCC4F4, #EEEEF7 50%, #BCC4F4);
           -webkit-background-clip: text; background-clip: text;
@@ -205,7 +205,7 @@ const CertificateCard = ({
         .pcert-float-logo {
           position: absolute; top: 50%; left: 50%;
           transform: translate(-50%, calc(-58% + 20px));
-          width: clamp(38px, 6.2%, 56px); height: auto;
+          width: 56px; height: auto;
           object-fit: contain;
           filter: drop-shadow(0 12px 20px rgba(97,85,245,0.22));
         }
@@ -214,21 +214,21 @@ const CertificateCard = ({
           display: inline-block;
           background: var(--pcert-primary); color: var(--pcert-primary-fg);
           font-family: var(--font-button), sans-serif;
-          font-size: clamp(8px, 1.05vw, 10px); letter-spacing: 0.14em;
-          border-radius: 999px; padding: 4px 16px;
+          font-size: 11px; letter-spacing: 0.14em;
+          border-radius: 999px; padding: 5px 18px;
         }
         .pcert-eyebrow {
-          font-size: clamp(10px, 1.25vw, 12px); letter-spacing: 0.18em;
+          font-size: 13px; letter-spacing: 0.18em;
           text-transform: uppercase; color: var(--pcert-muted);
-          text-align: center; margin-top: 4.5%; flex-shrink: 0;
+          text-align: center; margin-top: 3.5%; flex-shrink: 0;
         }
         .pcert-body {
-          font-size: clamp(13px, 1.8vw, 16px); color: var(--pcert-muted);
-          line-height: 1.65; text-align: center; flex-shrink: 0;
+          font-size: 16px; color: var(--pcert-muted);
+          line-height: 1.55; text-align: center; flex-shrink: 0;
         }
         .pcert-body strong { color: var(--pcert-fg); font-weight: 600; }
         .pcert-sep {
-          display: flex; align-items: center; gap: 10px;
+          display: flex; align-items: center; gap: 12px;
           margin: 1.2% auto; max-width: 56%; width: 100%; flex-shrink: 0;
         }
         .pcert-sep::before, .pcert-sep::after {
@@ -236,7 +236,7 @@ const CertificateCard = ({
         }
         .pcert-name {
           font-family: var(--font-display), var(--font-button), sans-serif;
-          font-size: clamp(26px, 5vw, 46px); letter-spacing: 0.04em;
+          font-size: 46px; letter-spacing: 0.04em;
           color: var(--pcert-primary); line-height: 1.1; text-align: center;
           flex-shrink: 0;
         }
@@ -252,11 +252,11 @@ const CertificateCard = ({
           display: inline-block;
           background: var(--pcert-secondary); color: var(--pcert-secondary-fg);
           font-family: var(--font-button), sans-serif;
-          font-size: clamp(14px, 1.9vw, 17px); letter-spacing: 0.06em;
+          font-size: 17px; letter-spacing: 0.06em;
           border-radius: 6px; padding: 2px 14px; margin: 0 4px;
         }
         .pcert-meta {
-          display: flex; justify-content: center; gap: clamp(1.2rem, 4.5vw, 2.8rem);
+          display: flex; justify-content: center; gap: 2.5rem;
           margin-top: auto; padding: 1.6% 0;
           border-top: 1px solid var(--pcert-border);
           border-bottom: 1px solid var(--pcert-border);
@@ -264,12 +264,12 @@ const CertificateCard = ({
         }
         .pcert-meta-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .pcert-meta-label {
-          font-size: clamp(9px, 1.15vw, 11px); text-transform: uppercase;
+          font-size: 11px; text-transform: uppercase;
           letter-spacing: 0.12em; color: var(--pcert-muted);
         }
         .pcert-meta-value {
           font-family: var(--font-button), sans-serif;
-          font-size: clamp(13px, 1.7vw, 15px); letter-spacing: 0.06em;
+          font-size: 15px; letter-spacing: 0.06em;
           color: var(--pcert-fg);
         }
         .pcert-footer {
@@ -278,18 +278,18 @@ const CertificateCard = ({
           flex-shrink: 0;
         }
         .pcert-verify-label {
-          font-size: clamp(9px, 1.15vw, 11px); color: var(--pcert-muted);
+          font-size: 11px; color: var(--pcert-muted);
           margin-top: 2px; letter-spacing: 0.1em; text-transform: uppercase;
           font-family: var(--font-button), sans-serif; text-align: center;
         }
         .pcert-id-label {
-          font-size: clamp(9px, 1.15vw, 11px); text-transform: uppercase;
+          font-size: 11px; text-transform: uppercase;
           letter-spacing: 0.1em; color: var(--pcert-muted);
           margin-bottom: 4px; text-align: right;
         }
         .pcert-id-value {
           font-family: var(--font-mono), ui-monospace, monospace;
-          font-size: clamp(12px, 1.55vw, 14px); font-weight: 600;
+          font-size: 14px; font-weight: 600;
           color: var(--pcert-primary); background: var(--pcert-secondary);
           border: 1px solid rgb(97 85 245 / 0.3);
           border-radius: 6px; padding: 5px 14px; letter-spacing: 0.06em;

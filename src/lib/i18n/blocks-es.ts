@@ -470,6 +470,8 @@ export const blocksEs: BlocksMessages = {
     downloadError: "No se pudo generar el PDF. Inténtalo de nuevo.",
     copyLink: "Copiar enlace de verificación",
     linkCopied: "¡Enlace copiado!",
+    viewFull: "Ver certificado completo",
+    tapToExpand: "Toca el certificado para verlo a tamaño completo.",
     verificationHint:
       "Escanea el código QR del certificado para abrir esta página de verificación. Comparte el enlace solo con quienes deban comprobar la asistencia.",
     roles: {

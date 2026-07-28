@@ -3,6 +3,12 @@ import { domToPng, waitUntilLoad } from "modern-screenshot";
 
 import { PRODUCTION_SITE_URL } from "@/lib/site-seo";
 
+/** Fixed design width used for on-screen layout and PDF capture. */
+export const CERTIFICATE_CANVAS_WIDTH_PX = 1100;
+const CERTIFICATE_ASPECT = 22 / 17;
+const CERTIFICATE_CANVAS_HEIGHT_PX =
+  CERTIFICATE_CANVAS_WIDTH_PX / CERTIFICATE_ASPECT;
+
 async function waitForImages(element: HTMLElement) {
   const images = Array.from(element.querySelectorAll("img"));
 
@@ -62,9 +68,8 @@ function getPdfLinkBounds(args: {
 }
 
 /**
- * Rasterize the live certificate DOM exactly as shown (fonts, colors, QR),
- * then embed that bitmap into a PDF page matching the certificate aspect ratio.
- * If the recipient name links to a profile, add a matching PDF link annotation.
+ * Capture a certificate node that is already laid out at the fixed canvas
+ * size (not CSS-scaled). PDF output is identical on every device.
  */
 export async function downloadCertificatePdf(args: {
   element: HTMLElement;
@@ -79,18 +84,19 @@ export async function downloadCertificatePdf(args: {
   // Brief pause so webfonts / QR paint settle before capture.
   await new Promise((resolve) => window.setTimeout(resolve, 80));
 
-  const scale = Math.min(3, Math.max(2, window.devicePixelRatio || 2));
-
   const dataUrl = await domToPng(element, {
-    scale,
+    width: CERTIFICATE_CANVAS_WIDTH_PX,
+    height: CERTIFICATE_CANVAS_HEIGHT_PX,
+    scale: 2,
     backgroundColor: "#ffffff",
     quality: 1,
     timeout: 30_000,
-    // Capture the node as fully painted (ignore parent motion transforms).
     style: {
       transform: "none",
       opacity: "1",
       filter: "none",
+      width: `${CERTIFICATE_CANVAS_WIDTH_PX}px`,
+      height: `${CERTIFICATE_CANVAS_HEIGHT_PX}px`,
     },
     fetch: {
       requestInit: {
@@ -100,12 +106,9 @@ export async function downloadCertificatePdf(args: {
     },
   });
 
-  // Page follows certificate aspect ratio (22:17), with a white margin around it.
-  const rect = element.getBoundingClientRect();
-  const aspect = rect.height > 0 ? rect.width / rect.height : 22 / 17;
   const margin = 28; // pt on each side
-  const contentWidth = 842; // ~A4 landscape width for the certificate itself
-  const contentHeight = contentWidth / aspect;
+  const contentWidth = 842;
+  const contentHeight = contentWidth / CERTIFICATE_ASPECT;
   const pageWidth = contentWidth + margin * 2;
   const pageHeight = contentHeight + margin * 2;
 
