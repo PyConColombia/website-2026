@@ -1,3 +1,11 @@
+packages:
+  - '.'
+
+# Used by pnpm 10+ (pnpm 9 reads package.json#overrides instead).
+overrides:
+  framer-motion: 12.29.2
+  remark-mdx-remove-esm: 1.2.3
+
 allowBuilds:
-  core-js: set this to true or false
+  core-js: true
   sharp: true
