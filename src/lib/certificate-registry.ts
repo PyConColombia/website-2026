@@ -20,17 +20,55 @@ const ROLE_ALIASES: Record<string, CertificateRole> = {
   organizador: "organizer",
 };
 
+const DRIVE_FILE_ID_PATTERNS = [
+  /\/file\/d\/([a-zA-Z0-9_-]+)/,
+  /[?&]id=([a-zA-Z0-9_-]+)/,
+  /^([a-zA-Z0-9_-]{20,})$/,
+];
+
 let registryPromise: Promise<Map<string, Certificate>> | null = null;
+
+/** Accepts a raw Drive file id or any common Drive share/view/open/download URL. */
+export function extractDriveFileId(value: string): string | undefined {
+  const trimmed = value.trim().replace(/^["']|["']$/g, "");
+  if (!trimmed) {
+    return undefined;
+  }
+
+  for (const pattern of DRIVE_FILE_ID_PATTERNS) {
+    const match = trimmed.match(pattern);
+    if (match?.[1]) {
+      return match[1];
+    }
+  }
+
+  return undefined;
+}
+
+function buildDriveDownloadUrl(fileId: string): string {
+  return `https://drive.usercontent.google.com/download?id=${encodeURIComponent(fileId)}&export=download`;
+}
 
 function getCertificatesJsonUrl(): string | undefined {
   const explicit = process.env.CERTIFICATES_JSON_URL?.trim();
   if (explicit) {
-    return explicit;
+    const driveId = extractDriveFileId(explicit);
+    // Sharing/view links return HTML; always rewrite Drive links to the download endpoint.
+    if (driveId) {
+      return buildDriveDownloadUrl(driveId);
+    }
+    return explicit.replace(/^["']|["']$/g, "");
   }
 
-  const fileId = process.env.CERTIFICATES_DRIVE_FILE_ID?.trim();
-  if (fileId) {
-    return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(fileId)}`;
+  const fileIdRaw = process.env.CERTIFICATES_DRIVE_FILE_ID?.trim();
+  if (fileIdRaw) {
+    const fileId = extractDriveFileId(fileIdRaw);
+    if (!fileId) {
+      throw new Error(
+        "CERTIFICATES_DRIVE_FILE_ID must be a Drive file id or Drive URL containing one.",
+      );
+    }
+    return buildDriveDownloadUrl(fileId);
   }
 
   return undefined;
@@ -86,6 +124,15 @@ function parseCertificateList(payload: unknown): Map<string, Certificate> {
   return registry;
 }
 
+function isHtmlBody(contentType: string, body: string): boolean {
+  const trimmed = body.trimStart();
+  return (
+    contentType.includes("text/html") ||
+    trimmed.startsWith("<!DOCTYPE") ||
+    trimmed.startsWith("<html")
+  );
+}
+
 async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
   const url = getCertificatesJsonUrl();
 
@@ -98,6 +145,12 @@ async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
   const response = await fetch(url, {
     // Build-time only; avoid Next Data Cache surprises across rebuilds.
     cache: "no-store",
+    redirect: "follow",
+    headers: {
+      // Some Drive edges return an HTML interstitial without a browser-like UA.
+      Accept: "application/json,text/plain,*/*",
+      "User-Agent": "PyConColombiaWebsiteBuild/1.0",
+    },
   });
 
   if (!response.ok) {
@@ -109,13 +162,9 @@ async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
   const contentType = response.headers.get("content-type") ?? "";
   const body = await response.text();
 
-  if (
-    contentType.includes("text/html") ||
-    body.trimStart().startsWith("<!DOCTYPE") ||
-    body.trimStart().startsWith("<html")
-  ) {
+  if (isHtmlBody(contentType, body)) {
     throw new Error(
-      "Certificates source returned HTML instead of JSON. Check that the Drive file is publicly readable.",
+      "Certificates source returned HTML instead of JSON. Use CERTIFICATES_DRIVE_FILE_ID with the file id (or any Drive link) — not a view/share page as CERTIFICATES_JSON_URL — and ensure the file is publicly readable.",
     );
   }
 
