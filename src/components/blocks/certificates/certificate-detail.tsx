@@ -2,7 +2,7 @@
 
 import { DownloadIcon, ExpandIcon, Link2Icon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
+import type { ResolvedCertificate } from "@/assets/data/certificates";
 import CertificateCard from "@/components/blocks/certificates/certificate-card";
 import CertificateStage from "@/components/blocks/certificates/certificate-stage";
 import { Badge } from "@/components/ui/badge";
@@ -17,18 +17,14 @@ import {
 import { PrimaryFlowButton } from "@/components/ui/flow-button";
 import { MotionPreset } from "@/components/ui/motion-preset";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
-import {
-  type CertificateWithUser,
-  getCertificateUrl,
-} from "@/lib/certificates";
+import { getCertificateUrl } from "@/lib/certificates";
 import {
   CERTIFICATE_CANVAS_WIDTH_PX,
   downloadCertificatePdf,
 } from "@/lib/download-certificate-pdf";
-import { getTeamMemberHref } from "@/lib/team";
 
 type CertificateDetailProps = {
-  certificate: CertificateWithUser;
+  certificate: ResolvedCertificate;
 };
 
 const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
@@ -41,11 +37,8 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
   const [previewOpen, setPreviewOpen] = useState(false);
 
   const verificationUrl = getCertificateUrl(certificate.id);
-  const profileHref = certificate.user.teamSlug
-    ? getTeamMemberHref(certificate.user.teamSlug)
-    : undefined;
   const roleLabel = t(`blocks.certificates.roles.${certificate.role}`);
-  const fileSlug = certificate.user.name
+  const fileSlug = certificate.name
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -53,11 +46,11 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
     .replace(/^-|-$/g, "");
 
   const cardProps = {
-    recipientName: certificate.user.name,
+    recipientName: certificate.name,
     role: certificate.role,
     verificationUrl,
     certificateId: certificate.id,
-    profileHref,
+    profileHref: certificate.profileHref,
   } as const;
 
   useEffect(() => {
@@ -152,7 +145,7 @@ const CertificateDetail = ({ certificate }: CertificateDetailProps) => {
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg sm:text-xl">
               {t("blocks.certificates.subtitle").replace(
                 "{name}",
-                certificate.user.name,
+                certificate.name,
               )}
             </p>
           </MotionPreset>
