@@ -143,8 +143,9 @@ async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
   }
 
   const response = await fetch(url, {
-    // Build-time only; avoid Next Data Cache surprises across rebuilds.
-    cache: "no-store",
+    // Static export requires a cacheable fetch — `no-store` forces dynamic rendering
+    // and fails prerender. Each `next build` still issues a fresh request.
+    cache: "force-cache",
     redirect: "follow",
     headers: {
       // Some Drive edges return an HTML interstitial without a browser-like UA.
