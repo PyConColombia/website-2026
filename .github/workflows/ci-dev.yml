@@ -77,6 +77,15 @@ jobs:
           echo "BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
           echo "NEXT_PUBLIC_BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
           echo "NEXT_PUBLIC_APP_URL=https://develop.pycon.co" >> "$GITHUB_ENV"
+          if [ -n "${{ secrets.CERTIFICATES_JSON_URL }}" ]; then
+            echo "CERTIFICATES_JSON_URL=${{ secrets.CERTIFICATES_JSON_URL }}" >> "$GITHUB_ENV"
+          elif [ -n "${{ vars.CERTIFICATES_JSON_URL }}" ]; then
+            echo "CERTIFICATES_JSON_URL=${{ vars.CERTIFICATES_JSON_URL }}" >> "$GITHUB_ENV"
+          elif [ -n "${{ secrets.CERTIFICATES_DRIVE_FILE_ID }}" ]; then
+            echo "CERTIFICATES_DRIVE_FILE_ID=${{ secrets.CERTIFICATES_DRIVE_FILE_ID }}" >> "$GITHUB_ENV"
+          elif [ -n "${{ vars.CERTIFICATES_DRIVE_FILE_ID }}" ]; then
+            echo "CERTIFICATES_DRIVE_FILE_ID=${{ vars.CERTIFICATES_DRIVE_FILE_ID }}" >> "$GITHUB_ENV"
+          fi
       - name: Build project
         run: npm run build
       - name: Upload dist folder as artifact

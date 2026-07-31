@@ -4,17 +4,18 @@ import { notFound } from "next/navigation";
 import CertificateDetail from "@/components/blocks/certificates/certificate-detail";
 import CTASection from "@/components/blocks/cta/cta";
 import SectionSeparator from "@/components/section-separator";
+import { getCertificateHref } from "@/lib/certificates";
 import {
   getAllCertificateIds,
-  getCertificateHref,
-  getCertificateWithUser,
-} from "@/lib/certificates";
+  getResolvedCertificate,
+} from "@/lib/certificates-server";
 import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
 import { siteMessages } from "@/lib/site-messages";
 import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
 
 export async function generateStaticParams() {
-  return getAllCertificateIds().map((id) => ({ id }));
+  const ids = await getAllCertificateIds();
+  return ids.map((id) => ({ id }));
 }
 
 export async function generateMetadata({
@@ -23,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const certificate = getCertificateWithUser(id);
+  const certificate = await getResolvedCertificate(id);
   const meta = siteMessages[STATIC_PRERENDER_LOCALE].pageMeta.certificates;
 
   if (!certificate) {
@@ -33,10 +34,10 @@ export async function generateMetadata({
     };
   }
 
-  const title = meta.detailTitle.replace("{name}", certificate.user.name);
+  const title = meta.detailTitle.replace("{name}", certificate.name);
   const description = meta.detailDescription.replace(
     "{name}",
-    certificate.user.name,
+    certificate.name,
   );
 
   return {
@@ -60,7 +61,7 @@ const CertificatePage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const certificate = getCertificateWithUser(id);
+  const certificate = await getResolvedCertificate(id);
 
   if (!certificate) {
     notFound();
@@ -70,11 +71,11 @@ const CertificatePage = async ({
   const pageUrl = `${getSiteUrl()}${getCertificateHref(id)}`;
   const title = messages.pageMeta.certificates.detailTitle.replace(
     "{name}",
-    certificate.user.name,
+    certificate.name,
   );
   const description = messages.pageMeta.certificates.detailDescription.replace(
     "{name}",
-    certificate.user.name,
+    certificate.name,
   );
 
   const jsonLd = {
