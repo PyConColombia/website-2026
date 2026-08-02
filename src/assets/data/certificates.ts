@@ -1,7 +1,7 @@
 /**
  * Attendance certificates. Public verification pages live at
- * `/certificates/[id]`. Records are loaded at build time from the
- * certificates JSON configured via env (see `loadCertificateRegistry`).
+ * `/certificates/[id]/` and require the per-certificate `key` from the
+ * registry JSON. Records are validated server-side (see `loadCertificateRegistry`).
  */
 export type CertificateRole =
   | "attendee"

@@ -1,11 +1,11 @@
 # website-2026
 
-React + Vite project with HMR, ESLint, and Biome for formatting.
+Next.js site for PyCon Colombia 2026. Deployed on [Vercel](https://vercel.com).
 
 ## Prerequisites
 
-- **Node.js** 18+ (recommended: current LTS)
-- **npm** 9+ (or use the Node-bundled version)
+- **Node.js** 22+ (recommended: current LTS)
+- **npm** 9+
 
 ## Setup & run
 
@@ -15,61 +15,56 @@ React + Vite project with HMR, ESLint, and Biome for formatting.
 npm install
 ```
 
-### 2. Run the development server
+### 2. Environment
+
+Copy `.env.example` to `.env.local` and set at least:
+
+- `NEXT_PUBLIC_APP_URL` — local site URL (e.g. `http://localhost:3000`)
+- `CERTIFICATES_DRIVE_FILE_ID` or `CERTIFICATES_JSON_URL` — certificates registry (server-only)
+
+### 3. Development server
 
 ```bash
 npm run dev
 ```
 
-Then open the URL shown in the terminal (usually `http://localhost:5173`).
+Open `http://localhost:3000`.
 
-## Deploy en GitHub Pages
-
-Este proyecto ya esta configurado para exportacion estatica de Next.js y despliegue automatico con GitHub Actions.
-
-1. Crea un repositorio en GitHub.
-2. Conecta este proyecto al repositorio real:
-
-```bash
-git remote set-url origin https://github.com/TU_USUARIO/TU_REPO.git
-git add .
-git commit -m "Prepare GitHub Pages deploy"
-git push -u origin main
-```
-
-3. En GitHub, entra a `Settings` -> `Pages`.
-4. En `Build and deployment`, selecciona `GitHub Actions` como fuente.
-5. Abre la pestana `Actions` y espera a que termine `Deploy to GitHub Pages`.
-
-Si el repositorio se llama `TU_USUARIO.github.io`, la web quedara en `https://TU_USUARIO.github.io/`. Si usa otro nombre, quedara en `https://TU_USUARIO.github.io/TU_REPO/`.
-
-## Table of Contents 📋
-
-### 3. Build for production
+### 4. Production build
 
 ```bash
 npm run build
+npm start
 ```
 
-Output is in the `dist/` folder.
+## Deploy on Vercel
 
-### 4. Preview production build locally
+1. Import the GitHub repo in the [Vercel dashboard](https://vercel.com/new).
+2. Framework preset: **Next.js** (auto-detected).
+3. Add environment variables (Production + Preview as needed):
+   - `NEXT_PUBLIC_APP_URL` — e.g. `https://2026.pycon.co` / `https://develop.pycon.co`
+   - `NEXT_PUBLIC_GA_ID` (optional)
+   - `CERTIFICATES_DRIVE_FILE_ID` or `CERTIFICATES_JSON_URL`
+   - Leave `BASEPATH` empty unless the app is served under a subpath
+4. Point custom domains (`2026.pycon.co`, preview/develop) at the Vercel project.
+5. Push to `main` / `develop` — Vercel deploys; GitHub Actions only runs CI (format, types, build).
 
-```bash
-npm run preview
-```
+Certificate pages (`/certificates/[id]/`) are rendered on demand: the server validates the id against the Drive JSON before returning the page. No static HTML is generated per certificate.
 
-## Other scripts
+## Scripts
 
 | Script                 | Description                 |
 | ---------------------- | --------------------------- |
+| `npm run dev`          | Next.js dev server          |
+| `npm run build`        | Production build            |
+| `npm start`            | Serve production build      |
 | `npm run format`       | Format and fix with Biome   |
 | `npm run format:check` | Check formatting (no write) |
+| `npm run check-types`  | TypeScript check            |
 
 ## Tech stack
 
+- [Next.js](https://nextjs.org/) 16 (App Router)
 - [React](https://react.dev/) 19
-- [Vite](https://vite.dev/) 7
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc) for Fast Refresh
+- [Tailwind CSS](https://tailwindcss.com/) 4
 - [Biome](https://biomejs.dev/) for linting and formatting
-- ESLint for additional lint rules

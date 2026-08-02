@@ -1,26 +1,24 @@
-name: Deploy static content to website-2026
+name: CI (production)
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages-prod"
+  group: "ci-prod"
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy to Production
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,10 +26,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: 25.2
+          node-version: "22"
       - name: Install dependencies
         run: npm install
-      - name: Set Pages environment
+      - name: Set build environment
         shell: bash
         run: |
           GA_ID="${{ vars.NEXT_PUBLIC_GA_ID }}"
@@ -41,8 +39,6 @@ jobs:
           if [ -n "$GA_ID" ]; then
             echo "NEXT_PUBLIC_GA_ID=$GA_ID" >> "$GITHUB_ENV"
           fi
-          echo "BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
-          echo "NEXT_PUBLIC_BASEPATH=${{ vars.BASEPATH }}" >> "$GITHUB_ENV"
           echo "NEXT_PUBLIC_APP_URL=https://2026.pycon.co" >> "$GITHUB_ENV"
           if [ -n "${{ secrets.CERTIFICATES_JSON_URL }}" ]; then
             echo "CERTIFICATES_JSON_URL=${{ secrets.CERTIFICATES_JSON_URL }}" >> "$GITHUB_ENV"
@@ -53,14 +49,9 @@ jobs:
           elif [ -n "${{ vars.CERTIFICATES_DRIVE_FILE_ID }}" ]; then
             echo "CERTIFICATES_DRIVE_FILE_ID=${{ vars.CERTIFICATES_DRIVE_FILE_ID }}" >> "$GITHUB_ENV"
           fi
+      - name: Format check
+        run: npm run format:check
+      - name: Typecheck
+        run: npm run check-types
       - name: Build
         run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
