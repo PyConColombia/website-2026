@@ -5,7 +5,10 @@ import type {
 } from "@/assets/data/certificates";
 import { speakers } from "@/assets/data/speakers";
 import { teamMembers, volunteerMembers } from "@/assets/data/team";
-import { loadCertificateRegistry } from "@/lib/certificate-registry";
+import {
+  type CertificateRecord,
+  loadCertificateRegistry,
+} from "@/lib/certificate-registry";
 import { getSpeakerProfileHref } from "@/lib/speakers";
 import { getTeamMemberHref } from "@/lib/team";
 
@@ -89,7 +92,16 @@ function resolveProfileHref(
   return undefined;
 }
 
-function resolveCertificate(certificate: Certificate): ResolvedCertificate {
+function toPublicCertificate(record: CertificateRecord): Certificate {
+  return {
+    id: record.id,
+    name: record.name,
+    role: record.role,
+  };
+}
+
+function resolveCertificate(record: CertificateRecord): ResolvedCertificate {
+  const certificate = toPublicCertificate(record);
   return {
     ...certificate,
     profileHref: resolveProfileHref(certificate.name, certificate.role),
@@ -105,17 +117,19 @@ export async function getCertificateById(
   id: string,
 ): Promise<Certificate | undefined> {
   const registry = await loadCertificateRegistry();
-  return registry.get(id);
+  const record = registry.get(id);
+  return record ? toPublicCertificate(record) : undefined;
 }
 
 export async function getResolvedCertificate(
   id: string,
 ): Promise<ResolvedCertificate | undefined> {
-  const certificate = await getCertificateById(id);
+  const registry = await loadCertificateRegistry();
+  const record = registry.get(id);
 
-  if (!certificate) {
+  if (!record) {
     return undefined;
   }
 
-  return resolveCertificate(certificate);
+  return resolveCertificate(record);
 }

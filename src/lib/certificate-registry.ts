@@ -1,8 +1,16 @@
+import { timingSafeEqual } from "node:crypto";
+
 import type { Certificate, CertificateRole } from "@/assets/data/certificates";
 
 type CertificateListEntry = {
   name: string;
   role: string;
+  key: string;
+};
+
+/** Server-only record — includes the unlock key, never send to the client. */
+export type CertificateRecord = Certificate & {
+  key: string;
 };
 
 type CertificateListFile = Record<string, CertificateListEntry>;
@@ -26,7 +34,7 @@ const DRIVE_FILE_ID_PATTERNS = [
   /^([a-zA-Z0-9_-]{20,})$/,
 ];
 
-let registryPromise: Promise<Map<string, Certificate>> | null = null;
+let registryPromise: Promise<Map<string, CertificateRecord>> | null = null;
 
 /** Accepts a raw Drive file id or any common Drive share/view/open/download URL. */
 export function extractDriveFileId(value: string): string | undefined {
@@ -78,38 +86,46 @@ function parseRole(raw: string): CertificateRole | undefined {
   return ROLE_ALIASES[raw.trim().toLowerCase()];
 }
 
-function isCertificateListEntry(value: unknown): value is CertificateListEntry {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-
-  const entry = value as Record<string, unknown>;
-  return typeof entry.name === "string" && typeof entry.role === "string";
-}
-
-function parseCertificateList(payload: unknown): Map<string, Certificate> {
+function parseCertificateList(
+  payload: unknown,
+): Map<string, CertificateRecord> {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
     throw new Error(
       "Certificates JSON must be an object keyed by certificate id.",
     );
   }
 
-  const registry = new Map<string, Certificate>();
+  const registry = new Map<string, CertificateRecord>();
+  let rawEntryCount = 0;
+  let missingKeyCount = 0;
 
   for (const [id, value] of Object.entries(payload as CertificateListFile)) {
     const certificateId = id.trim();
-    if (!certificateId || !isCertificateListEntry(value)) {
+    if (!certificateId || !value || typeof value !== "object") {
       continue;
     }
 
-    const role = parseRole(value.role);
+    rawEntryCount += 1;
+    const entry = value as Record<string, unknown>;
+
+    if (typeof entry.name !== "string" || typeof entry.role !== "string") {
+      continue;
+    }
+
+    if (typeof entry.key !== "string" || !entry.key.trim()) {
+      missingKeyCount += 1;
+      continue;
+    }
+
+    const role = parseRole(entry.role);
     if (!role) {
       throw new Error(
-        `Unknown certificate role "${value.role}" for id "${certificateId}".`,
+        `Unknown certificate role "${entry.role}" for id "${certificateId}".`,
       );
     }
 
-    const name = value.name.trim();
+    const name = entry.name.trim();
+    const key = entry.key.trim();
     if (!name) {
       continue;
     }
@@ -118,10 +134,35 @@ function parseCertificateList(payload: unknown): Map<string, Certificate> {
       id: certificateId,
       name,
       role,
+      key,
     });
   }
 
+  if (rawEntryCount > 0 && registry.size === 0) {
+    if (missingKeyCount > 0) {
+      throw new Error(
+        `Certificates JSON has ${missingKeyCount} entries but none include a valid "key" field. Update the Drive file (or clear the Next.js fetch cache) and retry.`,
+      );
+    }
+    throw new Error(
+      "Certificates JSON could not be parsed into any valid entries.",
+    );
+  }
+
   return registry;
+}
+
+/** Constant-time comparison so key length / mismatch timing is harder to probe. */
+export function certificateKeysMatch(
+  expected: string,
+  provided: string,
+): boolean {
+  const left = Buffer.from(expected);
+  const right = Buffer.from(provided);
+  if (left.length !== right.length) {
+    return false;
+  }
+  return timingSafeEqual(left, right);
 }
 
 function isHtmlBody(contentType: string, body: string): boolean {
@@ -133,7 +174,9 @@ function isHtmlBody(contentType: string, body: string): boolean {
   );
 }
 
-async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
+async function fetchCertificateRegistry(): Promise<
+  Map<string, CertificateRecord>
+> {
   const url = getCertificatesJsonUrl();
 
   if (!url) {
@@ -143,9 +186,9 @@ async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
   }
 
   const response = await fetch(url, {
-    // Static export requires a cacheable fetch — `no-store` forces dynamic rendering
-    // and fails prerender. Each `next build` still issues a fresh request.
-    cache: "force-cache",
+    // Avoid serving a stale Drive snapshot after the JSON schema changes
+    // (e.g. adding per-certificate keys). Pages are already force-dynamic.
+    cache: "no-store",
     redirect: "follow",
     headers: {
       // Some Drive edges return an HTML interstitial without a browser-like UA.
@@ -180,12 +223,18 @@ async function fetchCertificateRegistry(): Promise<Map<string, Certificate>> {
 }
 
 /**
- * Loads the full certificate list once per build/process.
- * Only used on the server (build / RSC). Never import from client components.
+ * Loads the certificate list (server-only). Always fetches fresh from the source.
+ * Never import from client components.
  */
-export function loadCertificateRegistry(): Promise<Map<string, Certificate>> {
+export function loadCertificateRegistry(): Promise<
+  Map<string, CertificateRecord>
+> {
   if (!registryPromise) {
-    registryPromise = fetchCertificateRegistry();
+    registryPromise = fetchCertificateRegistry().finally(() => {
+      // Allow a later request to refresh after the in-flight load settles.
+      // Next.js `revalidate` still owns CDN/data freshness across instances.
+      registryPromise = null;
+    });
   }
 
   return registryPromise;

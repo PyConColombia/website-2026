@@ -2,21 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import CertificateDetail from "@/components/blocks/certificates/certificate-detail";
+import CertificateUnlockDialog from "@/components/blocks/certificates/certificate-unlock-dialog";
 import CTASection from "@/components/blocks/cta/cta";
 import SectionSeparator from "@/components/section-separator";
+import { hasValidCertificateUnlock } from "@/lib/certificate-unlock";
 import { getCertificateHref } from "@/lib/certificates";
 import {
-  getAllCertificateIds,
+  getCertificateById,
   getResolvedCertificate,
 } from "@/lib/certificates-server";
 import { STATIC_PRERENDER_LOCALE } from "@/lib/site-locale-constants";
 import { siteMessages } from "@/lib/site-messages";
 import { getSiteUrl, webPageJsonLd, websiteJsonLd } from "@/lib/site-seo";
 
-export async function generateStaticParams() {
-  const ids = await getAllCertificateIds();
-  return ids.map((id) => ({ id }));
-}
+/** On-demand validation against the certificates JSON — no HTML per id at build. */
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
@@ -24,25 +25,21 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const certificate = await getResolvedCertificate(id);
+  const certificate = await getCertificateById(id);
   const meta = siteMessages[STATIC_PRERENDER_LOCALE].pageMeta.certificates;
 
+  // Don't leak the recipient name in metadata until the key unlocks the page.
   if (!certificate) {
     return {
       title: meta.title,
       description: meta.description,
+      robots: { index: false, follow: false },
     };
   }
 
-  const title = meta.detailTitle.replace("{name}", certificate.name);
-  const description = meta.detailDescription.replace(
-    "{name}",
-    certificate.name,
-  );
-
   return {
-    title,
-    description,
+    title: meta.title,
+    description: meta.description,
     alternates: {
       canonical: `${getSiteUrl()}${getCertificateHref(id)}`,
     },
@@ -53,16 +50,31 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = false;
-
 const CertificatePage = async ({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const certificate = await getResolvedCertificate(id);
 
+  const exists = await getCertificateById(id);
+  if (!exists) {
+    notFound();
+  }
+
+  const unlocked = await hasValidCertificateUnlock(id);
+
+  if (!unlocked) {
+    return (
+      <>
+        <CertificateUnlockDialog certificateId={id} />
+        <SectionSeparator />
+        <CTASection />
+      </>
+    );
+  }
+
+  const certificate = await getResolvedCertificate(id);
   if (!certificate) {
     notFound();
   }

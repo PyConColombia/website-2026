@@ -469,6 +469,17 @@ export const blocksEn = {
     tapToExpand: "Tap the certificate to view it full size.",
     verificationHint:
       "Scan the QR code on the certificate to open this verification page. Share the link only with people who should verify attendance.",
+    unlockTitle: "Enter your certificate key",
+    unlockSubtitle:
+      "This page is protected. Enter the private key you received with your certificate to view and download it.",
+    unlockLabel: "Certificate key",
+    unlockPlaceholder: "Paste your key",
+    unlockSubmit: "Unlock certificate",
+    unlockSubmitting: "Checking key…",
+    invalidKeyTitle: "Invalid certificate key",
+    invalidKeyMessage:
+      "The key you entered does not match this certificate. You will be redirected to the home page.",
+    invalidKeyRedirect: "Redirecting to the home page…",
     roles: {
       attendee: "Attendee",
       volunteer: "Volunteer",

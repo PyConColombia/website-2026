@@ -474,6 +474,17 @@ export const blocksEs: BlocksMessages = {
     tapToExpand: "Toca el certificado para verlo a tamaño completo.",
     verificationHint:
       "Escanea el código QR del certificado para abrir esta página de verificación. Comparte el enlace solo con quienes deban comprobar la asistencia.",
+    unlockTitle: "Ingresa la llave de tu certificado",
+    unlockSubtitle:
+      "Esta página está protegida. Ingresa la llave privada que recibiste con tu certificado para verlo y descargarlo.",
+    unlockLabel: "Llave del certificado",
+    unlockPlaceholder: "Pega tu llave",
+    unlockSubmit: "Desbloquear certificado",
+    unlockSubmitting: "Verificando llave…",
+    invalidKeyTitle: "Llave de certificado inválida",
+    invalidKeyMessage:
+      "La llave que ingresaste no coincide con este certificado. Serás redirigido a la página de inicio.",
+    invalidKeyRedirect: "Redirigiendo a la página de inicio…",
     roles: {
       attendee: "Asistente",
       volunteer: "Voluntario",
