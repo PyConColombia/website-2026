@@ -165,7 +165,7 @@ export const volunteerMembers: VolunteerMember[] = [
   },
   {
     slug: "jenny-acuna",
-    name: "Jenny Acuña",
+    name: "Jenny Paola Bolivar Acuña",
     role: "Logística",
     image: "/images/avatar/jenny-acuna.jpeg",
   },
